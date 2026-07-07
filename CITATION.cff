@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: >-
+  If you use the Fable Computer models or build on the design, please cite the
+  manuscript(s) below and describe what you changed.
+title: "The Fable Computer: models and manuscripts"
+type: software
+authors:
+  - family-names: Furui
+    given-names: Ryoji
+    email: info@ryoji.info
+    website: https://www.ryoji.info
+    affiliation: Nano Fusion Design
+repository-code: https://github.com/ryoji-info/FableComputer
+license: Apache-2.0
+preferred-citation:
+  type: report
+  title: >-
+    The Fable Computer: A Room-Temperature Terahertz Half Adder on a
+    Regenerative Graphene-Plasmon Logic Fabric — Concept, Architecture, and
+    Reduced-Order Feasibility (Revision v5)
+  authors:
+    - family-names: Furui
+      given-names: Ryoji
+  year: 2026
+  month: 6
+  doi: 10.5281/zenodo.20674840
+  url: https://doi.org/10.5281/zenodo.20674840
+  notes: >-
+    Not peer-reviewed; claims are in-model (reduced-order chain, reproducible
+    from this repository). See also Part II: Quantum-Limited Analog Tensor
+    Processing on the Regenerative Graphene-Plasmon Fabric (July 2026),
+    papers/Fable-Computer-Part-II.pdf.
