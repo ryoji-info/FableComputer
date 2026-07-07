@@ -1,7 +1,7 @@
 # Fable Computer, Part II — quantum extension model chain
 
 Runnable companion to *The Fable Computer, Part II: Quantum-Limited Analog
-Tensor Processing on the Graphene-Plasmon Fabric*. It quantizes the Part-I
+Tensor Processing on the Regenerative Graphene-Plasmon Fabric*. It quantizes the Part-I
 DS cell mode, builds the minimal quantum-analog tensor unit (QMAC-1: two
 inputs, one interference, one 2-bit classically-decoded output), and computes
 error rates vs temperature against the classical digital fabric. Pure Python;

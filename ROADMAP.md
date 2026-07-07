@@ -12,7 +12,7 @@ The transparent model chains are the project's foundation; make them harder
 to break.
 
 - Grid-refinement study of the shallow-water solver: confirm the
-  numerically-diffused threshold M_th,num → analytic as Δx → 0
+  numerically diffused threshold M_th,num → analytic as Δx → 0
   (`fable-model-chain/solver.py`).
 - Absolute calibration of the per-pulse gain against the CW regenerative
   transfer (`regen.py` vs `solver.py`).
@@ -74,7 +74,7 @@ sensitivity at the cold operating points.
 4. Preprint posted (arXiv cond-mat/app-ph once endorsement is secured; the
    Zenodo DOI already protects priority), and the manuscripts submitted to a
    peer-reviewed venue.
-5. Second maintainer on board; fiscal host application (requires an
+5. Second maintainer on board; fiscal-host application (requires an
    organization-owned repo and two admins).
 6. First funded work: compute for WP2 and bounties on WP1, decided by the
    process in [GOVERNANCE.md](GOVERNANCE.md).

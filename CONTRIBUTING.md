@@ -25,8 +25,8 @@ also runs standalone and prints a self-check against the manuscript values.
   least as valuable as a successful one.
 - **A technical critique.** A documented argument that an assumption is
   wrong, a derivation has an error, or a cited precedent doesn't support what
-  it's cited for. Open an issue with the specifics. The manuscripts' Section 2
-  (both parts) lists exactly which assumptions are load-bearing.
+  it's cited for. Open an issue with the specifics. The manuscripts state
+  exactly which assumptions are load-bearing (Part I §2; Part II §§2–3, 8).
 - **Code.** Solver improvements (grid refinement of the shallow-water solver,
   calibration of the per-pulse gain, tightening the disorder-yield criterion),
   ports (e.g. Julia), tests, CI, packaging.
@@ -48,14 +48,14 @@ co-authorship on resulting papers ([AUTHORSHIP.md](AUTHORSHIP.md)).
 - **Reproducibility is non-negotiable.** A change to a model must keep
   `run_all.py --json` running and update `results.json` and the self-checks
   it touches, with the change explained in the PR.
-- **Match the codebase's style**: plain Python, `numpy` only in the model
+- **Match the codebase's style.** Plain Python, `numpy` only in the model
   chains, transparent formulas over clever abstractions, physics comments
   where a constant or approximation comes from a manuscript equation.
-- Non-trivial PRs stay open at least 72 hours for review (lazy consensus —
-  see [GOVERNANCE.md](GOVERNANCE.md)).
-- If you used AI assistance substantially in a contribution, say so in the PR
-  description — same rule the manuscripts follow on page one. It affects
-  review attention, not acceptance.
+- **Review windows.** Non-trivial PRs stay open at least 72 hours for review
+  (lazy consensus — see [GOVERNANCE.md](GOVERNANCE.md)).
+- **Disclose substantial AI assistance** in the PR description — the same
+  rule the manuscripts follow on page one. It affects review attention, not
+  acceptance.
 
 ## Response promise
 

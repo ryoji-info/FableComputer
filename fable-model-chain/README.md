@@ -8,12 +8,12 @@ on `numpy` and (for figures) `matplotlib`.
 ## Quick start
 
 ```bash
-python3 run_all.py --json      # prints every manuscript number; writes results.json
-python3 figures.py             # regenerates Figures 6–10 into figures/
+python run_all.py --json      # prints every manuscript number; writes results.json
+python figures.py             # regenerates Figures 6–10 into figures/
 ```
 
 Each module is also runnable on its own and prints a self-check against the
-manuscript values (e.g. `python3 ds_cell.py`, `python3 kinetic.py`).
+manuscript values (e.g. `python ds_cell.py`, `python kinetic.py`).
 
 ## Modules
 

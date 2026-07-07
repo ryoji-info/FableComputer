@@ -39,16 +39,17 @@ bad-faith membership PRs (e.g. trivial-commit farming) with public reasons.
 
 ## Money: transparent by construction
 
-Until a fiscal host exists, the project pools **no funds** — see the
-[Charter](CHARTER.md) §2. Once a fiscal host holds a community treasury,
-every spend follows a two-stage process:
+Until a fiscal host exists, the project pools **no funds** at all — and per
+the [Charter](CHARTER.md) §2, nothing is ever distributed as profit. Once a
+fiscal host holds a community treasury, every spend follows the same
+five-step process:
 
 1. **Proposal** — a written spending proposal (amount, deliverable, payee,
    timeline, reporting duty) filed from a public template.
-2. **Rubric review** — 2–3 members score it publicly against a published,
+2. **Rubric review** — 2–3 voting members score it publicly against a published,
    frozen rubric (scientific merit, feasibility, cost, openness of outputs,
    roadmap fit).
-3. **Vote** — a 7-day member `[VOTE]`; passing requires **⅔ approval** with a
+3. **Vote** — a 7-day `[VOTE]` among voting members; passing requires **⅔ approval** with a
    **quorum of more than half the member roll**. The tally is committed to
    the repository by someone other than the proposer.
 4. **Payment** — executed only as a fiscal-host expense linking the decision
@@ -67,21 +68,21 @@ never changed mid-round.
   Heritage, so no single platform (or person) holds the only copy.
 - As soon as a second maintainer exists, administrative control of the GitHub
   organization, funds, and domains moves to two-person control, and this file
-  records who.
+  records who holds it.
 
 ## Written triggers (the growth contract)
 
 | Trigger | What changes |
 |---|---|
-| **First voting member** | `MEMBERS.md` and the decision log begin. |
-| **5 voting members and first real money** | The two-stage spending process above becomes binding; rubric and proposal template are published first. |
-| **~10 active members** | A Reviewer role may be added by decision record. |
+| **First voting member** | `MEMBERS.md` begins. (The decision log begins earlier, with the first recorded decision.) |
+| **First community treasury (fiscal host in place)** | The five-step spending process above becomes binding; the rubric and proposal template are published first. With fewer than five voting members, the existing roll plus the maintainer score and vote — small, but recorded. |
+| **~10 voting members** | A Reviewer role may be added by decision record. |
 | **15 voting members** | A 3-person **steering group** is elected by ranked ballot restricted to the member roll (nomination period, ballots committed to the repo). Steering owns budget and governance; the maintainer remains technical lead. |
 | **Any physical experiment** | A safety & replication policy is adopted *first*; experiments run only inside host labs' own safety regimes under written agreement (Charter §5). |
 
 ## Disputes and code of conduct
 
-Code-of-conduct reports go to **info@ryoji.info** (see
+Code of Conduct reports go to **info@ryoji.info** (see
 [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)). A complaint that concerns the
 maintainer cannot be judged by the maintainer: it goes to an outside neutral
 contact, who will be named in this file before community recruiting begins.
@@ -90,5 +91,8 @@ contact, who will be named in this file before community recruiting begins.
 
 This file and the [Charter](CHARTER.md) are amended by a **75% supermajority**
 of voting members (quorum: more than half the roll). Until five voting members
-exist, the maintainer may amend them, and each amendment is logged as a
-decision record — the log, not trust, is the guarantee.
+exist, the maintainer may amend them — with two exceptions no maintainer
+amendment can loosen: the Charter's non-distribution rule (§2) and its
+no-crypto scope (§3), which always require the 75% member supermajority. Each
+maintainer amendment is logged as a decision record — the log, not trust, is
+the guarantee.

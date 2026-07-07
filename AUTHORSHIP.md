@@ -37,12 +37,13 @@ contributions already credited in an earlier versioned report.
   the process in [GOVERNANCE.md](GOVERNANCE.md) *before* submission.
 - Contributors are asked to provide an **ORCID** when joining a paper effort.
 - Every release and paper carries a contributors section naming everyone at
-  acknowledgment level or above; `MEMBERS.md` and the git history are the
-  permanent record.
+  acknowledgment level or above; `MEMBERS.md` (created with the first member —
+  see [GOVERNANCE.md](GOVERNANCE.md)) and the git history are the permanent
+  record.
 - **Negative results carry authorship too.** If your investigation kills a
-  claim and that finding is published (it will be — see the
-  [Charter](CHARTER.md), §4.2), you are an author of that publication under
-  the same criteria.
+  claim and that finding is published (it will be — the project publishes
+  negative results as a matter of principle; [Charter](CHARTER.md) §4), you
+  are an author of that publication under the same criteria.
 
 ## AI assistance
 
