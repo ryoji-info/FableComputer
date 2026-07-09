@@ -3,6 +3,7 @@
 **An open feasibility program for room-temperature terahertz computing on a graphene-plasmon fabric — developed in the open, with every number reproducible.**
 
 [![DOI](https://img.shields.io/badge/Part_I_DOI-10.5281%2Fzenodo.20674840-blue)](https://doi.org/10.5281/zenodo.20674840)
+[![DOI](https://img.shields.io/badge/Part_II_DOI-10.5281%2Fzenodo.21185177-blue)](https://doi.org/10.5281/zenodo.21185177)
 ![Status](https://img.shields.io/badge/status-paper_design_%2B_runnable_models-blue)
 ![Experiment](https://img.shields.io/badge/gain_cell-experimentally_unproven-orange)
 ![Governance](https://img.shields.io/badge/governance-open%2C_no_blockchain-brightgreen)
@@ -30,11 +31,13 @@ The Fable Computer is an architecture built around one answer to that problem: *
 | | Title | What it establishes |
 |---|---|---|
 | **Part I** | [The Fable Computer: A Room-Temperature Terahertz Half Adder on a Regenerative Graphene-Plasmon Logic Fabric](papers/Fable-Computer-Part-I.pdf) · [DOI](https://doi.org/10.5281/zenodo.20674840) | Concept, architecture, and a five-pass reduced-order feasibility chain for the clocked, regenerative logic fabric and its half-adder demonstrator. Ends with a pre-registered five-gate bench protocol. |
-| **Part II** | [Quantum-Limited Analog Tensor Processing on the Regenerative Graphene-Plasmon Fabric](papers/Fable-Computer-Part-II.pdf) | Quantizes the Part-I cell: the plasmonic-qubit no-go, the QMAC-1 analog tensor unit with on-chip classical decoding, and the temperature budget of the quantum–classical crossover. |
+| **Part II** | [Quantum-Limited Analog Tensor Processing on the Regenerative Graphene-Plasmon Fabric](papers/Fable-Computer-Part-II.pdf) · [DOI](https://doi.org/10.5281/zenodo.21185177) | Quantizes the Part-I cell: the plasmonic-qubit no-go, the QMAC-1 analog tensor unit with on-chip classical decoding, and the temperature budget of the quantum–classical crossover. |
 
 Both manuscripts carry a full authorship and status disclaimer: they were prepared by an independent researcher with AI assistance (including an orchestrated literature-verification audit), they are not peer-reviewed, and their claims are offered as a starting point for discussion — which is exactly where this community comes in.
 
-*Note: the manuscripts' own data-availability statements point to the author's earlier repository; this repository is now the canonical home of the model chains, and the link will be updated in the next manuscript revision.*
+*Note: the manuscripts' own data-availability statements point to the author's earlier repository; this repository is now the canonical home of the model chains, and the link will be updated in the next manuscript revision. The PDFs in `papers/` are byte-identical to the Zenodo deposits (MD5-verified).*
+
+**New here?** Two short companion documents summarize everything: [The Fable Computer — An Introduction](docs/Fable-Computer-Introduction.pdf) (six pages: the idea, the numbers, and what remains open) and the [Community Guidelines](docs/Fable-Computer-Community-Guidelines.pdf) (how to join in). Editable sources sit alongside them in [docs/](docs/).
 
 ## Run the models yourself
 

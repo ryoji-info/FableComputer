@@ -13,7 +13,7 @@ self-checks passed or failed.
 
 | Date | Who | What | Platform | Result | Notes / link |
 |---|---|---|---|---|---|
-| 2026-06 | R. Furui (author) | `fable-model-chain` full run (`run_all.py --json`) | Python 3.11 | ✅ matches manuscript v5 | Baseline; `results.json` in repo |
+| 2026-06 | R. Furui (author) | `fable-model-chain` full run (`run_all.py --json`) | Python 3.11 | ✅ matches manuscript v5 (Zenodo v5f) | Baseline; `results.json` in repo |
 | 2026-07 | R. Furui (author) | `fable-model-quantum` full run (`run_all.py --json`) | Python 3.11 | ✅ matches manuscript Part II | Baseline; `results.json` in repo |
 
 ## Independent ports

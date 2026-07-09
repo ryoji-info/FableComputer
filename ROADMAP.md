@@ -72,7 +72,7 @@ sensitivity at the cold operating points.
    affiliation**, which unlocks preprint endorsement, grant eligibility, and
    lab access in one move.
 4. Preprint posted (arXiv cond-mat/app-ph once endorsement is secured; the
-   Zenodo DOI already protects priority), and the manuscripts submitted to a
+   Zenodo DOIs already protect priority), and the manuscripts submitted to a
    peer-reviewed venue.
 5. Second maintainer on board; fiscal-host application (requires an
    organization-owned repo and two admins).

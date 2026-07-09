@@ -17,16 +17,28 @@ preferred-citation:
   title: >-
     The Fable Computer: A Room-Temperature Terahertz Half Adder on a
     Regenerative Graphene-Plasmon Logic Fabric — Concept, Architecture, and
-    Reduced-Order Feasibility (Revision v5)
+    Reduced-Order Feasibility
   authors:
     - family-names: Furui
       given-names: Ryoji
   year: 2026
   month: 6
+  version: v5f
   doi: 10.5281/zenodo.20674840
   url: https://doi.org/10.5281/zenodo.20674840
   notes: >-
     Not peer-reviewed; claims are in-model (reduced-order chain, reproducible
-    from this repository). See also Part II: Quantum-Limited Analog Tensor
-    Processing on the Regenerative Graphene-Plasmon Fabric (July 2026),
-    papers/Fable-Computer-Part-II.pdf.
+    from this repository). The repository PDF is byte-identical to the Zenodo
+    deposit. For the quantum extension, cite Part II (see references).
+references:
+  - type: report
+    title: >-
+      The Fable Computer, Part II: Quantum-Limited Analog Tensor Processing
+      on the Regenerative Graphene-Plasmon Fabric
+    authors:
+      - family-names: Furui
+        given-names: Ryoji
+    year: 2026
+    month: 7
+    doi: 10.5281/zenodo.21185177
+    url: https://doi.org/10.5281/zenodo.21185177
