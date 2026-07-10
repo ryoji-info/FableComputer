@@ -1,0 +1,38 @@
+name: Agent Lab — weekly note draft and vote
+
+on:
+  schedule:
+    - cron: "0 21 * * 5"   # Saturday 06:00 JST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  discussions: read
+
+jobs:
+  draft-and-vote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Draft the weekly note and open a PR
+        id: draft
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MODEL: claude-sonnet-5
+        run: |
+          PR=$(python agents/scripts/agent_draft.py | tail -1)
+          echo "pr=$PR" >> "$GITHUB_OUTPUT"
+      - name: Three-agent review vote (2-of-3 to promote)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ steps.draft.outputs.pr }}
+          MODEL: claude-sonnet-5
+        run: python agents/scripts/agent_review.py

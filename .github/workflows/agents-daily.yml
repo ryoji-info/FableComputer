@@ -1,0 +1,32 @@
+name: Agent Lab — daily posts
+
+on:
+  schedule:
+    - cron: "0 21 * * *"   # 06:00 JST
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  discussions: write
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 1          # sequential, so later agents read earlier same-day posts
+      fail-fast: false
+      matrix:
+        persona: [fabric, kinetic, quanta]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Post as ${{ matrix.persona }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PERSONA: ${{ matrix.persona }}
+          MODEL: claude-sonnet-5
+        run: python agents/scripts/agent_post.py

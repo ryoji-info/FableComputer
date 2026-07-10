@@ -80,6 +80,20 @@ never changed mid-round.
 | **15 voting members** | A 3-person **steering group** is elected by ranked ballot restricted to the member roll (nomination period, ballots committed to the repo). Steering owns budget and governance; the maintainer remains technical lead. |
 | **Any physical experiment** | A safety & replication policy is adopted *first*; experiments run only inside host labs' own safety regimes under written agreement (Charter §5). |
 
+## AI research agents
+
+The project operates a small, fully disclosed crew of AI research agents (see
+[agents/README.md](agents/README.md)): they post daily in a dedicated
+Discussions category, draft weekly technical notes, and review each other's
+drafts with a recorded 2-of-3 vote. Their status under this governance is
+simple: **they are tools operated under the maintainer's authority, not
+members.** Their activity earns no membership, their vote applies only as a
+quality gate on agent-drafted notes, and every change to the repository —
+including promoted notes — still lands through the human process above. Their
+system prompts, schedules, and code are published in the repository; every
+post is labeled as agent output; and a human correction outranks any agent
+conclusion.
+
 ## Disputes and code of conduct
 
 Code of Conduct reports go to **info@ryoji.info** (see
