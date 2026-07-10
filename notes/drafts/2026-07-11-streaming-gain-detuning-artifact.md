@@ -1,0 +1,57 @@
+# The streaming pulse-gain measurement is drift-detuned: a named ~0.8 dB component of the CW/pulse gap, and a correction to the promoted 2026-07-10 note
+
+**Status:** draft (notes pipeline). **License:** CC BY 4.0.
+**Prompted by:** [GitHub discussion #4](https://github.com/ryoji-info/FableComputer/discussions/4).
+**Method:** as in the promoted note [2026-07-10-cw-pulse-gap-and-nf-agreement.md](../2026-07-10-cw-pulse-gap-and-nf-agreement.md) — no model code executed; all values re-derived by hand from the documented equations and evaluated with standalone calculator scripts; code facts verified by line inspection; the new physics claim was adversarially cross-checked, including an exact driven boundary-value solve of the linearized shallow-water system with the solver's own ghost-cell boundary conditions.
+**Labels:** demonstrated / in-model / open, per [notes/README.md](../README.md).
+
+## 1. The finding — demonstrated (code fact) + in-model (magnitude)
+
+`solver._setup` builds its cavity with `L = cell_length(s)` — default **M = 0**, i.e. the zero-drift quarter-wave length 582.80 nm — and drives at carrier `f0_n = f0·L/s = 0.25` exactly ([solver.py:31–33](../../fable-model-chain/solver.py)). But `results.json` separately exports `cell_length_operating_nm` = **576.62 nm** = 582.80·(1−M²): the design retunes the cell so that *at operating drift* it resonates at f₀ (Eq. 4, [ds_cell.py:19–21](../../fable-model-chain/ds_cell.py)). The streaming run never uses that length.
+
+Linearizing the solver's own equations about (h=1, u=M): perturbations propagate at 1±M, so the round trip is 2/(1−M²), not 2, and the fixed-length cavity's resonance sits at f_res = (1−M²)/4. An exact eigencondition derived with the solver's DS boundary conditions (source density-clamped, drain current-clamped) reproduces the repo's own Eq.-2 increment term-for-term and gives the same resonance — the repo's analytics endorse this shift; Eq. (4) *is* this shift, solved for L instead of f.
+
+At the streaming run's bias M = 0.7·M_th,num = 0.11826, the drive at 0.25 is therefore detuned by Δf = 0.25·M² ≈ 0.0035 (phase mismatch θ = π·M²/(1−M²) = 0.0446 rad per round trip). The analytic CW figure (+9.661 dB) assumes on-resonance recirculation (`rt = 2.0` fixed, "copies add in phase", [regen.py](../../fable-model-chain/regen.py)); the passive reference run (M = 10⁻⁹) is essentially on-resonance. So the detuning penalizes **only the active streaming run**:
+
+> penalty = 10·log₁₀[((1−l)² + 2l(1−cos θ)) / (1−l)²], with l the effective round-trip amplitude.
+
+With the effective loop estimated two independent ways (threshold calibration ⇒ l_eff ≈ 0.902; Lax-Friedrichs damping at the carrier ⇒ l_eff ≈ 0.914): penalty ≈ **0.7–1.0 dB** (central ≈ 0.8 dB ≈ 45 % of the 1.864 dB gap). Continuum zero-diffusion upper bound: 1.9 dB. A further ~0.08–0.10 dB comes from the damping-induced resonance shift (ω_r = √((π/2)² − 1/(4τ_n²)); passive line center 0.2489, active 0.2454) — genuine in-model physics that the analytic formula also ignores. In-model; exact value open pending the run in §4.
+
+The M_th,num renormalization cannot have absorbed this: the numerical threshold is measured from *free* growth (the mode picks its own frequency), so it compensates numerical loss, not drive detuning — demonstrated. LF numerical dispersion at the carrier is ~10⁻⁵ relative, three orders too small to retune — bounded.
+
+**Label:** it is fair to call this an *artifact* — the simulated cavity is consistent physics, but the published comparison is inconsistent: a mistuned (zero-drift-length) cell measured against an on-resonance analytic and reported next to the retuned design geometry. Caveat: because the run bias uses M_th,num while the exported length uses 0.7·M_th,analytic, retuning to the exported 576.62 nm removes only ~¾ of the drift detuning; the fully consistent retune is L(M_run) (equivalently f0_n = 0.25·(1−M_run²) = 0.24650).
+
+## 2. Correction to the promoted note — demonstrated
+
+Appendix C of the 2026-07-10 note states the carrier "lands exactly on resonance (round trip = half a carrier period; source r_s = −1 restores phase)". **This is true only for the passive reference (and only up to the ~0.001 relaxation shift); it is false for the active run.** Consequently that note's open bucket "residual LF diffusion + estimator ≈ 0.3–0.9 dB" is largely this now-named detuning term, and its waypoint budget must be read as *nonadditive*: the metric (~0.74 dB) and compression (0.2–0.8 dB) estimates assumed an on-resonance active cavity, so the named components (detuning 0.7–1.0 + compression 0.2–0.8 + metric 0.74) over-subscribe the 1.864 dB total at midpoints. The constrained statement is: **components are named and bounded individually; their joint split is open pending one run** (§4).
+
+## 3. Revised decomposition of the 1.864 dB gap (discussion #4's buckets)
+
+| bucket | contribution | label |
+|---|---|---|
+| (a) genuine steady-state-vs-transient physics: streaming energy-gain deficit 0.02–0.05 dB; plus per-slot waveform reshaping ≈ 0.74 ± 0.3 dB *if* the per-slot peak is accepted as the observable (it vanishes in an energy metric) | 0.05 → ~0.8 dB depending on observable convention | in-model |
+| (b) artifacts of the streaming calculation absent from the CW solve: drift-geometry detuning 0.7–1.0 dB (this note); finite-drive compression 0.2–0.8 dB (not pulse-specific); residual LF diffusion after threshold renormalization + estimator: sign unknown, **cannot bound from available data** | ~0.9–1.5 dB, nonadditive with (a)'s metric term | in-model / open |
+| (c) cascade_per_cell_dB integration or renormalization inconsistency | **0.000 dB** — the table is `G_CW + compression(A_op·10^(J/20))`: closed-form, lumped, no length, no cell count, no solver input; computationally disjoint from both headline numbers | demonstrated |
+| Caves/amplifier quantum noise (for completeness) | 0.000 dB | demonstrated (2026-07-10 note, App. F) |
+
+Premise corrections for discussion #4 (all demonstrated): the streaming figure is a **single-cell** 1-D solve (240 grid points inside one cavity), not a cell-to-cell cascade; `cascade_per_cell_dB` is indexed by **junction attenuation** (0/−1/−3/−6 dB), not compression states; "0.7" is the bias fraction M/M_th; and the solver does **not** use `cell_length_operating_nm` — which is precisely the problem.
+
+Hidden free parameters, named, with direction on the gap: L/f0_n convention (widens, 0.7–1.0 dB); `drive_amp = 3e-3` (widens, 0.2–0.8 dB); peak-vs-energy metric (widens, ~0.74 dB); bias renormalization to M_th,num (narrows, by design; residual unknown); `N = 240`, `cfl = 0.4`, the ad-hoc `+0.2` wave-speed headroom (Δt is not independent — it is cfl·Δx/(1+|u0|+0.2)), estimator windowing (drop first slot, second-half mean): **cannot bound without runs**; passive reference at M = 10⁻⁹ (negligible — demonstrated).
+
+## 4. The single most decisive experiment
+
+`solver.run()` already accepts an `f0_n` override — no new code. **Drive-frequency sweep of the shipped pulse-gain measurement:** rerun `measure_pulse_gain` with `f0_n ∈ {0.2435, 0.2454, 0.2465, 0.2483, 0.2500}`, everything else untouched.
+
+Expected outcomes:
+- **Detuning-artifact hypothesis (this note):** gain peaks near 0.2454–0.2465 at ≈ 8.5–8.9 dB, with the shipped 0.25 sitting 0.7–1.0 dB down the flank. Bonus: the fitted line HWHM gives l_eff directly (θ_HW = (1−l)/√l), separating LF-diffusion loss from every other bucket in the same run.
+- **Genuine-transient hypothesis:** flat to ≤ 0.1 dB across the sweep; the gap survives retuning.
+- **Diffusion-dominant hypothesis:** little frequency dependence *and* a strong N-dependence (a companion N = 480 point moves the number > 0.3 dB).
+
+Follow-ups that then close the remaining buckets: `drive_amp = 3e-4` (isolates compression, expected +0.2–0.8 dB), a CW-drive solver run at the same amplitude and metric (isolates transient+reshaping), and an energy-metric variant of the estimator (isolates the observable convention).
+
+## Limitations and open items
+
+- The 0.7–1.0 dB magnitude rests on estimated effective loops (0.90–0.914); the sweep in §4 measures l_eff and settles it.
+- All detuning arithmetic is linear; the nonlinear solver at 0.7 % swing may shift line center and width by a few hundredths.
+- The nonadditivity of the named buckets means no component's share should be quoted alone as "the" explanation until §4 is run.
+- Nothing here changes the 2026-07-10 note's Part 1 (noise-figure agreement) or its bucket (c)/(Caves) conclusions.
