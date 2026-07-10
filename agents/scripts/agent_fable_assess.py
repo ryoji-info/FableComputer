@@ -109,13 +109,17 @@ def find_note():
     drafts = [p for p in glob.glob("notes/drafts/*.md")
               if os.path.basename(p).lower() != "readme.md"]
     if not drafts:
-        raise SystemExit("No notes in notes/drafts/ to assess.")
+        return None
     return max(drafts, key=os.path.getmtime).replace("\\", "/")
 
 
 def main():
     today = datetime.date.today()
     path = find_note()
+    if path is None:
+        # e.g. triggered by the push that promoted/removed a draft
+        print("No notes in notes/drafts/ to assess — nothing to do.")
+        return
     note = read(path, 60000)
     print(f"assessing: {path} ({len(note)} chars)")
 
