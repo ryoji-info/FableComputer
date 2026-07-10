@@ -1,0 +1,43 @@
+name: Agent Lab — Fable session (prompt by 2-of-3 vote)
+
+# Manually triggered: the three agents each draft a candidate prompt for
+# Claude Fable 5, vote (no self-votes), and the winning prompt runs with
+# attached project documents. Full transcript published to Discussions.
+# Fable 5 is the premium tier — this workflow has no cron on purpose.
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: "Optional focus for the session (blank = agents choose)"
+        required: false
+        default: ""
+      effort:
+        description: "Fable 5 effort level"
+        required: false
+        default: "high"
+        type: choice
+        options: [low, medium, high, xhigh]
+
+permissions:
+  contents: read
+  discussions: write
+
+jobs:
+  fable-session:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Draft, vote, execute, publish
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TOPIC: ${{ github.event.inputs.topic }}
+          EFFORT: ${{ github.event.inputs.effort }}
+          MODEL: claude-sonnet-5
+          FABLE_MODEL: claude-fable-5
+        run: python agents/scripts/agent_fable_session.py
