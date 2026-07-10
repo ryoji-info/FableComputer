@@ -1,0 +1,43 @@
+name: Agent Lab — assess a draft note (2-of-3 to store)
+
+# The three agents independently assess a note in notes/drafts/ (e.g. a reply
+# from a Fable session) and vote whether it belongs in the permanent record.
+# 2-of-3 'store' opens a PR promoting it to notes/ (a human merges);
+# otherwise an issue is opened with the verdicts.
+#
+# Runs automatically when a new draft lands on main, or manually with an
+# optional explicit path.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "notes/drafts/*.md"
+  workflow_dispatch:
+    inputs:
+      note_path:
+        description: "Path of the note to assess (blank = newest in notes/drafts/)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  assess:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Assess and vote
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NOTE_PATH: ${{ github.event.inputs.note_path }}
+          MODEL: claude-sonnet-5
+        run: python agents/scripts/agent_fable_assess.py

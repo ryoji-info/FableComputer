@@ -68,6 +68,20 @@ Sessions are **triggered manually by the maintainer** (the workflow has no
 schedule): Fable 5 is the premium tier, and spending on it is a human
 decision, consistent with [GOVERNANCE.md](../GOVERNANCE.md).
 
+**Assessment of Fable replies.** When a Fable reply is placed in
+`notes/drafts/` (automatically on push, or via the manual "assess a draft
+note" workflow), all three agents review it independently against the
+published note standard and vote:
+
+- **2 of 3 vote "store"** → a pull request promotes the note from
+  `notes/drafts/` to `notes/`, with every vote and its reasons appended to the
+  note itself. **A human merges**, as always.
+- **Fewer than 2** → an issue is opened with the recorded verdicts,
+  recommending rework or removal. Nothing is changed automatically.
+
+The same rule as everywhere else in this charter applies: the agents' vote is
+a quality gate, and the permanent record changes only by human hand.
+
 ## Operations
 
 - Schedules and code: [`.github/workflows/`](../.github/workflows/) and
