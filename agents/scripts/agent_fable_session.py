@@ -64,12 +64,18 @@ def read(path, limit=8000):
         return "(unavailable)"
 
 
-def claude(system, user, max_tokens=4000, model=MODEL, effort=None, fable=False):
+def claude(system, user, max_tokens=4000, model=MODEL, effort=None, fable=False,
+           schema=None):
     body = {"model": model, "max_tokens": max_tokens, "system": system,
             "messages": [{"role": "user", "content": user}]}
     headers = dict(anthropic_headers)
-    if effort:
-        body["output_config"] = {"effort": effort}
+    if effort or schema:
+        body["output_config"] = {}
+        if effort:
+            body["output_config"]["effort"] = effort
+        if schema:
+            # Structured outputs: guaranteed valid JSON matching the schema.
+            body["output_config"]["format"] = {"type": "json_schema", "schema": schema}
     if fable:
         # Fable 5: thinking always on (no thinking param); refusal fallback on.
         headers["anthropic-beta"] = "server-side-fallback-2026-06-01"
@@ -141,10 +147,21 @@ Return ONLY JSON:
 {{"title": "<short title>", "prompt": "<the full prompt text>",
   "attachments": ["<path>", ...], "rationale": "<2-3 sentences why this question>"}}"""
 
+    draft_schema = {
+        "type": "object",
+        "properties": {
+            "title": {"type": "string"},
+            "prompt": {"type": "string"},
+            "attachments": {"type": "array", "items": {"type": "string"}},
+            "rationale": {"type": "string"},
+        },
+        "required": ["title", "prompt", "attachments", "rationale"],
+        "additionalProperties": False,
+    }
     candidates = {}
     for p in PERSONAS:
         persona = read(f"agents/personas/{p}.md")
-        resp = claude(persona, draft_instruction, max_tokens=4000)
+        resp = claude(persona, draft_instruction, max_tokens=4000, schema=draft_schema)
         candidates[p] = parse_json(text_of(resp))
         print(f"candidate from {p}: {candidates[p]['title']}")
 
@@ -162,8 +179,15 @@ vote for your own candidate ('{p}').
 
 {ballot}
 
-Return ONLY JSON: {{"vote": "<candidate name, not your own>", "reason": "<2-3 sentences>"}}""",
-                       max_tokens=1500)
+Return your vote (a candidate name, not your own) and reason (2-3 sentences).""",
+                       max_tokens=1500,
+                       schema={"type": "object",
+                               "properties": {
+                                   "vote": {"type": "string",
+                                            "enum": ["fabric", "kinetic", "quanta"]},
+                                   "reason": {"type": "string"}},
+                               "required": ["vote", "reason"],
+                               "additionalProperties": False})
         v = parse_json(text_of(resp))
         if v.get("vote") == p or v.get("vote") not in PERSONAS:
             v["vote"] = None  # invalid ballot

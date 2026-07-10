@@ -57,13 +57,30 @@ def read(path, limit=8000):
         return "(unavailable)"
 
 
-def claude(system, user, max_tokens=4000):
+VOTE_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "vote": {"type": "string", "enum": ["store", "reject"]},
+        "reasons": {"type": "string"},
+        "top_issues": {"type": "array", "items": {"type": "string"}},
+    },
+    "required": ["vote", "reasons", "top_issues"],
+    "additionalProperties": False,
+}
+
+
+def claude(system, user, max_tokens=4000, schema=None):
+    body = {"model": MODEL, "max_tokens": max_tokens, "system": system,
+            "messages": [{"role": "user", "content": user}]}
+    if schema:
+        # Structured outputs: the response is guaranteed to be valid JSON
+        # matching the schema — no parsing lottery.
+        body["output_config"] = {"format": {"type": "json_schema", "schema": schema}}
     r = requests.post(API, headers={
         "x-api-key": os.environ["ANTHROPIC_API_KEY"],
         "anthropic-version": "2023-06-01",
         "content-type": "application/json",
-    }, json={"model": MODEL, "max_tokens": max_tokens, "system": system,
-             "messages": [{"role": "user", "content": user}]}, timeout=600)
+    }, json=body, timeout=600)
     r.raise_for_status()
     data = r.json()
     text = "".join(b.get("text", "") for b in data["content"]
@@ -74,7 +91,10 @@ def claude(system, user, max_tokens=4000):
 
 
 def parse_json(raw):
-    return json.loads(raw[raw.find("{"): raw.rfind("}") + 1])
+    start = raw.find("{")
+    if start < 0:
+        raise RuntimeError(f"no JSON in completion: {raw[:200]!r}")
+    return json.loads(raw[start: raw.rfind("}") + 1])
 
 
 def find_note():
@@ -116,7 +136,7 @@ Return ONLY JSON:
     votes = {}
     for p in PERSONAS:
         persona = read(f"agents/personas/{p}.md")
-        votes[p] = parse_json(claude(persona, context))
+        votes[p] = parse_json(claude(persona, context, schema=VOTE_SCHEMA))
         print(f"{p}: {votes[p].get('vote')}")
 
     stores = sum(1 for v in votes.values() if v.get("vote") == "store")

@@ -56,10 +56,20 @@ def main():
             "content-type": "application/json",
         }, json={
             "model": MODEL, "max_tokens": 4000, "system": persona,
+            "output_config": {"format": {"type": "json_schema", "schema": {
+                "type": "object",
+                "properties": {
+                    "vote": {"type": "string", "enum": ["accept", "revise", "reject"]},
+                    "reasons": {"type": "string"},
+                    "top_issues": {"type": "array", "items": {"type": "string"}},
+                },
+                "required": ["vote", "reasons", "top_issues"],
+                "additionalProperties": False,
+            }}},
             "messages": [{"role": "user", "content":
-                f"{STANDARD}\n\nReview this draft note and return ONLY JSON: "
-                '{"vote": "accept|revise|reject", "reasons": "<3-6 sentences>", '
-                '"top_issues": ["..."]}\n\nDRAFT:\n\n' + raw}],
+                f"{STANDARD}\n\nReview this draft note and return your verdict: "
+                'vote (accept/revise/reject), reasons (3-6 sentences), '
+                'top_issues (specific problems).\n\nDRAFT:\n\n' + raw}],
         })
         r.raise_for_status()
         text = "".join(b.get("text", "") for b in r.json()["content"]
