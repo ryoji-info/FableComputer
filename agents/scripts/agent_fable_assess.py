@@ -152,6 +152,8 @@ Return ONLY JSON:
 
     main_sha = requests.get(f"{REST}/repos/{OWNER}/{REPO}/git/ref/heads/main",
                             headers=gh).json()["object"]["sha"]
+    # clean up a stale branch from a previously failed run, then create fresh
+    requests.delete(f"{REST}/repos/{OWNER}/{REPO}/git/refs/heads/{branch}", headers=gh)
     requests.post(f"{REST}/repos/{OWNER}/{REPO}/git/refs", headers=gh,
                   json={"ref": f"refs/heads/{branch}", "sha": main_sha}).raise_for_status()
 
