@@ -83,6 +83,10 @@ def claude(system, user, max_tokens=4000, schema=None):
     }, json=body, timeout=600)
     r.raise_for_status()
     data = r.json()
+    if data.get("stop_reason") == "max_tokens":
+        raise RuntimeError(
+            f"completion truncated at max_tokens={max_tokens} — thinking shares "
+            f"the budget on this model; raise max_tokens")
     text = "".join(b.get("text", "") for b in data["content"]
                    if b.get("type") == "text").strip()
     if not text:
@@ -136,7 +140,8 @@ Return ONLY JSON:
     votes = {}
     for p in PERSONAS:
         persona = read(f"agents/personas/{p}.md")
-        votes[p] = parse_json(claude(persona, context, schema=VOTE_SCHEMA))
+        votes[p] = parse_json(claude(persona, context, max_tokens=12000,
+                                     schema=VOTE_SCHEMA))
         print(f"{p}: {votes[p].get('vote')}")
 
     stores = sum(1 for v in votes.values() if v.get("vote") == "store")

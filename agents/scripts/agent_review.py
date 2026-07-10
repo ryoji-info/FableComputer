@@ -55,7 +55,7 @@ def main():
             "anthropic-version": "2023-06-01",
             "content-type": "application/json",
         }, json={
-            "model": MODEL, "max_tokens": 4000, "system": persona,
+            "model": MODEL, "max_tokens": 12000, "system": persona,
             "output_config": {"format": {"type": "json_schema", "schema": {
                 "type": "object",
                 "properties": {

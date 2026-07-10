@@ -161,7 +161,7 @@ Return ONLY JSON:
     candidates = {}
     for p in PERSONAS:
         persona = read(f"agents/personas/{p}.md")
-        resp = claude(persona, draft_instruction, max_tokens=4000, schema=draft_schema)
+        resp = claude(persona, draft_instruction, max_tokens=12000, schema=draft_schema)
         candidates[p] = parse_json(text_of(resp))
         print(f"candidate from {p}: {candidates[p]['title']}")
 
@@ -180,7 +180,7 @@ vote for your own candidate ('{p}').
 {ballot}
 
 Return your vote (a candidate name, not your own) and reason (2-3 sentences).""",
-                       max_tokens=1500,
+                       max_tokens=8000,
                        schema={"type": "object",
                                "properties": {
                                    "vote": {"type": "string",
