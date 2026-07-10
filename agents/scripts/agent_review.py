@@ -55,14 +55,15 @@ def main():
             "anthropic-version": "2023-06-01",
             "content-type": "application/json",
         }, json={
-            "model": MODEL, "max_tokens": 900, "system": persona,
+            "model": MODEL, "max_tokens": 4000, "system": persona,
             "messages": [{"role": "user", "content":
                 f"{STANDARD}\n\nReview this draft note and return ONLY JSON: "
                 '{"vote": "accept|revise|reject", "reasons": "<3-6 sentences>", '
                 '"top_issues": ["..."]}\n\nDRAFT:\n\n' + raw}],
         })
         r.raise_for_status()
-        text = "".join(b.get("text", "") for b in r.json()["content"]).strip()
+        text = "".join(b.get("text", "") for b in r.json()["content"]
+                       if b.get("type") == "text").strip()
         text = text[text.find("{"): text.rfind("}") + 1]
         try:
             votes[p] = json.loads(text)

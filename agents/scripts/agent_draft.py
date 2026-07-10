@@ -100,10 +100,15 @@ Return ONLY the note's markdown, starting with the metadata block."""
         "x-api-key": os.environ["ANTHROPIC_API_KEY"],
         "anthropic-version": "2023-06-01",
         "content-type": "application/json",
-    }, json={"model": MODEL, "max_tokens": 4000, "system": persona,
+    }, json={"model": MODEL, "max_tokens": 12000, "system": persona,
              "messages": [{"role": "user", "content": prompt}]})
     r.raise_for_status()
-    note = "".join(b.get("text", "") for b in r.json()["content"])
+    data = r.json()
+    note = "".join(b.get("text", "") for b in data["content"]
+                   if b.get("type") == "text").strip()
+    if not note:
+        raise RuntimeError(
+            f"empty completion (stop_reason={data.get('stop_reason')}) — no draft created")
 
     m = re.search(r"^title:\s*(.+)$", note, re.M)
     slug = re.sub(r"[^a-z0-9]+", "-", (m.group(1) if m else "note").lower()).strip("-")[:60]

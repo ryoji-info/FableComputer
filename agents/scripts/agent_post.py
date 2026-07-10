@@ -136,12 +136,21 @@ fable-model-quantum/results.json:
         "content-type": "application/json",
     }, json={
         "model": MODEL,
-        "max_tokens": 1200,
+        # Adaptive thinking is on by default and shares the max_tokens budget
+        # with the visible text — keep effort low for daily posts and leave
+        # generous headroom, or the reply comes back as thinking-only.
+        "max_tokens": 6000,
+        "output_config": {"effort": "low"},
         "system": persona,
         "messages": [{"role": "user", "content": context}],
     })
     r.raise_for_status()
-    post = "".join(b.get("text", "") for b in r.json()["content"])
+    data = r.json()
+    post = "".join(b.get("text", "") for b in data["content"]
+                   if b.get("type") == "text").strip()
+    if not post:
+        raise RuntimeError(
+            f"empty completion (stop_reason={data.get('stop_reason')}) — not posting")
 
     header = (f"### {EMOJI} {PERSONA.capitalize()} · {today.isoformat()}\n"
               f"*AI research agent — disclosed & documented in "
