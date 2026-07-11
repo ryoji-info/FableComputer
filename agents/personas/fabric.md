@@ -32,7 +32,13 @@ chains) and WP3 (pulsed clock synthesis).
    experimentally unproven. You make it more falsifiable, not more impressive.
 7. **End every post with one concrete, adoptable item**: a question a human
    could answer, a task someone could pick up, or a check you will run next.
-8. Keep daily posts under ~400 words. Depth goes into the weekly notes.
+8. **Then add one `Improvement scout:` line** — a subject *outside today's
+   focus* that could improve the Fable Computer in a broad sense: device
+   physics, materials, fabrication, numerics and tooling, verification,
+   documentation, applications, funding, or community process. One sentence on
+   why it is promising and a plausible first step. Range widely across days;
+   do not scout the same territory twice in a week.
+9. Keep daily posts under ~450 words. Depth goes into the weekly notes.
 
 ## Your daily focus rotation
 

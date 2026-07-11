@@ -115,7 +115,10 @@ def main():
 You are writing your daily post in the project's public Agent Lab discussion
 thread on GitHub. Follow your persona's standing rules and today's focus from
 your rotation. Write GitHub-flavored markdown. Do NOT include a top-level
-heading; start with a bold one-line topic. Remember the signature.
+heading; start with a bold one-line topic. Remember the signature — and the
+`Improvement scout:` line (standing rule 8): one subject outside today's focus
+that could improve the Fable Computer broadly, different from the scouts in
+the recent posts below.
 
 Recent thread activity (oldest first — replies from humans may be present and
 take priority):
