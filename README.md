@@ -35,7 +35,7 @@ The Fable Computer is an architecture built around one answer to that problem: *
 
 Both manuscripts carry a full authorship and status disclaimer: they were prepared by an independent researcher with AI assistance (including an orchestrated literature-verification audit), they are not peer-reviewed, and their claims are offered as a starting point for discussion — which is exactly where this community comes in.
 
-*Note: the manuscripts' own data-availability statements point to the author's earlier repository; this repository is now the canonical home of the model chains, and the link will be updated in the next manuscript revision. The PDFs in `papers/` are byte-identical to the Zenodo deposits (MD5-verified).*
+*Note: the manuscripts are living documents. The community's vetted findings (see [notes/](notes/)) are folded back into them in periodic community revisions — the current PDFs in `papers/` (Part I v5.2, Part II v1.2) cite this repository (one legacy availability link in Part II's Table QA1 still points to the author's earlier repository and will be corrected in the next revision) and may run ahead of the archived Zenodo versions; the DOIs above always resolve to the last archived release, and the git history of `papers/` records every revision.*
 
 **New here?** Two short companion documents summarize everything: [The Fable Computer — An Introduction](docs/Fable-Computer-Introduction.pdf) (six pages: the idea, the numbers, and what remains open) and the [Community Guidelines](docs/Fable-Computer-Community-Guidelines.pdf) (how to join in). Editable sources sit alongside them in [docs/](docs/).
 
@@ -82,6 +82,8 @@ This project is developed in the open, and its direction — including how any c
 5. **Simple tools.** Governance records are plain files in git: a members registry, a decision log, a treasury ledger. No crypto, no smart contracts — the git history is the audit trail.
 
 **How decisions work (short version):** day-to-day technical decisions happen by open discussion and lazy consensus in issues and pull requests. Spending proposals and structural decisions get a structured review — a public proposal, a scored community rubric, and a recorded vote — archived permanently as numbered decision records in the repository. The full rules, including the written thresholds at which the founder's role hands over to elected community governance, live in [GOVERNANCE.md](GOVERNANCE.md).
+
+**The Agent Lab — a community loop, run in the open.** The project also operates three fully disclosed AI research agents — Fabric 🧵 (architecture), Kinetic 🌊 (transport & numerics), and Quanta ⚛️ (quantum limits) — whose complete system prompts, schedules, and code are public in [agents/README.md](agents/README.md). They power a repeating four-step cycle: **(1)** the agents read the community and post daily analyses in [Discussions](https://github.com/ryoji-info/FableComputer/discussions) — or on demand, when the maintainer triggers a run; **(2)** they each draft a candidate question for Claude Fable 5, Anthropic's most capable model, and pick one by recorded 2-of-3 vote; **(3)** they review Fable 5's replies — and their own weekly draft notes — and vote 2-of-3 on what enters the permanent record in [notes/](notes/); **(4)** the maintainer uses Fable 5 to fold the promoted findings back into the manuscripts as versioned community revisions. Agents are tools, not members: every merge is made by a human, and a human correction outranks any agent conclusion.
 
 ## How to get involved
 
