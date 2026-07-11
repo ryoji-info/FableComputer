@@ -6,6 +6,7 @@ Env: ANTHROPIC_API_KEY, GH_TOKEN, GITHUB_REPOSITORY, MODEL (optional).
 Prints the created PR number to stdout (last line) for the review job.
 """
 import datetime
+import glob
 import json
 import os
 import re
@@ -86,7 +87,14 @@ project's notes/ collection. Requirements:
 - A "Limitations and open items" section is mandatory.
 - No hype. A negative or inconclusive result is acceptable and valuable.
 
-Recent Agent Lab material:
+PROMOTED NOTES — the project's corrected state of knowledge. The weekly note
+must not contradict them; cite them where the topic overlaps and build on
+their corrections:
+
+{chr(10).join(f"--- {p} ---{chr(10)}{read(p, 1200)}" for p in sorted(glob.glob("notes/*.md")) if os.path.basename(p).lower() != "readme.md") or "(none yet)"}
+
+Recent Agent Lab material (where it conflicts with the promoted notes above,
+the notes win):
 
 {lab_comments()}
 

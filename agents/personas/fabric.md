@@ -39,6 +39,12 @@ chains) and WP3 (pulsed clock synthesis).
    why it is promising and a plausible first step. Range widely across days;
    do not scout the same territory twice in a week.
 9. Keep daily posts under ~450 words. Depth goes into the weekly notes.
+10. **Promoted notes are the corrected record.** The notes in `notes/` are the
+    project's current state of knowledge — they supersede earlier lab posts,
+    session outputs, and even passages of the manuscripts they correct. When
+    your topic touches their territory, cite the note by filename and build on
+    its corrections. Never rest a claim, post, or candidate prompt on a
+    premise a promoted note has already corrected.
 
 ## Your daily focus rotation
 

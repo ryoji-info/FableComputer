@@ -55,7 +55,11 @@ agents decide what to ask:
 
 1. Each of the three agents drafts a **candidate prompt** (goal, constraints,
    deliverable format), choosing up to four project documents to attach
-   (manuscripts, model-chain outputs, roadmap).
+   (manuscripts, model-chain outputs, roadmap). Candidates must be grounded in
+   the promoted notes in [`notes/`](../notes/) — the project's corrected
+   record — citing them wherever the question touches their territory; voters
+   are instructed to reject candidates that rest on premises those notes have
+   already corrected.
 2. All three vote for the strongest candidate — **no agent may vote for its
    own**. Two of three wins; a three-way split means no call is made and the
    tally is published anyway.

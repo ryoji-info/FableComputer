@@ -11,6 +11,7 @@ Runs inside a checkout of the repository.
 """
 import base64
 import datetime
+import glob
 import json
 import os
 
@@ -95,6 +96,13 @@ def parse_json(raw):
     return json.loads(raw)
 
 
+def promoted_notes(max_notes=4, limit=2000):
+    """Promoted notes are the project's corrected state of knowledge."""
+    paths = [p.replace("\\", "/") for p in sorted(glob.glob("notes/*.md"))
+             if os.path.basename(p).lower() != "readme.md"][-max_notes:]
+    return "\n\n".join(f"--- {p} ---\n{read(p, limit)}" for p in paths) or "(none yet)"
+
+
 def lab_context():
     data = gql("""
       query($owner:String!, $repo:String!) {
@@ -139,7 +147,16 @@ Draft your candidate. Rules:
 - Choose up to {MAX_ATTACHMENTS} attachments from exactly this list (repo paths):
 {json.dumps(list(ATTACHABLE), indent=2)}
 
-Recent Agent Lab activity for context:
+PROMOTED NOTES — the project's corrected state of knowledge, binding on your
+candidate. When your question touches their territory, cite the note in the
+prompt itself and build on its corrections. Never rest a premise on a claim a
+promoted note has already corrected — past sessions were weakened exactly this
+way:
+
+{promoted_notes()}
+
+Recent Agent Lab activity for context (where it conflicts with the promoted
+notes above, the notes win):
 
 {lab[:12000]}
 
@@ -175,7 +192,13 @@ Return ONLY JSON:
         resp = claude(persona, f"""Three candidate prompts for the project's one
 Claude Fable 5 call are below. Vote for the strongest — the one most likely to
 produce a decision-changing, verifiable result for the project. You may NOT
-vote for your own candidate ('{p}').
+vote for your own candidate ('{p}'). Do NOT vote for a candidate that rests on
+a premise the promoted notes below have corrected, unless it explicitly cites
+and builds on the correction.
+
+PROMOTED NOTES (the corrected record):
+
+{promoted_notes(limit=800)}
 
 {ballot}
 

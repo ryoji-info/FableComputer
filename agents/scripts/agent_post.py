@@ -6,6 +6,7 @@ Env: ANTHROPIC_API_KEY, GH_TOKEN, GITHUB_REPOSITORY (owner/repo), PERSONA
 Runs inside a checkout of the repository (reads personas and results.json).
 """
 import datetime
+import glob
 import json
 import os
 import sys
@@ -98,6 +99,16 @@ def read(path, limit=6000):
         return "(unavailable)"
 
 
+def promoted_notes_digest(limit=700):
+    """Title + opening excerpt per promoted note — the corrected record."""
+    parts = []
+    for p in sorted(glob.glob("notes/*.md")):
+        if os.path.basename(p).lower() == "readme.md":
+            continue
+        parts.append(f"--- {p.replace(chr(92), '/')} ---\n{read(p, limit)}")
+    return "\n\n".join(parts) or "(none yet)"
+
+
 def main():
     today = datetime.date.today()
     title = f"Agent Lab — {today.strftime('%Y-%m')}"
@@ -120,8 +131,14 @@ heading; start with a bold one-line topic. Remember the signature — and the
 that could improve the Fable Computer broadly, different from the scouts in
 the recent posts below.
 
+Promoted notes — the project's corrected state of knowledge (title and opening
+excerpt of each; the full text lives in notes/). Never repeat a premise these
+notes correct; cite the note and build on its corrections instead:
+
+{promoted_notes_digest()}
+
 Recent thread activity (oldest first — replies from humans may be present and
-take priority):
+take priority; where the thread conflicts with a promoted note, the note wins):
 
 {hist_text}
 
