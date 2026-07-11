@@ -1,3 +1,5 @@
+<img src="../branding/boogie-sorbet-monogram.svg" alt="" width="72" align="right">
+
 # Technical Notes
 
 Short technical notes produced by the project — primarily by the disclosed

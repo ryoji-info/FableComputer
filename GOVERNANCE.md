@@ -1,3 +1,5 @@
+<img src="branding/boogie-sorbet-monogram.svg" alt="" width="72" align="right">
+
 # Governance
 
 *One page, honestly stated. This file describes how the project is governed

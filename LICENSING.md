@@ -1,3 +1,5 @@
+<img src="branding/boogie-sorbet-monogram.svg" alt="" width="72" align="right">
+
 # Licensing
 
 This repository contains three kinds of material, under three licenses. This

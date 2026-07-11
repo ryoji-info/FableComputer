@@ -1,4 +1,9 @@
-# The Fable Computer
+<div align="center">
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="branding/boogie-sorbet-dark.svg">
+  <img src="branding/boogie-sorbet.svg" alt="The Fable Computer" width="430">
+</picture>
 
 **An open feasibility program for room-temperature terahertz computing on a graphene-plasmon fabric — developed in the open, with every number reproducible.**
 
@@ -7,6 +12,8 @@
 ![Status](https://img.shields.io/badge/status-paper_design_%2B_runnable_models-blue)
 ![Experiment](https://img.shields.io/badge/gain_cell-experimentally_unproven-orange)
 ![Governance](https://img.shields.io/badge/governance-open%2C_no_blockchain-brightgreen)
+
+</div>
 
 > **Where this project honestly stands.** The Fable Computer is a *design study*, not a demonstrated device. Its claims are "in-model": established within a transparent, reduced-order model chain that you can run yourself from this repository — not measured on hardware. The central physical assumption (regenerative gain in a Dyakonov–Shur graphene-plasmon cell at room temperature) has **never been demonstrated experimentally**. The manuscripts have not received independent expert review, and they say so on page one. This community exists to close that gap: check the models, build the missing simulation tiers, and get the design to a real bench experiment — or find the error that kills it. **A clean negative result is a success here.**
 

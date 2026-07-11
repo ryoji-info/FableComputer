@@ -1,3 +1,5 @@
+<img src="branding/boogie-sorbet-monogram.svg" alt="" width="72" align="right">
+
 # Charter of the Fable Computer Project
 
 *Draft — takes effect when adopted by the maintainer as the project's first

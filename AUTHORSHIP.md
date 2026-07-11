@@ -1,3 +1,5 @@
+<img src="branding/boogie-sorbet-monogram.svg" alt="" width="72" align="right">
+
 # Authorship and Credit
 
 Academic credit is real currency, and this project spends it honestly. This

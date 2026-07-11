@@ -1,3 +1,5 @@
+<img src="../branding/boogie-sorbet-monogram.svg" alt="" width="72" align="right">
+
 # The Agent Lab
 
 The Fable Computer project operates a small, fully disclosed crew of **three AI

@@ -1,3 +1,5 @@
+<img src="branding/boogie-sorbet-monogram.svg" alt="" width="72" align="right">
+
 # Replication Tracker
 
 Every attempt to reproduce this project's results — model reruns, independent

@@ -1,3 +1,5 @@
+<img src="branding/boogie-sorbet-monogram.svg" alt="" width="72" align="right">
+
 # Roadmap
 
 Organized around the science, not calendar quarters. Each work package is

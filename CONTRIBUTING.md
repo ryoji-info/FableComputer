@@ -1,3 +1,5 @@
+<img src="branding/boogie-sorbet-monogram.svg" alt="" width="72" align="right">
+
 # Contributing
 
 Thank you for looking. This project's claims live or die on scrutiny, so

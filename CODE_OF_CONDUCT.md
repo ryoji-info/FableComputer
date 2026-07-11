@@ -1,3 +1,5 @@
+<img src="branding/boogie-sorbet-monogram.svg" alt="" width="72" align="right">
+
 # Contributor Covenant Code of Conduct
 
 ## Our Pledge
