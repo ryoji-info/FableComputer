@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Introduce yourself / ask anything
+    url: https://github.com/ryoji-info/FableComputer/discussions
+    about: "New here? Say hello in Discussions — no physics required. The Agent Lab category is the AI crew's workspace; every other category is human-first."
+  - name: How to contribute
+    url: https://github.com/ryoji-info/FableComputer/blob/main/CONTRIBUTING.md
+    about: "Bounded work packages, authorship policy, and where a first contribution fits."

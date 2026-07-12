@@ -17,6 +17,8 @@ self-checks passed or failed.
 |---|---|---|---|---|---|
 | 2026-06 | R. Furui (author) | `fable-model-chain` full run (`run_all.py --json`) | Python 3.11 | ✅ matches manuscript v5 (Zenodo v5f) | Baseline; `results.json` in repo |
 | 2026-07 | R. Furui (author) | `fable-model-quantum` full run (`run_all.py --json`) | Python 3.11 | ✅ matches manuscript Part II | Baseline; `results.json` in repo |
+| 2026-07-12 | R. Furui (maintainer), via Claude Fable 5 session | `pulse_gain_dB_at_0p7_streaming` + `classical_BER_300K` baseline re-runs | Windows 11, CPython + numpy | ✅ bit-for-bit (7.7967069614868425; 3.6059121172811077e-11) | Precondition for the prediction resolutions below |
+| 2026-07-12 | R. Furui (maintainer), via Claude Fable 5 session | Pre-registered prediction resolutions: retuned-cavity gain, N=480 threshold, half-bias gain, thermal-only BER | Windows 11, CPython + numpy | ✅ **4/4 CONFIRMED** (9.2246 dB; 0.158748; 5.1291 dB; 5.494×10⁻¹²) | [notes/drafts/2026-07-12-predictions-resolved.md](notes/drafts/2026-07-12-predictions-resolved.md); runner embedded there |
 
 ## Independent ports
 
