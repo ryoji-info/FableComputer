@@ -1,6 +1,6 @@
-# The effective round-trip amplitude derived, not bounded: von Neumann analysis of the released solver, a named boundary loss, and two sharpened predictions
+# The effective round-trip amplitude, split and sharpened: interior term derived (von Neumann), boundary term calibrated, promoted interval superseded
 
-**Status:** draft (notes pipeline). **License:** CC BY 4.0.
+**Status:** draft (notes pipeline) — **reworked 2026-07-12 in response to [issue #13](https://github.com/ryoji-info/FableComputer/issues/13)** (1 STORE / 2 REJECT). What changed: (i) the §5 prediction is renamed and tabulated so it cannot be read as contradicting the reference output `pulse_gain_dB_at_0p7_streaming = 7.7967 dB`, which describes a *different cavity length* and is this note's demonstrated *input*, not a competing measurement (Fabric's and Quanta's objection); (ii) an explicit consistency check against both promoted notes is added as §6 (Kinetic's request); (iii) the title and §4 labeling no longer describe l_a as fully "derived" — the interior factor is derived, the boundary factor is calibrated (Quanta's objection). No number changed. **License:** CC BY 4.0.
 **Prompted by:** [Fable Session, discussion #12](https://github.com/ryoji-info/FableComputer/discussions/12) (Kinetic's winning prompt), building on the promoted notes [2026-07-11-streaming-gain-detuning-artifact.md](../2026-07-11-streaming-gain-detuning-artifact.md) and [2026-07-11-retuned-streaming-gain-prediction.md](../2026-07-11-retuned-streaming-gain-prediction.md).
 **Method:** hand/symbolic derivation from the released source; no repo code executed; numerical evaluation by standalone calculator scripts. **Labels:** demonstrated / in-model / open per [notes/README.md](../README.md).
 
@@ -41,17 +41,37 @@ l_a = loop_analytic(M_run) · a_d,int(driven) · a_b = 0.945034 × 0.966897 × 0
     = 0.9041 ± 0.0036          (l_p = 0.7174, same construction, passive)
 ```
 
-**Verdict requested by the prompt: the analytic value lands INSIDE the promoted interval**, near its lower end — and the interval is now explained rather than merely narrowed: its width was the unseparated boundary term plus the missing frequency correction of the threshold calibration.
+Label precisely: the first two factors are demonstrated arithmetic; a_b is **calibrated** on the measured threshold, so the composite l_a is **in-model with one calibrated factor** — sharpened and decomposed, not fully derived from first principles. (The fully analytic path — a discrete boundary-mode analysis of the ghost-cell reflections — remains open, §Limitations.)
+
+**Verdict requested by the prompt: the value lands INSIDE the promoted interval**, near its lower end — and the interval is now explained rather than merely narrowed: its width was the unseparated boundary term plus the missing frequency correction of the threshold calibration.
 
 ## 5. Propagation to the streaming-gain prediction — in-model
 
-Through the promoted penalty formula with the same mismatch angles (θ_act 0.0586 → 0.0245; θ_pas 0.0138 → 0.0198): retune recovery = **+1.021 dB**, compression feedback −0.13 dB. Updated pre-registered prediction for the retuned run (L → 576.62 nm, bias M = 0.118260 held, drive_amp = 3×10⁻³, N = 240):
+Through the promoted penalty formula with the same mismatch angles (θ_act 0.0586 → 0.0245; θ_pas 0.0138 → 0.0198): retune recovery = **+1.021 dB**, compression feedback −0.13 dB.
 
-> **pulse_gain_dB_at_0p7_streaming (retuned) = 8.69 ± 0.20 dB** (supersedes 8.77 ± 0.35; variant with M_th,num re-measured on the retuned geometry: 8.49 ± 0.22). **Falsification band: a result outside 8.3–9.1 dB refutes the sharpened partition.** Error budget (quadrature): δl_a ±0.075 dB, linearization ±0.10, estimator windowing ±0.10, unanchored compression knee ±0.05, comb-line spillover ±0.05.
+**Non-contradiction statement (added in rework).** The released chain's key `pulse_gain_dB_at_0p7_streaming` reports **7.7967 dB for the shipped cavity** — the zero-drift length, 582.80 nm. That number is this note's demonstrated *input* (§1); nothing below competes with it. The prediction concerns a **different, not-yet-run configuration**: the same measurement after the one-line retune fix (L = 576.62 nm). No run of that configuration exists in the repository, so no reference output can yet agree or disagree with the predicted value — that is what "pre-registered" means here.
 
-At the sharpened l_a the full detuning deficit is 1.255 dB = **67 %** of the 1.864 dB gap (promoted range was 64–82 %; the sharpened value sits at its lower half).
+| configuration | cavity length | status | value |
+|---|---|---|---|
+| shipped | 582.80 nm (zero-drift) | measured; `results.json` today | 7.7967 dB |
+| retuned (post-fix) | 576.62 nm (operating, Eq. 4) | **predicted; no run exists** | **8.69 ± 0.20 dB** |
 
-## 6. A second, scheme-discriminating prediction — in-model
+> Predicted value of the retuned run (suggested new key on export: `pulse_gain_dB_at_0p7_streaming_retuned`, so the record never holds two numbers under one name): **8.69 ± 0.20 dB** (supersedes the promoted 8.77 ± 0.35 by narrowing; variant with M_th,num re-measured on the retuned geometry: 8.49 ± 0.22). **Falsification band: a retuned-run result outside 8.3–9.1 dB refutes the sharpened partition.** Error budget (quadrature): δl_a ±0.075 dB, linearization ±0.10, estimator windowing ±0.10, unanchored compression knee ±0.05, comb-line spillover ±0.05.
+
+At the sharpened l_a the full detuning deficit is 1.255 dB = **67 %** of the 1.864 dB gap (promoted range was 64–82 %; the sharpened value sits in its lower half).
+
+## 6. Consistency with the promoted record — demonstrated (added in rework)
+
+Cross-checks against the two promoted notes this analysis builds on, as requested in the assessment:
+
+1. l_a = 0.9041 ± 0.0036 lies **inside** the promoted interval [0.902, 0.914] (2026-07-11 retuned-gain note) — and reproduces its upper end as the interior-only limit (0.9138).
+2. The prediction 8.69 ± 0.20 lies **inside** the promoted prediction band 8.77 ± 0.35 (overlap 8.49–8.89 dB): this note narrows the promoted claim; it does not contradict it.
+3. The detuning share, 67 %, lies inside the promoted 64–82 % (and the promoted 2026-07-11 detuning note's drift-geometry component 0.74–0.95 dB is unchanged here).
+4. This note contradicts **no reference output**: its only statements about existing numbers are reproductions (7.7967, 0.16894, 0.14708, a_loss, loop identities), each matching `results.json` to the printed digit.
+
+## 7. A second, scheme-discriminating prediction — in-model
+
+(As with §5: this predicts runs that do not yet exist — the current `M_th_num = 0.16894` at N = 240 is reproduced, not contested.)
 
 Interior LF damping scales ∝ Δx at fixed cfl (per-step ξ² ∝ Δx², steps ∝ 1/Δx); the boundary term's scaling depends on the ghost-cell truncation order. Solving the threshold condition at N = 480 under the two candidate scalings:
 
