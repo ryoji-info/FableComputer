@@ -46,6 +46,21 @@ the predicted run later lands, its measured value enters `results.json`
 under the new key, and the note's prediction is marked resolved
 (confirmed / falsified) in a follow-up or revision.
 
+**New computed quantities ship their computation.** A note whose claims rest
+on a construction that is not already in the released chains — a derived
+operator, a new solver, a nontrivial numerical evaluation — must include the
+computation itself: a self-contained runnable listing (or a script committed
+alongside the note), with expected outputs stated so a reviewer can verify
+every headline number by running it. Formulas alone meet this bar only when
+a reader can re-derive each number from them directly. Results computed on
+apparatus the reader cannot run or rebuild will fail review for that reason
+alone, whatever their internal consistency — this rule exists because
+exactly that happened
+([issue #18](https://github.com/ryoji-info/FableComputer/issues/18)). The
+*demonstrated* label may be applied to such results only in the form
+"demonstrated (runnable, see listing)" — the label carries an artifact, not
+an assertion.
+
 All notes are licensed **CC BY 4.0** (see [LICENSING.md](../LICENSING.md)).
 Notes are working documents, not peer-reviewed publications — treat them as
 the project treats everything: a starting point for scrutiny.
