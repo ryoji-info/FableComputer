@@ -110,7 +110,10 @@ def find_note():
               if os.path.basename(p).lower() != "readme.md"]
     if not drafts:
         return None
-    return max(drafts, key=os.path.getmtime).replace("\\", "/")
+    # actions/checkout gives every file the same mtime, so "newest by mtime"
+    # is arbitrary when several drafts coexist; the date-prefixed filenames
+    # sort chronologically, so lexicographic max is the deterministic choice
+    return max(drafts).replace("\\", "/")
 
 
 def main():
@@ -144,8 +147,16 @@ Return ONLY JSON:
     votes = {}
     for p in PERSONAS:
         persona = read(f"agents/personas/{p}.md")
-        votes[p] = parse_json(claude(persona, context, max_tokens=12000,
-                                     schema=VOTE_SCHEMA))
+        try:
+            raw = claude(persona, context, max_tokens=24000, schema=VOTE_SCHEMA)
+        except RuntimeError as e:
+            if "max_tokens" not in str(e):
+                raise
+            # long notes (embedded listings, appendices) can exhaust the budget
+            # via thinking; one retry with double budget before giving up
+            print(f"{p}: truncated at 24000, retrying at 48000")
+            raw = claude(persona, context, max_tokens=48000, schema=VOTE_SCHEMA)
+        votes[p] = parse_json(raw)
         print(f"{p}: {votes[p].get('vote')}")
 
     stores = sum(1 for v in votes.values() if v.get("vote") == "store")
