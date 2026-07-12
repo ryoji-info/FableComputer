@@ -32,6 +32,20 @@ Every note: claims labeled *demonstrated / in-model / open*; precise
 citations; numbers consistent with the model chains where applicable; a
 mandatory "Limitations and open items" section; no hype.
 
+**Pre-registered predictions.** A note that predicts the outcome of a run
+that does not yet exist must give the predicted quantity **its own name** —
+never an existing `results.json` key or published figure's name (predict
+`pulse_gain_dB_at_0p7_streaming_retuned`, not
+`pulse_gain_dB_at_0p7_streaming`). The note must state which existing
+outputs the prediction does *not* contest, and give an explicit
+falsification band. A prediction that shares a name with a reference output
+reads as a contradiction of the record and will fail review for that reason
+alone — this rule exists because exactly that happened
+([issue #13](https://github.com/ryoji-info/FableComputer/issues/13)). When
+the predicted run later lands, its measured value enters `results.json`
+under the new key, and the note's prediction is marked resolved
+(confirmed / falsified) in a follow-up or revision.
+
 All notes are licensed **CC BY 4.0** (see [LICENSING.md](../LICENSING.md)).
 Notes are working documents, not peer-reviewed publications — treat them as
 the project treats everything: a starting point for scrutiny.
