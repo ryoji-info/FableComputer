@@ -1,9 +1,14 @@
 name: Agent Lab — Fable session (prompt by 2-of-3 vote)
 
-# Manually triggered: the three agents each draft a candidate prompt for
-# Claude Fable 5, vote (no self-votes), and the winning prompt runs with
-# attached project documents. Full transcript published to Discussions.
-# Fable 5 is the premium tier — this workflow has no cron on purpose.
+# The three agents each draft a candidate prompt for Claude Fable 5, vote
+# (no self-votes), and the winning prompt runs with attached project
+# documents. Full transcript published to Discussions.
+#
+# FALLBACK ONLY (since 2026-07-13): sessions are normally performed in a
+# Claude Code session operated by the maintainer — see agents/README.md,
+# "Operations". Dispatch this workflow to run the original API-key
+# implementation instead. No cron on purpose, either way: Fable 5 is the
+# premium tier, and spending on it is a human decision.
 
 on:
   workflow_dispatch:

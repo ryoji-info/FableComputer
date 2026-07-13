@@ -1,12 +1,14 @@
 name: Agent Lab — review vote on a draft note
 
-# Runs the 2-of-3 agent vote on any human-opened or updated draft-note PR.
-# (Bot-opened weekly PRs are voted on inside the weekly workflow itself.)
+# Runs the 2-of-3 agent vote on a draft-note PR.
+#
+# FALLBACK ONLY (since 2026-07-13): review votes are normally performed by
+# Claude (Fable 5) in a Claude Code session operated by the maintainer,
+# following the same personas and vote rules — see agents/README.md,
+# "Operations". Dispatch this workflow with a PR number to run the original
+# API-key implementation instead.
 
 on:
-  pull_request:
-    paths:
-      - "notes/drafts/**"
   workflow_dispatch:
     inputs:
       pr_number:
@@ -31,6 +33,6 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_NUMBER: ${{ github.event.inputs.pr_number || github.event.pull_request.number }}
+          PR_NUMBER: ${{ github.event.inputs.pr_number }}
           MODEL: claude-sonnet-5
         run: python agents/scripts/agent_review.py

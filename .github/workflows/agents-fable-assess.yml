@@ -5,14 +5,13 @@ name: Agent Lab — assess a draft note (2-of-3 to store)
 # 2-of-3 'store' opens a PR promoting it to notes/ (a human merges);
 # otherwise an issue is opened with the verdicts.
 #
-# Runs automatically when a new draft lands on main, or manually with an
-# optional explicit path.
+# FALLBACK ONLY (since 2026-07-13): assessments are normally performed by
+# Claude (Fable 5) in a Claude Code session operated by the maintainer,
+# following the same personas and vote rules — see agents/README.md,
+# "Operations". Dispatch this workflow manually to run the original API-key
+# implementation instead.
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "notes/drafts/*.md"
   workflow_dispatch:
     inputs:
       note_path:

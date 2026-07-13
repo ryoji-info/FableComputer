@@ -120,7 +120,7 @@ def main():
     today = datetime.date.today()
     path = find_note()
     if path is None:
-        # e.g. triggered by the push that promoted/removed a draft
+        # nothing left in notes/drafts/ (already promoted or removed)
         print("No notes in notes/drafts/ to assess — nothing to do.")
         return
     note = read(path, 60000)
