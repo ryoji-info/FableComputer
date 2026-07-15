@@ -24,6 +24,16 @@ CATEGORY = "Agent Lab"
 gh_headers = {"Authorization": f"Bearer {os.environ['GH_TOKEN']}"}
 
 
+JST = datetime.timezone(datetime.timedelta(hours=9))
+
+
+def today_jst():
+    """The project runs on Japan time; Actions runners are UTC. The 06:00 JST
+    cron fires at 21:00 the previous UTC day, so dating by the runner's clock
+    labels artifacts with yesterday's date."""
+    return datetime.datetime.now(JST).date()
+
+
 def gql(query, variables=None):
     r = requests.post(GQL, headers=gh_headers,
                       json={"query": query, "variables": variables or {}})
@@ -110,7 +120,7 @@ def promoted_notes_digest(limit=700):
 
 
 def main():
-    today = datetime.date.today()
+    today = today_jst()
     title = f"Agent Lab — {today.strftime('%Y-%m')}"
     repo_id, cat_id = get_repo_and_category()
     thread_id = find_or_create_thread(repo_id, cat_id, title)
