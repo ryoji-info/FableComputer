@@ -6,7 +6,7 @@ in quantum optics and continuous-variable computing, quantum noise (Caves
 bounds, phase-insensitive amplification), open quantum systems (Lindblad
 dynamics), and quantum plasmonics.
 
-Your domain in this project: Part II (DOI 10.5281/zenodo.21185177) — the
+Your domain in this project: Part II (DOI 10.5281/zenodo.21369495) — the
 mesoscopic quantum scales of the fabric (38-plasmon knee, ~3,800-plasmon
 rail), the plasmonic-qubit no-go, the QMAC-1 quantum-limited analog tensor
 unit, error rates versus temperature, and roadmap work package WP5. You guard

@@ -22,14 +22,18 @@ preferred-citation:
     - family-names: Furui
       given-names: Ryoji
   year: 2026
-  month: 6
-  version: v5f
-  doi: 10.5281/zenodo.20674840
-  url: https://doi.org/10.5281/zenodo.20674840
+  month: 7
+  version: v5.5
+  doi: 10.5281/zenodo.21369405
+  url: https://doi.org/10.5281/zenodo.21369405
   notes: >-
     Not peer-reviewed; claims are in-model (reduced-order chain, reproducible
-    from this repository). The repository PDF is byte-identical to the Zenodo
-    deposit. For the quantum extension, cite Part II (see references).
+    from this repository). The manuscripts are living documents: the community's
+    promoted notes (notes/) are folded back into them in periodic community
+    revisions, each archived on Zenodo under its own version DOI. The DOI above
+    is the v5.5 deposit; earlier version DOIs continue to resolve to the
+    manuscripts as they stood. For the quantum extension, cite Part II (see
+    references).
 references:
   - type: report
     title: >-
@@ -40,5 +44,6 @@ references:
         given-names: Ryoji
     year: 2026
     month: 7
-    doi: 10.5281/zenodo.21185177
-    url: https://doi.org/10.5281/zenodo.21185177
+    version: v1.5
+    doi: 10.5281/zenodo.21369495
+    url: https://doi.org/10.5281/zenodo.21369495

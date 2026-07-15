@@ -7,8 +7,8 @@
 
 **An open feasibility program for room-temperature terahertz computing on a graphene-plasmon fabric — developed in the open, with every number reproducible.**
 
-[![DOI](https://img.shields.io/badge/Part_I_DOI-10.5281%2Fzenodo.20674840-blue)](https://doi.org/10.5281/zenodo.20674840)
-[![DOI](https://img.shields.io/badge/Part_II_DOI-10.5281%2Fzenodo.21185177-blue)](https://doi.org/10.5281/zenodo.21185177)
+[![DOI](https://img.shields.io/badge/Part_I_DOI-10.5281%2Fzenodo.21369405-blue)](https://doi.org/10.5281/zenodo.21369405)
+[![DOI](https://img.shields.io/badge/Part_II_DOI-10.5281%2Fzenodo.21369495-blue)](https://doi.org/10.5281/zenodo.21369495)
 ![Status](https://img.shields.io/badge/status-paper_design_%2B_runnable_models-blue)
 ![Experiment](https://img.shields.io/badge/gain_cell-experimentally_unproven-orange)
 ![Governance](https://img.shields.io/badge/governance-open%2C_no_blockchain-brightgreen)
@@ -37,12 +37,12 @@ The Fable Computer is an architecture built around one answer to that problem: *
 
 | | Title | What it establishes |
 |---|---|---|
-| **Part I** | [The Fable Computer: A Room-Temperature Terahertz Half Adder on a Regenerative Graphene-Plasmon Logic Fabric](papers/Fable-Computer-Part-I.pdf) · [DOI](https://doi.org/10.5281/zenodo.20674840) | Concept, architecture, and a five-pass reduced-order feasibility chain for the clocked, regenerative logic fabric and its half-adder demonstrator. Ends with a pre-registered five-gate bench protocol. |
-| **Part II** | [Quantum-Limited Analog Tensor Processing on the Regenerative Graphene-Plasmon Fabric](papers/Fable-Computer-Part-II.pdf) · [DOI](https://doi.org/10.5281/zenodo.21185177) | Quantizes the Part-I cell: the plasmonic-qubit no-go, the QMAC-1 analog tensor unit with on-chip classical decoding, and the temperature budget of the quantum–classical crossover. |
+| **Part I** (v5.5) | [The Fable Computer: A Room-Temperature Terahertz Half Adder on a Regenerative Graphene-Plasmon Logic Fabric](papers/Fable-Computer-Part-I.pdf) · [DOI](https://doi.org/10.5281/zenodo.21369405) | Concept, architecture, and a five-pass reduced-order feasibility chain for the clocked, regenerative logic fabric and its half-adder demonstrator. Ends with a pre-registered five-gate bench protocol. |
+| **Part II** (v1.5) | [Quantum-Limited Analog Tensor Processing on the Regenerative Graphene-Plasmon Fabric](papers/Fable-Computer-Part-II.pdf) · [DOI](https://doi.org/10.5281/zenodo.21369495) | Quantizes the Part-I cell: the plasmonic-qubit no-go, the QMAC-1 analog tensor unit with on-chip classical decoding, and the temperature budget of the quantum–classical crossover. |
 
 Both manuscripts carry a full authorship and status disclaimer: they were prepared by an independent researcher with AI assistance (including an orchestrated literature-verification audit), they are not peer-reviewed, and their claims are offered as a starting point for discussion — which is exactly where this community comes in.
 
-*Note: the manuscripts are living documents. The community's vetted findings (see [notes/](notes/)) are folded back into them in periodic community revisions — the current PDFs in `papers/` (Part I v5.2, Part II v1.2) cite this repository (one legacy availability link in Part II's Table QA1 still points to the author's earlier repository and will be corrected in the next revision) and may run ahead of the archived Zenodo versions; the DOIs above always resolve to the last archived release, and the git history of `papers/` records every revision.*
+*Note: the manuscripts are living documents. The community's vetted findings (see [notes/](notes/)) are folded back into them in periodic community revisions, each archived on Zenodo under its own version DOI — the DOIs above are the current deposits (Part I v5.5, Part II v1.5), matching the PDFs in `papers/`; earlier version DOIs keep resolving to the manuscripts as they stood, and the git history of `papers/` records every revision. Each revision's "Revision notes" section states exactly what changed and which promoted note required it. One known erratum outstanding: a legacy data-availability link in Part II's Table QA1 still points to the author's earlier repository.*
 
 **New here?** Two short companion documents summarize everything: [The Fable Computer — An Introduction](docs/Fable-Computer-Introduction.pdf) (six pages: the idea, the numbers, and what remains open) and the [Community Guidelines](docs/Fable-Computer-Community-Guidelines.pdf) (how to join in). Editable sources sit alongside them in [docs/](docs/).
 
