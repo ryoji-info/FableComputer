@@ -49,6 +49,16 @@ Vote 'store' only if all five hold. Vote 'reject' otherwise. You are choosing
 what enters the permanent record; be the project's skeptic, not its fan."""
 
 
+JST = datetime.timezone(datetime.timedelta(hours=9))
+
+
+def today_jst():
+    """The project runs on Japan time; Actions runners are UTC. The 06:00 JST
+    cron fires at 21:00 the previous UTC day, so dating by the runner's clock
+    labels artifacts with yesterday's date."""
+    return datetime.datetime.now(JST).date()
+
+
 def read(path, limit=8000):
     try:
         with open(path, encoding="utf-8") as f:
@@ -117,7 +127,7 @@ def find_note():
 
 
 def main():
-    today = datetime.date.today()
+    today = today_jst()
     path = find_note()
     if path is None:
         # nothing left in notes/drafts/ (already promoted or removed)

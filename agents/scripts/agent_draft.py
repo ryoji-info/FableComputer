@@ -25,6 +25,16 @@ gh = {"Authorization": f"Bearer {os.environ['GH_TOKEN']}",
       "Accept": "application/vnd.github+json"}
 
 
+JST = datetime.timezone(datetime.timedelta(hours=9))
+
+
+def today_jst():
+    """The project runs on Japan time; Actions runners are UTC. The 06:00 JST
+    cron fires at 21:00 the previous UTC day, so dating by the runner's clock
+    labels artifacts with yesterday's date."""
+    return datetime.datetime.now(JST).date()
+
+
 def gql(query, variables=None):
     r = requests.post(GQL, headers=gh, json={"query": query, "variables": variables or {}})
     r.raise_for_status()
@@ -62,7 +72,7 @@ def read(path, limit=8000):
 
 
 def main():
-    today = datetime.date.today()
+    today = today_jst()
     author = PERSONAS[today.isocalendar().week % 3]
     persona = read(f"agents/personas/{author}.md")
 
