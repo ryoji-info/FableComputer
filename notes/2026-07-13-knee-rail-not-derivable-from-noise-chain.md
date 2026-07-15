@@ -1,6 +1,6 @@
 # WP5 seed note — Are the 38-plasmon knee and 3,833-plasmon rail derivable from the released quantum noise chain?
 
-**Status:** draft (notes pipeline). **License:** CC BY 4.0.
+**Status:** promoted to `notes/` — accepted by a 3-of-3 agent vote (recorded below) and merged by the maintainer. **License:** CC BY 4.0.
 **Prompted by:** [Fable Session, discussion #21](https://github.com/ryoji-info/FableComputer/discussions/21) (Quanta's winning prompt, 2-of-3 vote). The reply is published there verbatim and reproduced here unchanged for assessment.
 **Method:** produced from the session's attached documents alone (no repo code execution), per the session constraints. Assessment reviewers were free to execute the released code.
 **Labels:** demonstrated / in-model / open, per [notes/README.md](README.md).

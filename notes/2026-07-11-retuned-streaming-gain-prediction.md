@@ -1,6 +1,6 @@
 # Retuned-cavity streaming gain: analytic partition of the 1.86 dB gap and one falsifiable number
 
-**Status:** draft (notes pipeline). **License:** CC BY 4.0.
+**Status:** promoted to `notes/` — accepted by a 3-of-3 agent vote (recorded below) and merged by the maintainer. **License:** CC BY 4.0.
 **Prompted by:** [Fable Session, discussion #10](https://github.com/ryoji-info/FableComputer/discussions/10) (Kinetic's winning prompt), building on the promoted note [2026-07-11-streaming-gain-detuning-artifact.md](../2026-07-11-streaming-gain-detuning-artifact.md).
 **Method:** hand/symbolic derivation only, per the promoted notes' standard — no code execution. All inputs are the documented solver equations, ghost-cell boundary conditions, and the linear driven-cavity response verified in the promoted note (whose eigencondition reproduces the chain's Eq. (2) term-for-term). Numerical evaluation by standalone calculator scripts.
 **Labels:** demonstrated / in-model / open, per [notes/README.md](../README.md).

@@ -1,6 +1,6 @@
 # The 2.77 dB noise-figure agreement: symbolic derivation and verdict (STRUCTURAL), with the cascade-length question resolved
 
-**Status:** draft (notes pipeline). **License:** CC BY 4.0.
+**Status:** promoted to `notes/` — accepted by a 3-of-3 agent vote (recorded below) and merged by the maintainer. **License:** CC BY 4.0.
 **Prompted by:** [Fable Session, discussion #7](https://github.com/ryoji-info/FableComputer/discussions/7) (Quanta's winning prompt).
 **Method:** no repo code executed; both derivations transcribed by hand from the two repos' source and READMEs and evaluated with standalone calculator scripts. Every quoted `results.json` value is reproduced to its last printed digit. Companion to the promoted note [2026-07-10-cw-pulse-gap-and-nf-agreement.md](../2026-07-10-cw-pulse-gap-and-nf-agreement.md) (§1 there), which this note extends with the explicit verdict, the separation curve, and the falsifiable prediction the session prompt requests.
 **Labels:** demonstrated / in-model / open, per [notes/README.md](../README.md).

@@ -8,7 +8,7 @@
 **An open feasibility program for room-temperature terahertz computing on a graphene-plasmon fabric — developed in the open, with every number reproducible.**
 
 [![DOI](https://img.shields.io/badge/Part_I_DOI-10.5281%2Fzenodo.21369405-blue)](https://doi.org/10.5281/zenodo.21369405)
-[![DOI](https://img.shields.io/badge/Part_II_DOI-10.5281%2Fzenodo.21369495-blue)](https://doi.org/10.5281/zenodo.21369495)
+[![DOI](https://img.shields.io/badge/Part_II_DOI-10.5281%2Fzenodo.21385646-blue)](https://doi.org/10.5281/zenodo.21385646)
 ![Status](https://img.shields.io/badge/status-paper_design_%2B_runnable_models-blue)
 ![Experiment](https://img.shields.io/badge/gain_cell-experimentally_unproven-orange)
 ![Governance](https://img.shields.io/badge/governance-open%2C_no_blockchain-brightgreen)
@@ -38,7 +38,7 @@ The Fable Computer is an architecture built around one answer to that problem: *
 | | Title | What it establishes |
 |---|---|---|
 | **Part I** (v5.5) | [The Fable Computer: A Room-Temperature Terahertz Half Adder on a Regenerative Graphene-Plasmon Logic Fabric](papers/Fable-Computer-Part-I.pdf) · [DOI](https://doi.org/10.5281/zenodo.21369405) | Concept, architecture, and a five-pass reduced-order feasibility chain for the clocked, regenerative logic fabric and its half-adder demonstrator. Ends with a pre-registered five-gate bench protocol. |
-| **Part II** (v1.5) | [Quantum-Limited Analog Tensor Processing on the Regenerative Graphene-Plasmon Fabric](papers/Fable-Computer-Part-II.pdf) · [DOI](https://doi.org/10.5281/zenodo.21369495) | Quantizes the Part-I cell: the plasmonic-qubit no-go, the QMAC-1 analog tensor unit with on-chip classical decoding, and the temperature budget of the quantum–classical crossover. |
+| **Part II** (v1.6) | [Quantum-Limited Analog Tensor Processing on the Regenerative Graphene-Plasmon Fabric](papers/Fable-Computer-Part-II.pdf) · [DOI](https://doi.org/10.5281/zenodo.21385646) | Quantizes the Part-I cell: the plasmonic-qubit no-go, the QMAC-1 analog tensor unit with on-chip classical decoding, and the temperature budget of the quantum–classical crossover. |
 
 Both manuscripts carry a full authorship and status disclaimer: they were prepared by an independent researcher with AI assistance (including an orchestrated literature-verification audit), they are not peer-reviewed, and their claims are offered as a starting point for discussion — which is exactly where this community comes in.
 
