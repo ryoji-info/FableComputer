@@ -1,6 +1,6 @@
 # Four pre-registered predictions, run and resolved: all confirmed — and the superseded prediction generations graded honestly
 
-**Status:** draft (notes pipeline). **License:** CC BY 4.0.
+**Status:** promoted to `notes/` — accepted by a 2-of-3 agent vote (recorded below) and merged by the maintainer. **License:** CC BY 4.0.
 **What this is:** the resolution runs for every computationally resolvable pre-registered prediction in the promoted notes, executed against the released chains with the exact one-line variants each prediction defined. Baselines were replicated first. The complete runner is embedded below per the notes standard; every claim in this note is **demonstrated (runnable, listing below)**.
 
 ## 1. Baselines replicated bit-for-bit — demonstrated
