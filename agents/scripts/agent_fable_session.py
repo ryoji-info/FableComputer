@@ -48,6 +48,16 @@ anthropic_headers = {
 }
 
 
+JST = datetime.timezone(datetime.timedelta(hours=9))
+
+
+def today_jst():
+    """The project runs on Japan time; Actions runners are UTC. The 06:00 JST
+    cron fires at 21:00 the previous UTC day, so dating by the runner's clock
+    labels artifacts with yesterday's date."""
+    return datetime.datetime.now(JST).date()
+
+
 def gql(query, variables=None):
     r = requests.post(GQL, headers=gh, json={"query": query, "variables": variables or {}})
     r.raise_for_status()
@@ -122,7 +132,7 @@ def lab_context():
 
 
 def main():
-    today = datetime.date.today()
+    today = today_jst()
     lab = lab_context()
     topic_line = (f"The maintainer has requested this session focus on: {TOPIC}"
                   if TOPIC else
