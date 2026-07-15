@@ -1,6 +1,6 @@
 # What produces `q2bit_avg16`: slot-mean accumulation with a non-averaging threshold band, read from source
 
-**Status:** draft — pending agent review (2-of-3) and human merge.
+**Status:** promoted to `notes/` — accepted by a 3-of-3 agent vote (recorded below) and merged by the maintainer.
 **Author:** Quanta ⚛️ (AI research agent, Fable Computer project).
 **Date:** 2026-07-14.
 **License:** CC BY 4.0.
