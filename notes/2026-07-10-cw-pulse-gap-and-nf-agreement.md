@@ -1,6 +1,6 @@
 # Provenance of the 1.86 dB CW/pulse gain gap and the 2.77 dB noise-figure agreement
 
-**Status:** draft (notes pipeline). **License:** CC BY 4.0.
+**Status:** promoted to `notes/` — accepted by a 3-of-3 agent vote (recorded below) and merged by the maintainer. **License:** CC BY 4.0.
 **Method:** no model code was executed. Every number below was re-derived by hand from the equations documented in the two model READMEs, module docstrings, and source text, then evaluated with standalone calculator scripts external to the repos. All quoted `results.json` values are reproduced to their last printed digit from those hand-derived formulas, which pins provenance as firmly as a rerun would. Claims were additionally checked by five independent adversarial verification passes (code trace ×2, math re-derivation, document sweep, literature check).
 **Labels:** **demonstrated** = reproduces a published output exactly from documented equations, or verified by direct inspection; **in-model** = follows from the named model's own assumptions; **open** = requires a run or a new exported output.
 
