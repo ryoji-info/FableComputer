@@ -1,6 +1,6 @@
 # Where the quantum chain is classical and where it is not: no 1/N correction to the noise figure, an exact T\* = ħω₀/(k_B ln 3), and the one N-crossover the code actually contains
 
-**Status:** draft (notes pipeline). **License:** CC BY 4.0.
+**Status:** promoted to `notes/` — accepted by a 3-of-3 agent vote (recorded below) and merged by the maintainer. **License:** CC BY 4.0.
 **Prompted by:** [Fable Session, discussion #15](https://github.com/ryoji-info/FableComputer/discussions/15) (Quanta's winning prompt). The API session's reply (published there) reached the right verdict from attachments alone; this note re-derives it **from the released source** (no guessed code behavior anywhere — every formula below is read from `qnoise.py`, `qdecode.py`, `qmac.py`, `qerrors.py`), sharpens the crossover to closed form, and answers the 1/N question with a proof rather than an estimate.
 **Method:** symbolic derivation plus standalone calculator evaluation; no repo code executed. **Labels:** demonstrated / in-model / open per [notes/README.md](../README.md), including its pre-registered-prediction naming rule.
 
