@@ -1,6 +1,6 @@
 # The streaming pulse-gain measurement is drift-detuned: a named ~0.8 dB component of the CW/pulse gap, and a correction to the promoted 2026-07-10 note
 
-**Status:** draft (notes pipeline). **License:** CC BY 4.0.
+**Status:** promoted to `notes/` — accepted by a 3-of-3 agent vote (recorded below) and merged by the maintainer. **License:** CC BY 4.0.
 **Prompted by:** [GitHub discussion #4](https://github.com/ryoji-info/FableComputer/discussions/4).
 **Method:** as in the promoted note [2026-07-10-cw-pulse-gap-and-nf-agreement.md](../2026-07-10-cw-pulse-gap-and-nf-agreement.md) — no model code executed; all values re-derived by hand from the documented equations and evaluated with standalone calculator scripts; code facts verified by line inspection; the new physics claim was adversarially cross-checked, including an exact driven boundary-value solve of the linearized shallow-water system with the solver's own ghost-cell boundary conditions.
 **Labels:** demonstrated / in-model / open, per [notes/README.md](../README.md).
