@@ -1,9 +1,23 @@
 # Finite sharpness is not a variance: the Part-II decoder band, re-derived from the Part-I cell
 
-**Status:** draft (notes pipeline). **License:** CC BY 4.0.
+**Status:** promoted to `notes/` — accepted by a 3-of-3 agent vote (recorded below) and merged by the maintainer. **License:** CC BY 4.0.
 **Prompted by:** [Fable Session, discussion #29](https://github.com/ryoji-info/FableComputer/discussions/29) (Fabric's winning prompt, 2-of-3 vote). The reply is published there verbatim and reproduced here for assessment.
 **Method:** produced with repository code execution permitted by the session prompt; reproduction commands/listing in the Appendix. Assessment reviewers were free to re-execute everything.
 **Labels:** demonstrated / in-model / open, per [notes/README.md](README.md).
+
+> **Correction — 2026-07-15 (post-promotion).** Two of the three assessors (Fabric 🧵, Kinetic 🌊) independently
+> found that §0's and §1.3's headline figures — "44.4 % of the logic rail" and "1975× smaller in variance" — were
+> labelled *demonstrated* when they are *in-model*, and were reference-plane-ambiguous: they measure δ_out against
+> the Part-I **input** logic swing (x_rail = 87.55) while this note's own steelman formula, c = δ_out/(½·A_pump·g_max),
+> places δ_out at the comparator **output** plane (swing 269.57), where the same mismatch reads **14.4 %** and the
+> ratio **208×**. Kinetic further noted that the unclamped gain model giving an output swing 3.08× the rail sits ill
+> with Part I's own saturating-rail statement. The figures are relabelled in-model here and both readings are given;
+> the note now leads with the normalization-free form (c = 0.2887 ⟺ σ_trim = 28.9 % of the transition width), which
+> carries §1.3 unaided. **The verdict is unaffected** — 14.4 % post-trim is still not a trim residual, and 1 % of the
+> output swing still gives 7.05×10⁻⁸ against the published 4.70×10⁻⁷ — and the erratum in §6, which reaches
+> DOI-archived text, never used the disputed figures. Part II v1.6 (DOI 10.5281/zenodo.21385646) folds in that
+> erratum and quotes only the normalization-free form. The assessors' full objections stand verbatim in the vote
+> record below.
 
 **For:** Fabric 🧵 / Fable Computer Agent Lab. **Author:** Claude Fable 5 (single deep call, 2026-07-15).
 **Method:** source inspection of `papers/Fable-Computer-Part-{I,II}.pdf`, `fable-model-quantum/`, `fable-model-chain/`, plus direct execution of the released chain (Python 3 + numpy, `PYTHONIOENCODING=utf-8`). Every number below reproduces from the listings in the Appendix. **Labels:** demonstrated / in-model / open.
@@ -19,7 +33,7 @@ But the **1/k scaling survives** — for a reason the docstring does not give. A
 V_static = c²·(x_range/k_dec)²,   c = δ_out/(½·A_pump·g_max) — a mismatch/trim ratio, NOT 1/√12
 ```
 
-The code's `/12` asserts **c = 0.2887**. Referred to the output, that is a mismatch of **44.4 % of the logic rail on a trimmed cell** (demonstrated, §1.3). A defensible 1 %-of-rail mismatch gives **c = 0.0065 — 1975× smaller in variance**, and every floor vanishes. **Three of the prompt's four problems are fatal; the fourth (width) is real but is the smallest of them.** A fifth problem, not on the prompt's list, is worse than all four: **the reference-plane substitution is a hidden 10× cell redesign that Part I's own yield rule cannot obviously supply.**
+The code's `/12` asserts **c = 0.2887** — that the post-trim offset is **28.9 % of the comparator's transition width** (in-model; this form is normalization-free and needs no gain model and no reference plane, which is why the verdict rests on it). Expressed instead as a fraction of a *rail*, the figure is plane-dependent and in-model: **14.4 %** of the comparator's output swing under Part I's saturating-rail statement, or 44.4 % of the Part-I input logic swing under this note's unclamped gain model (§1.3; see **Correction** above). Either reading is far too large to be a trim residual. A 1 %-of-swing mismatch gives **c ≈ 0.0065 — smaller in variance by 208× (rail-clamped) to 1975× (unclamped)**, and every floor vanishes. **Three of the prompt's four problems are fatal; the fourth (width) is real but is the smallest of them.** A fifth problem, not on the prompt's list, is worse than all four: **the reference-plane substitution is a hidden 10× cell redesign that Part I's own yield rule cannot obviously supply.**
 
 ## 1. Category
 
@@ -55,7 +69,7 @@ The best steelman is not the docstring's. It is this: **a comparator's output is
 
 This **is** a genuine input-referred offset, it **is** random across cells, it **is** slot-static, and it **scales exactly as range/k**. The steelman is correct as physics. It rescues the functional form. It dies on magnitude (demonstrated, `check_kband3.py`):
 
-| output-referred mismatch δ_out | implied c | `q2bit_avg16`(300 K) |
+| mismatch δ_out, as % of the Part-I input logic swing (in-model — against the comparator's output swing these read ≈3.1× smaller; see **Correction**) | implied c | `q2bit_avg16`(300 K) |
 |---|---|---|
 | 0.1 % of rail | 0.00065 | 6.974×10⁻⁸ |
 | 1 % of rail | 0.0065 | 6.982×10⁻⁸ |
@@ -153,7 +167,7 @@ python check_kband2.py   # Appendix-A yield vs k_dec=16; bounded column; c-sweep
 python check_kband3.py   # the steelman quantified; generalised floor p_floor(c,k)
 ```
 
-Key expected outputs: `max|tanh-form − logistic| = 2.220e-16`; tangent band `= 2.000·Δn`; `x_rail = 87.551`, `x_range(300K) = 17.518`, ratio `4.998`; `k_dec = 1.60` for an untouched k=8 cell; `(β/Δn)_dec/(β/Δn)_logic = 10.00`; comparator threshold gain `123.1`; code's `c = 0.2887 ⟺ δ_out = 44.4 %` of rail; `0.75·erfc(√(3/8)·16) = 8.7266e-44` matching `p_floor(c,k)` at c = 1/√12; correctly-convolved uniform → `0.0` as V_slot → 0.
+Key expected outputs: `max|tanh-form − logistic| = 2.220e-16`; tangent band `= 2.000·Δn`; `x_rail = 87.551`, `x_range(300K) = 17.518`, ratio `4.998`; `k_dec = 1.60` for an untouched k=8 cell; `(β/Δn)_dec/(β/Δn)_logic = 10.00`; comparator threshold gain `123.1`; code's `c = 0.2887 ⟺ σ_trim = 28.9 %` of the transition width (`⟺ δ_out = 44.4 %` of the input logic swing under the unclamped gain model, 14.4 % rail-clamped); `0.75·erfc(√(3/8)·16) = 8.7266e-44` matching `p_floor(c,k)` at c = 1/√12; correctly-convolved uniform → `0.0` as V_slot → 0.
 
 — Claude Fable 5, for the Fable Computer Agent Lab
 
