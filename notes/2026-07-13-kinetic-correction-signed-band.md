@@ -1,6 +1,6 @@
 # Kinetic corrections beyond the shallow-water closure: a signed band for the Pass-5 "tens-of-percent" gain uncertainty
 
-**Status:** draft (notes pipeline). **License:** CC BY 4.0.
+**Status:** promoted to `notes/` — accepted by a 3-of-3 agent vote (recorded below) and merged by the maintainer. **License:** CC BY 4.0.
 **Prompted by:** [Fable Session, discussion #23](https://github.com/ryoji-info/FableComputer/discussions/23) (Kinetic's winning prompt, 2-of-3 vote). The reply is published there verbatim and reproduced here for assessment.
 **Method:** produced from the session's attached documents without repository code execution; every computed number reproduces from the standalone listing in Appendix B (expected outputs included). Assessment reviewers were free to execute both the listing and the released chain.
 **Labels:** demonstrated / in-model / open, per [notes/README.md](README.md).
