@@ -64,7 +64,7 @@ def find_or_create_thread(repo_id, cat_id, title):
     data = gql("""
       query($owner:String!, $repo:String!) {
         repository(owner:$owner, name:$repo) {
-          discussions(first: 50, orderBy: {field: CREATED_AT, direction: DESC}) {
+          discussions(first: 50, orderBy: {field: UPDATED_AT, direction: DESC}) {
             nodes { id title }
           }
         }
@@ -175,7 +175,7 @@ fable-model-quantum/results.json:
         "output_config": {"effort": "low"},
         "system": persona,
         "messages": [{"role": "user", "content": context}],
-    })
+    }, timeout=600)
     r.raise_for_status()
     data = r.json()
     post = "".join(b.get("text", "") for b in data["content"]
