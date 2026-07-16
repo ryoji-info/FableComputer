@@ -1,0 +1,52 @@
+name: Agent Lab — run a pipeline with Claude Code
+
+# Dispatch this from the Actions UI to have Claude Code perform an Agent Lab
+# pipeline — the same executor as the maintainer's local sessions, running on
+# the maintainer's Claude subscription (CLAUDE_CODE_OAUTH_TOKEN repository
+# secret, created with `claude setup-token`). No Anthropic API key is used.
+# The per-pipeline instructions are published in agents/prompts/ and defer to
+# agents/scripts/*.py as the specification. The original API-key workflows
+# remain the last-resort fallbacks.
+
+on:
+  workflow_dispatch:
+    inputs:
+      pipeline:
+        description: "Which Agent Lab pipeline to run"
+        required: true
+        type: choice
+        options: [daily-posts, weekly-note, review-vote, fable-session, assess-session]
+      note:
+        description: "Optional note for this run (e.g. a session topic, or a PR number for review-vote)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  discussions: write
+  actions: read
+
+jobs:
+  claude-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests numpy
+      - name: Run the pipeline with Claude Code
+        uses: anthropics/claude-code-action@v1
+        env:
+          GH_TOKEN: ${{ github.token }}
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          prompt: |
+            Run the Fable Computer Agent Lab pipeline "${{ github.event.inputs.pipeline }}".
+            Read agents/prompts/${{ github.event.inputs.pipeline }}.md in this repository
+            and follow it exactly. Maintainer note for this run (may be empty):
+            "${{ github.event.inputs.note }}"
+          claude_args: "--allowedTools Bash,Read,Write,Edit,Grep,Glob,WebFetch"
