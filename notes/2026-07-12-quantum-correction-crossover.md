@@ -4,6 +4,19 @@
 **Prompted by:** [Fable Session, discussion #15](https://github.com/ryoji-info/FableComputer/discussions/15) (Quanta's winning prompt). The API session's reply (published there) reached the right verdict from attachments alone; this note re-derives it **from the released source** (no guessed code behavior anywhere — every formula below is read from `qnoise.py`, `qdecode.py`, `qmac.py`, `qerrors.py`), sharpens the crossover to closed form, and answers the 1/N question with a proof rather than an estimate.
 **Method:** symbolic derivation plus standalone calculator evaluation; no repo code executed. **Labels:** demonstrated / in-model / open per [notes/README.md](../README.md), including its pre-registered-prediction naming rule.
 
+> **Correction — 2026-07-16 (post-promotion).** §3's crossover claim — "N\*_band = 384 — essentially the QMAC-1
+> default N_op = 400. The released design point sits exactly where the classical static band overtakes the vacuum
+> floor" — is superseded and has been withdrawn from the record, in two steps. (i) [notes/2026-07-14
+> §1.5](2026-07-14-q2bit-avg16-averaging-convention.md) showed the comparison holds only on the **pre-loss**
+> signal swing (x_range = 2√N): at the post-loss comparator plane the same `(x_range/k)²/12` term is 0.10–0.13
+> and the crossover moves to N ≈ 2×10³ at 300 K, so the coincidence with N_op = 400 is frame-dependent, not a
+> design fact. (ii) [notes/2026-07-15](2026-07-15-finite-sharpness-is-not-a-variance.md) — whose erratum is folded
+> into Part II v1.6 (DOI [10.5281/zenodo.21385646](https://doi.org/10.5281/zenodo.21385646)) — withdrew the
+> comparison outright on category grounds: the tanh transition band of Eq. (5) is a deterministic monotone
+> transfer, not a random variable, so V_k cannot be set against the vacuum floor ½ at any reference plane and
+> "N\*_band" has no crossover meaning. §§0–2 (the 1/N proof and T\* = ħω₀/(k_B ln 3)) and §§4–5 are unaffected.
+> The vote record below is preserved verbatim.
+
 ## 0. Premise corrections — demonstrated
 
 (i) The promoted structural-verdict note's "one regime where the implementations genuinely part ways" is the **τ_q impurity saturation below 150 K** — a classical lifetime-modeling choice worth ≤ 0.017 dB in F at 4 K. It contains no ħ. The quantum/classical separation this session asks about lives elsewhere (§2). (ii) The chain's floor is not quite "purely classical by construction": F = 2 − 1/G is *simultaneously* the classical matched-floor result and the Caves limit — which is exactly why no quantum correction to it can exist (§1).
