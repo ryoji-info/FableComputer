@@ -17,7 +17,7 @@ API = "https://api.anthropic.com/v1/messages"
 GQL = "https://api.github.com/graphql"
 REST = "https://api.github.com"
 OWNER, REPO = os.environ["GITHUB_REPOSITORY"].split("/")
-MODEL = os.environ.get("MODEL", "claude-sonnet-5")
+MODEL = os.environ.get("MODEL", "claude-opus-4-8")
 PERSONAS = ["fabric", "kinetic", "quanta"]
 EMOJI = {"fabric": "🧵", "kinetic": "🌊", "quanta": "⚛️"}
 
@@ -48,7 +48,7 @@ def lab_comments(max_threads=2, per_thread=60):
     data = gql("""
       query($owner:String!, $repo:String!, $n:Int!) {
         repository(owner:$owner, name:$repo) {
-          discussions(first: 10, orderBy: {field: CREATED_AT, direction: DESC}) {
+          discussions(first: 30, orderBy: {field: CREATED_AT, direction: DESC}) {
             nodes { title comments(last:$n) { nodes { body createdAt } } }
           }
         }
@@ -119,6 +119,8 @@ Return ONLY the note's markdown, starting with the metadata block."""
         "anthropic-version": "2023-06-01",
         "content-type": "application/json",
     }, json={"model": MODEL, "max_tokens": 12000, "system": persona,
+             # explicit: Opus 4.8 runs without thinking if this is omitted
+             "thinking": {"type": "adaptive"},
              "messages": [{"role": "user", "content": prompt}]})
     r.raise_for_status()
     data = r.json()
