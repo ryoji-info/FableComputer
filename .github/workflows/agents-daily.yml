@@ -1,8 +1,12 @@
 name: Agent Lab — daily posts
 
+# FALLBACK ONLY (since 2026-07-16): the daily posts are performed by Claude
+# in a Claude Code session operated by the maintainer, following the same
+# personas and rotation — see agents/README.md, "Operations". Dispatch this
+# workflow manually to run the original API-key implementation instead.
+# No cron: nothing runs on the API key automatically anymore.
+
 on:
-  schedule:
-    - cron: "0 21 * * *"   # 06:00 JST
   workflow_dispatch:
     inputs:
       model:
