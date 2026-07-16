@@ -110,7 +110,7 @@ def parse_json(raw):
     return json.loads(raw)
 
 
-def promoted_notes(max_notes=4, limit=2000):
+def promoted_notes(max_notes=12, limit=2000):
     """Promoted notes are the project's corrected state of knowledge."""
     paths = [p.replace("\\", "/") for p in sorted(glob.glob("notes/*.md"))
              if os.path.basename(p).lower() != "readme.md"][-max_notes:]
@@ -121,7 +121,7 @@ def lab_context():
     data = gql("""
       query($owner:String!, $repo:String!) {
         repository(owner:$owner, name:$repo) {
-          discussions(first: 30, orderBy: {field: CREATED_AT, direction: DESC}) {
+          discussions(first: 30, orderBy: {field: UPDATED_AT, direction: DESC}) {
             nodes { title comments(last: 30) { nodes { body createdAt } } }
           }
         }
