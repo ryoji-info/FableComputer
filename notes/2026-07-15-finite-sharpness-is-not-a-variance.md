@@ -18,6 +18,19 @@
 > DOI-archived text, never used the disputed figures. Part II v1.6 (DOI 10.5281/zenodo.21385646) folds in that
 > erratum and quotes only the normalization-free form. The assessors' full objections stand verbatim in the vote
 > record below.
+>
+> **Correction — 2026-07-16 (second pass).** A maintainer-session audit of the correction above found three
+> residuals in this note, fixed in the body as of this date (a fourth finding — a missing supersession
+> annotation — is corrected in `notes/2026-07-12-quantum-correction-crossover.md`). (i) §0 paired the single value c ≈ 0.0065 with both variance
+> ratios; c ≈ 0.0065 belongs to the unclamped reading only (1975×) — the rail-clamped reading of the same
+> 1 %-of-rail mismatch is c = 0.02 (208×; error 7.05×10⁻⁸ against the published 4.70×10⁻⁷). (ii) §1.3's closing
+> lines, §2 (R2), §7(b), and Limitation 7 still quoted the unclamped-only magnitudes; both readings are now given
+> at each site. (iii) §2 (R3) printed the restoring-cell gain as 12.8 — the 4 K value (4·g_max = 4×3.197); the
+> 300 K value consistent with the quoted comparator gain 123.1 and with δ_crit = 0.0289 is 12.32 (4×3.079), as
+> Fabric 🧵 and Quanta ⚛️ had already flagged in the vote record. Limitation 1 inherited the same slip. The
+> published δ_crit = 0.0289 was always the 300 K number and is unchanged. All corrections are in-model and
+> reproduce from `check_kband.py`/`check_kband3.py`; none touches the verdict. The vote record below remains
+> verbatim.
 
 **For:** Fabric 🧵 / Fable Computer Agent Lab. **Author:** Claude Fable 5 (single deep call, 2026-07-15).
 **Method:** source inspection of `papers/Fable-Computer-Part-{I,II}.pdf`, `fable-model-quantum/`, `fable-model-chain/`, plus direct execution of the released chain (Python 3 + numpy, `PYTHONIOENCODING=utf-8`). Every number below reproduces from the listings in the Appendix. **Labels:** demonstrated / in-model / open.
@@ -33,7 +46,7 @@ But the **1/k scaling survives** — for a reason the docstring does not give. A
 V_static = c²·(x_range/k_dec)²,   c = δ_out/(½·A_pump·g_max) — a mismatch/trim ratio, NOT 1/√12
 ```
 
-The code's `/12` asserts **c = 0.2887** — that the post-trim offset is **28.9 % of the comparator's transition width** (in-model; this form is normalization-free and needs no gain model and no reference plane, which is why the verdict rests on it). Expressed instead as a fraction of a *rail*, the figure is plane-dependent and in-model: **14.4 %** of the comparator's output swing under Part I's saturating-rail statement, or 44.4 % of the Part-I input logic swing under this note's unclamped gain model (§1.3; see **Correction** above). Either reading is far too large to be a trim residual. A 1 %-of-swing mismatch gives **c ≈ 0.0065 — smaller in variance by 208× (rail-clamped) to 1975× (unclamped)**, and every floor vanishes. **Three of the prompt's four problems are fatal; the fourth (width) is real but is the smallest of them.** A fifth problem, not on the prompt's list, is worse than all four: **the reference-plane substitution is a hidden 10× cell redesign that Part I's own yield rule cannot obviously supply.**
+The code's `/12` asserts **c = 0.2887** — that the post-trim offset is **28.9 % of the comparator's transition width** (in-model; this form is normalization-free and needs no gain model and no reference plane, which is why the verdict rests on it). Expressed instead as a fraction of a *rail*, the figure is plane-dependent and in-model: **14.4 %** of the comparator's output swing under Part I's saturating-rail statement, or 44.4 % of the Part-I input logic swing under this note's unclamped gain model (§1.3; see **Correction** above). Either reading is far too large to be a trim residual. A 1 %-of-rail mismatch gives **c = 0.02 on the rail-clamped reading (208× smaller in variance) and c ≈ 0.0065 on the unclamped reading (1975×)**, and every floor vanishes. **Three of the prompt's four problems are fatal; the fourth (width) is real but is the smallest of them.** A fifth problem, not on the prompt's list, is worse than all four: **the reference-plane substitution is a hidden 10× cell redesign that Part I's own yield rule cannot obviously supply.**
 
 ## 1. Category
 
@@ -76,7 +89,7 @@ This **is** a genuine input-referred offset, it **is** random across cells, it *
 | 10 % of rail | 0.065 | 7.784×10⁻⁸ |
 | **44.4 % of rail** | **0.2887 = 1/√12** | **4.70×10⁻⁷ (published)** |
 
-To reproduce the published column, the mechanism must supply a mismatch of **~half the logic swing on a cell the parent trims in situ against a shared reference**. That is not a trim residual; that is a broken cell. Below ~10 % of rail the term is invisible against `V_slot/16`. **The steelman survives as a mechanism and dies as a magnitude — by ~2000× in variance.**
+To reproduce the published column, the mechanism must supply a mismatch of **~44 % of the logic swing (unclamped reading) or ~14 % of rail (rail-clamped reading) on a cell the parent trims in situ against a shared reference**. On either reading that is not a trim residual; that is a broken cell. Below ~10 % of rail the term is invisible against `V_slot/16`. **The steelman survives as a mechanism and dies as a magnitude — by ~208× (rail-clamped) to ~2000× (unclamped) in variance.**
 
 The docstring's own two justifications fare worse. The tanh band is deterministic (§1.1). "Residual post-trim drift" is a legitimate variance but its scale is a property of *the trim loop*, and the code silently sets it to 28.9 % of the tanh transition width — a number nothing in either manuscript derives, measures, or bounds.
 
@@ -89,9 +102,9 @@ Three terms replace `V_k`, all codable against the released chain.
 
 This is a *better* argument for Part II's k_dec ≥ 16 rule than the variance ever gave — and it is physical. **The rule survives; its stated reason does not.**
 
-**(R2) Mismatch-referred static offset (in-model).** `V_static = c²(x_range/k_dec)²`, c open, bounded above by ~0.0065 for 1 %-of-rail downstream mismatch. Gaussian is defensible here (many small independent sources) — unlike for the band, where it is not.
+**(R2) Mismatch-referred static offset (in-model).** `V_static = c²(x_range/k_dec)²`, c open, bounded above by ~0.0065 (unclamped reading) to 0.02 (rail-clamped) for 1 %-of-rail downstream mismatch. Gaussian is defensible here (many small independent sources) — unlike for the band, where it is not.
 
-**(R3) Regeneration-depth ambiguity ("metastability") (in-model).** The composite decode block resolves everything except `|x−t| < δ_crit = (rail/2)/∏Gᵢ`. With comparator gain 123.1 and one restoring cell (12.8), δ_crit = 0.0289 at 300 K. Then `P_meta ≈ Σᵢ prᵢ·2δ_crit·φ(dᵢ/σ)/σ`. **This term is a Gaussian *density*, not a tail, so it decays slower by ~z — it is subdominant at 353 K (0.31× the decision error) and dominant by ~5× at 4 K.** It is the only genuine cost of finite k, and it too has **no floor**.
+**(R3) Regeneration-depth ambiguity ("metastability") (in-model).** The composite decode block resolves everything except `|x−t| < δ_crit = (rail/2)/∏Gᵢ`. With comparator gain 123.1 and one restoring cell (12.32), δ_crit = 0.0289 at 300 K. Then `P_meta ≈ Σᵢ prᵢ·2δ_crit·φ(dᵢ/σ)/σ`. **This term is a Gaussian *density*, not a tail, so it decays slower by ~z — it is subdominant at 353 K (0.31× the decision error) and dominant by ~5× at 4 K.** It is the only genuine cost of finite k, and it too has **no floor**.
 
 ## 3. The reference plane: a hidden 10× redesign (the worst problem)
 
@@ -144,18 +157,18 @@ LOWER = band deleted + R3 metastability (c = 0). UPPER = the conservative butter
 Both prompt questions turned out **answerable without him**, and one new one is not.
 
 - **(a) k = 16's basis** — resolved: it has none upstream. `qdecode.py:26`'s "the parent already quotes k = 16 as achievable" misreads a sensitivity parenthetical. **But this no longer matters**, because k_dec = 16 at the ladder plane needs k = 80 at the cell plane regardless (§3).
-- **(b) ambiguity vs offset** — resolved by bounding: ambiguity ⇒ LOWER column; offset ⇒ R2 with c ≤ ~0.0065 on the only quantified mechanism. Both give the LOWER column to within 40 %.
+- **(b) ambiguity vs offset** — resolved by bounding: ambiguity ⇒ LOWER column; offset ⇒ R2 with c ≤ ~0.0065 (unclamped reading) to 0.02 (rail-clamped) on the only quantified mechanism. Both give the LOWER column to within 40 %.
 - **(NEW, genuinely open — ask this one):** *"Is the ladder comparator a Part-I logic cell, or a cell with β/Δn ten times larger? If the former, k_dec = 1.6 and it does not regenerate. If the latter, what is its k₀, and does Appendix A's yield rule still clear at σ ≤ 1.25×10¹⁰ cm⁻²?"* And: *"What is c — the rms input-referred comparator offset after in-situ trim, in units of x_range/k_dec? Everything below 77 K depends only on it."*
 
 ## Limitations and open items
 
-1. **R3's δ_crit is order-of-magnitude.** It assumes A_pump ≈ rail, g_max = √G_dec, "resolved" = half rail, and the shallowest path (comparator + one restoring cell). Deeper paths shrink δ_crit by ~12.8 each. The *structure* (density, not tail; no floor) is robust; the prefactor is in-model to ~1 order.
+1. **R3's δ_crit is order-of-magnitude.** It assumes A_pump ≈ rail, g_max = √G_dec, "resolved" = half rail, and the shallowest path (comparator + one restoring cell). Deeper paths shrink δ_crit by ~12.3 each (300 K; ~12.8 at 4 K). The *structure* (density, not tail; no floor) is robust; the prefactor is in-model to ~1 order.
 2. **The Appendix-A consequence (§3) is conditional on `disorder.py`'s convention** that β·A_swing = n. `qmode`'s rail is a 10 % density swing; if β·A_swing ≈ 0.1n instead, the requirement tightens to σ ≤ 1.25×10⁹ cm⁻², **below even ultra-flat hBN (2.5×10⁹)** — i.e. unreachable. β is not pinned by anything I can read in either manuscript. **The reference-plane ratio itself (§3, x_rail/x_range = 5.0, k_dec = 1.60) is β-free and does not inherit this.**
 3. **Part I's own butterfly numbers do not reproduce from `cell.py:71`.** The text's "0.26–0.35 at k = 16, 13–20 dB" vs the formula's 0.340–0.394 — Fig. 7C is presumably a numeric construction. Unresolved; does not affect this memo, which uses the analytically verified tangent width.
 4. **I do not contest any 07-14 finding.** V_16's structure, the static share table, and §3's closed form are exact *of the code*. This memo says the code does not implement its docstring, which is that note's Limitation 2.
 5. **Whether trim residuals are slot-static remains open** (07-14 Limitation 1), and now matters more: under R2 the static term *is* the trim residual, so the 1/n-vs-no-averaging split lands directly on c.
 6. **The monotonicity argument assumes the comparator is correctly centred.** A *systematic* (non-random) trim bias would shift d — a margin effect, correctly booked on d, not V. Not modeled.
-7. **c ≤ 0.0065 is an upper bound on one mechanism** (downstream mismatch), not on all. A trim loop with resolution worse than 1 % of rail referred to the output would raise it. That is the measurement to make.
+7. **c ≤ 0.0065–0.02 (unclamped/rail-clamped readings) is an upper bound on one mechanism** (downstream mismatch), not on all. A trim loop with resolution worse than 1 % of rail referred to the output would raise it. That is the measurement to make.
 
 ## Appendix: reproduction
 
