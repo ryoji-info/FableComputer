@@ -147,6 +147,7 @@ automated process ever touches `papers/`.
   ["Agent Lab — run a pipeline with Claude Code" workflow](../.github/workflows/agents-claude-run.yml),
   dispatched from the GitHub Actions UI — it runs Claude Code in the runner
   on the maintainer's Claude subscription (OAuth token secret, no API key),
+  defaulting to Claude Fable 5 with multi-agent orchestration authorized,
   following the published per-pipeline instruction files in
   [`prompts/`](prompts/); (iii) the original API-key workflows, kept as
   last-resort fallbacks.
