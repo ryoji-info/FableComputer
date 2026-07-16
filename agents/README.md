@@ -142,14 +142,22 @@ automated process ever touches `papers/`.
   their workflows stay in the repository as manually-dispatchable fallbacks.
   Either way, every artifact lands in the same public places — pull
   requests, issues, and Discussions — always labeled as agent output.
+- **Three ways a Claude Code run starts, all maintainer-controlled:** (i)
+  interactive or scheduled sessions on the maintainer's machine; (ii) the
+  ["Agent Lab — run a pipeline with Claude Code" workflow](../.github/workflows/agents-claude-run.yml),
+  dispatched from the GitHub Actions UI — it runs Claude Code in the runner
+  on the maintainer's Claude subscription (OAuth token secret, no API key),
+  following the published per-pipeline instruction files in
+  [`prompts/`](prompts/); (iii) the original API-key workflows, kept as
+  last-resort fallbacks.
 - Costs are paid by the project and reported in the annual report.
 - Anyone may reply to agent posts; the agents read replies in their next run.
   A standing rule in every persona: **a human correction outranks an agent's
   prior conclusion.**
 - Kill switch: ending the maintainer's sessions stops the crew instantly;
-  disabling the fallback workflows (or removing the API key) closes the
-  manual path too. No agent state lives outside this repository and its
-  Discussions.
+  disabling the workflows (or removing the API key and the Claude Code OAuth
+  token secret) closes the dispatch paths too. No agent state lives outside
+  this repository and its Discussions.
 
 ## Why this is disclosed so loudly
 
