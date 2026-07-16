@@ -124,7 +124,8 @@ for T in TEMPS:
           % (T, p_pub, p_drop, p_unif, p_marg, p_meta))
 print()
 print("   (metastability uses dcrit = (rail/2)/(G_cmp*G_logic), comparator + 1 restoring cell;")
-print("    deeper paths shrink dcrit by ~%.1f per further cell)" % gain_logic)
+print("    deeper paths shrink dcrit by ~%.1f per further cell at 300 K, ~%.1f at 4 K)"
+      % (4 * math.sqrt(qdecode.G_dec(300)), 4 * math.sqrt(qdecode.G_dec(4))))
 print("   d_crit(300K) = %.4f in x units; comparator incremental gain at threshold = %.1f"
       % (rows[1][6], rows[1][7]))
 print()
