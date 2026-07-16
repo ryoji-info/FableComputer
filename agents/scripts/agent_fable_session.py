@@ -20,7 +20,7 @@ import requests
 API = "https://api.anthropic.com/v1/messages"
 GQL = "https://api.github.com/graphql"
 OWNER, REPO = os.environ["GITHUB_REPOSITORY"].split("/")
-MODEL = os.environ.get("MODEL", "claude-sonnet-5")
+MODEL = os.environ.get("MODEL", "claude-opus-4-8")
 FABLE_MODEL = os.environ.get("FABLE_MODEL", "claude-fable-5")
 EFFORT = os.environ.get("EFFORT", "high")
 TOPIC = os.environ.get("TOPIC", "").strip()
@@ -78,6 +78,10 @@ def read(path, limit=8000):
 def claude(system, user, max_tokens=4000, model=MODEL, effort=None, fable=False,
            schema=None):
     body = {"model": model, "max_tokens": max_tokens, "system": system,
+            # Adaptive thinking, stated explicitly: Sonnet 5 defaults to it,
+            # Opus 4.8 runs without thinking when the param is omitted, and
+            # Fable 5 (always-on) accepts an explicit adaptive too.
+            "thinking": {"type": "adaptive"},
             "messages": [{"role": "user", "content": user}]}
     headers = dict(anthropic_headers)
     if effort or schema:
@@ -106,7 +110,7 @@ def parse_json(raw):
     return json.loads(raw)
 
 
-def promoted_notes(max_notes=4, limit=2000):
+def promoted_notes(max_notes=12, limit=2000):
     """Promoted notes are the project's corrected state of knowledge."""
     paths = [p.replace("\\", "/") for p in sorted(glob.glob("notes/*.md"))
              if os.path.basename(p).lower() != "readme.md"][-max_notes:]
@@ -117,7 +121,7 @@ def lab_context():
     data = gql("""
       query($owner:String!, $repo:String!) {
         repository(owner:$owner, name:$repo) {
-          discussions(first: 5, orderBy: {field: CREATED_AT, direction: DESC}) {
+          discussions(first: 30, orderBy: {field: UPDATED_AT, direction: DESC}) {
             nodes { title comments(last: 30) { nodes { body createdAt } } }
           }
         }

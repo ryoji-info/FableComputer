@@ -13,7 +13,7 @@ API = "https://api.anthropic.com/v1/messages"
 REST = "https://api.github.com"
 OWNER, REPO = os.environ["GITHUB_REPOSITORY"].split("/")
 PR = os.environ["PR_NUMBER"]
-MODEL = os.environ.get("MODEL", "claude-sonnet-5")
+MODEL = os.environ.get("MODEL", "claude-opus-4-8")
 PERSONAS = ["fabric", "kinetic", "quanta"]
 EMOJI = {"fabric": "🧵", "kinetic": "🌊", "quanta": "⚛️"}
 
@@ -56,6 +56,8 @@ def main():
             "content-type": "application/json",
         }, json={
             "model": MODEL, "max_tokens": 12000, "system": persona,
+            # explicit: Opus 4.8 runs without thinking if this is omitted
+            "thinking": {"type": "adaptive"},
             "output_config": {"format": {"type": "json_schema", "schema": {
                 "type": "object",
                 "properties": {
@@ -70,7 +72,7 @@ def main():
                 f"{STANDARD}\n\nReview this draft note and return your verdict: "
                 'vote (accept/revise/reject), reasons (3-6 sentences), '
                 'top_issues (specific problems).\n\nDRAFT:\n\n' + raw}],
-        })
+        }, timeout=600)
         r.raise_for_status()
         text = "".join(b.get("text", "") for b in r.json()["content"]
                        if b.get("type") == "text").strip()

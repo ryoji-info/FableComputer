@@ -25,7 +25,7 @@ import requests
 API = "https://api.anthropic.com/v1/messages"
 REST = "https://api.github.com"
 OWNER, REPO = os.environ["GITHUB_REPOSITORY"].split("/")
-MODEL = os.environ.get("MODEL", "claude-sonnet-5")
+MODEL = os.environ.get("MODEL", "claude-opus-4-8")
 NOTE_PATH = os.environ.get("NOTE_PATH", "").strip()
 PERSONAS = ["fabric", "kinetic", "quanta"]
 EMOJI = {"fabric": "🧵", "kinetic": "🌊", "quanta": "⚛️"}
@@ -81,6 +81,8 @@ VOTE_SCHEMA = {
 
 def claude(system, user, max_tokens=4000, schema=None):
     body = {"model": MODEL, "max_tokens": max_tokens, "system": system,
+            # explicit: Opus 4.8 runs without thinking if this is omitted
+            "thinking": {"type": "adaptive"},
             "messages": [{"role": "user", "content": user}]}
     if schema:
         # Structured outputs: the response is guaranteed to be valid JSON

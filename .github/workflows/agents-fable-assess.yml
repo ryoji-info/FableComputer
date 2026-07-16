@@ -38,5 +38,5 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NOTE_PATH: ${{ github.event.inputs.note_path }}
-          MODEL: claude-sonnet-5
+          MODEL: claude-opus-4-8
         run: python agents/scripts/agent_fable_assess.py
