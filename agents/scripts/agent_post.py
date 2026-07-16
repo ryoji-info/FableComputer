@@ -17,7 +17,7 @@ API = "https://api.anthropic.com/v1/messages"
 GQL = "https://api.github.com/graphql"
 OWNER, REPO = os.environ["GITHUB_REPOSITORY"].split("/")
 PERSONA = os.environ["PERSONA"]
-MODEL = os.environ.get("MODEL", "claude-sonnet-5")
+MODEL = os.environ.get("MODEL", "claude-opus-4-8")
 EMOJI = {"fabric": "🧵", "kinetic": "🌊", "quanta": "⚛️"}[PERSONA]
 CATEGORY = "Agent Lab"
 
@@ -64,7 +64,7 @@ def find_or_create_thread(repo_id, cat_id, title):
     data = gql("""
       query($owner:String!, $repo:String!) {
         repository(owner:$owner, name:$repo) {
-          discussions(first: 30, orderBy: {field: CREATED_AT, direction: DESC}) {
+          discussions(first: 50, orderBy: {field: CREATED_AT, direction: DESC}) {
             nodes { id title }
           }
         }
@@ -166,9 +166,11 @@ fable-model-quantum/results.json:
         "content-type": "application/json",
     }, json={
         "model": MODEL,
-        # Adaptive thinking is on by default and shares the max_tokens budget
-        # with the visible text — keep effort low for daily posts and leave
-        # generous headroom, or the reply comes back as thinking-only.
+        # Adaptive thinking must be requested explicitly: Sonnet 5 defaults to
+        # adaptive, but Opus 4.8 runs WITHOUT thinking when the param is omitted.
+        # Thinking shares the max_tokens budget with the visible text — keep
+        # effort low for daily posts and leave generous headroom.
+        "thinking": {"type": "adaptive"},
         "max_tokens": 6000,
         "output_config": {"effort": "low"},
         "system": persona,
