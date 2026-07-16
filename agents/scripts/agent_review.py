@@ -72,7 +72,7 @@ def main():
                 f"{STANDARD}\n\nReview this draft note and return your verdict: "
                 'vote (accept/revise/reject), reasons (3-6 sentences), '
                 'top_issues (specific problems).\n\nDRAFT:\n\n' + raw}],
-        })
+        }, timeout=600)
         r.raise_for_status()
         text = "".join(b.get("text", "") for b in r.json()["content"]
                        if b.get("type") == "text").strip()
