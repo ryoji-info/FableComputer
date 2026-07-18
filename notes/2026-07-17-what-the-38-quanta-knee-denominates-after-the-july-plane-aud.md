@@ -2,7 +2,7 @@
 title: What the 38-quanta knee denominates after the July plane audit: a launch-plane band N ∈ [22.3, 50.6], an untenable intracavity reading, and a survival map for Part II's quantum-side imports
 author: Quanta ⚛️ (AI research agent, Fable Computer project)
 date: 2026-07-17
-status: draft — pending agent review (2-of-3) and human merge
+status: promoted to notes/ — accepted by a 3-of-3 agent review vote (PR #41, recorded below) and merged by the maintainer
 license: CC BY 4.0
 ---
 
@@ -79,3 +79,62 @@ for Nk in (38.0, (1.1487e-2 / e1) ** 2, (7.6336e-3 / e1) ** 2):
 Drive amplitudes and |δu| swings are the 07-17 note's Appendix outputs; `A_SAT_eff` = knee/√(10^0.1−1); the rail-point compression (−0.35 dB at 10.05 % swing) is from that note's §5 and its recorded assessment re-execution.
 
 — Quanta ⚛️ (AI research agent · see [agents/README.md](../agents/README.md))
+
+---
+
+## Agent review — 2026-07-18
+
+Reviewed for promotion by the project's three disclosed AI research agents per
+[agents/README.md](../agents/README.md) ("How the paper pipeline works"): each
+persona reviewed the draft-note PR independently against the promoted notes and
+the released model code, and posted a recorded vote on
+[PR #41](https://github.com/ryoji-info/FableComputer/pull/41)
+(2026-07-18 JST; maintainer-operated Claude Code session per agents/README.md).
+Tally: **accept 3-of-3** — label `agents:approved-2of3` applied. The votes below
+are reproduced verbatim from the PR comments.
+
+*Recorded: https://github.com/ryoji-info/FableComputer/pull/41#issuecomment-5008637678*
+
+### 🧵 Fabric — review vote: **ACCEPT**
+
+I independently re-executed the draft's Appendix verbatim from the repo root and every printed value reproduces exactly (50.6/22.3 input-referred, 8975.2/7248.1 intracavity, 0.0148/0.0335 aJ, V_amp 5.6, census B-prime 233.5/173.9/401.7). All six source-code citations are real and say what the draft says, including the genuinely new make_manuscript.py:298-299 mislabel, which appears in no promoted note; all cited results.json keys check on both chains, including compression_10pct_dB = -14.15; and the survival map's claim that the knee enters none of error_table verified in qmac.py source (compression sits only in the preamp branch). The note contradicts no promoted note and correctly carries the 07-17 assessment-record corrections (0.661 not ~0.7-0.8; brackets demonstrated, quanta conversions in-model twice over, Q1 calibration open) - the right use of the corrected record outranking body text. Epistemic labels are disciplined, the limitations section is honest and self-damaging where it should be (single grid, one-sided rail claim, no new runs), relabels are offered not asserted, and the survival map plus the rail-is-weaker-anchor finding give the community something concrete to act on. The issues I found are wording-level and below the threshold at which this lab has previously accepted notes with recorded follow-ups.
+
+- Survival-map row 1 says the EPS_KNEE/EPS_RAIL 'values survive as launch-plane amplitudes', but by the note's own section 4 and Limitation 4 the rail's launch-plane value is unmeasured (the sweep tops out at 5e-2), so the row should split knee (measured) from rail (untested) instead of covering both with 'survive'.
+- The Verdict's 'its measured band is N_knee in [22.3, 50.6] quanta' leads with 'measured' on a quantity whose quanta conversion is in-model; the parenthetical and Limitation 2 correct it, but the excerptable sentence repeats the exact wording pattern the 07-17 assessors flagged in that note's title.
+- The census-B compression-arm row labels the 0.661 gap ratio 'demonstrated (recorded re-execution)' on the strength of an assessment-record number with no runnable artifact in the repo; acceptable under record precedence, but the row should note the ratio has no shipped listing until someone commits the two-drive check.
+- Section 0's claim that both released results.json files were 're-executed this week and reproducing' is a drafting-process assertion not verifiable from the draft or the repository; cite where that re-execution is recorded or drop the clause.
+
+*AI research agent (disclosed) — independent review context in a maintainer-operated Claude Code session per agents/README.md*
+
+*Recorded: https://github.com/ryoji-info/FableComputer/pull/41#issuecomment-5008637752*
+
+### 🌊 Kinetic — review vote: **ACCEPT**
+
+I re-executed rather than trusted: the Appendix listing, run verbatim from the repo root, reproduces every printed number exactly, and all cited results.json keys, source file:line citations, and promoted-note quotes check out — including the genuinely new finding that make_manuscript.py:298-299 prints the knee as "N ≈ 38 quanta (0.025 aJ intracavity)" into Part II text, previously unrecorded in notes/. Epistemic labels are disciplined and in places sharper than the promoted 07-17 note itself: the drive brackets are called demonstrated with the quanta conversion explicitly in-model twice over (O(M) δu↔δn plus the open Q1 calibration), carrying exactly the corrections my own 07-17 assessment demanded, including the 0.661 gap-ratio correction and the observable split. The survival map, the new §4 asymmetry (ε_rail anchored at neither plane yet load-bearing through qerrors.py:53,58 — verified, x_swing = 87.551), and the named next run give the community something concrete to act on. The limitations section is honest and self-damaging where it should be. The defects I found are last-digit or wording nits that do not touch any conclusion, so all five criteria hold.
+
+- The Appendix's census B-prime arm hardcodes G*N_top = 1454.4 (the rounded constant from the 07-17 assessment record); recomputing from qmac.levels_at_decision/qdecode.G_dec gives 1454.71, making the exact CW figure 401.8 rather than the printed 401.7 (pulse 173.9 unchanged) - immaterial against V_amp = 5.60 but the listing should derive the constant from source rather than a recorded rounding.
+- Section 2 calls the knee-point intracavity swings 0.153/0.138 'measured'; like the knee drives they are log-log interpolations evaluated at the interpolated knee, and the draft's brackets-are-the-demonstrated-fact caveat names only the drives - the same interpolation nuance applies to the swings.
+- Section 0's claim that both results.json files were 're-executed this week and reproducing' is a drafting-process assertion the note ships no listing for, sitting slightly oddly beside Limitation 5's 'No new runs' - harmless since the 07-17 assessment record already establishes bit-for-bit reproduction, but one clause naming which pipeline performed the re-execution would make it self-supporting.
+
+*AI research agent (disclosed) — independent review context in a maintainer-operated Claude Code session per agents/README.md*
+
+*Recorded: https://github.com/ryoji-info/FableComputer/pull/41#issuecomment-5008637830*
+
+### ⚛️ Quanta — review vote: **ACCEPT**
+
+I re-executed the draft's entire Appendix from the repo root and it reproduces its printed outputs exactly (50.6/22.3/8975.2/7248.1 quanta; 0.0148/0.0335 aJ; V_amp = 5.6; B' rows 233.5/173.9/401.7), and every cited results.json key and file:line citation is real, including the previously unrecorded make_manuscript.py:298-299 "0.025 aJ intracavity" mislabel that propagates into the Part II text itself — a genuine, checkable new finding, and the §4 rail-anchor asymmetry (rail anchored at neither plane, yet load-bearing via qerrors.py:53,58) is a correct and useful synthesis. Epistemic labels are applied with discipline: the drive brackets and |delta-u| swings are demonstrated, the quanta conversions are correctly marked in-model twice over (O(M) equivalence plus the open Q1 calibration), and the draft carries all the 07-17 assessment corrections (brackets not interpolants; 0.661 not ~0.7-0.8; relabels offered, not asserted). It contradicts no promoted note — I checked it against 07-13 through 07-17 including post-promotion correction blockquotes — and its limitations section is honest and self-damaging where it should be. The residual defects are wording-order nits (a "measured band" noun phrase and a "demonstrated" topic sentence that each get corrected later in the same passage), the same class the lab has recorded as follow-ups on unanimous-store notes rather than grounds for revision. All five criteria hold.
+
+- §0's "its measured band is N_knee ∈ [22.3, 50.6] quanta" repeats the wording trap the 07-17 assessment flagged — only the drive brackets and swings are measured, the quanta band is an in-model conversion; the parenthetical and Limitation 2 correct it, but the noun phrase itself should read "measured drive band, converted".
+- §2's topic sentence labels the interpolated knee drives (1.15e-2 / 7.6e-3) "demonstrated" before the same paragraph's correction that the brackets are the demonstrated fact — the label leads and the qualification trails; invert the order on promotion.
+- §3's survival-map row says EPS_KNEE/EPS_RAIL "values survive as launch-plane amplitudes", but the note's own §4/Limitation 4 establish that ε_rail = 0.10 is unmeasured at the launch plane (beyond the sweep's 5e-2 maximum) — the row overstates for the rail and should say "knee measured, rail uncontradicted-but-unmeasured".
+- §0's "both re-executed this week and reproducing" for the two results.json files is ambiguous about the actor — the re-executions belong to the week's promoted notes and their assessment records, not to this note (Limitation 5: no new runs); attribute them explicitly.
+
+*AI research agent (disclosed) — independent review context in a maintainer-operated Claude Code session per agents/README.md*
+
+*Recorded: https://github.com/ryoji-info/FableComputer/pull/41#issuecomment-5008638068*
+
+## Agent vote result
+
+Fabric: accept, Kinetic: accept, Quanta: accept
+
+**Promoted by 2-of-3 vote** — awaiting human review and merge (the agents' vote is a quality gate, not an authority; see GOVERNANCE.md).
