@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
-"""Daily Agent Lab post: one persona reads the lab thread and adds a comment.
+"""Agent Lab post: one persona reads the lab thread and adds a comment.
+
+May run several times per day (scheduled and/or manual). Each run posts a
+fresh, run-numbered set unless the persona already posted within the last 10
+minutes (anti-double-fire guard), so retries and racing runs don't duplicate.
+Reads notes/ and papers/ for recent changes so posts engage the latest state.
 
 Env: ANTHROPIC_API_KEY, GH_TOKEN, GITHUB_REPOSITORY (owner/repo), PERSONA
      (fabric|kinetic|quanta), MODEL (optional).
@@ -9,6 +14,7 @@ import datetime
 import glob
 import json
 import os
+import subprocess
 import sys
 
 import requests
@@ -119,6 +125,48 @@ def promoted_notes_digest(limit=700):
     return "\n\n".join(parts) or "(none yet)"
 
 
+def recent_changes(paths, n=12):
+    """Recent git changes under the given paths, so posts engage the latest
+    state of notes/ and papers/ rather than stale content. Degrades to a
+    placeholder if git is unavailable or the checkout is too shallow (in CI,
+    the workflow checks out with fetch-depth: 0 so history is present)."""
+    try:
+        out = subprocess.run(
+            ["git", "log", f"-n{n}", "--date=short", "--format=%ad %s",
+             "--", *paths],
+            capture_output=True, text=True, timeout=30)
+        return out.stdout.strip() or "(no recent changes)"
+    except Exception:
+        return "(unavailable)"
+
+
+def papers_manifest():
+    """The manuscripts in papers/ — binary (.docx/.pdf), cited by URL and never
+    excerpted inline; listed so personas reference the right ones."""
+    try:
+        files = sorted(f for f in os.listdir("papers") if not f.startswith("."))
+        return "\n".join(files) or "(none)"
+    except OSError:
+        return "(unavailable)"
+
+
+def run_number_and_guard(history, today):
+    """Count today's posts by this persona (for the (run N) suffix) and guard
+    against an accidental double-fire. Returns the run number to use, or None
+    if a post by this persona is less than 10 minutes old (skip — a retry or a
+    concurrent run just made it). Headers may carry an optional (run N) suffix,
+    so match on the "### <emoji> <Persona> · <today>" prefix only."""
+    prefix = f"### {EMOJI} {PERSONA.capitalize()} · {today.isoformat()}"
+    now = datetime.datetime.now(datetime.timezone.utc)
+    todays = [c for c in history if c["body"].startswith(prefix)]
+    for c in todays:
+        created = datetime.datetime.fromisoformat(
+            c["createdAt"].replace("Z", "+00:00"))
+        if now - created < datetime.timedelta(minutes=10):
+            return None
+    return len(todays) + 1
+
+
 def main():
     today = today_jst()
     title = f"Agent Lab — {today.strftime('%Y-%m')}"
@@ -126,6 +174,13 @@ def main():
     thread_id = find_or_create_thread(repo_id, cat_id, title)
 
     history = recent_comments(thread_id)
+
+    # Multiple runs per day are allowed; only guard an accidental double-fire.
+    run_no = run_number_and_guard(history, today)
+    if run_no is None:
+        print(f"{PERSONA} posted <10 min ago — skipping (anti-double-fire guard)")
+        return
+
     hist_text = "\n\n---\n\n".join(
         f"[{c['createdAt']} · {c['author']['login'] if c['author'] else 'unknown'}]\n"
         + c["body"][:1800] for c in history) or "(no posts yet — you open the month)"
@@ -146,6 +201,16 @@ excerpt of each; the full text lives in notes/). Never repeat a premise these
 notes correct; cite the note and build on its corrections instead:
 
 {promoted_notes_digest()}
+
+Recent changes in notes/ and papers/ — check for updates and engage anything
+new (a note may not be reflected in the thread yet; a paper may have been
+revised). notes/ outrank any manuscript passage they correct (standing rule 10):
+
+{recent_changes(['notes', 'papers'])}
+
+Manuscripts currently in papers/ (cite by URL; binary, not excerpted here):
+
+{papers_manifest()}
 
 Recent thread activity (oldest first — replies from humans may be present and
 take priority; where the thread conflicts with a promoted note, the note wins):
@@ -184,7 +249,9 @@ fable-model-quantum/results.json:
         raise RuntimeError(
             f"empty completion (stop_reason={data.get('stop_reason')}) — not posting")
 
-    header = (f"### {EMOJI} {PERSONA.capitalize()} · {today.isoformat()}\n"
+    # Run 1 keeps the plain date; same-day repeats get a "(run N)" suffix.
+    date_label = today.isoformat() if run_no == 1 else f"{today.isoformat()} (run {run_no})"
+    header = (f"### {EMOJI} {PERSONA.capitalize()} · {date_label}\n"
               f"*AI research agent — disclosed & documented in "
               f"[agents/README.md](https://github.com/{OWNER}/{REPO}/blob/main/agents/README.md)*\n\n")
     gql("""
@@ -193,7 +260,7 @@ fable-model-quantum/results.json:
           comment { id }
         }
       }""", {"id": thread_id, "body": header + post})
-    print(f"{PERSONA} posted to '{title}'")
+    print(f"{PERSONA} posted to '{title}' (run {run_no})")
 
 
 if __name__ == "__main__":
