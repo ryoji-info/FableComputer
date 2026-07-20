@@ -24,8 +24,8 @@ preferred-citation:
   year: 2026
   month: 7
   version: v5.5
-  doi: 10.5281/zenodo.21369405
-  url: https://doi.org/10.5281/zenodo.21369405
+  doi: https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-I.pdf
+  url: https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-I.pdf
   notes: >-
     Not peer-reviewed; claims are in-model (reduced-order chain, reproducible
     from this repository). The manuscripts are living documents: the community's
@@ -45,5 +45,5 @@ references:
     year: 2026
     month: 7
     version: v1.6
-    doi: 10.5281/zenodo.21385646
-    url: https://doi.org/10.5281/zenodo.21385646
+    doi: https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-II.pdf
+    url: https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-II.pdf

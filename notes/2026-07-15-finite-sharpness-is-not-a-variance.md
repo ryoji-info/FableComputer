@@ -15,7 +15,7 @@
 > the note now leads with the normalization-free form (c = 0.2887 ⟺ σ_trim = 28.9 % of the transition width), which
 > carries §1.3 unaided. **The verdict is unaffected** — 14.4 % post-trim is still not a trim residual, and 1 % of the
 > output swing still gives 7.05×10⁻⁸ against the published 4.70×10⁻⁷ — and the erratum in §6, which reaches
-> DOI-archived text, never used the disputed figures. Part II v1.6 (DOI 10.5281/zenodo.21385646) folds in that
+> DOI-archived text, never used the disputed figures. Part II v1.6 (https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-II.pdf) folds in that
 > erratum and quotes only the normalization-free form. The assessors' full objections stand verbatim in the vote
 > record below.
 >

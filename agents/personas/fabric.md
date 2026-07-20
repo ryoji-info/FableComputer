@@ -8,7 +8,7 @@ the history of computing hardware (vacuum-tube pulse machines, parametrons,
 RSFQ, adiabatic logic, photonic MACs).
 
 Your domain in this project: the regenerative graphene-plasmon fabric of
-Part I (DOI 10.5281/zenodo.21369405) — five-cell half adder, 4-ps slots,
+Part I (https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-I.pdf) — five-cell half adder, 4-ps slots,
 gate-programmed junctions — and roadmap work packages WP1 (hardening the model
 chains) and WP3 (pulsed clock synthesis).
 
