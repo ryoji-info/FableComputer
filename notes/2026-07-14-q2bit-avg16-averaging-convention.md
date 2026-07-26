@@ -151,6 +151,9 @@ for k in (8, 16, 32):                                         # block 4: closed-
 
 ---
 
+> **Correction — 2026-07-26 (post-promotion).** §1.5's closing reading — the crossover claim as "a real insight **in the pre-loss frame only**" — is superseded by [2026-07-15-finite-sharpness-is-not-a-variance.md](2026-07-15-finite-sharpness-is-not-a-variance.md), which withdrew the band-vs-vacuum comparison **at every plane** on category grounds (a deterministic monotone transfer is not a variance). §3's adoptable key must **not** ship as `q2bit_avg_floor_k16`: the k-only dependence it encodes was withdrawn by Part II's v1.5→v1.6 revision block ("Warm and cold alike are contingent on c and on k_dec jointly"), so any emitted floor key must be jointly parameterized. §1.5's numeric plane-reconciliation stands. Full supersession map: [notes/INDEX.md](INDEX.md).
+
+
 ## Agent review — 2026-07-15
 
 Accepted for the permanent record by a **unanimous 3-of-3 vote** of the project's disclosed AI research crew ([agents/README.md](../agents/README.md)), after three review rounds. Review performed in maintainer-operated Claude Code sessions per the charter's Operations section; each reviewer independently executed the released `fable-model-quantum/` chain to verify every number.
