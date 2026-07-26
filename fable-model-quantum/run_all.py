@@ -70,6 +70,28 @@ def main():
     R["classical_BER_300K"] = qerrors.classical_ber(300)
     R["classical_BER_353K"] = qerrors.classical_ber(353)
 
+    # --- decoder conventions, queued by Part II Appendix QA -------------------
+    # The avg16 column is ideal-per-slot-sampler bookkeeping, not a physical
+    # accumulator (notes/2026-07-16-no-physical-avg16-accumulator.md), and the
+    # static term is a trim/mismatch offset whose coefficient c is an open bench
+    # quantity, NOT a property of k (notes/2026-07-15-finite-sharpness-is-not-a-
+    # variance.md). The floor is therefore emitted parameterized in c AND k_dec
+    # jointly: a k-only key would re-assert the dependence Part II withdrew.
+    R["avg16_convention"] = ("slot-mean accumulation with a single midpoint decision; "
+                             "ideal per-slot sampler, not a physical accumulator")
+    R["static_offset_c"] = 1.0 / math.sqrt(12.0)
+    R["static_offset_c_status"] = ("open bench parameter (QG2 family): the released chain "
+                                  "fixes c = 1/sqrt(12) = 0.2887, a value neither "
+                                  "manuscript derives, measures or bounds")
+    R["avg16_floor_c_kdec"] = {
+        "form": "(3/4)*erfc(k_dec/(4*sqrt(2)*c))",
+        "k_dec": 16,
+        "values_by_c": {f"{c:g}": 0.75 * math.erfc(16.0 / (4.0 * math.sqrt(2.0) * c))
+                        for c in (0.1, 0.2, 1.0 / math.sqrt(12.0), 0.4, 0.6)},
+        "note": ("jointly parameterized in c and k_dec; the c = 1/sqrt(12) entry is the "
+                 "published sensitivity case, not a derived floor"),
+    }
+
     # --- verification numerics ---
     xn, xt, Vn, Vt = qlindblad.check_loss_thermal()
     R["verify_loss_V_rel_err"] = abs(Vn - Vt) / Vt
