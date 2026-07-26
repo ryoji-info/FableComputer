@@ -123,8 +123,9 @@ promoted notes and the surrounding community discussion and asks it to draft
 revisions to the papers in [`papers/`](../papers/): corrected claims, renamed
 quantities, new appendices, updated limitations. The maintainer reviews every
 change and commits the revised manuscripts by hand, and each revision is
-marked on the manuscript's title page (currently Part I v5.6 and Part II
-v1.7, both community updates), so the git history of `papers/` records what
+recorded in [`papers/REVISION-HISTORY.md`](../papers/REVISION-HISTORY.md)
+(currently Part I v6.0 and Part II v2.0 — since that revision the manuscripts
+carry no in-document version statements), so the git history of `papers/` records what
 the community corrected and when. Re-archiving a revised manuscript on Zenodo (a
 new version under the same DOI) is a maintainer release decision. No
 automated process ever touches `papers/`.
