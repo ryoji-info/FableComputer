@@ -28,10 +28,18 @@ QUANT = json.loads((ROOT / "fable-model-quantum" / "results.json").read_text(enc
 
 # --------------------------------------------------------------- published values
 
+# The shipped results.json was generated on Windows/CPython. libm differs across
+# platforms, so a recomputed value can land 1 ULP away (CI first caught this on Linux:
+# 4.7022673057229145e-07 against the stored 4.702267305722915e-07). Published values are
+# therefore pinned to a tight RELATIVE tolerance, not to bit equality. Identities
+# computed twice in the same interpreter stay exact -- see the test below.
+ULP = 1e-12
+
+
 def test_quantum_avg16_column_is_pinned():
-    """The headline avg16 column, bit-for-bit."""
+    """The headline avg16 column, to within a tight relative tolerance."""
     import qmac
-    assert qmac.error_2bit(300, 400, n_avg=16) == QUANT["avg16_2bit_300K"]
+    assert qmac.error_2bit(300, 400, n_avg=16) == pytest.approx(QUANT["avg16_2bit_300K"], rel=ULP)
 
 
 def test_avg16_is_an_ideal_sampler_identity_not_an_accumulator():
@@ -62,14 +70,14 @@ def test_quantum_floor_explains_the_null_threshold_keys():
 
 def test_chain_headline_gains_are_pinned():
     import regen
-    assert regen.pulse_net_gain_dB(0.7) == pytest.approx(6.258296289342312, rel=0, abs=1e-12)
-    assert CHAIN["pulse_gain_dB_at_0p7_streaming"] == pytest.approx(7.7967069614868425, abs=1e-12)
+    assert regen.pulse_net_gain_dB(0.7) == pytest.approx(6.258296289342312, rel=ULP)
+    assert CHAIN["pulse_gain_dB_at_0p7_streaming"] == pytest.approx(7.7967069614868425, rel=ULP)
 
 
 def test_cascade_per_cell_matches_the_notes_self_check():
     """gain(F=1, A_SAT=0.02) reproduces the shipped 0-dB-junction entry — the number
     the promoted fan-out notes compute at (notes/2026-07-20, notes/2026-07-21)."""
-    assert CHAIN["cascade_per_cell_dB"]["0"] == pytest.approx(8.401641447428242, abs=1e-9)
+    assert CHAIN["cascade_per_cell_dB"]["0"] == pytest.approx(8.401641447428242, rel=ULP)
 
 
 # ------------------------------------------------- corrections a note requires
