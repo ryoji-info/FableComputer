@@ -1,0 +1,59 @@
+# Note index — what each promoted note settles, and what later notes did to it
+
+**Why this file exists.** By 2026-07-26 the collection held 26 promoted notes forming
+four long correction chains, and only two of them carried a dated post-promotion
+annotation. Three independent assessors and one audit each rediscovered the *same*
+superseded claim because nothing forward-mapped the record. This index is the fix:
+one row per note, with the relationships stated in both directions.
+
+Read it as navigation, not as authority. **Each note's own text and its appended vote
+record are the record** — those are never edited. Where a later note supersedes or
+qualifies an earlier one, the earlier note carries (or should carry) a dated
+post-promotion annotation, and this index says so.
+
+**Legend.** ⛔ *superseded* — a claim was withdrawn or falsified. ⚠️ *qualified* — the
+claim stands within a narrower scope. ✅ *resolved* — an item the note left open was
+closed by a later note. 📌 *annotated* — the note file itself carries a dated
+post-promotion blockquote.
+
+| date | note | settles | later record |
+|---|---|---|---|
+| 07-10 | [cw-pulse-gap-and-nf-agreement](2026-07-10-cw-pulse-gap-and-nf-agreement.md) | provenance of the 1.86 dB CW/pulse gain gap and the 2.77 dB NF agreement | ⛔ App. C's "lands exactly on resonance" holds for the passive reference only (07-11 detuning §2); the 8.87 dB per-slot-peak waypoint **falsified** (measured 7.8511) and the 0.2–0.8 dB compression bucket **falsified** (0.062) by 07-17 drive sweep §6; ✅ the 0.6 ± 0.5 dB discretization bucket closed by 07-12 exact-operator. §1's NF agreement stands |
+| 07-11 | [nf-floor-structural-verdict](2026-07-11-nf-floor-structural-verdict.md) | the 2.77 dB agreement is **structural**, not coincidental | stands |
+| 07-11 | [retuned-streaming-gain-prediction](2026-07-11-retuned-streaming-gain-prediction.md) | pre-registered retuned gain 8.77 ± 0.35 dB | ⚠️ measured **9.2246** — outside the central band (07-12 predictions-resolved grades it "would have been falsified") but inside this note's own ≤8.2/≥9.3 refutation limits; superseded same-day by the exact-operator band 9.05 ± 0.30 |
+| 07-11 | [streaming-gain-detuning-artifact](2026-07-11-streaming-gain-detuning-artifact.md) | ≈0.8 dB of the gap is drift detuning | stands; it is the note that supersedes 07-10's Appendix C |
+| 07-12 | [boundary-factor-exact-operator](2026-07-12-boundary-factor-exact-operator.md) | no closed form for the boundary factor; exact construction instead | ⚠️ §4's split of the 0.909 dB residual had the right **sum** and inverted proportions — measured 0.8541 dB estimator + 0.0544 dB compression (07-17 drive sweep). Its own "the split is open pending a drive sweep" was the correct call |
+| 07-12 | [effective-loop-von-neumann](2026-07-12-effective-loop-von-neumann.md) | interior round-trip term derived (von Neumann) | ⛔ §5's prediction refuted **by its own criterion** (measured 9.2246 vs "outside 8.3–9.1 dB refutes"); §7's two M_th(480) branches both missed 0.158748. §2's interior derivation survives, confirmed to 4×10⁻⁶ |
+| 07-12 | [predictions-resolved](2026-07-12-predictions-resolved.md) | four pre-registered predictions run and graded | stands — it is the grading authority for 07-10/07-11/07-12 |
+| 07-12 | [quantum-correction-crossover](2026-07-12-quantum-correction-crossover.md) 📌 | no 1/N correction to the NF; exact T\* = ħω₀/(k_B ln 3) | ⛔ §3's "N\*_band = 384 ≈ N_op" withdrawn: rescoped to the pre-loss frame by 07-14 §1.5, then withdrawn on **category** grounds by 07-15 (a deterministic monotone transfer is not a variance). §§0–2 and §§4–5 unaffected |
+| 07-13 | [kinetic-correction-signed-band](2026-07-13-kinetic-correction-signed-band.md) | the "tens-of-percent" kinetic uncertainty becomes a **signed band** (−0.95 dB/cell at 353 K, [−1.5, −0.3]) | stands; folded into Part I v5.5. Some references in §3.1/App. B remain memory-sourced (see [CITATIONS.md](CITATIONS.md)) |
+| 07-13 | [knee-rail-not-derivable-from-noise-chain](2026-07-13-knee-rail-not-derivable-from-noise-chain.md) | the knee and rail are **not** derivable from the quantum noise chain | ✅ §5 item 4 (pin v_F and s) was already satisfied at promotion — `qconstants.py:27` `vF = 1.0e6`, `s_design` = 2331197.965421007 = 4·L₀·f₀ exactly; the item belongs against Part II's text |
+| 07-14 | [q2bit-avg16-averaging-convention](2026-07-14-q2bit-avg16-averaging-convention.md) | what actually produces `q2bit_avg16`, read from source | ⛔ §1.5's "a real insight in the pre-loss frame only" superseded by 07-15 (withdrawn at every plane); ⚠️ §3's adoptable key must not ship as `…_k16` — the k-only dependence was withdrawn by Part II v1.5→v1.6 |
+| 07-15 | [finite-sharpness-is-not-a-variance](2026-07-15-finite-sharpness-is-not-a-variance.md) 📌 | the decoder band is a deterministic transfer, not a variance; c is an open bench quantity | stands, twice annotated (2026-07-15 and a second pass 2026-07-16). Its erratum reached Part II v1.6 |
+| 07-16 | [no-physical-avg16-accumulator](2026-07-16-no-physical-avg16-accumulator.md) | **no physical accumulator reproduces the published avg16 column** | ⚠️ row B′'s ≈234 quadrature units re-anchor to 173.9 (pulse)/401.7 (CW) — the exclusion is robust; row B's 0.581 gap ratio measures 0.661; Limitation 5's sampler scale should read 250 GS/s slots / 15.6 GHz decisions, not 62.5 GS/s. Binding for the 2026-07-26 relabels in `qmac.py`, `qerrors.py` and both model READMEs |
+| 07-17 | [drive-sweep-knee-anchored](2026-07-17-drive-sweep-knee-anchored.md) | A_SAT = 0.02 survives at the **drive** plane (band 0.015–0.023) | stands; it is the note that falsifies 07-10's two buckets |
+| 07-17 | [what-the-38-quanta-knee-denominates](2026-07-17-what-the-38-quanta-knee-denominates-after-the-july-plane-aud.md) | the knee is a **launch/drive-plane** quantity (input-referred 22–51); the rail is anchored at **neither** plane | stands. Adopted by Part II v1.7 item 3 and by the 2026-07-26 source relabels; its knee band is quoted wrongly in v1.7 as "≈1–1.2 %" (see [../papers/ERRATA.md](../papers/ERRATA.md) II-2) |
+| 07-18 | [boundary-channel-contact-gated](2026-07-18-boundary-channel-contact-gated.md) | δ_b is a one-signed loss at the source, sign-open at the drain; **contact-gated on σ_c** | ⚠️ two recorded promotion-edit seams were never applied to the body: §6's specular band maps to C_acc ≲ 0.02 (Kn)/≲ 0.08 (Kn²), not ≲ 0.1; §4's near-specular upper edge is ≈−0.3 dB, not −0.2. Neither is load-bearing |
+| 07-18 | [boundary-channel-bench-discriminants](2026-07-18-boundary-channel-bench-discriminants.md) | three sub-threshold linewidth signatures that separately falsify the channel | ⚠️ three recorded seams: the length label is `cell_length(s)` = 582.80 nm; the drift factor is +7.0 % at the note's own bias; §5's "drain ~3× more leveraged" fails on the linewidth observable. Authored on Opus 4.8 (disclosed fallback) |
+| 07-20 | [loaded-fanout-fixed-point](2026-07-20-loaded-fanout-fixed-point.md) | loaded fan-out is **F = 2**, not the 3–4 raw headroom suggests | ✅ the revision its Status header asked the merger to "hold for" arrived as 07-21 (3/3), discharging the recorded REJECT; ⛔ §3's "ISI negligible (0.0001 dB)" is carrier-recovery ISI only — loaded ring-down at 4 ps is ≈3–4 dB (07-22) |
+| 07-20 | [source-contact-knudsen-exponent-open](2026-07-20-source-contact-knudsen-exponent-open.md) | the exponent *p* is **open**, honestly | stands — open by construction |
+| 07-21 | [composed-regeneration-envelope](2026-07-21-composed-regeneration-envelope.md) | the composed envelope: F and depth after the −0.95 dB bulk term (F = 2 reserve +2.01 dB [1.46, 2.66]) | ⚠️ §4's "ISI negligible, second-order" and the §7 RFC line are carrier-recovery only; the F = 2 slot is ≈0.1 THz, not 4 ps (07-22/07-23). Every published number stands |
+| 07-22 | [cavity-ringdown-isi](2026-07-22-cavity-ringdown-isi.md) | ring-down is the binding ISI memory: loaded ≈3–4 dB/slot at 4 ps; per-slot flush **necessary** | ✅ §7.3's sufficiency question resolved — passive flush insufficient (07-22 flush) and no de-Q rate closes flushed F = 2 at 4 ps (07-23, which ran the WP3 transient this note predicted); ⚠️ the `ringdown_isi_pp_dB_0p7_0p25THz` band [2.0, 4.5] needs scoping to this note's §6 conventions — a stricter burst window measured 4.90 (07-23) and 4.91 (07-25) |
+| 07-22 | [flush-noise-figure-negative](2026-07-22-flush-noise-figure-negative.md) | a demonstrated negative: no self-consistent (loop, S) for a signal-preserving per-slot flush | ⚠️ §9's WP3 prediction is **half** superseded — the passive half confirmed, the positive half (reachability above ~10 dB/rt) struck at 4 ps by 07-23; the named active de-Q survives only at stretched slots as a ≈+10 % clock optimization (0 % at the 81 GHz corner) |
+| 07-22 | [mth-numerical-vs-physical-viscosity](2026-07-22-mth-numerical-vs-physical-viscosity.md) | the shipped `M_th_num` = 0.169 is coarse-grid Lax–Friedrichs over-diffusion; Δx→0 → exact inviscid ≈0.149313; **physical** kinetic threshold 0.165 [0.154, 0.169] | stands. Binding for the 2026-07-26 corrections to `fable-model-chain/README.md`, `ROADMAP.md`, `figures.py` (Figure 8) and Part I §7.3/App. A ([ERRATA](../papers/ERRATA.md) I-8), and for the pytest assertion it requests |
+| 07-23 | [reset-switch-adjudication](2026-07-23-reset-switch-adjudication.md) | **no de-Q rate — including D = ∞ — closes the flushed F = 2 ledger at 4 ps**; rebuild time binds; the defensible headline is **≈0.1 THz logic** (E1 79–92, E2 98–128, E3 100–148 GHz) | ⚠️ §4's E1 row and `f_max_F2_flushed_THz` = 0.115 carry 07-25's burst proviso (the centre is reached at no measured burst length); §0.2's pedestal figures are floor-referenced (data-referenced +10.0/+28.4 dB ⇒ spec ≥ ~20–38 dB); E3's 81 GHz demonstrated-calibrated corner is omitted from the row |
+| 07-25 | [e1-burst-scaling-proviso](2026-07-25-e1-burst-scaling-proviso.md) | transient gain is set by **drive duration**, not slot length: the released 3-cycle burst falls 0.9–3.0 dB short of F = 2 at every slot; ncyc ≈ 12 needed | stands. Its three tracked code items (`solver.run` not forwarding `ncyc`; dead `rep_ratio`; `_cavity` not forwarding `f0`) remain open — see the CI item in [ROADMAP.md](../ROADMAP.md) |
+| 07-26 | [record-audit-ten-findings](2026-07-26-record-audit-ten-findings.md) | ten findings on where the published artifacts diverge from the record: stale metadata, six days of timing physics in neither manuscript, the dead generator, the public on-ramp, and why hand-reading could not certify completeness | current. This index, [CITATIONS.md](CITATIONS.md), [../papers/ERRATA.md](../papers/ERRATA.md) and the CI sweep are its implementation |
+
+## Chains at a glance
+
+- **Gain gap / NF:** 07-10 → 07-11 ×3 → 07-12 (von Neumann, exact operator, predictions-resolved) → 07-17 drive sweep.
+- **Knee / rail / plane:** 07-13 knee-rail → 07-17 ×2 → Part II v1.7 → the 2026-07-26 source relabels.
+- **avg16 / decoder band:** 07-12 crossover → 07-14 → 07-15 → 07-16 → Part II v1.6/v1.7 → the 2026-07-26 relabels.
+- **Boundary channel:** 07-12 boundary-factor → 07-13 signed band → 07-18 ×2 (contact-gated on σ_c, still open).
+- **Fan-out / regeneration:** 07-20 loaded fan-out → 07-21 composed envelope.
+- **ISI / flush / reset / burst:** 07-22 ring-down → 07-22 flush → 07-23 reset-switch → 07-25 burst proviso. **This is the chain neither manuscript carries.**
+
+---
+
+*Maintained per [2026-07-26-record-audit-ten-findings.md](2026-07-26-record-audit-ten-findings.md) finding 5. When a note is promoted, add its row and update the rows it changes.*
