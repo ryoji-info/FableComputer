@@ -65,6 +65,19 @@ def main():
         "M_th_300K": DS.M_threshold(DS.cell_length(s), s, tau300),
         "M_th_353K": Mth,
         "M_th_num": Mthn,
+        # The shipped M_th_num is a coarse-grid Lax-Friedrichs value: its Dx->0 limit
+        # is the exact INVISCID threshold ~0.1493, not the small-M analytic 0.147083,
+        # and it is not the physical threshold either. Both readings are emitted so a
+        # machine reader cannot mistake one for the other
+        # (notes/2026-07-22-mth-numerical-vs-physical-viscosity.md, promoted 3-of-3).
+        "M_th_num_convention": ("coarse-grid Lax-Friedrichs at the single released grid "
+                                "N=240; Dx->0 limit is the exact inviscid 0.149313"),
+        "M_th_num_inviscid_limit": 0.149313,
+        "M_th_kinetic_353K": 0.165,
+        "M_th_kinetic_353K_band": [0.154, 0.169],
+        "M_th_kinetic_note": ("physical threshold with the kinetic bulk viscosity in place "
+                              "of the numerical one; in-model, notes/2026-07-22-"
+                              "mth-numerical-vs-physical-viscosity.md"),
         "v0_operating_m_s": v0,
         "J_mA_per_um": C.n_op * C.e * v0 * 1e-3 / 1e6 * 1e6 * 1e-3 * 1e3,  # see note
         "per_gate_loss_300K_dB": DS.passive_loss_dB_per_half_lambda(tau300),
@@ -110,7 +123,10 @@ def main():
             for kk, vv in val.items():
                 print(f"    junction {kk:+d} dB : {vv:+.2f} dB")
         elif isinstance(val, list):
-            print(f"{k:34s} = " + ", ".join(f"{x:.3g}" for x in val))
+            print(f"{k:34s} = " + ", ".join(
+                f"{x:.3g}" if isinstance(x, (int, float)) else str(x) for x in val))
+        elif isinstance(val, str):
+            print(f"{k:34s} = {val}")
         else:
             print(f"{k:34s} = {val:.4g}")
     if "--json" in sys.argv:
