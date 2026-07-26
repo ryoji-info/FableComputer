@@ -66,6 +66,8 @@ Start with the [Introduction](Fable-Computer-Introduction.pdf) (six pages), then
 [Part II](../papers/Fable-Computer-Part-II.pdf) for the quantum extension. The
 **corrected state of knowledge lives in [`notes/`](../notes/)** — start at
 [`notes/INDEX.md`](../notes/INDEX.md), which maps every note to what it settled and
-what later notes did to it. Where a note and a manuscript disagree, the note wins, and
-[`papers/ERRATA.md`](../papers/ERRATA.md) lists the gaps that the deposited PDFs still
-carry.
+what later notes did to it. Where a note and a manuscript disagree, the note wins;
+[`papers/ERRATA.md`](../papers/ERRATA.md) reports whether any adopted correction is not
+yet in the current Zenodo deposit, and
+[`papers/REVISION-HISTORY.md`](../papers/REVISION-HISTORY.md) records every revision and
+its DOI.
