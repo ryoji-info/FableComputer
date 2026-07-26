@@ -22,7 +22,7 @@ Each module is independently runnable and prints a self-check
 | File | Role | Key outputs |
 |------|------|-------------|
 | `qconstants.py` | operating point + quantum scales | hbar*w0, T_Q = 48 K, nbar(T), tau_q(T) with 150-K saturation; parent anchors reproduced |
-| `qmode.py`      | DS-mode quantization | eps_1 = 1.6e-3 per plasmon, knee = 38 quanta, rail = 3.8e3; Kerr chi/kappa ~ 1e-5 (the gate-model no-go), 3-nm blockade cell |
+| `qmode.py`      | DS-mode quantization | eps_1 = 1.6e-3 per plasmon, knee = 38 quanta (launch/drive plane, band 22-51), rail = 3.8e3 (anchored at neither plane); Kerr chi/kappa ~ 1e-5 (the gate-model no-go), 3-nm blockade cell |
 | `qnoise.py`     | Gaussian quadrature calculus | loss/amp/combine rules, matched-T amplifier = parent Eq. (7), symbol error + MC check |
 | `qdecode.py`    | classical 2-bit flash decode | 2 comparators + NOT + AND + buffer = the Part-I half-adder block; decoder noise; truth table b1b0 = A+B |
 | `qmac.py`       | QMAC-1, the tensor unit | levels at decision, 2-bit/1-bit error, preamp-variant no-go, weighted-MAC demo, ENOB |
@@ -33,7 +33,8 @@ Each module is independently runnable and prints a self-check
 
 ## Headline results (N_op = 400 quanta/input unless noted)
 
-- Logic pulses are mesoscopic: the Part-I 1-dB knee is **38 plasmons**, the
+- Logic pulses are mesoscopic: the Part-I 1-dB knee is **38 plasmons at the
+  launch/drive plane** (input-referred band 22-51), the
   rail **3.8e3** — quantum noise is quantitative here, not academic.
 - Gate-model (blockade) quantum logic misses by **five orders of magnitude**
   in this cell (chi/kappa ~ 1e-5; needs ~3-nm cells) — the extension is
@@ -45,9 +46,19 @@ Each module is independently runnable and prints a self-check
   quantum floor 1.3e-6 below ~15-20 K (1.3e-10 at N_op = 800).
 - **1-bit (full-range binary) decode**: 3.9e-3 at 300 K, 4.8e-9 at 77 K —
   "lower-bit decoding" works two temperature classes earlier than 2-bit.
-- **16-slot averaging** (charge-memory accumulation; per-slot noise averages,
-  the static threshold band does not) buys the 2-bit decode to ~5e-7 at
-  300 K at 1/16th throughput (still 1.6e10 MAC/s).
+- **16-slot averaging** is **ideal-per-slot-sampler bookkeeping**, not an
+  achieved result: the published ~5e-7 at 300 K is the noise algebra of a
+  lossless 16-slot coherent combiner (60 ps of storage against tau_q ~ 1-2 ps),
+  and `error_2bit(300, 400, n_avg=16)` equals `error_2bit(300, 6400, n_avg=1)`
+  exactly. Under the manuscripts' own charge-memory reading the amplifier noise
+  is charged once, undivided, giving ~5.6e-2 at 300 K -- a 2.5x improvement, not
+  five decades (Part II v1.7 revision item 1). No physical topology reproduces
+  the column:
+  [notes/2026-07-16-no-physical-avg16-accumulator.md](../notes/2026-07-16-no-physical-avg16-accumulator.md).
+- In `results.json`, `null` in the `T_*_below_*` keys means the vacuum-set error
+  floor lies **above** that target at every temperature (`quantum_floor.2bit` =
+  1.336e-6 > 1e-6), so `qerrors.threshold_temperature` returns `None` by design
+  -- it does not mean "not computed".
 - The **classical digital fabric** (rail-restored, ~3.8e3 quanta/decision;
   this BER model is Part II's own construction — Part I quotes no BER)
   stays below ~1e-9 in the Part-I band — digital restoration beats the
