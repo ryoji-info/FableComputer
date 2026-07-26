@@ -41,9 +41,13 @@ manuscript values (e.g. `python ds_cell.py`, `python kinetic.py`).
   `regen.py` (Fabry-Perot below threshold: loop = (s+v₀)/(s−v₀)·a_loss, gain =
   [(1−loop₀)/(1−loop)]²). The **nonlinear shallow-water solver** (`solver.py`)
   independently confirms the sub-threshold regenerative buildup, locates the
-  numerically-diffused threshold M_th,num ≈ 0.17 (≈15 % above analytic; a
-  Lax-Friedrichs diffusion artifact that → analytic as Δx→0), and supplies the
-  gain compression (1 dB at ≈1 % swing) and the streaming per-pulse gain.
+  numerically-diffused threshold M_th,num ≈ 0.169 — coarse-grid Lax-Friedrichs
+  over-diffusion whose Δx→0 limit is the **exact inviscid** threshold ≈0.149313
+  (+1.52 % above the small-M analytic 0.147083), **not** the analytic value; the
+  *physical* kinetic threshold is 0.165 [0.154, 0.169] and must not be confused
+  with either ([notes/2026-07-22-mth-numerical-vs-physical-viscosity.md](../notes/2026-07-22-mth-numerical-vs-physical-viscosity.md))
+  — and supplies the gain compression (1 dB at ≈1 % **drive-plane** swing) and
+  the streaming per-pulse gain.
 - **Per-pulse gain.** A 3-cycle burst is shorter than the low-Q (Q≈6) cavity
   buildup time, so its gain (≈ +8 dB streaming, solver) sits below the CW
   regenerative gain (+9.7 dB). The cavity ring-down (~4–5 ps) is comparable to
