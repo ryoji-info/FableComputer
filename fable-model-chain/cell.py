@@ -41,7 +41,8 @@ def compression_dB(drive_frac):
 
 
 def cascade_per_cell_gain_dB(junctions_dB=(0, -1, -3, -6), A_op=0.0116):
-    """Per-cell net gain in cascade. Each cell operates near the 1-dB knee; the
+    """Per-cell net gain in cascade. Each cell operates near the 1-dB knee
+    (drive-plane amplitude; A_SAT_eff in [0.015, 0.023]); the
     junction attenuates the downstream cell's input, moving it below the knee, so
     per-cell gain RISES with junction loss (the restoring rail in action)."""
     out = {}
