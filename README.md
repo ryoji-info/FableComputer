@@ -9,8 +9,8 @@
 
 [![Part I PDF](https://img.shields.io/badge/Part_I-PDF-blue)](https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-I.pdf)
 [![Part II PDF](https://img.shields.io/badge/Part_II-PDF-blue)](https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-II.pdf)
-[![Part I DOI](https://img.shields.io/badge/Part_I_DOI-10.5281%2Fzenodo.21369405-blue)](https://doi.org/10.5281/zenodo.21369405)
-[![Part II DOI](https://img.shields.io/badge/Part_II_DOI-10.5281%2Fzenodo.21385646-blue)](https://doi.org/10.5281/zenodo.21385646)
+[![Part I DOI](https://img.shields.io/badge/Part_I_DOI-10.5281%2Fzenodo.21606810-blue)](https://doi.org/10.5281/zenodo.21606810)
+[![Part II DOI](https://img.shields.io/badge/Part_II_DOI-10.5281%2Fzenodo.21607070-blue)](https://doi.org/10.5281/zenodo.21607070)
 ![Status](https://img.shields.io/badge/status-paper_design_%2B_runnable_models-blue)
 ![Experiment](https://img.shields.io/badge/gain_cell-experimentally_unproven-orange)
 ![Governance](https://img.shields.io/badge/governance-open%2C_no_blockchain-brightgreen)
@@ -61,7 +61,7 @@ from the no-cryogenics charter and are labelled as such wherever they appear.
 
 Both manuscripts carry a full authorship and status disclaimer: they were prepared by an independent researcher with AI assistance (including an orchestrated literature-verification audit), they are not peer-reviewed, and their claims are offered as a starting point for discussion — which is exactly where this community comes in.
 
-*Note: the manuscripts are living documents. The community's vetted findings (see [notes/](notes/)) are folded back into them in periodic community revisions, each archived on Zenodo under its own version DOI (badges above). The PDFs in `papers/` are **Part I v6.0** and **Part II v2.0**; the badge DOIs resolve to the most recent deposits (Part I v5.5, Part II v1.6), so the repository copies currently run ahead of Zenodo — re-archiving is a maintainer release decision. The manuscripts themselves carry no version statements: the version, and the complete indexed history of every revision and which promoted note required it, live in [papers/REVISION-HISTORY.md](papers/REVISION-HISTORY.md). Corrections the record has adopted but the deposited manuscripts do not yet carry are indexed in [papers/ERRATA.md](papers/ERRATA.md).*
+*Note: the manuscripts are living documents. The community's vetted findings (see [notes/](notes/)) are folded back into them in periodic community revisions, each archived on Zenodo under its own version DOI (badges above). The PDFs in `papers/` are **Part I v6.0** and **Part II v2.0**, and the badge DOIs resolve to exactly those deposits — repository and archive are in step. Earlier version DOIs keep resolving to the manuscripts as they stood. The manuscripts themselves carry no version statements: the version, the deposit DOIs, and the complete indexed history of every revision and which promoted note required it live in [papers/REVISION-HISTORY.md](papers/REVISION-HISTORY.md); [papers/ERRATA.md](papers/ERRATA.md) reports whether any adopted correction is not yet in the current deposit (as of these deposits, none is).*
 
 **New here?** Two short companion documents summarize everything: [The Fable Computer — An Introduction](docs/Fable-Computer-Introduction.pdf) (six pages: the idea, the numbers, and what remains open) and the [Community Guidelines](docs/Fable-Computer-Community-Guidelines.pdf) (how to join in). Editable sources sit alongside them in [docs/](docs/).
 
