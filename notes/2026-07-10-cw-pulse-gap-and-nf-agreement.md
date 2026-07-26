@@ -6,6 +6,9 @@
 
 ---
 
+> **Correction — 2026-07-26 (post-promotion).** Three of this note's figures were later graded against measurement. Appendix C's "lands exactly on resonance" holds for the **passive reference only** — superseded by [2026-07-11-streaming-gain-detuning-artifact.md](2026-07-11-streaming-gain-detuning-artifact.md) §2, whose assessor asked for this erratum. §2's **8.87 dB** per-slot-peak waypoint is **falsified** (measured 7.8511, 1.02 dB over) and its **0.2–0.8 dB** compression bucket is **falsified** (measured 0.062, 8× over) by [2026-07-17-drive-sweep-knee-anchored.md](2026-07-17-drive-sweep-knee-anchored.md) §6; the 0.6 ± 0.5 dB discretization bucket is **closed** by [2026-07-12-boundary-factor-exact-operator.md](2026-07-12-boundary-factor-exact-operator.md). §1's noise-figure agreement and the metric-convention findings stand. Full supersession map: [notes/INDEX.md](INDEX.md).
+
+
 ## 1. The noise-figure agreement (2.7689 vs 2.7750 dB) is structurally forced up to a temperature choice — demonstrated
 
 Both numbers are **one closed form evaluated at two temperatures**:
