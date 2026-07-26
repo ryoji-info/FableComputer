@@ -11,10 +11,10 @@ Before any variant: the shipped measurements reproduce exactly on this platform 
 
 | key (pre-registered in) | predicted | band | **measured** | verdict |
 |---|---|---|---|---|
-| `pulse_gain_dB_at_0p7_streaming_retuned` ([exact-operator note](../2026-07-12-boundary-factor-exact-operator.md)) | 9.05 ± 0.30 | 8.45–9.65 | **9.2246** | **CONFIRMED** |
+| `pulse_gain_dB_at_0p7_streaming_retuned` ([exact-operator note](2026-07-12-boundary-factor-exact-operator.md)) | 9.05 ± 0.30 | 8.45–9.65 | **9.2246** | **CONFIRMED** |
 | `M_th_num_N480` (same) | 0.1590 ± 0.0010 | 0.157–0.161 | **0.158748** | **CONFIRMED** |
 | `pulse_gain_dB_at_0p5_streaming` (same) | 5.08 ± 0.30 | 4.6–5.6 | **5.1291** | **CONFIRMED** |
-| `classical_BER_300K_thermal_only` ([quantum-crossover note](../2026-07-12-quantum-correction-crossover.md)) | ≈ 5.5×10⁻¹² | 2×10⁻¹²–1.5×10⁻¹¹ | **5.494×10⁻¹²** | **CONFIRMED** |
+| `classical_BER_300K_thermal_only` ([quantum-crossover note](2026-07-12-quantum-correction-crossover.md)) | ≈ 5.5×10⁻¹² | 2×10⁻¹²–1.5×10⁻¹¹ | **5.494×10⁻¹²** | **CONFIRMED** |
 
 The fifth pre-registered quantity, T\* = 43.7 K (vacuum–thermal crossover), is a bench observable and remains open by nature.
 
