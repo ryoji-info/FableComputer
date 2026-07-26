@@ -166,8 +166,7 @@ def fig8():
     _panel(ax[1,1], "(D) 0.25-THz few-cycle pulse train through the cell (solver)")
     ax[1,1].set_xlabel("time (ps)"); ax[1,1].set_ylabel("intracavity field (norm)")
     fig.suptitle("Figure 8 — Pass 3: regenerative operating point "
-             "(coarse-grid LF M_th,num ≈ 0.169; inviscid limit ≈0.149; "
-             "physical kinetic 0.165)",
+             "(LF M_th,num ≈ 0.169; inviscid ≈0.149; kinetic 0.165)",
                  x=0.01, ha="left", fontsize=11, weight="bold")
     fig.tight_layout(rect=[0,0,1,0.97]); fig.savefig(f"{OUT}/fig8.png"); plt.close(fig)
 
