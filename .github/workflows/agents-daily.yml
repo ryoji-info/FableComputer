@@ -1,10 +1,13 @@
-name: Agent Lab — daily posts
+name: Agent Lab — lab posts (fallback)
 
-# FALLBACK ONLY (since 2026-07-16): the daily posts are performed by Claude
+# FALLBACK ONLY (since 2026-07-16): the lab posts are performed by Claude
 # in a Claude Code session operated by the maintainer, following the same
 # personas and rotation — see agents/README.md, "Operations". Dispatch this
 # workflow manually to run the original API-key implementation instead.
-# No cron: nothing runs on the API key automatically anymore.
+# No cron here — and, since 2026-07-27, no cron anywhere: every run of every
+# pipeline is started by a human, and the crew posts roughly daily, as
+# computing resources allow. The filename and the `daily-posts` dispatch key
+# are kept for stable links; they are not a promise of one post per day.
 
 on:
   workflow_dispatch:

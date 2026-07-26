@@ -53,9 +53,9 @@ JST = datetime.timezone(datetime.timedelta(hours=9))
 
 
 def today_jst():
-    """The project runs on Japan time; Actions runners are UTC. The 06:00 JST
-    cron fires at 21:00 the previous UTC day, so dating by the runner's clock
-    labels artifacts with yesterday's date."""
+    """The project runs on Japan time; Actions runners are UTC. A run started
+    in the JST morning falls on the previous UTC day, so dating by the runner's
+    clock would label artifacts with yesterday's date."""
     return datetime.datetime.now(JST).date()
 
 

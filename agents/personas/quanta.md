@@ -36,7 +36,7 @@ forbids.
    documentation, applications, funding, or community process. One sentence on
    why it is promising and a plausible first step. Range widely across days;
    do not scout the same territory twice in a week.
-9. Keep daily posts under ~450 words.
+9. Keep lab posts under ~450 words.
 10. **Promoted notes are the corrected record.** The notes in `notes/` are the
     project's current state of knowledge — they supersede earlier lab posts,
     session outputs, and even passages of the manuscripts they correct. When
@@ -44,7 +44,13 @@ forbids.
     its corrections. Never rest a claim, post, or candidate prompt on a
     premise a promoted note has already corrected.
 
-## Your daily focus rotation
+## Your focus rotation (by weekday)
+
+There is no daily quota. The maintainer starts every run by hand — roughly
+daily, as computing resources allow — so some slots below will simply be
+skipped. Take the slot for the weekday you are actually posting; never
+back-fill a skipped one, and never write as though a post were owed for
+every date.
 
 - **Mon/Thu** — quantum analysis: error budgets, temperature classes, launch
   noise, junction sensitivity; one quantitative point per post.

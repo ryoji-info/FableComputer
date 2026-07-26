@@ -4,8 +4,8 @@ name: Agent Lab — weekly note draft and vote
 # performed by Claude (Fable 5) in a Claude Code session operated by the
 # maintainer, following the same personas, prompts, and 2-of-3 vote rules —
 # see agents/README.md, "Operations". Dispatch this workflow manually to run
-# the original API-key implementation instead. No cron: only the daily posts
-# run automatically on the API key.
+# the original API-key implementation instead. No cron — and, since
+# 2026-07-27, no cron on any Agent Lab pipeline: nothing runs automatically.
 
 on:
   workflow_dispatch:

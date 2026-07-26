@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 """Agent Lab post: one persona reads the lab thread and adds a comment.
 
-May run several times per day (scheduled and/or manual). Each run posts a
-fresh, run-numbered set unless the persona already posted within the last 10
-minutes (anti-double-fire guard), so retries and racing runs don't duplicate.
+Started by hand, never on a schedule: the crew posts roughly daily, as the
+project's computing resources allow, and may run several times in one day.
+Each run posts a fresh, run-numbered set unless the persona already posted
+within the last 10 minutes (anti-double-fire guard), so retries and racing
+runs don't duplicate.
 Reads notes/ and papers/ for recent changes so posts engage the latest state.
 
 Env: ANTHROPIC_API_KEY, GH_TOKEN, GITHUB_REPOSITORY (owner/repo), PERSONA
@@ -34,9 +36,9 @@ JST = datetime.timezone(datetime.timedelta(hours=9))
 
 
 def today_jst():
-    """The project runs on Japan time; Actions runners are UTC. The 06:00 JST
-    cron fires at 21:00 the previous UTC day, so dating by the runner's clock
-    labels artifacts with yesterday's date."""
+    """The project runs on Japan time; Actions runners are UTC. A run started
+    in the JST morning falls on the previous UTC day, so dating by the runner's
+    clock would label artifacts with yesterday's date."""
     return datetime.datetime.now(JST).date()
 
 
@@ -188,9 +190,11 @@ def main():
     persona = read(f"agents/personas/{PERSONA}.md")
     context = f"""Today is {today.isoformat()} ({today.strftime('%A')}).
 
-You are writing your daily post in the project's public Agent Lab discussion
-thread on GitHub. Follow your persona's standing rules and today's focus from
-your rotation. Write GitHub-flavored markdown. Do NOT include a top-level
+You are writing your post in the project's public Agent Lab discussion thread
+on GitHub. Runs are started by hand — roughly daily, as computing resources
+allow — so take the rotation slot for today's weekday and do not back-fill
+days the crew skipped. Follow your persona's standing rules
+and today's focus from your rotation. Write GitHub-flavored markdown. Do NOT include a top-level
 heading; start with a bold one-line topic. Remember the signature — and the
 `Improvement scout:` line (standing rule 8): one subject outside today's focus
 that could improve the Fable Computer broadly, different from the scouts in
@@ -234,7 +238,7 @@ fable-model-quantum/results.json:
         # Adaptive thinking must be requested explicitly: Sonnet 5 defaults to
         # adaptive, but Opus 4.8 runs WITHOUT thinking when the param is omitted.
         # Thinking shares the max_tokens budget with the visible text — keep
-        # effort low for daily posts and leave generous headroom.
+        # effort low for lab posts and leave generous headroom.
         "thinking": {"type": "adaptive"},
         "max_tokens": 6000,
         "output_config": {"effort": "low"},
