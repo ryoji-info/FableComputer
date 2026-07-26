@@ -216,6 +216,7 @@ para("Part I [1] built a machine out of one physical object — a resonant "
      "decisions never erode. The price of that discipline is nonlinearity: "
      "digital restoration lives at the saturating rail. This Part starts "
      "from the opposite end of the same transfer curve. Below the 1-dB knee "
+     "(a launch/drive-plane amplitude) "
      "the fabric is a linear, phase-coherent wave medium: pulses split, "
      "merge, and interfere at gate-programmed junctions, and the "
      "comb-locked clock of Part I — distributed at femtosecond-class "
@@ -312,7 +313,8 @@ equation("N(ε) = (ε/ε₁)²,   ε₁ = "
 para(f"One plasmon is a {R['eps_one']*100:.2f} % density swing. The Part-I "
      "solver's 1-dB gain-compression knee (ε ≈ 1 %) is therefore "
      f"N ≈ {R['N_knee']:.0f} quanta ({R['pulse_energy_knee_aJ']:.3f} aJ "
-     "intracavity), and the ≈10 % rail is N ≈ "
+     "input-/launch-referred -- the intracavity reading is a plane mislabel, "
+     "v1.7), and the ≈10 % rail (anchored at neither plane) is N ≈ "
      f"{R['N_rail']:.0f} ({R['pulse_energy_rail_aJ']:.1f} aJ). Two scales "
      "should not be confused. Part I's “intrinsic field energy of "
      "≈10 aJ per bit” counts a traveling few-cycle pulse over its "
@@ -568,6 +570,7 @@ para("Reading the table downward: at the Part-I band the classical digital "
      "unit's per-input amplitude and giving up linearity. The quantized "
      "noise floor turns that from a choice into a requirement: had the "
      "digital fabric restored its levels at the 1-dB knee "
+     "(launch/drive plane) "
      f"(≈{R['N_knee']:.0f} quanta) instead of the rail, its decision "
      "would be thermal-noise-limited to ≈10⁻¹ BER at 300 K "
      "— a constraint on Part I that only becomes visible once the "
@@ -782,7 +785,8 @@ table(
       f"{R['nbar_300K']:.1f} at 300 K; {R['nbar_77K']:.1f} at 77 K"],
      ["ε₁", "single-plasmon density amplitude, Eq. (Q2)",
       f"{R['eps_one']*1e3:.2f}×10⁻³"],
-     ["N_knee, N_rail", "quanta at the 1-dB knee / the rail",
+     ["N_knee, N_rail", "quanta at the 1-dB knee (launch/drive plane) / the rail "
+      "(anchored at neither plane)",
       f"{R['N_knee']:.0f} / {R['N_rail']:.0f}"],
      ["χ, c_K", "single-plasmon Kerr rate and its O(1) coefficient",
       f"χ/2π ≈ {R['chi_over_2pi_MHz']:.1f} MHz (c_K = 0.25, "
