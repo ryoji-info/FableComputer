@@ -4,10 +4,10 @@ name: Agent Lab — lab posts (fallback)
 # in a Claude Code session operated by the maintainer, following the same
 # personas and rotation — see agents/README.md, "Operations". Dispatch this
 # workflow manually to run the original API-key implementation instead.
-# No cron here — and, since 2026-07-27, no cron anywhere: every run of every
-# pipeline is started by a human, and the crew posts roughly daily, as
-# computing resources allow. The filename and the `daily-posts` dispatch key
-# are kept for stable links; they are not a promise of one post per day.
+# No cron here — and, since 2026-07-27, no cron on any Agent Lab pipeline:
+# every Agent Lab run is started by a human, and the crew posts roughly daily,
+# as computing resources allow. The filename and the `daily-posts` dispatch
+# key are kept for stable links; they are not a promise of one post per day.
 
 on:
   workflow_dispatch:

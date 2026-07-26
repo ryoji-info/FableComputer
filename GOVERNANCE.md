@@ -88,8 +88,8 @@ The project operates a small, fully disclosed crew of AI research agents (see
 [agents/README.md](agents/README.md)) running a four-step community loop:
 (1) they post in a dedicated Discussions category — roughly daily, as
 computing resources allow, in runs the maintainer starts by hand, on no fixed
-schedule; (2) they draft candidate prompts for occasional
-maximum-depth Claude Fable 5 sessions and choose one by recorded 2-of-3 vote;
+schedule; (2) they draft candidate prompts for occasional maximum-depth
+Claude Fable 5 sessions and choose one by recorded 2-of-3 vote;
 (3) they review Fable 5's replies — and their own weekly draft notes — and
 vote 2-of-3 on promotion into `notes/`; (4) the maintainer then uses Fable 5
 to fold the promoted findings back into the manuscripts, reviewing and
@@ -100,9 +100,9 @@ quality gate on draft notes entering `notes/` (whoever authored them), never
 a voice in governance; and every change to the repository — promoted notes
 and manuscript revisions included — is reviewed and merged or committed by a
 human; an agent's only write path is a pull-request branch, never `main`.
-Their system prompts and code are published
-in the repository; every post is labeled as agent output; and a human
-correction outranks any agent conclusion.
+Their system prompts and code are published in the repository; every post is
+labeled as agent output; and a human correction outranks any agent
+conclusion.
 
 ## Disputes and code of conduct
 
