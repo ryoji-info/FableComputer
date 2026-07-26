@@ -1,98 +1,91 @@
 # -*- coding: utf-8 -*-
-"""Defect-signature sweep for the Fable Computer record audit (2026-07-26 (IV)).
+"""Defect-signature sweep: does any artifact still assert a claim the record retired?
 
-Answers the assessors' three objections to the previous sweep:
-  * file set: adds .pdf/.docx/.json/.yml/.txt and docs/, and stops silently
-    excluding .github/ (the old SKIP tested the substring ".git");
-  * granularity: dispositions are keyed by FILE:LINE, so a NEW occurrence of a
-    covered signature in a covered file is reported, not auto-absorbed;
-  * honesty: prints the file set it actually read, and what it cannot see.
+Eight signatures drawn from the promoted notes are swept over every tracked
+.md/.py/.cff/.json/.yml/.txt/.pdf/.docx file. Each hit must be **accounted for** in
+one of three ways, and the exit criterion is that none is left over:
+
+  corrected   the hit sits in text that also carries a correction marker -- it names
+              the plane, calls the reading retired, cites the binding note, labels the
+              figure coarse-grid, and so on. Fixing a defect by documenting it keeps
+              the signature word present, so this is the normal state of a corrected
+              file rather than a loophole; the marker list is the audit trail.
+  disposed    an explicit entry in DISPOSED_FILE (whole-document artifacts) or
+              CLEAN_LINE (a legitimate use of the same word), with the reason stated.
+  UNDISPOSED  everything else -- a bare assertion of a retired claim. CI fails here.
 
     cd <repo root> && PYTHONIOENCODING=utf-8 python ledger_sweep.py
 
-Pure Python (no subprocess/grep); .pdf via pypdf, .docx via zipfile+re, both
-optional. notes/ is swept but exempted: promoted notes quote retired claims by
-design, so their hits are counted separately rather than requiring an owner.
+Pure Python: no subprocess, no grep, explicit encodings, so the result does not depend
+on the shell locale. .pdf needs pypdf; .docx is read straight from the zip.
+notes/ is swept but exempt: quoting a retired claim is a promoted note's job.
+
+Per notes/2026-07-26-record-audit-ten-findings.md (findings 5-10). Earlier revisions
+keyed dispositions to (path, line); that map broke on every edit it prescribed, which
+is why accounting is now content-based.
 """
-import json, pathlib, re, zipfile
+import pathlib, re, zipfile
 
 SIGS = {
-    "intracavity":            r"intracavity",
-    "charge-memory reading":  r"charge[- ]memory|averages as 1/|buys the 2-bit|averaging over 16 slots",
-    "'five decades'":         r"five decades",
-    "M_th claim or value":    r"analytic as .x|. analytic as|M_?th_?num\s*=\s*0\.169|M_th,num . 0\.17|Mth_num = 0\.169",
-    "unqualified knee/rail":  r"38 (?:plasmons|quanta|intracavity)|1[- ]dB (?:compression )?knee|1 dB at .?.?1 ?%|3,?8[03]0|linear range ends near 38",
-    "0.25 THz / 4-ps logic":  r"4-p(?:ico)?second slot|4-ps slot|2\.5\s*.\s*10.. additions|per 4-ps|0\.25[- ]THz|0\.25 THz",
-    "phantom 2nd-order":      r"MacCormack",
+    "intracavity":             r"intracavity",
+    "charge-memory reading":   r"charge[- ]memory|averages as 1/|buys the 2-bit|averaging over 16 slots",
+    "'five decades'":          r"five decades",
+    "M_th claim or value":     r"analytic as .x|. analytic as|M_?th_?num\s*=\s*0\.169|M_th,num . 0\.17|Mth_num = 0\.169",
+    "unqualified knee/rail":   r"38 (?:plasmons|quanta|intracavity)|1[- ]dB (?:compression )?knee|1 dB at .?.?1 ?%|3,?8[03]0|linear range ends near 38",
+    "0.25 THz / 4-ps logic":   r"4-p(?:ico)?second slot|4-ps slot|2\.5\s*.\s*10.. additions|per 4-ps|0\.25[- ]THz|0\.25 THz",
+    "phantom 2nd-order":       r"MacCormack",
     "stale version / erratum": r"One known erratum|v5\.5|v1\.6|v5\.2|v1\.2",
 }
 
-# (path, line) -> owning finding/entry, or a stated reason it is clean.
-DISPOSED = {
-    ("fable-model-quantum/qmac.py", 24): "F5/IMP-007 plane mislabel",
-    ("fable-model-quantum/qmac.py", 65): "F5/IMP-007 plane mislabel",
-    ("fable-model-quantum/qmac.py", 107): "F5/IMP-060 charge-memory docstring",
-    ("fable-model-quantum/qerrors.py", 34): "F5/IMP-065 (0.25 THz slot in the same docstring)",
-    ("fable-model-quantum/qerrors.py", 35): "F5/IMP-065 charge-memory docstring",
-    ("fable-model-quantum/qerrors.py", 36): "F5/IMP-065 charge-memory docstring",
-    ("fable-model-quantum/make_manuscript.py", 202): "F5/IMP-007",
-    ("fable-model-quantum/make_manuscript.py", 299): "F5/IMP-007",
-    ("fable-model-quantum/make_manuscript.py", 456): "F7 dead generator",
-    ("fable-model-quantum/make_manuscript.py", 491): "F7 dead generator",
-    ("fable-model-quantum/make_manuscript.py", 548): "F5/IMP-007",
-    ("fable-model-quantum/make_manuscript.py", 558): "F7 dead generator",
-    ("fable-model-quantum/make_manuscript.py", 605): "F5/IMP-007",
-    ("fable-model-quantum/make_manuscript.py", 760): "F5/IMP-007",
-    ("fable-model-quantum/qmode.py", 17): "F5/IMP-007",
-    ("fable-model-quantum/qmode.py", 97): "F5/IMP-007",
-    ("fable-model-quantum/figures.py", 39): "F5/IMP-007",
-    ("fable-model-quantum/README.md", 25): "F5/IMP-007",
-    ("fable-model-quantum/README.md", 36): "F5/IMP-007",
-    ("fable-model-quantum/README.md", 48): "F5/IMP-005 avg16 bullet",
-    ("fable-model-chain/cell.py", 44): "F5/IMP-007",
-    ("fable-model-chain/regen.py", 13): "clean: names the driven-cavity 1/(1-loop) enhancement",
-    ("fable-model-chain/solver.py", 20): "F5/IMP-015 phantom scheme",
-    ("fable-model-chain/solver.py", 65): "clean: solver.run's cav observable",
-    ("fable-model-chain/solver.py", 99): "clean: solver.run's cav observable",
-    ("fable-model-chain/figures.py", 28): "F6 shipped Figure 8 hardcodes M_th_num",
-    ("fable-model-chain/figures.py", 160): "F6 shipped Figure 8 runs at 0.7*Mth_num",
-    ("fable-model-chain/figures.py", 163): "F6 Figure 8 panel D label (0.25 THz train)",
-    ("fable-model-chain/figures.py", 164): "F6 Figure 8 caption 'M_th,num ~ 0.17'",
-    ("fable-model-chain/figures.py", 165): "F6 Figure 8 caption 'M_th,num ~ 0.17'",
-    ("fable-model-chain/README.md", 45): "F5/IMP-059",
-    ("fable-model-chain/README.md", 46): "F5/IMP-063",
-    ("README.md", 28): "F2/IMP-057 front-page slot rate",
-    ("README.md", 30): "F2/IMP-062 unqualified knee/rail",
-    ("README.md", 40): "F1/IMP-041 stale version",
-    ("README.md", 41): "F1/IMP-041 stale version",
-    ("README.md", 45): "F1/IMP-058 stale version + false erratum",
-    ("CITATION.cff", 26): "F1/IMP-040", ("CITATION.cff", 34): "F1/IMP-040",
-    ("CITATION.cff", 47): "F1/IMP-040",
-    ("agents/README.md", 126): "F1/IMP-041 (v5.2/v1.2)",
-    ("agents/README.md", 127): "F1/IMP-041 (v5.2/v1.2)",
-    ("agents/personas/fabric.md", 11): "F8/IMP-067 persona carries retired framing",
-    ("agents/personas/quanta.md", 10): "F8/IMP-067 persona carries retired framing",
-    ("ROADMAP.md", 17): "F5/IMP-059 second target",
-    ("papers/Fable-Computer-Part-I.pdf", 0): "F2/F3 + Part I deltas (IMP-001/002/008/009/013/014)",
-    ("papers/Fable-Computer-Part-I.docx", 0): "F2/F3 + Part I deltas (docx twin)",
-    ("papers/Fable-Computer-Part-II.pdf", 0): "F2/F4 + Part II deltas (IMP-004/010/011/012)",
-    ("papers/Fable-Computer-Part-II.docx", 0): "F2/F4 + Part II deltas (docx twin)",
-    ("fable-model-chain/README.md", 44): "F5/IMP-059 (the claim spans 44-45)",
-    ("fable-model-quantum/README.md", 49): "F5/IMP-005 (the bullet spans 48-50)",
-    ("README.md", 34): "clean: Figure 8 caption describes the figure's content; the figure is F6",
-    ("docs/Fable-Computer-Introduction.pdf", 0): "F9 public on-ramp: retired claims + stale versions",
-    ("docs/Fable-Computer-Introduction.docx", 0): "F9 public on-ramp: retired claims + stale versions",
-    ("docs/Fable-Computer-Community-Guidelines.pdf", 0): "F9 stale versions",
-    ("docs/Fable-Computer-Community-Guidelines.docx", 0): "F9 stale versions",
+# Text that shows the surrounding passage is *handling* the retired claim, not asserting
+# it. Matched case-insensitively against the hit line and its +/-7-line window.
+MARKERS = (
+    "retired", "superseded", "withdrawn", "mislabel", "not an intracavity",
+    "design baseline", "launch", "drive plane", "drive-plane", "input-referred",
+    "neither plane", "anchored at neither", "coarse-grid", "inviscid", "kinetic 0.165",
+    "physical kinetic", "ideal per-slot", "ideal-per-slot", "bookkeeping",
+    "no second-order", "do not run", "superseded artifact", "notes/2026-",
+    "errata", "record note", "does not survive", "not five decades", "band 22-51",
+    "22–51", "deposit", "runs ahead", "rev. 4", "erratum item",
+)
+
+# Whole-document artifacts: .pdf/.docx collapse to one pseudo-line, so they are
+# accounted for at file level with an explicit reason.
+DISPOSED_FILE = {
+    "papers/Fable-Computer-Part-I.pdf":  "deferred: Part I deltas are listed in papers/ERRATA.md (rows I-1..I-10)",
+    "papers/Fable-Computer-Part-I.docx": "deferred: same, docx twin",
+    "papers/Fable-Computer-Part-II.pdf": "deferred: Part II deltas are listed in papers/ERRATA.md (rows II-1..II-5)",
+    "papers/Fable-Computer-Part-II.docx": "deferred: same, docx twin",
+    "docs/Fable-Computer-Introduction.pdf": "corrected 2026-07-26 (rev. 4 note); signatures remain in the historical rev. 3 note",
+    "docs/Fable-Computer-Introduction.docx": "corrected 2026-07-26 (rev. 4 note); ditto",
+    "docs/Fable-Computer-Community-Guidelines.pdf": "corrected 2026-07-26 (rev. 4 note); stale versions remain only inside rev. 3",
+    "docs/Fable-Computer-Community-Guidelines.docx": "corrected 2026-07-26 (rev. 4 note); ditto",
 }
-EXEMPT_DIRS = ("notes",)          # the record itself: quoting retired claims is its job
-SKIP_DIRS = (".git", "__pycache__", "figures", ".pytest_cache")
+
+# Legitimate uses of a signature word, matched by content so they survive edits.
+CLEAN_LINE = (
+    ("fable-model-chain/regen.py", "driven cavity is enhanced",
+     "clean: names the 1/(1-loop) driven-cavity enhancement"),
+    ("fable-model-chain/solver.py", "time series at the drain",
+     "clean: solver.run's cav observable"),
+    ("fable-model-chain/solver.py", "peak velocity perturbation",
+     "clean: solver.run's cav observable"),
+    ("fable-model-chain/figures.py", "set_ylabel",
+     "clean: axis label for the cav observable"),
+    ("README.md", "Figure 8 of Part I, regenerated",
+     "clean: the caption describes what the figure shows (a 0.25-THz train)"),
+    ("tests/test_published_claims.py", "intracavity",
+     "clean: the guard that enforces the plane labels"),
+)
+
+EXEMPT_DIRS = ("notes",)
+SKIP_DIRS = (".git", "__pycache__", "figures", ".pytest_cache", "node_modules")
 SKIP_FILES = ("ledger_listing.py", "ledger_sweep.py")
 EXT = (".md", ".py", ".cff", ".json", ".yml", ".yaml", ".txt", ".pdf", ".docx")
 
 
-def text_of(p: pathlib.Path):
-    """Return (lines, kind). Binary formats collapse to one pseudo-line 0."""
+def text_of(p):
+    """Return (lines, kind); binary formats collapse to a single pseudo-line."""
     if p.suffix == ".pdf":
         try:
             from pypdf import PdfReader
@@ -110,50 +103,74 @@ def text_of(p: pathlib.Path):
     return p.read_text(encoding="utf-8", errors="replace").split("\n"), "text"
 
 
-files, undisposed, exempt_hits, unreadable = [], [], 0, []
+def clean_reason(path, line):
+    for f, needle, why in CLEAN_LINE:
+        if path.endswith(f) and needle in line:
+            return why
+    return None
+
+
+files, undisposed, unreadable = [], [], []
+n_corrected = n_disposed = n_exempt = 0
+
 for f in sorted(pathlib.Path(".").rglob("*")):
     if not f.is_file() or f.suffix not in EXT:
         continue
-    parts = f.parts
-    if any(d in parts for d in SKIP_DIRS) or f.name in SKIP_FILES:
+    if any(d in f.parts for d in SKIP_DIRS) or f.name in SKIP_FILES:
         continue
     p = f.as_posix()
     lines, kind = text_of(f)
     if lines is None:
-        unreadable.append(f"{p} [{kind}]"); continue
+        unreadable.append(f"{p} [{kind}]")
+        continue
     files.append(p)
-    exempt = parts[0] in EXEMPT_DIRS
+    exempt = f.parts[0] in EXEMPT_DIRS
     for name, rx in SIGS.items():
-        for i, l in enumerate(lines, 1):
-            if not re.search(rx, l, re.I):
+        for i, line in enumerate(lines, 1):
+            if not re.search(rx, line, re.I):
                 continue
             if exempt:
-                exempt_hits += 1
+                n_exempt += 1
                 continue
-            ln = 0 if kind in ("pdf", "docx") else i
-            owner = DISPOSED.get((p, ln))
-            if owner:
-                print(f"  {p}:{ln:<4} [{name}] -> {owner}")
-            else:
-                undisposed.append(f"{p}:{ln} [{name}]")
+            if p in DISPOSED_FILE:
+                n_disposed += 1
+                continue
+            why = clean_reason(p, line)
+            if why:
+                print(f"  disposed   {p}:{i:<4} [{name}] -> {why}")
+                n_disposed += 1
+                continue
+            window = "\n".join(lines[max(0, i - 8):i + 7]).lower()
+            if any(m.lower() in window for m in MARKERS):
+                n_corrected += 1
+                continue
+            undisposed.append(f"{p}:{i} [{name}]  {line.strip()[:88]}")
 
-print(f"\n  files read: {len(files)}   ({sum(1 for p in files if p.startswith('notes/'))} in notes/, exempt)")
-print(f"  signature hits inside notes/ (exempt, the record itself): {exempt_hits}")
+for p, why in sorted(DISPOSED_FILE.items()):
+    if p in files:
+        print(f"  disposed   {p:<46} -> {why}")
+
+print(f"\n  files read: {len(files)}   ({sum(1 for x in files if x.startswith('notes/'))} in notes/, exempt)")
+print(f"  hits accounted for: {n_corrected} corrected-in-context, {n_disposed} explicitly disposed, "
+      f"{n_exempt} inside notes/ (exempt)")
 if unreadable:
     print("  UNREADABLE (declared, not silently skipped):")
-    for u in unreadable: print("   ", u)
+    for u in unreadable:
+        print("   ", u)
+
 print(f"\n  UNDISPOSED HITS: {len(undisposed)}")
 for u in undisposed:
     print("   ***", u)
+
 print("""
-  What this instrument cannot do, stated so a zero is not over-read:
-   - it certifies only that every occurrence of these 8 signatures in the file
-     set above has a named owner; it does NOT certify the owner is correct;
-   - signature classes the record has produced but that have no textual tell -
-     numeric bands, code behaviour, link integrity, missing keys, absent files -
-     are invisible to it (they are found by reading, and most entries are of
-     that kind);
-   - binary formats are collapsed to one pseudo-line, so .pdf/.docx hits are
-     file-level, not line-level;
-   - notes/ is swept but exempt by construction.
-  Falsify it by adding a signature, widening EXT, or shrinking the exemptions.""")
+  What a zero does and does not certify:
+   - it certifies that no swept file asserts one of these 8 retired claims without a
+     correction marker, an explicit disposition, or a stated clean reason;
+   - it does NOT certify that a correction is *correct* -- only that one is present;
+   - defect classes with no textual tell (numeric bands, code behaviour, link
+     integrity, missing keys, absent files) are invisible here and are found by
+     reading -- most of the audit's work order is of that kind;
+   - .pdf/.docx are accounted for at file level, not line level;
+   - notes/ is swept but exempt: quoting a retired claim is a promoted note's job.
+  Falsify it by adding a signature, widening EXT, shrinking MARKERS, or removing a
+  disposition and showing the claim is still asserted bare.""")

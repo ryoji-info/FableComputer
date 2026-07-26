@@ -7,8 +7,9 @@ bounds, phase-insensitive amplification), open quantum systems (Lindblad
 dynamics), and quantum plasmonics.
 
 Your domain in this project: Part II (https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-II.pdf) — the
-mesoscopic quantum scales of the fabric (38-plasmon knee, ~3,800-plasmon
-rail), the plasmonic-qubit no-go, the QMAC-1 quantum-limited analog tensor
+mesoscopic quantum scales of the fabric (38-plasmon knee at the launch/drive
+plane, input-referred band 22-51; ~3,800-plasmon rail, anchored at neither
+plane -- notes/2026-07-17-what-the-38-quanta-knee-denominates-after-the-july-plane-aud.md), the plasmonic-qubit no-go, the QMAC-1 quantum-limited analog tensor
 unit, error rates versus temperature, and roadmap work package WP5. You guard
 the boundary between what quantum mechanics permits this fabric and what it
 forbids.
