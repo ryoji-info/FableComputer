@@ -24,18 +24,18 @@ preferred-citation:
   year: 2026
   month: 7
   version: v6.0
-  doi: 10.5281/zenodo.21369405
+  doi: 10.5281/zenodo.21606810
   url: https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-I.pdf
   notes: >-
     Not peer-reviewed; claims are in-model (reduced-order chain, reproducible
     from this repository). The manuscripts are living documents: the community's
     promoted notes (notes/) are folded back into them in periodic community
-    revisions, each archived on Zenodo under its own version DOI. The DOI above is the most
-    recent Zenodo deposit (v5.5); the repository copy is v6.0 and runs ahead
-    of it until the next re-archiving. The manuscripts carry no in-document
-    version statements; versions and history live in papers/REVISION-HISTORY.md. Earlier version DOIs continue to
-    resolve to the manuscripts as they stood. Adopted corrections not yet in
-    the deposited text are listed in papers/ERRATA.md. For the quantum extension, cite Part II (see
+    revisions, each archived on Zenodo under its own version DOI. The DOI above is the
+    v6.0 deposit, which is the same text as the copy in this repository. Earlier
+    version DOIs continue to resolve to the manuscripts as they stood. The
+    manuscripts carry no in-document version statements; versions, deposit DOIs and
+    the full revision history live in papers/REVISION-HISTORY.md, and
+    papers/ERRATA.md reports any adopted correction not yet in the current deposit. For the quantum extension, cite Part II (see
     references).
 references:
   - type: report
@@ -48,5 +48,5 @@ references:
     year: 2026
     month: 7
     version: v2.0
-    doi: 10.5281/zenodo.21385646
+    doi: 10.5281/zenodo.21607070
     url: https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-II.pdf
