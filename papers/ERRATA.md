@@ -12,10 +12,15 @@ hand, and re-archiving on Zenodo is a maintainer release decision
 ([GOVERNANCE.md](../GOVERNANCE.md)). Until a revision lands, **this file is the
 correct reading of the deposited text.**
 
-**Shipped versions:** Part I **v5.6** ("boundary-channel and gain-budget update"),
-Part II **v1.7** ("avg16-topology and knee-plane update"). Most recent Zenodo
-deposits: Part I v5.5 ([10.5281/zenodo.21369405](https://doi.org/10.5281/zenodo.21369405)),
+**Shipped versions:** Part I **v6.0**, Part II **v2.0** (July 2026 reader-focused
+revision; complete history in [REVISION-HISTORY.md](REVISION-HISTORY.md)). Most
+recent Zenodo deposits: Part I v5.5 ([10.5281/zenodo.21369405](https://doi.org/10.5281/zenodo.21369405)),
 Part II v1.6 ([10.5281/zenodo.21385646](https://doi.org/10.5281/zenodo.21385646)).
+
+> **Status (July 2026): every row below is folded into the v6.0 / v2.0 repository
+> copies.** The rows are retained because the *deposited* v5.5 / v1.6 PDFs still
+> carry the original passages; until re-archiving, this file is the correct reading
+> of the deposited text. Once the new versions are deposited, these rows clear.
 
 **Provenance.** Every row below is carried by
 [`notes/2026-07-26-record-audit-ten-findings.md`](../notes/2026-07-26-record-audit-ten-findings.md)
@@ -27,7 +32,7 @@ being listed here.
 
 ---
 
-## Part I (v5.6) — pending a v5.7 revision
+## Part I — folded into v6.0 (repository copy); applies to the deposited v5.5
 
 | # | passage | what the deposited text says | what the record says | binding note |
 |---|---|---|---|---|
@@ -42,12 +47,12 @@ being listed here.
 | I-9 | Abstract; §7.6 Table 6, "Kinetic validity" row | the boundary channel as "a separate and still-open ±1 dB allowance" | Carry §7.5's own rider, which the summary layers omit: **sign-open at the drain, loss-definite at the source, and potentially larger than ±1 dB for a diffuse contact** (−3 dB under Kn², ≲−10 dB under Kn). | [07-18 contact-gated](../notes/2026-07-18-boundary-channel-contact-gated.md) |
 | I-10 | Table 7, gate **G1** | model target names tuning and estimator | Additive extension only, every pre-registered pass threshold unchanged: pin G1's **drive amplitude relative to the measured knee** (the operating drive sits 3.8× below the pulse knee; a 3× hotter bench drive erodes 0.5+ dB) and add the companion observables (knee at source amplitude ≈0.76–1.15 %; −1 dB at intracavity swing ≈14 ± 2 %). | [07-17 drive sweep](../notes/2026-07-17-drive-sweep-knee-anchored.md) §8 |
 
-## Part II (v1.7) — pending a v1.8 revision
+## Part II — folded into v2.0 (repository copy); applies to the deposited v1.6
 
 | # | passage | what the deposited text says | what the record says | binding note |
 |---|---|---|---|---|
 | II-1 | §5, p.8; §6, pp.11–12; §8's dependencies paragraph | "one MAC per 4-ps slot, wave-pipelined like everything on this fabric"; "at 1/16th throughput (still 1.6×10¹⁰ MAC/s per unit)", with threats to "16 independent slot samples" listed as only comb-clock, gate 1/f and thermal drift | Both figures are **contingent on per-slot flush/reset closure**, which the classical record has adjudicated **negatively at 0.25 THz for F = 2** (in-model, across conventions). **Cavity ring-down memory belongs on the list of threats to slot-sample independence.** The timing basis a quantum throughput claim inherits is ≈0.1 THz with the burst proviso of I-4. The v1.7 text contains no occurrence of "flush", "ring-down" or "reset". | [07-22 ring-down](../notes/2026-07-22-cavity-ringdown-isi.md), [07-22 flush](../notes/2026-07-22-flush-noise-figure-negative.md), [07-23](../notes/2026-07-23-reset-switch-adjudication.md) |
-| II-2 | Revision notes v1.6→v1.7, item 3, p.16 | the measured knee at "source-drive amplitude ≈1–1.2 %" | **≈0.76–1.15 %** (7.6×10⁻³ CW to 1.15×10⁻² pulse). The item is internally inconsistent as printed: its own "input-referred ≈22–51 quanta" requires the 0.76 % figure (ε₁ = 1.6153×10⁻³ ⇒ 22.3 and 50.6). Correct by a **new v1.8 erratum item** — the revision-notes blocks are the append-only record and are not edited. | [07-17 plane audit](../notes/2026-07-17-what-the-38-quanta-knee-denominates-after-the-july-plane-aud.md) |
+| II-2 | Revision notes v1.6→v1.7, item 3, p.16 | the measured knee at "source-drive amplitude ≈1–1.2 %" | **≈0.76–1.15 %** (7.6×10⁻³ CW to 1.15×10⁻² pulse). The item is internally inconsistent as printed: its own "input-referred ≈22–51 quanta" requires the 0.76 % figure (ε₁ = 1.6153×10⁻³ ⇒ 22.3 and 50.6). Carried by the v2.0 fold and by the marked editorial note on the v1.6→v1.7 block in [REVISION-HISTORY.md](REVISION-HISTORY.md); the block itself is preserved verbatim (append-only). | [07-17 plane audit](../notes/2026-07-17-what-the-38-quanta-knee-denominates-after-the-july-plane-aud.md) |
 | II-3 | §3.1, pp.3–4; §6's classical-digital paragraph | ε_rail = 0.10 / N_rail ≈ 3833, no anchoring caveat | v1.7 folded the **knee** half of the plane audit but not the **rail** half: the rail is anchored at neither plane (see I-7). | [07-17 plane audit](../notes/2026-07-17-what-the-38-quanta-knee-denominates-after-the-july-plane-aud.md) §4 |
 | II-4 | Abstract, p.1; §1, p.2; §9 Conclusion | "the Part-I threshold cells themselves, re-programmed" | Qualify at all three headline sites, as §5 and Table QB1 already do: the two ladder comparators are a **redesign, not a re-trim** — k_dec ≥ 16 "is not reachable in-model by re-trimming a Part-I logic cell", and a re-trimmed cell presents k_dec ≈ 1.6–3.2. | Part II v1.6 §5 / Table QB1; [07-15](../notes/2026-07-15-finite-sharpness-is-not-a-variance.md) |
 | II-5 | Appendix QA, p.23 | the convention string, the coefficient c and the generalised averaging floor "are queued together as machine-readable `results.json` keys" | The queue is **undischarged** — none of those keys exists among the shipped leaf keys. When emitted, the floor key must be **jointly parameterized in c and k_dec**; a k-only key (`q2bit_avg_floor_k16`) re-injects the dependence the v1.5→v1.6 revision block withdrew ("Warm and cold alike are contingent on c and on k_dec jointly"). | [07-14](../notes/2026-07-14-q2bit-avg16-averaging-convention.md) §3; [07-15](../notes/2026-07-15-finite-sharpness-is-not-a-variance.md) §4 |

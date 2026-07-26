@@ -287,9 +287,20 @@ Return your vote (a candidate name, not your own) and reason (2-3 sentences)."""
     usage = resp.get("usage", {})
     answer = text_of(resp)
     served_by = resp.get("model", FABLE_MODEL)
-    if stop == "refusal" or not answer:
-        answer = (f"*(The request was declined by the model's safety classifiers "
-                  f"(stop_reason: {stop}). No answer was produced.)*")
+    if not answer:
+        # Distinguish a classifier refusal from an exhausted output budget: both used
+        # to be posted as "declined by the safety classifiers", which mislabels the
+        # record (notes/2026-07-26-record-audit-ten-findings.md, finding 5).
+        if stop == "refusal":
+            answer = ("*(The request was declined by the model's safety classifiers "
+                      f"(stop_reason: {stop}). No answer was produced.)*")
+        elif stop == "max_tokens":
+            answer = ("*(No text was produced: the output budget was exhausted "
+                      f"(stop_reason: {stop}) — thinking shares max_tokens with the "
+                      "visible answer. Not a refusal.)*")
+        else:
+            answer = ("*(No text was produced "
+                      f"(stop_reason: {stop}). Not a refusal.)*")
 
     title = f"Fable Session — {date_s}: {win['title']}"
     body = (f"One prompt, drafted and selected by the agent crew "

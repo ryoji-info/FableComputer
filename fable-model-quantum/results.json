@@ -128,6 +128,21 @@
   "weighted_mac_rms_LSB_77K": 0.3558401134817859,
   "classical_BER_300K": 3.6059121172811077e-11,
   "classical_BER_353K": 9.101052631220227e-10,
+  "avg16_convention": "slot-mean accumulation with a single midpoint decision; ideal per-slot sampler, not a physical accumulator",
+  "static_offset_c": 0.2886751345948129,
+  "static_offset_c_status": "open bench parameter (QG2 family): the released chain fixes c = 1/sqrt(12) = 0.2887, a value neither manuscript derives, measures or bounds",
+  "avg16_floor_c_kdec": {
+    "form": "(3/4)*erfc(k_dec/(4*sqrt(2)*c))",
+    "k_dec": 16,
+    "values_by_c": {
+      "0.1": 0.0,
+      "0.2": 4.130436177909706e-89,
+      "0.288675": 8.726643207570339e-44,
+      "0.4": 1.1429779536241033e-23,
+      "0.6": 1.9625887029079507e-11
+    },
+    "note": "jointly parameterized in c and k_dec; the c = 1/sqrt(12) entry is the published sensitivity case, not a derived floor"
+  },
   "verify_loss_V_rel_err": 2.1614236326665073e-10,
   "verify_amp_vac_V_rel_err": 4.481843044838267e-10,
   "verify_amp_thermal_V_rel_err": 9.902019521206285e-05,

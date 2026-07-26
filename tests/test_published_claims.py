@@ -98,6 +98,36 @@ def test_M_th_num_is_not_mistaken_for_the_physical_threshold():
     assert analytic < inviscid < lf
 
 
+def test_physical_and_numerical_thresholds_are_both_emitted():
+    """The 07-22 note's second half: M_th_num must be relabelled and the physical
+    threshold emitted, so a machine reader cannot mistake one for the other."""
+    assert CHAIN["M_th_kinetic_353K"] == pytest.approx(0.165, abs=1e-6)
+    assert CHAIN["M_th_kinetic_353K_band"] == [pytest.approx(0.154), pytest.approx(0.169)]
+    assert CHAIN["M_th_num_inviscid_limit"] == pytest.approx(0.149313, abs=1e-6)
+    assert "coarse-grid" in CHAIN["M_th_num_convention"]
+    # ordering: analytic < inviscid limit < shipped coarse-grid value
+    assert CHAIN["M_th_353K"] < CHAIN["M_th_num_inviscid_limit"] < CHAIN["M_th_num"]
+
+
+def test_decoder_floor_key_is_parameterized_in_c_and_k_not_k_alone():
+    """Appendix QA's queued keys, emitted the way the record requires: a k-only floor
+    key would re-assert the dependence Part II withdrew
+    (notes/2026-07-15-finite-sharpness-is-not-a-variance.md)."""
+    assert "slot-mean" in QUANT["avg16_convention"]
+    assert QUANT["static_offset_c"] == pytest.approx(1.0 / math.sqrt(12.0))
+    floor = QUANT["avg16_floor_c_kdec"]
+    assert floor["k_dec"] == 16 and "c" in floor["form"]
+    vals = floor["values_by_c"]
+    assert len(vals) >= 4, "the floor must be shown across a c range, not at one c"
+    # the published sensitivity case reproduces the note's 8.73e-44
+    key = min(vals, key=lambda k: abs(float(k) - 1.0 / math.sqrt(12.0)))
+    assert vals[key] == pytest.approx(8.73e-44, rel=1e-3)
+    # and the floor is wildly c-sensitive, which is the point
+    assert max(vals.values()) / max(min(v for v in vals.values() if v > 0), 1e-300) > 1e10
+    # no k-only floor key may exist
+    assert not [k for k in QUANT if k.startswith("q2bit_avg_floor_k")]
+
+
 def test_no_second_order_scheme_is_advertised():
     """notes/2026-07-26 finding 5: solver.py advertised a MacCormack option that does
     not exist. If a second-order stepper is ever added, this test should be updated
