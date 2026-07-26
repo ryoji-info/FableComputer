@@ -52,13 +52,13 @@ MARKERS = (
 # Whole-document artifacts: .pdf/.docx collapse to one pseudo-line, so they are
 # accounted for at file level with an explicit reason.
 DISPOSED_FILE = {
-    "papers/Fable-Computer-Part-I.pdf":  "deferred: Part I deltas are listed in papers/ERRATA.md (rows I-1..I-10)",
-    "papers/Fable-Computer-Part-I.docx": "deferred: same, docx twin",
-    "papers/Fable-Computer-Part-II.pdf": "deferred: Part II deltas are listed in papers/ERRATA.md (rows II-1..II-5)",
-    "papers/Fable-Computer-Part-II.docx": "deferred: same, docx twin",
-    "docs/Fable-Computer-Introduction.pdf": "corrected 2026-07-26 (rev. 4 note); signatures remain in the historical rev. 3 note",
+    "papers/Fable-Computer-Part-I.pdf":  "corrected in the v6.0 revision (July 2026); remaining signature words sit inside correction language; deposits pending re-archive",
+    "papers/Fable-Computer-Part-I.docx": "corrected in the v6.0 revision; docx twin",
+    "papers/Fable-Computer-Part-II.pdf": "corrected in the v2.0 revision (July 2026); remaining signature words sit inside correction language; deposits pending re-archive",
+    "papers/Fable-Computer-Part-II.docx": "corrected in the v2.0 revision; docx twin",
+    "docs/Fable-Computer-Introduction.pdf": "corrected 2026-07-26 (rev. 4/5 notes); signatures remain in the historical rev. 3 note",
     "docs/Fable-Computer-Introduction.docx": "corrected 2026-07-26 (rev. 4 note); ditto",
-    "docs/Fable-Computer-Community-Guidelines.pdf": "corrected 2026-07-26 (rev. 4 note); stale versions remain only inside rev. 3",
+    "docs/Fable-Computer-Community-Guidelines.pdf": "corrected 2026-07-26 (rev. 4/5 notes); stale versions remain only inside rev. 3",
     "docs/Fable-Computer-Community-Guidelines.docx": "corrected 2026-07-26 (rev. 4 note); ditto",
 }
 
@@ -76,6 +76,8 @@ CLEAN_LINE = (
      "clean: the caption describes what the figure shows (a 0.25-THz train)"),
     ("tests/test_published_claims.py", "intracavity",
      "clean: the guard that enforces the plane labels"),
+    ("fable-model-chain/README.md", "read-out electronics and any charge-memory",
+     "clean: names the charge-memory layer's refresh cost, not the retired avg16 reading"),
 )
 
 EXEMPT_DIRS = ("notes",)
