@@ -53,6 +53,11 @@ manuscript values (e.g. `python ds_cell.py`, `python kinetic.py`).
   regenerative gain (+9.7 dB). The cavity ring-down (~4–5 ps) is comparable to
   the 4 ps slot, so data-pattern ISI is controlled by the architecture's
   per-slot bias gating / re-sync flushing, not assumed away.
+- **Energy per addition.** `results.json:energy_per_add_fJ` is the fabric-side
+  figure only: drive dissipation over the biased cells at the operating point,
+  excluding the photonic clock chain, the read-out electronics and any charge-memory
+  refresh. It assumes the `thermal.py` stack model (steady state, `constants.R_th`,
+  fill factor as given) — not a transient or packaged-device thermal budget.
 - **Yield criterion** (`disorder.py`) ties cell yield to the k≥8 sharpness rule:
   a puddle of rms σ broadens the threshold to √((n/k₀)²+σ²); the cell yields if
   the broadened sharpness clears the regeneration floor.
