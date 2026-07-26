@@ -30,10 +30,16 @@ Two more curves bound the design space:
     launch noise does not cool away. Quantum operation requires a quiet
     (near-shot-noise) launch; this is the extension's sharpest new hardware
     requirement.
-  * 16-slot averaging: the wave-pipelined fabric can spend throughput
-    (16 slots at 0.25 THz = 64 ps per MAC, still 1.6e10 MAC/s) by
-    accumulating slots in the charge-memory layer. Per-slot noise averages
-    as 1/16; the static threshold band does not (qmac.decision_variance).
+  * 16-slot averaging: IDEAL-PER-SLOT-SAMPLER bookkeeping, not a physical
+    accumulator (16 slots at 0.25 THz = 64 ps per MAC). Per-slot noise
+    averages as 1/16 and the static threshold band does not
+    (qmac.decision_variance) -- but the charge-memory reading that once
+    justified dividing the amplifier noise was retired by Part II v1.7
+    revision item 1 (undivided V_amp gives ~5.6e-2 at 300 K, a 2.5x gain,
+    not five decades), and no physical topology reproduces the column:
+    notes/2026-07-16-no-physical-avg16-accumulator.md. The 0.25 THz slot
+    rate is the design baseline; F = 2 logic at a 4-ps slot is retired
+    (notes/2026-07-23-reset-switch-adjudication.md).
 
 Temperature structure: T_Q = hbar w0/kB = 48 K is where the noise DENSITY
 crosses from thermal- to vacuum-dominated (nbar = 0.58 there); the error
