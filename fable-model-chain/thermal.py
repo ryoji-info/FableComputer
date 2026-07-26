@@ -3,6 +3,10 @@
 
 Joule dissipation density P = n m* v0^2 / tau (W/m^2 sheet), spread through an
 effective stack resistance R_th to a temperature rise dT = q_areal * R_th, with
+R_th taken from constants.py as a lumped literature-scale value for the assumed
+hBN/graphene/substrate stack (a design assumption, not a measured device number:
+it sets the absolute margin in Part I Section 8.2 and should be replaced by a
+packaged-device measurement before any thermal claim leaves in-model status),
 q_areal = P * fill. The high-density corner (n=1e13, drift at v_sat) is the
 brute-force no-go; the operating point (n=1e12, v0=2.4e5) closes the 55 K budget
 with margin at fill 1/3.
