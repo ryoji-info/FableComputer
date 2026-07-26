@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """Runnable listing for the repository improvement ledger (Fable session 2026-07-26 (III)).
 
-Reproduces every claim the ledger labels *demonstrated*, and ends with a mechanical
-defect-signature sweep whose output IS the ledger's completeness evidence.
+Reproduces every claim the note labels *demonstrated*. Paired with ledger_sweep.py
+(Artifact 2), which carries the defect-signature completeness sweep.
 
     cd <repo root> && PYTHONIOENCODING=utf-8 python ledger_listing.py
 
@@ -82,62 +82,4 @@ try:
             print(f"    {p!r:40s} raw={len(re.findall(re.escape(p), raw, re.I)):2d} normalized={len(re.findall(re.escape(p), nrm, re.I)):2d}")
 except ImportError:
     print("  (pypdf missing - skipped)")
-
-# 9 - DEFECT-SIGNATURE SWEEP: the ledger's completeness evidence
-H(9, "defect-signature sweep over every tracked .md and .py")
-SIGS = {
-    "intracavity":            r"intracavity",
-    "charge-memory reading":  r"charge[- ]memory|averages as 1/",
-    "'five decades'":         r"five decades",
-    "M_th -> analytic":       r"analytic as .x|. analytic as",
-    "unqualified knee/rail":  r"38 (?:plasmons|quanta|intracavity)|1[- ]dB (?:compression )?knee|1 dB at .?.?1 ?%|3,?8[03]0",
-    "0.25 THz F=2 slot rate": r"4-p(?:ico)?second slot|4-ps slot|2\.5.10.. additions|per 4-ps",
-    "phantom 2nd-order":      r"MacCormack",
-    "stale erratum / version": r"One known erratum|v5\.5|v1\.6",
-}
-DISPOSED = {  # (file-substring, signature) -> ledger entry that owns it, most specific first
-    ("qmac.py", "intracavity"): "IMP-007", ("make_manuscript.py", "intracavity"): "IMP-007",
-    ("regen.py", "intracavity"): "clean (solver cav observable)",
-    ("fable-model-chain/solver.py", "intracavity"): "clean (solver cav observable)",
-    ("fable-model-chain/figures.py", "intracavity"): "clean (axis label)",
-    ("qmac.py", "charge-memory reading"): "IMP-060",
-    ("make_manuscript.py", "charge-memory reading"): "IMP-064",
-    ("qerrors.py", "charge-memory reading"): "IMP-065",
-    ("fable-model-quantum/README.md", "charge-memory reading"): "IMP-005",
-    ("make_manuscript.py", "'five decades'"): "IMP-064",
-    ("fable-model-chain/README.md", "M_th -> analytic"): "IMP-059",
-    ("ROADMAP.md", "M_th -> analytic"): "IMP-059 (2nd target)",
-    ("agents/personas", "unqualified knee/rail"): "IMP-067",
-    ("agents/personas", "0.25 THz F=2 slot rate"): "IMP-067",
-    ("fable-model-quantum/README.md", "unqualified knee/rail"): "IMP-007",
-    ("fable-model-quantum/figures.py", "unqualified knee/rail"): "IMP-007",
-    ("make_manuscript.py", "unqualified knee/rail"): "IMP-007",
-    ("qmac.py", "unqualified knee/rail"): "IMP-007",
-    ("qmode.py", "unqualified knee/rail"): "IMP-007",
-    ("cell.py", "unqualified knee/rail"): "IMP-007",
-    ("fable-model-chain/README.md", "unqualified knee/rail"): "IMP-063",
-    ("README.md", "unqualified knee/rail"): "IMP-062",
-    ("make_manuscript.py", "0.25 THz F=2 slot rate"): "IMP-068 (generator of Part II 5)",
-    ("README.md", "0.25 THz F=2 slot rate"): "IMP-057",
-    ("solver.py", "phantom 2nd-order"): "IMP-015",
-    ("README.md", "stale erratum / version"): "IMP-041 / IMP-058",
-    ("CITATION.cff", "stale erratum / version"): "IMP-040",
-    ("agents/README.md", "stale erratum / version"): "IMP-041",
-}
-SKIP = ("notes/", ".git", "__pycache__", "ledger_listing.py", "agents/prompts/")
-undisposed = 0
-for f in sorted(pathlib.Path(".").rglob("*")):
-    p = f.as_posix()
-    if f.suffix not in (".md", ".py", ".cff") or any(s in p for s in SKIP) or not f.is_file():
-        continue
-    lines = R(p).split("\n")
-    for name, rx in SIGS.items():
-        for i, l in enumerate(lines, 1):
-            if re.search(rx, l, re.I):
-                cands = [k for k in DISPOSED if k[0] in p and k[1] == name]
-                key = max(cands, key=lambda k: len(k[0])) if cands else None
-                d = DISPOSED[key] if key else "*** UNDISPOSED ***"
-                if not key: undisposed += 1
-                print(f"  {p}:{i:<4} [{name}] -> {d}")
-print(f"  undisposed hits: {undisposed}   (every hit must map to an entry or a stated 'clean' reason)")
-print("\ndone.")
+print("\n(The defect-signature sweep lives in ledger_sweep.py - Artifact 2.)")
