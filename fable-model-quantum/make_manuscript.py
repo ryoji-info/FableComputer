@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 """SUPERSEDED ARTIFACT -- does NOT reproduce the shipped Part II manuscript.
 
-This script built Part II **v1.0**. The manuscript in papers/ is now **v1.7**,
-seven community revisions later, and this file carries none of them: it has no
+This script built Part II **v1.0**. The manuscript in papers/ is now **v2.0**
+(see papers/REVISION-HISTORY.md), many community revisions later, and this file
+carries none of them: it has no
 revision-notes blocks, no occurrence of v1.5/v1.6/v1.7, still calls itself a
 companion to Part I "Revision v5", and writes ../Fable-Computer-PartII-v1.docx
 to the repository root rather than into papers/. Its git history is a single
