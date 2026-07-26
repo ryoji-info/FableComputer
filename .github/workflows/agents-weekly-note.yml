@@ -5,7 +5,8 @@ name: Agent Lab — weekly note draft and vote
 # maintainer, following the same personas, prompts, and 2-of-3 vote rules —
 # see agents/README.md, "Operations". Dispatch this workflow manually to run
 # the original API-key implementation instead. No cron — and, since
-# 2026-07-27, no cron on any Agent Lab pipeline: nothing runs automatically.
+# 2026-07-27, no cron on any Agent Lab pipeline: no agent run starts
+# automatically.
 
 on:
   workflow_dispatch:
