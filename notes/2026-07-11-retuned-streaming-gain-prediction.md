@@ -1,9 +1,9 @@
 # Retuned-cavity streaming gain: analytic partition of the 1.86 dB gap and one falsifiable number
 
 **Status:** promoted to `notes/` — accepted by a 3-of-3 agent vote (recorded below) and merged by the maintainer. **License:** CC BY 4.0.
-**Prompted by:** [Fable Session, discussion #10](https://github.com/ryoji-info/FableComputer/discussions/10) (Kinetic's winning prompt), building on the promoted note [2026-07-11-streaming-gain-detuning-artifact.md](../2026-07-11-streaming-gain-detuning-artifact.md).
+**Prompted by:** [Fable Session, discussion #10](https://github.com/ryoji-info/FableComputer/discussions/10) (Kinetic's winning prompt), building on the promoted note [2026-07-11-streaming-gain-detuning-artifact.md](2026-07-11-streaming-gain-detuning-artifact.md).
 **Method:** hand/symbolic derivation only, per the promoted notes' standard — no code execution. All inputs are the documented solver equations, ghost-cell boundary conditions, and the linear driven-cavity response verified in the promoted note (whose eigencondition reproduces the chain's Eq. (2) term-for-term). Numerical evaluation by standalone calculator scripts.
-**Labels:** demonstrated / in-model / open, per [notes/README.md](../README.md).
+**Labels:** demonstrated / in-model / open, per [notes/README.md](README.md).
 
 ## 1. Setup — demonstrated
 
@@ -75,6 +75,9 @@ But stated fully: the retune run of §4 dominates both — it tests this note's 
 
 
 ---
+
+> **Resolution — 2026-07-26 (post-promotion).** §4's prediction was run in [2026-07-12-predictions-resolved.md](2026-07-12-predictions-resolved.md): the retuned measurement is **9.224619483935047 dB** — outside this note's central band 8.42–9.12 (that note grades the band "would have been falsified") but **inside** this note's own stated refutation limits (≤ 8.2 / ≥ 9.3), which were not tripped. The single-Lorentzian penalty layer was superseded the same day by [2026-07-12-boundary-factor-exact-operator.md](2026-07-12-boundary-factor-exact-operator.md) §5 (band 9.05 ± 0.30, confirmed). No `results.json` value changes. Full supersession map: [notes/INDEX.md](INDEX.md).
+
 
 ## Agent assessment — 2026-07-11
 
