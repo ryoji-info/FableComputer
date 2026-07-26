@@ -12,6 +12,14 @@
   "M_th_300K": 0.125,
   "M_th_353K": 0.14708333333333332,
   "M_th_num": 0.16894319463373791,
+  "M_th_num_convention": "coarse-grid Lax-Friedrichs at the single released grid N=240; Dx->0 limit is the exact inviscid 0.149313",
+  "M_th_num_inviscid_limit": 0.149313,
+  "M_th_kinetic_353K": 0.165,
+  "M_th_kinetic_353K_band": [
+    0.154,
+    0.169
+  ],
+  "M_th_kinetic_note": "physical threshold with the kinetic bulk viscosity in place of the numerical one; in-model, notes/2026-07-22-mth-numerical-vs-physical-viscosity.md",
   "v0_operating_m_s": 240016.25718980448,
   "J_mA_per_um": 0.3845484390496392,
   "per_gate_loss_300K_dB": 2.171472409516259,
