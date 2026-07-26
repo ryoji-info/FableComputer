@@ -12,8 +12,8 @@ commit (the initial import) against eleven touching papers/.
     DO NOT RUN THIS TO REGENERATE THE MANUSCRIPT.
 
 Running it would emit a v1.0-era document and discard seven revisions of the
-record. papers/ is hand-maintained; corrections the record has adopted but the
-deposited text does not yet carry are listed in papers/ERRATA.md.
+record. papers/ is hand-maintained; the deposited manuscripts and the repository
+copies are the same text (see papers/REVISION-HISTORY.md for versions and DOIs).
 
 Retained as a historical artifact: it documents how the v1.0 text was derived
 from results.json, and its formatting helpers are still a useful reference.
