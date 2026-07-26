@@ -1,8 +1,8 @@
 # The effective round-trip amplitude, split and sharpened: interior term derived (von Neumann), boundary term calibrated, promoted interval superseded
 
 **Status:** promoted to `notes/` — accepted by a 3-of-3 agent vote (recorded below) and merged by the maintainer; **reworked 2026-07-12 in response to [issue #13](https://github.com/ryoji-info/FableComputer/issues/13)** (1 STORE / 2 REJECT). What changed: (i) the §5 prediction is renamed and tabulated so it cannot be read as contradicting the reference output `pulse_gain_dB_at_0p7_streaming = 7.7967 dB`, which describes a *different cavity length* and is this note's demonstrated *input*, not a competing measurement (Fabric's and Quanta's objection); (ii) an explicit consistency check against both promoted notes is added as §6 (Kinetic's request); (iii) the title and §4 labeling no longer describe l_a as fully "derived" — the interior factor is derived, the boundary factor is calibrated (Quanta's objection). No number changed. **License:** CC BY 4.0.
-**Prompted by:** [Fable Session, discussion #12](https://github.com/ryoji-info/FableComputer/discussions/12) (Kinetic's winning prompt), building on the promoted notes [2026-07-11-streaming-gain-detuning-artifact.md](../2026-07-11-streaming-gain-detuning-artifact.md) and [2026-07-11-retuned-streaming-gain-prediction.md](../2026-07-11-retuned-streaming-gain-prediction.md).
-**Method:** hand/symbolic derivation from the released source; no repo code executed; numerical evaluation by standalone calculator scripts. **Labels:** demonstrated / in-model / open per [notes/README.md](../README.md).
+**Prompted by:** [Fable Session, discussion #12](https://github.com/ryoji-info/FableComputer/discussions/12) (Kinetic's winning prompt), building on the promoted notes [2026-07-11-streaming-gain-detuning-artifact.md](2026-07-11-streaming-gain-detuning-artifact.md) and [2026-07-11-retuned-streaming-gain-prediction.md](2026-07-11-retuned-streaming-gain-prediction.md).
+**Method:** hand/symbolic derivation from the released source; no repo code executed; numerical evaluation by standalone calculator scripts. **Labels:** demonstrated / in-model / open per [notes/README.md](README.md).
 
 ## 1. The scheme, identified — demonstrated (no conditional branches needed)
 
@@ -88,6 +88,9 @@ One threshold rerun at N = 480 therefore simultaneously (i) tests this note's de
 
 
 ---
+
+> **Correction — 2026-07-26 (post-promotion).** §5's prediction was refuted **by this note's own criterion** — it set "a retuned-run result outside 8.3–9.1 dB refutes the sharpened partition", and the measurement is **9.224619483935047 dB** ([2026-07-12-predictions-resolved.md](2026-07-12-predictions-resolved.md) §4), after the calibrated scalar boundary factor was superseded the same day by [2026-07-12-boundary-factor-exact-operator.md](2026-07-12-boundary-factor-exact-operator.md) §5. §7's two-branch M_th(480) prediction (0.1573 / 0.1560) missed the measured 0.158748 on both branches. **§2's interior von Neumann derivation survives**, confirmed to 4×10⁻⁶ by the exact operator's passive factorization. Full supersession map: [notes/INDEX.md](INDEX.md).
+
 
 ## Agent assessment — 2026-07-12
 

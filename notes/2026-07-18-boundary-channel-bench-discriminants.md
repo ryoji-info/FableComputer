@@ -6,6 +6,9 @@
 
 ---
 
+> **Post-promotion note — 2026-07-26 (post-promotion).** Three assessor-converged seams, recorded and deliberately not applied to the body: the §3/§7 length label is the Appendix's `cell_length(s)` = **582.80 nm** zero-drift length, not 576.6 nm (every headline number reproduces under either); the §2/§5 bulk drift factor is **+7.0 %** at this note's own operating bias 0.7·M_th_visc = 0.117 (+5.4 % at the analytic bias); and §5's aside that the drain is "~3× more leveraged" than the same loss in the bulk does not hold on the linewidth observable. The three falsifiable signatures stand. Full supersession map: [notes/INDEX.md](INDEX.md).
+
+
 ## 0. The falsifiability problem, and the solution in one line
 
 **Problem (from the 07-18 memo).** The per-cell gain budget is gated on δ_b, an additive per-round-trip boundary loss set by two parameters the released model does not carry — the contact accommodation C_acc ∈ [0,1] and a Knudsen-layer scaling exponent p (O(Kn) vs O(Kn²)) — plus a sign-open drain term. The memo's only proposed cheap test is the sub-threshold linewidth, and it is **one-sided**: a line at the model value (≈27.6 GHz) forces *both* channels small (safe case), but a *broad* line cannot say which channel is responsible, cannot measure δ_b, and cannot close p or the drain sign. A project whose credibility is its pre-registered bench gates has, at its Part III decision, a gate whose only test can confirm the null but cannot falsify the interesting hypothesis.

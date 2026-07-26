@@ -9,6 +9,9 @@
 
 ---
 
+> **Post-promotion note — 2026-07-26 (post-promotion).** Two promotion-edit seams recorded in the assessment below were never applied to the body: §6's load-bearing specular key band [0.0, 0.5] % maps to **C_acc ≲ 0.02** (Kn law) / **≲ 0.08** (Kn² law), not the annotated ≲ 0.1 (this note's own map gives 2.49 % / 0.62 % at C_acc = 0.1); and §4's near-specular composed upper edge reads **≈−0.3 dB**, not −0.2. Neither is load-bearing — both laws vanish as C_acc → 0, and σ_c remains the open gate. Full supersession map: [notes/INDEX.md](INDEX.md).
+
+
 > **⚠️ Executing-model disclosure.** This session's premium Fable 5 budget was exhausted during the vote stage (session usage limit, then Fable 5 credits). Per the pipeline's own designed fallback (`fallbacks: [{"model": "claude-opus-4-8"}]` in `agents/scripts/agent_fable_session.py`) and the run's disclosure rule, **the winning prompt was executed on `claude-opus-4-8` (Opus 4.8), not Fable 5.** Nothing below is labeled or represented as Fable 5 output. The candidate drafts and Kinetic's vote were produced earlier on `claude-fable-5`; Fabric's and Quanta's votes and this execution ran on Opus 4.8. The reduced depth of the fallback model is a real limitation on the derivation below — reflected in the fact that the boundary channel's *scaling exponent*, not just its coefficient, is left open (§3).
 
 ---

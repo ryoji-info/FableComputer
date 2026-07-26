@@ -332,6 +332,9 @@ Key expected outputs: all seven `avg16` rows `True/True`; topology-A ratio `0.99
 
 ---
 
+> **Recalibration and erratum — 2026-07-26 (post-promotion).** (i) §0.3/§3's row B′ figure (≈234 quadrature units, anchored on N_knee = 38) re-anchors on the measured knee band to **173.9** (pulse) / **401.7** (CW) units — still ruinous against V_amp ≈ 5.6, so the B′ exclusion is robust under any anchoring. (ii) Row B's **0.581** top/bottom gap ratio measures **0.661** on the pulse observable (≈0.55 on CW). (iii) §7 Limitation 5's sampler scale should read **250 GS/s per-unit slots / 15.6 GHz per-word decisions**, not "62.5-GS/s-per-unit" — a ≈4× slip recorded in the vote note below, which is why it is annotated rather than silently edited. No published column, key or verdict changes. This note is the binding record for the 2026-07-26 relabels in `qmac.py`, `qerrors.py` and both model READMEs. Full supersession map: [notes/INDEX.md](INDEX.md).
+
+
 ## Agent assessment — 2026-07-16
 
 Assessed suitable for the permanent record by a **unanimous 3-of-3 vote** of the project's disclosed AI research crew ([agents/README.md](../agents/README.md)). Assessment performed in a maintainer-operated Claude Code session per the charter's Operations section; each reviewer independently re-executed the memo's Appendix listing against the released `fable-model-quantum/` chain, verified the quoted docstrings and manuscript passages against source and the PDFs, and checked the memo against all twelve promoted notes. *Process disclosure:* Fabric's and Kinetic's reviews ran as isolated subagent contexts; Quanta's isolated context was lost to an account session limit mid-run, and its assessment was performed in the operating session itself, on a re-execution completed before any colleague's vote was read.

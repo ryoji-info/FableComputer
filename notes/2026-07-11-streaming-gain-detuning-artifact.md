@@ -2,16 +2,16 @@
 
 **Status:** promoted to `notes/` — accepted by a 3-of-3 agent vote (recorded below) and merged by the maintainer. **License:** CC BY 4.0.
 **Prompted by:** [GitHub discussion #4](https://github.com/ryoji-info/FableComputer/discussions/4).
-**Method:** as in the promoted note [2026-07-10-cw-pulse-gap-and-nf-agreement.md](../2026-07-10-cw-pulse-gap-and-nf-agreement.md) — no model code executed; all values re-derived by hand from the documented equations and evaluated with standalone calculator scripts; code facts verified by line inspection; the new physics claim was adversarially cross-checked, including an exact driven boundary-value solve of the linearized shallow-water system with the solver's own ghost-cell boundary conditions.
-**Labels:** demonstrated / in-model / open, per [notes/README.md](../README.md).
+**Method:** as in the promoted note [2026-07-10-cw-pulse-gap-and-nf-agreement.md](2026-07-10-cw-pulse-gap-and-nf-agreement.md) — no model code executed; all values re-derived by hand from the documented equations and evaluated with standalone calculator scripts; code facts verified by line inspection; the new physics claim was adversarially cross-checked, including an exact driven boundary-value solve of the linearized shallow-water system with the solver's own ghost-cell boundary conditions.
+**Labels:** demonstrated / in-model / open, per [notes/README.md](README.md).
 
 ## 1. The finding — demonstrated (code fact) + in-model (magnitude)
 
-`solver._setup` builds its cavity with `L = cell_length(s)` — default **M = 0**, i.e. the zero-drift quarter-wave length 582.80 nm — and drives at carrier `f0_n = f0·L/s = 0.25` exactly ([solver.py:31–33](../../fable-model-chain/solver.py)). But `results.json` separately exports `cell_length_operating_nm` = **576.62 nm** = 582.80·(1−M²): the design retunes the cell so that *at operating drift* it resonates at f₀ (Eq. 4, [ds_cell.py:19–21](../../fable-model-chain/ds_cell.py)). The streaming run never uses that length.
+`solver._setup` builds its cavity with `L = cell_length(s)` — default **M = 0**, i.e. the zero-drift quarter-wave length 582.80 nm — and drives at carrier `f0_n = f0·L/s = 0.25` exactly ([solver.py:31–33](../fable-model-chain/solver.py)). But `results.json` separately exports `cell_length_operating_nm` = **576.62 nm** = 582.80·(1−M²): the design retunes the cell so that *at operating drift* it resonates at f₀ (Eq. 4, [ds_cell.py:19–21](../fable-model-chain/ds_cell.py)). The streaming run never uses that length.
 
 Linearizing the solver's own equations about (h=1, u=M): perturbations propagate at 1±M, so the round trip is 2/(1−M²), not 2, and the fixed-length cavity's resonance sits at f_res = (1−M²)/4. An exact eigencondition derived with the solver's DS boundary conditions (source density-clamped, drain current-clamped) reproduces the repo's own Eq.-2 increment term-for-term and gives the same resonance — the repo's analytics endorse this shift; Eq. (4) *is* this shift, solved for L instead of f.
 
-At the streaming run's bias M = 0.7·M_th,num = 0.11826, the drive at 0.25 is therefore detuned by Δf = 0.25·M² ≈ 0.0035 (phase mismatch θ = π·M²/(1−M²) = 0.0446 rad per round trip). The analytic CW figure (+9.661 dB) assumes on-resonance recirculation (`rt = 2.0` fixed, "copies add in phase", [regen.py](../../fable-model-chain/regen.py)); the passive reference run (M = 10⁻⁹) is essentially on-resonance. So the detuning penalizes **only the active streaming run**:
+At the streaming run's bias M = 0.7·M_th,num = 0.11826, the drive at 0.25 is therefore detuned by Δf = 0.25·M² ≈ 0.0035 (phase mismatch θ = π·M²/(1−M²) = 0.0446 rad per round trip). The analytic CW figure (+9.661 dB) assumes on-resonance recirculation (`rt = 2.0` fixed, "copies add in phase", [regen.py](../fable-model-chain/regen.py)); the passive reference run (M = 10⁻⁹) is essentially on-resonance. So the detuning penalizes **only the active streaming run**:
 
 > penalty = 10·log₁₀[((1−l)² + 2l(1−cos θ)) / (1−l)²], with l the effective round-trip amplitude.
 

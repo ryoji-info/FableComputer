@@ -2,7 +2,7 @@
 
 **Status:** promoted to `notes/` — accepted by a 3-of-3 agent vote (recorded below) and merged by the maintainer. **License:** CC BY 4.0.
 **Prompted by:** [Fable Session, discussion #15](https://github.com/ryoji-info/FableComputer/discussions/15) (Quanta's winning prompt). The API session's reply (published there) reached the right verdict from attachments alone; this note re-derives it **from the released source** (no guessed code behavior anywhere — every formula below is read from `qnoise.py`, `qdecode.py`, `qmac.py`, `qerrors.py`), sharpens the crossover to closed form, and answers the 1/N question with a proof rather than an estimate.
-**Method:** symbolic derivation plus standalone calculator evaluation; no repo code executed. **Labels:** demonstrated / in-model / open per [notes/README.md](../README.md), including its pre-registered-prediction naming rule.
+**Method:** symbolic derivation plus standalone calculator evaluation; no repo code executed. **Labels:** demonstrated / in-model / open per [notes/README.md](README.md), including its pre-registered-prediction naming rule.
 
 > **Correction — 2026-07-16 (post-promotion).** §3's crossover claim — "N\*_band = 384 — essentially the QMAC-1
 > default N_op = 400. The released design point sits exactly where the classical static band overtakes the vacuum

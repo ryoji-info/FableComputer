@@ -7,6 +7,9 @@
 
 ---
 
+> **Post-promotion note — 2026-07-26 (post-promotion).** The signed band stands and is folded into Part I. Two housekeeping items the assessors recorded: the Torre et al. reference (PRB **99**, 144307 (2019)) remains **memory-sourced** — this note's own Limitation 8 flagged it, and the band itself is derived from the chain's own ν₀ and is exact at both endpoints, so the number does not depend on the locator; and the band-edge rounding (−1.146 × 1.25 = −1.43 → quoted −1.5) is outward/conservative. Status tracked in [notes/CITATIONS.md](CITATIONS.md). Full supersession map: [notes/INDEX.md](INDEX.md).
+
+
 ## 0. Verdict
 
 Part I §7.5 assigns an unsigned "tens-of-percent" kinetic uncertainty on the gain to the Boltzmann–Maxwell tier (WP2). This note converts it into a **signed, banded estimate**:

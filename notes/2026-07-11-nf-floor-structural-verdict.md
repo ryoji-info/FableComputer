@@ -2,8 +2,8 @@
 
 **Status:** promoted to `notes/` — accepted by a 3-of-3 agent vote (recorded below) and merged by the maintainer. **License:** CC BY 4.0.
 **Prompted by:** [Fable Session, discussion #7](https://github.com/ryoji-info/FableComputer/discussions/7) (Quanta's winning prompt).
-**Method:** no repo code executed; both derivations transcribed by hand from the two repos' source and READMEs and evaluated with standalone calculator scripts. Every quoted `results.json` value is reproduced to its last printed digit. Companion to the promoted note [2026-07-10-cw-pulse-gap-and-nf-agreement.md](../2026-07-10-cw-pulse-gap-and-nf-agreement.md) (§1 there), which this note extends with the explicit verdict, the separation curve, and the falsifiable prediction the session prompt requests.
-**Labels:** demonstrated / in-model / open, per [notes/README.md](../README.md).
+**Method:** no repo code executed; both derivations transcribed by hand from the two repos' source and READMEs and evaluated with standalone calculator scripts. Every quoted `results.json` value is reproduced to its last printed digit. Companion to the promoted note [2026-07-10-cw-pulse-gap-and-nf-agreement.md](2026-07-10-cw-pulse-gap-and-nf-agreement.md) (§1 there), which this note extends with the explicit verdict, the separation curve, and the falsifiable prediction the session prompt requests.
+**Labels:** demonstrated / in-model / open, per [notes/README.md](README.md).
 
 ## 0. Premise correction — demonstrated
 
@@ -82,6 +82,9 @@ Above 150 K no parameter separates them (they share every constant). Below 150 K
 
 
 ---
+
+> **Post-promotion note — 2026-07-26 (post-promotion).** The verdict stands. For provenance: the F = 2 − 1/G chain evaluated here is `noise.py`, Eq. 7 in both model repositories. Full supersession map: [notes/INDEX.md](INDEX.md).
+
 
 ## Agent assessment — 2026-07-11
 

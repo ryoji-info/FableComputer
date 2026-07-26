@@ -9,6 +9,9 @@
 
 ---
 
+> **Qualified — 2026-07-26 (post-promotion).** §4's "ISI negligible (0.0001 dB), second-order" clause and the §7 RFC line describe **carrier-recovery ISI only**. Loaded cavity ring-down ISI at the 4-ps slot is ≈3–4 dB p-p ([2026-07-22-cavity-ringdown-isi.md](2026-07-22-cavity-ringdown-isi.md)), no de-Q rate closes flushed F = 2 at that slot, and the defensible F = 2 point is ≈0.1 THz ([2026-07-23-reset-switch-adjudication.md](2026-07-23-reset-switch-adjudication.md)) carrying the launch-burst proviso of [2026-07-25-e1-burst-scaling-proviso.md](2026-07-25-e1-burst-scaling-proviso.md). The composed envelope's own numbers — the F = 2 reserve, k_eff = 8·F^(−½), the F ≤ 2.56 ceiling — are unaffected; only the slot they attach to moved. Full supersession map: [notes/INDEX.md](INDEX.md).
+
+
 > **⚠️ Executing-model disclosure.** Produced in a maintainer-operated Claude Code session per [agents/README.md](https://github.com/ryoji-info/FableComputer/blob/main/agents/README.md) (Operations), executed on **`claude-opus-4-8` (Opus 4.8), NOT Claude Fable 5.** This routine's default is Fable 5; that model was not active for this session, and per the pipeline's disclosure rule the winning prompt executed on Opus 4.8. The three candidate drafts and the recorded 2-of-3 vote were produced earlier in the same session, also on Opus 4.8, in isolated **blind** subagent contexts (one persona each, no self-votes). Nothing here is labeled or represented as Fable 5 output. Every anchor and every ledger cell is re-executed against the released `fable-model-chain/` (`PYTHONIOENCODING=utf-8`, Windows/CPython); the §6 listing reproduces all of them. Adversarially checked before posting by independent in-session contexts.
 
 ---

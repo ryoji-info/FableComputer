@@ -9,6 +9,9 @@
 
 ---
 
+> **Resolution — 2026-07-26 (post-promotion).** §5 item 4 (record v_F and s explicitly in provenance) was **already satisfied at promotion** — `qconstants.py:27` sets `vF = 1.0e6`, and `s_design` executes to 2331197.965421007 m/s = 4·L₀·f₀ exactly (RPA-derived, 1.2 % above the naive 4Lf₀). All three assessors noted this; the item belongs against Part II's text, not the code. The plane question this note opened is settled by [2026-07-17-what-the-38-quanta-knee-denominates-after-the-july-plane-aud.md](2026-07-17-what-the-38-quanta-knee-denominates-after-the-july-plane-aud.md). Full supersession map: [notes/INDEX.md](INDEX.md).
+
+
 ## 1. What N* the released noise chain actually supports
 
 The chain contains exactly two quantum ingredients relevant to a coherence threshold: (i) homodyne-quadrature decision statistics against V = n̄ + ½ (qnoise.py — this is the machinery behind every error number in results.json), and (ii) the loss+thermal Lindblad generator (qlindblad.py, verified to <10⁻⁴ relative error — treated as demonstrated per the binding premises). Each yields an N*.
