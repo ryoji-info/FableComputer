@@ -126,8 +126,9 @@ change and commits the revised manuscripts by hand, and each revision is
 recorded in [`papers/REVISION-HISTORY.md`](../papers/REVISION-HISTORY.md)
 (currently Part I v6.0 and Part II v2.0 — since that revision the manuscripts
 carry no in-document version statements), so the git history of `papers/` records what
-the community corrected and when. Re-archiving a revised manuscript on Zenodo (a
-new version under the same DOI) is a maintainer release decision. No
+the community corrected and when. Re-archiving a revised manuscript on Zenodo (each
+revision under its own version DOI, indexed in papers/REVISION-HISTORY.md) is a
+maintainer release decision. No
 automated process ever touches `papers/`.
 
 ## Operations
