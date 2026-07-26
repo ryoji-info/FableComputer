@@ -69,6 +69,9 @@ print("  steppers present:", [n for n in dir(solver) if "step" in n.lower()])
 
 # 8 - what the manuscripts do and do not cite (whitespace-normalized)
 H(8, "manuscript greps, raw vs normalized")
+print("  NOTE: the promoted 2026-07-26 note measured these against Part I v5.6 / Part II v1.7,")
+print("  where every count below was 0. Non-zero counts today are the v6.0/v2.0 corrections")
+print("  landing (the timing thread is now cited), not a failed reproduction.")
 try:
     from pypdf import PdfReader
     for path, pats in (("papers/Fable-Computer-Part-I.pdf",
@@ -77,7 +80,10 @@ try:
                         ["flush", "ring-down", "ringdown", "reset", "one MAC per 4-ps slot"])):
         raw = "\n".join((p.extract_text() or "") for p in PdfReader(path).pages)
         nrm = re.sub(r"\s+", " ", re.sub(r"-\s*\n\s*", "", raw))
-        print(f"  {path}  (revision: {re.search(r'Revision v[0-9.]+', nrm).group(0)})")
+        m = re.search(r'Revision v[0-9.]+', nrm)
+        # since the v6.0/v2.0 revision the manuscripts carry no version statement;
+        # versions live in papers/REVISION-HISTORY.md
+        print(f"  {path}  ({m.group(0) if m else 'no in-document version statement (v6.0/v2.0 convention)'})")
         for p in pats:
             print(f"    {p!r:40s} raw={len(re.findall(re.escape(p), raw, re.I)):2d} normalized={len(re.findall(re.escape(p), nrm, re.I)):2d}")
 except ImportError:
