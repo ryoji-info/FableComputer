@@ -25,6 +25,11 @@ to break.
   sensitivity (`disorder.py`).
 - Junction-loss sensitivity: elevate the −1 dB vs −3 dB junction band from a
   results.json side-entry to a first-class reported band (both parts).
+- The record-audit artifacts `ledger_listing.py` (numeric claims) and
+  `ledger_sweep.py` (defect-signature sweep, must report `UNDISPOSED HITS: 0`)
+  run in CI on every PR, together with `tests/` pinning the published
+  `results.json` keys — the standing WP1 deliverable, now delivered for the
+  audit surface and extendable to the rest.
 - Independent ports (Julia, Rust, JAX) as living cross-checks; CI that runs
   every self-check on every PR.
 
@@ -59,6 +64,38 @@ two room-temperature plasmonic gain cells.
   fully specified, falsifiable, pre-registered experiment.
 - Per the [Charter](CHARTER.md) §5: experiments run inside host labs' own
   safety regimes under written agreement.
+- Open a "measurement wanted" issue distilling the three sub-threshold
+  linewidth signatures of
+  [notes/2026-07-18-boundary-channel-bench-discriminants.md](notes/2026-07-18-boundary-channel-bench-discriminants.md)
+  — near-model linewidth ≈27.6 GHz, a temperature sweep for the Knudsen
+  exponent *p*, and a drift sweep for the drain sign — into a one-page
+  protocol. Part I §10 already assigns those tests to WP1/WP4.
+
+### WP6 — Part III scoping (`open`)
+
+Part III is the architecture chapter. The record already fixes several of its
+inputs, and this work package is scoping only — no new physics:
+
+- **The operating point is a stretched slot.** F = 2 logic does not close at a
+  4-ps slot at any de-Q rate; the defensible in-model headline is ≈0.1 THz,
+  across three closing configurations (E1 no flush, 79–92 GHz; E2 passive
+  guard, 98–128 GHz; E3 active de-Q, 100–148 GHz, worth ≈+10 % over E2 and 0 %
+  at its 81 GHz demonstrated-calibrated corner) —
+  [notes/2026-07-23-reset-switch-adjudication.md](notes/2026-07-23-reset-switch-adjudication.md).
+- **The gain leg is set by drive duration, not slot length.** The released
+  3-cycle burst falls 0.9–3.0 dB short of F = 2 at every slot; closure needs
+  ncyc ≈ 12 (7.851 dB, ≈71–91 GHz), and the launch-energy/duty-cycle cost is
+  open —
+  [notes/2026-07-25-e1-burst-scaling-proviso.md](notes/2026-07-25-e1-burst-scaling-proviso.md).
+- **Prerequisite:** `solver.run` must forward `ncyc` to `_pulse_train` before
+  E1 is expressible in the released chain at all (WP1).
+- **Sequencing gate:** the boundary channel is contact-gated on σ_c, so the
+  Part III margin chapter waits on one sub-threshold linewidth measurement
+  (WP4 above) —
+  [notes/2026-07-18-boundary-channel-contact-gated.md](notes/2026-07-18-boundary-channel-contact-gated.md).
+- **Open design choice, not a claim:** 4-ps slots as an F = 1 transport and
+  retiming layer over a ≈0.1 THz logic layer — a two-clock architecture the
+  record explicitly leaves to the crew.
 
 ### WP5 — Part II extensions (`open`)
 
