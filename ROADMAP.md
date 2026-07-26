@@ -13,9 +13,12 @@ scoped so that a person or small group could adopt it. Status values:
 The transparent model chains are the project's foundation; make them harder
 to break.
 
-- Grid-refinement study of the shallow-water solver: confirm the
-  numerically diffused threshold M_th,num → analytic as Δx → 0
-  (`fable-model-chain/solver.py`).
+- Grid-refinement study of the shallow-water solver: the numerically diffused
+  threshold M_th,num → the **exact inviscid** threshold ≈0.149313 as Δx → 0
+  (+1.52 % above the small-M analytic 0.147083), *not* the analytic value; the
+  physical kinetic threshold is 0.165 [0.154, 0.169]
+  (`fable-model-chain/solver.py`; see
+  [notes/2026-07-22-mth-numerical-vs-physical-viscosity.md](notes/2026-07-22-mth-numerical-vs-physical-viscosity.md)).
 - Absolute calibration of the per-pulse gain against the CW regenerative
   transfer (`regen.py` vs `solver.py`).
 - Tighten the disorder-yield criterion's free parameters and document their

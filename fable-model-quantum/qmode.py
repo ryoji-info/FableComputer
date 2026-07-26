@@ -14,7 +14,9 @@ classical swing follows:
     N(eps) = (eps/eps_1)^2,   eps_1 = sqrt(4 hbar w0 / (n m* s^2 A))  (Q2)
 
 Anchored to the parent chain's nonlinear solve: the 1-dB gain-compression knee
-(eps ~ 1%) sits at ~38 quanta, the hard rail (eps ~ 10%) at ~3.8e3. Logic
+(eps ~ 1% at the launch/drive plane) sits at ~38 quanta -- input-referred band
+22-51; the hard rail (eps ~ 10%) at ~3.8e3 is anchored at NEITHER plane
+(notes/2026-07-17-what-the-38-quanta-knee-denominates-after-the-july-plane-aud.md sec.4). Logic
 pulses on this fabric are MESOSCOPIC — tens to thousands of plasmons — which
 is what makes the quantum noise treatment of qnoise/qerrors quantitative
 rather than academic.
@@ -94,7 +96,7 @@ if __name__ == "__main__":
     e1 = eps_one()
     print(f"mode energy scale n m* s^2 A = {mode_energy_scale():.3e} J")
     print(f"eps_1 (one plasmon)          = {e1:.3e}  ({e1*100:.3f} % swing)")
-    print(f"N at 1-dB knee (1% swing)    = {N_of_eps(EPS_KNEE):.1f} quanta")
+    print(f"N at 1-dB knee (1% drive-plane swing) = {N_of_eps(EPS_KNEE):.1f} quanta")
     print(f"N at rail (10% swing)        = {N_of_eps(EPS_RAIL):.0f} quanta")
     print(f"pulse energy at knee         = {N_of_eps(EPS_KNEE)*C.E_quantum*1e18:.3f} aJ")
     print(f"pulse energy at rail         = {N_of_eps(EPS_RAIL)*C.E_quantum*1e18:.2f} aJ")

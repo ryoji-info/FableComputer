@@ -36,7 +36,7 @@ def fig_q1():
     A = ax[0, 0]
     A.loglog(eps * 100, [qmode.N_of_eps(e) for e in eps], "k-")
     for e, lab in ((qmode.eps_one(), "1 plasmon"),
-                   (qmode.EPS_KNEE, f"1-dB knee: {qmode.N_of_eps(0.01):.0f}"),
+                   (qmode.EPS_KNEE, f"1-dB knee (drive plane): {qmode.N_of_eps(0.01):.0f}"),
                    (qmode.EPS_RAIL, f"rail: {qmode.N_of_eps(0.1):.0f}")):
         A.axvline(e * 100, color="C3", ls=":", lw=1)
         A.annotate(lab, (e * 100, 2), rotation=90, fontsize=7.5,

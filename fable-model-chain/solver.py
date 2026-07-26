@@ -16,8 +16,8 @@ h u = u0 (AC open). Time units are L/s, so one round trip = 2, the carrier
 period is 1/(f0 L/s), and tau_n = tau s / L.
 
 Integrated with a Lax-Friedrichs flux (robust; its numerical diffusion raises the
-measured threshold above the analytic 0.146 -- reported, not tuned away) plus a
-2nd-order MacCormack option. Three experiments: free-perturbation threshold,
+measured threshold above the analytic 0.146 -- reported, not tuned away). No second-order
+(e.g. MacCormack) option is implemented -- the module exposes _step_LF only. Three experiments: free-perturbation threshold,
 CW regenerative gain, and few-cycle pulse-train gain/spread.
 """
 import numpy as np

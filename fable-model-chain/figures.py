@@ -25,6 +25,9 @@ plt.rcParams.update({"font.size": 9, "axes.titlesize": 10, "axes.grid": True,
 OUT = "figures"
 s = DS.plasmon_speed(); tauC = C.tau(C.Tcap)
 L = DS.cell_length(s); Mth = DS.M_threshold(L, s, tauC)
+# Coarse-grid Lax-Friedrichs threshold, NOT the physical one: its Dx->0 limit is
+# the exact inviscid 0.149313, and the physical kinetic threshold is
+# 0.165 [0.154, 0.169] -- notes/2026-07-22-mth-numerical-vs-physical-viscosity.md
 Mth_num = 0.169
 
 
@@ -162,7 +165,9 @@ def fig8():
     ax[1,1].plot(t, rr["cav"]/np.max(np.abs(rr["cav"])), color=ACC, lw=0.8)
     _panel(ax[1,1], "(D) 0.25-THz few-cycle pulse train through the cell (solver)")
     ax[1,1].set_xlabel("time (ps)"); ax[1,1].set_ylabel("intracavity field (norm)")
-    fig.suptitle("Figure 8 — Pass 3: regenerative operating point (M_th,num ≈ 0.17)",
+    fig.suptitle("Figure 8 — Pass 3: regenerative operating point "
+             "(coarse-grid LF M_th,num ≈ 0.169; inviscid limit ≈0.149; "
+             "physical kinetic 0.165)",
                  x=0.01, ha="left", fontsize=11, weight="bold")
     fig.tight_layout(rect=[0,0,1,0.97]); fig.savefig(f"{OUT}/fig8.png"); plt.close(fig)
 

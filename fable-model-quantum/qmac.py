@@ -21,7 +21,10 @@ Signal chain (all on the parent fabric, all co-drift routed):
 
 THE central architectural finding (computed, not assumed): a regenerative
 pre-amplifier before the ladder does NOT pay. Its linear window ends at the
-1-dB knee (~38 intracavity quanta, qmode), so amplifying first caps N_op at
+1-dB knee (~38 launch/input-referred quanta, qmode; band 22-51 across the CW
+and pulse observables -- the intracavity reading is a plane mislabel and would
+convert to ~7,200-9,000 quanta, above N_rail = 3,833; see
+notes/2026-07-17-what-the-38-quanta-knee-denominates-after-the-july-plane-aud.md), so amplifying first caps N_op at
 ~10-20 quanta where thermal noise is ruinous; passively interfering at
 N_op ~ 10^2-10^3 and letting the (nonlinear-but-thresholding) comparators do
 the gain wins at every temperature. Gain belongs AFTER the decision, exactly
@@ -62,7 +65,13 @@ def preamp_gain(T):
 
 
 def compression_gain(eps):
-    """Parent cell.py amplitude compression: 1 dB at ~1% intracavity swing."""
+    """Parent cell.py amplitude compression: 1 dB at ~1% drive-plane swing.
+
+    Plane label per
+    notes/2026-07-17-what-the-38-quanta-knee-denominates-after-the-july-plane-aud.md:
+    the measured knee is 1.15e-2 (pulse observable) / 7.6e-3 (CW), i.e. ~0.8-1.2 %
+    at the launch/drive plane -- not an intracavity swing.
+    """
     return 1.0 / math.sqrt(1.0 + (eps / 0.02) ** 2)
 
 
@@ -104,12 +113,20 @@ def levels_at_decision(T, N_op=400, w=0.5, preamp=False, launch_snr_dB=None,
 def decision_variance(states, x_range, T, n_avg=1):
     """Common decision variance: worst-case symbol variance + decoder noise.
 
-    n_avg > 1 models multi-slot accumulation in the electronic charge-memory
-    layer (parent Section 6.4): each slot is independently sampled through
-    the comparator path and the decision is taken once on the accumulated
-    mean, so per-slot noise (propagation + sampling amplifier) averages as
-    1/n while the STATIC threshold-band/drift term V_k is common to all
-    slots and does not average."""
+    n_avg > 1 is IDEAL-PER-SLOT-SAMPLER BOOKKEEPING, not a model of a physical
+    accumulator. What it computes -- (V_sig + V_amp)/n + V_static -- is the
+    noise algebra of a lossless n-slot coherent combiner, which this fabric
+    cannot build (16 slots is 60 ps of storage against tau_q ~ 1-2 ps).
+
+    The charge-memory reading this docstring used to assert was retired by
+    Part II v1.7 revision item 1: a charge-memory accumulator charges the
+    comparator's own amplifier noise ONCE, undivided (V = V_sig/16 + V_amp +
+    V_static), giving ~5.6e-2 at 300 K -- a 2.5x improvement over single-shot,
+    not five decades. No physical accumulator reproduces the published column:
+    notes/2026-07-16-no-physical-avg16-accumulator.md.
+
+    The arithmetic below is unchanged -- it reproduces a published results.json
+    column bit-for-bit and is retained as that column's definition."""
     V_sig = max(s.V for s in states.values())
     V_per_slot = V_sig + qdecode.decoder_amp_noise(T)
     return V_per_slot / n_avg + qdecode.threshold_band_variance(x_range)
