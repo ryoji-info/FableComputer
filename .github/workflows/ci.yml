@@ -1,0 +1,49 @@
+name: CI — published claims and record-audit sweep
+
+# The standing WP1 deliverable ("CI that runs every self-check on every PR",
+# ROADMAP.md) and the enforcement the record audit asks for:
+#   * tests/  pins the numbers that appear in published artifacts and the
+#     corrections promoted notes require (notes/2026-07-22-mth-numerical-vs-
+#     physical-viscosity.md asks for the M_th assertions by name);
+#   * ledger_listing.py  reproduces the audit's demonstrated claims;
+#   * ledger_sweep.py    must report UNDISPOSED HITS: 0 — every occurrence of a
+#     retired-claim signature in the tracked file set has a named owner.
+# See notes/2026-07-26-record-audit-ten-findings.md.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  claims:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pytest numpy pypdf
+
+      - name: Published claims are pinned
+        run: python -m pytest tests/ -q
+
+      - name: Audit listing reproduces
+        run: python ledger_listing.py
+
+      - name: Defect-signature sweep reports no undisposed hits
+        run: |
+          python ledger_sweep.py | tee sweep.out
+          if ! grep -q "UNDISPOSED HITS: 0" sweep.out; then
+            echo "::error::the sweep found signature hits with no owning finding."
+            echo "Either fix the defect, or add a (path, line) disposition to"
+            echo "ledger_sweep.py naming the finding that owns it."
+            grep -A100 "UNDISPOSED HITS:" sweep.out
+            exit 1
+          fi
