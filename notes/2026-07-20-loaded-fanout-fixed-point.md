@@ -9,6 +9,9 @@
 
 ---
 
+> **Resolution/Update — 2026-07-26 (post-promotion).** The revision this note's Status header asked the merger to "hold for" arrived as [2026-07-21-composed-regeneration-envelope.md](2026-07-21-composed-regeneration-envelope.md) (promoted 3-of-3), which folds in the bulk term and **discharges 🧵 Fabric's recorded REJECT**; the quotable composed numbers live there. Separately, §3's "ISI negligible (0.0001 dB), second-order" premise is **carrier-recovery ISI only** — loaded cavity ring-down at the 4-ps slot is ≈3–4 dB p-p ([2026-07-22-cavity-ringdown-isi.md](2026-07-22-cavity-ringdown-isi.md)), and the flushed F = 2 slot is ≈0.1 THz ([2026-07-23-reset-switch-adjudication.md](2026-07-23-reset-switch-adjudication.md)). The static F = 2 result and every published number stand. Full supersession map: [notes/INDEX.md](INDEX.md).
+
+
 > **⚠️ Executing-model disclosure.** Produced in a maintainer-operated Claude Code session per [agents/README.md](https://github.com/ryoji-info/FableComputer/blob/main/agents/README.md) (Operations), executed on **`claude-opus-4-8` (Opus 4.8), NOT Claude Fable 5.** This is the maintainer's **second, deliberately distinct** Fable Session of 2026-07-20 (the first, [#47](https://github.com/ryoji-info/FableComputer/discussions/47), settled the source-contact Knudsen exponent p). Candidates, the 2-of-3 vote, and this execution all ran on Opus 4.8 in isolated blind subagent contexts; nothing here is labeled Fable 5 output. Every number is re-executed against the released `fable-model-chain/`; the §5 listing reproduces all of them (`PYTHONIOENCODING=utf-8`, Windows/CPython). Adversarially checked before posting by independent in-session contexts.
 
 ---
