@@ -189,13 +189,18 @@ def build(tasks: list[dict], repo: str, prev_by_id: dict[str, dict], prune: bool
         tid = t["id"]
         skill = pathlib.Path(t.get("filePath")
                              or (pathlib.Path.home() / ".claude/scheduled-tasks" / tid / "SKILL.md"))
-        if not skill.exists():
-            problems.append(f"{tid}: SKILL.md missing at {skill}")
+        try:
+            # one guard for every way this can fail — absent, locked by the app, a
+            # directory, a stale filePath. A prompt we cannot read must never turn into a
+            # prompt we delete, and must never end the run with a traceback.
+            text = skill.read_text(encoding="utf-8")
+        except OSError as e:
+            problems.append(f"{tid}: cannot read {skill} ({e.__class__.__name__}: {e})")
             if not keep_exported(tid, "SKILL.md unreadable"):
-                print(f"  ! {tid}: SKILL.md missing and nothing exported yet — skipped",
+                print(f"  ! {tid}: SKILL.md unreadable and nothing exported yet — skipped",
                       file=sys.stderr)
             continue
-        fm, body = split_frontmatter(skill.read_text(encoding="utf-8"))
+        fm, body = split_frontmatter(text)
         desc = ""
         m = re.search(r"^description:\s*(.+)$", fm, re.M)
         if m:
