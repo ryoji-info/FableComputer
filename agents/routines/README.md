@@ -129,11 +129,12 @@ Use it when you want no interactive step; prefer A otherwise.
   subscription as a *session* id, which means nothing on another machine. A freshly
   created routine notifies whichever session created it (the tool's default); pass
   `notifyOnCompletion: false` when registering if you would rather it stayed quiet.
-- **One prompt still carries a machine fact.** `agent-lab-posts` asserts that the `gh` CLI
-  is not installed. The instruction it leads to — use the REST/GraphQL API with a token
-  from `git credential fill` — is correct on any machine, but the premise would be false
-  on a Mac that has `gh`. Fixing it means editing the live routine's prompt and
-  re-exporting, which is a maintainer action; nothing breaks if it is left alone.
+- **The prompts assert nothing about the machine they run on.** They did once —
+  `agent-lab-posts` used to state that the `gh` CLI was not installed, which is true on the
+  Windows box and would be false on a Mac that has it. That sentence now reads "do not rely
+  on the `gh` CLI", which is an instruction rather than a claim, and holds anywhere. If you
+  add a machine-specific fact to a routine, either make it an instruction like that one or
+  give it a placeholder; the two existing tokens are the only ones the installer resolves.
 - **Routines only run while Claude Code is open.** A due routine that was missed fires on
   next launch.
 - **The per-routine model picker is app state and is not exported.** These routines are
