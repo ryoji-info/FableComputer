@@ -90,6 +90,11 @@ def test_prompt_is_portable(prompt: pathlib.Path):
     for leak in ("C:" + chr(92), "C:/", "/Users/", "/home/"):
         assert leak not in text, f"{prompt.name} leaks an absolute machine path: {leak}"
     assert "Windows" not in text, f"{prompt.name} hard-codes a Windows-only instruction"
+    # A prompt may instruct ("do not rely on the gh CLI"). It must not assert a fact about
+    # whichever machine it was exported from: that claim travels and stops being true.
+    for claim in ("is NOT installed", "is not installed", "is unavailable",
+                  "not available on this machine"):
+        assert claim not in text, f"{prompt.name} asserts a machine fact: {claim!r}"
     assert prompt.read_bytes().count(b"\r\n") == 0, f"{prompt.name} must be LF"
 
 
