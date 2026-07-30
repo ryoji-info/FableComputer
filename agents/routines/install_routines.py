@@ -22,8 +22,12 @@ registry, not in the task folder. Two ways to complete it:
      Claude calls the scheduled-task tool once per routine, which is exactly how these
      were created originally.
   B. --register: patch the registry file directly. Only works if the app has created it
-     already (i.e. you have at least one routine on this machine). A timestamped backup
-     is written first, and the app must be restarted to pick up the change.
+     already (i.e. you have at least one routine on this machine). QUIT Claude Code first
+     — it owns that file and can overwrite the patch on exit. A timestamped backup is
+     written before the patch.
+
+Exit status is non-zero if any routine could not be fully installed, so an unattended run
+does not look like it succeeded.
 """
 from __future__ import annotations
 
@@ -65,6 +69,20 @@ def render(body: str, repo: str, note: str) -> str:
     return body.replace("{{REPO}}", repo).replace("{{PLATFORM_NOTE}}", note)
 
 
+def routine_cwd(routine: dict, repo: str) -> str:
+    """A routine's working directory. Almost always this checkout, but the manifest can
+    record a literal path for a routine that deliberately runs somewhere else."""
+    return (routine.get("cwd") or "{{REPO}}").replace("{{REPO}}", repo)
+
+
+def describe_schedule(schedule: str) -> str:
+    if schedule == "manual":
+        return "no schedule — manual/Run-now only"
+    if schedule.startswith("cron:"):
+        return f"cron {schedule[5:]} (local time)"
+    return f"one-time at {schedule[5:]}"
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--repo", help="path to the FableComputer checkout (default: this file's repo)")
@@ -100,10 +118,15 @@ def main() -> int:
           + (f", {len(skipped)} skipped (disabled)" if skipped else ""))
     print()
 
+    installed: list[dict] = []
+    failures: list[str] = []
     for r in selected:
         tid = r["id"]
         src = PROMPTS / f"{tid}.md"
         if not src.exists():
+            # do NOT keep it in the set to register: the registry would point filePath at
+            # a SKILL.md that was never written
+            failures.append(f"{tid}: prompts/{tid}.md missing — not installed, not registered")
             print(f"  ! {tid}: prompts/{tid}.md missing — skipped", file=sys.stderr)
             continue
         body = render(src.read_text(encoding="utf-8"), repo, note)
@@ -114,7 +137,9 @@ def main() -> int:
         if not args.dry_run:
             dest.parent.mkdir(parents=True, exist_ok=True)
             dest.write_text(content, encoding="utf-8", newline="\n")
-        print(f"  {action} {dest}  ({len(content)} chars, schedule: {r['schedule']})")
+        installed.append(r)
+        state = "" if r["enabled"] else ", DISABLED"
+        print(f"  {action} {dest}  ({len(content)} chars, schedule: {r['schedule']}{state})")
 
     # ---- registration -------------------------------------------------------
     print()
@@ -124,14 +149,15 @@ def main() -> int:
             print(f"! --register needs exactly one registry file; found {len(regs)}.")
             print("  Create one routine through the app first (or use the paste-in block below),")
             print("  then re-run with --register.")
+            failures.append(f"--register did nothing: found {len(regs)} registry files, need 1")
         else:
             reg = regs[0]
             data = json.loads(reg.read_text(encoding="utf-8"))
             existing = {t["id"]: t for t in data.get("scheduledTasks", [])}
-            for r in selected:
+            for r in installed:
                 fresh = r["id"] not in existing
                 entry = existing.get(r["id"], {"id": r["id"]})
-                entry["cwd"] = repo
+                entry["cwd"] = routine_cwd(r, repo)
                 entry["enabled"] = bool(r["enabled"])
                 entry["filePath"] = str(tasks_dir / r["id"] / "SKILL.md")
                 entry["useWorktree"] = bool(r.get("useWorktree", False))
@@ -150,7 +176,7 @@ def main() -> int:
                 existing[r["id"]] = entry
             data["scheduledTasks"] = list(existing.values())
             if args.dry_run:
-                print(f"  would patch {reg} ({len(selected)} routines)")
+                print(f"  would patch {reg} ({len(installed)} routines)")
             else:
                 stamp = _dt.datetime.now().strftime("%Y%m%d-%H%M%S")
                 backup = reg.with_suffix(f".json.bak-{stamp}")
@@ -158,7 +184,8 @@ def main() -> int:
                 reg.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
                 print(f"  patched {reg}")
                 print(f"  backup  {backup}")
-                print("  RESTART Claude Code for the app to pick this up.")
+                print("  Claude Code must be RESTARTED to pick this up — and if it was")
+                print("  running just now, quit it and re-apply: it owns this file.")
         print()
 
     print("=" * 78)
@@ -171,21 +198,29 @@ def main() -> int:
     print(f"{repo} and {{{{PLATFORM_NOTE}}}} with \"{note}\"")
     print(f"and set the working directory to {repo}:")
     print()
-    for r in selected:
-        sched = ("no schedule — manual/Run-now only" if r["schedule"] == "manual"
-                 else f"cron {r['schedule'][5:]} (local time)" if r["schedule"].startswith("cron:")
-                 else f"one-time at {r['schedule'][5:]}")
-        print(f"  - {r['id']}: {sched}")
+    for r in installed:
+        print(f"  - {r['id']}: {describe_schedule(r['schedule'])}")
         if r.get("displayName"):
             print(f"    display name: {r['displayName']}")
         print(f"    description: {r['description']}")
+        # state it on every routine: silence here reads as "enabled", and for a routine
+        # carrying a retired cron that would put the schedule back into service
+        print(f"    enabled: {'yes' if r['enabled'] else 'NO — create it paused/disabled, it must not fire'}")
         if r.get("useWorktree"):
             print(f"    run in a git worktree: yes")
+        cwd = routine_cwd(r, repo)
+        if cwd != repo:
+            print(f"    working directory: {cwd}  (not this checkout)")
     print()
     if skipped:
         print("Not requested (disabled in the export): "
               + ", ".join(r["id"] for r in skipped))
         print()
+    if failures:
+        print("! not everything was installed:", file=sys.stderr)
+        for f in failures:
+            print(f"  - {f}", file=sys.stderr)
+        return 1
     return 0
 
 
