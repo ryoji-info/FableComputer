@@ -40,7 +40,7 @@
     },
     {
       "id": "agent-lab-weekly-note",
-      "displayName": "",
+      "displayName": "4. Agent lab weekly note",
       "description": "Fable Computer Agent Lab: run the weekly-note pipeline in-session on demand (draft → PR → 2-of-3 review vote)",
       "schedule": "manual",
       "enabled": true,
