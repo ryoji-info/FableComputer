@@ -74,6 +74,16 @@ def test_manifest_entries_carry_the_definitional_fields():
         assert r["schedule"] == "manual" or r["schedule"].startswith(("cron:", "once:"))
 
 
+def test_display_name_prefixes_do_not_collide():
+    """The maintainer orders the sidebar with numeric prefixes, so two routines claiming
+    the same number is ambiguous — and it is how a retired routine ends up sitting in the
+    live run order."""
+    named = [r["displayName"] for r in ROUTINES if r["displayName"]]
+    prefixes = [n.split(".")[0].strip() for n in named]
+    dupes = {p for p in prefixes if prefixes.count(p) > 1}
+    assert not dupes, f"display-name prefixes collide: {sorted(dupes)} in {sorted(named)}"
+
+
 def test_manifest_and_prompts_are_in_one_to_one_correspondence():
     on_disk = {p.stem for p in (RD / "prompts").glob("*.md")}
     assert on_disk == {r["id"] for r in ROUTINES}
