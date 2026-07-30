@@ -38,14 +38,34 @@ python3 agents/routines/export_routines.py
 ```
 
 It reads the app registry and each `SKILL.md`, tokenizes, and rewrites `routines.json`
-and `prompts/`. Commit the result. A staleness check is available:
+and `prompts/`. Commit the result.
+
+**The export is additive.** A routine that is already in `routines.json` but is not
+installed on the machine you are exporting from is *carried forward untouched*, and the
+run says so. That is what makes exporting from a second machine safe: the Mac has never
+installed the retired `agent-lab-daily-posts`, and an export from there must not silently
+delete it. Likewise, a routine whose `SKILL.md` cannot be read keeps its committed copy
+rather than losing it, and the run exits non-zero so the gap is visible.
+
+When you genuinely did delete a routine in the app and want it gone from the export:
+
+```bash
+python3 agents/routines/export_routines.py --prune
+```
+
+Routines belonging to *other* checkouts are ignored, so `--repo` cannot accidentally drag
+another project's routines — or their absolute paths — into this repository. A staleness
+check is available:
 
 ```bash
 python3 agents/routines/export_routines.py --check   # exit 1 if the export is behind
 ```
 
 Run that after editing a routine in the app — **it cannot run in CI**, because CI has no
-app registry to compare against. Treat it as a local habit, not a gate.
+app registry to compare against. Treat it as a local habit, not a gate. What CI *does*
+check is that whatever the export produced is portable and installable:
+[`tests/test_routines_export.py`](../../tests/test_routines_export.py) installs the
+manifest into a sandbox for macOS, Linux and Windows in turn.
 
 ## Importing on a Mac
 
@@ -73,14 +93,18 @@ finish it:
 
 **A. Ask Claude Code (recommended).** Paste the printed block into Claude Code with this
 repository open. It calls the scheduled-task tool once per routine, which is exactly how
-these routines were created in the first place, and the app picks them up immediately.
+these routines were created in the first place, and the app picks them up immediately. The
+block states each routine's **enabled flag explicitly**, including "must not fire" for a
+disabled one — silence there would read as "enabled", which for a routine carrying a
+retired cron expression would put that schedule back into service.
 
 **B. `--register`.** Patches the registry file directly, after writing a timestamped
 backup. For a routine that does not exist yet it writes the full entry the app expects —
 schedule, working directory, enabled flag, display name, worktree flag, and a `createdAt`
 stamp — so the routine appears named and dated rather than blank. It needs the registry to
-exist already (i.e. at least one routine created on that machine), and the app must be
-restarted afterwards. Use it when you want no interactive step; prefer A otherwise.
+exist already (i.e. at least one routine created on that machine). **Quit Claude Code
+before running it**: the app owns that file and can overwrite the patch when it exits.
+Use it when you want no interactive step; prefer A otherwise.
 
 ## Things worth knowing
 

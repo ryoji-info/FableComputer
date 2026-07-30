@@ -19,6 +19,7 @@ from __future__ import annotations
 import importlib.util
 import io
 import json
+import os
 import pathlib
 import re
 import contextlib
@@ -244,8 +245,214 @@ def test_dry_run_writes_absolutely_nothing(inst, monkeypatch, tmp_path):
 
 
 def test_register_without_a_registry_reports_instead_of_crashing(inst, monkeypatch, tmp_path):
-    """A first-ever install has no registry; it must still write the prompts and explain."""
+    """A first-ever install has no registry; it must still write the prompts, explain, and
+    exit non-zero so an unattended run does not read as success."""
     rc, out = _install(inst, monkeypatch, tmp_path, "Darwin", ["--repo", str(REPO), "--register"])
-    assert rc == 0
+    assert rc == 1
     assert "needs exactly one registry file" in out
     assert (tmp_path / ".claude/scheduled-tasks").exists(), "prompts should still be installed"
+
+
+def test_paste_block_states_the_enabled_flag_on_every_routine(inst, monkeypatch, tmp_path):
+    """Silence reads as "enabled". For a routine carrying a retired cron, a registration
+    request that omits the flag would put that schedule back into service."""
+    _, out = _install(inst, monkeypatch, tmp_path, "Darwin",
+                      ["--repo", str(REPO), "--include-disabled"])
+    for r in ROUTINES:
+        block = out.split(f"- {r['id']}:")[1].split("  - ")[0]
+        if r["enabled"]:
+            assert "enabled: yes" in block, r["id"]
+        else:
+            assert "must not fire" in block, r["id"]
+            assert "enabled: yes" not in block, r["id"]
+
+
+# ------------------------------------------------------- install: a broken manifest entry
+
+@pytest.fixture
+def inst_sandbox(inst, tmp_path, monkeypatch):
+    """The installer with its manifest/prompts redirected, so entries can be corrupted."""
+    prompts = tmp_path / "src-prompts"
+    prompts.mkdir()
+    for p in (RD / "prompts").glob("*.md"):
+        (prompts / p.name).write_text(p.read_text(encoding="utf-8"), encoding="utf-8")
+    manifest = tmp_path / "routines.json"
+    manifest.write_text(json.dumps(MANIFEST, indent=2), encoding="utf-8")
+    monkeypatch.setattr(inst, "PROMPTS", prompts)
+    monkeypatch.setattr(inst, "MANIFEST", manifest)
+    return inst, prompts, manifest
+
+
+def test_a_routine_with_no_prompt_file_is_neither_installed_nor_registered(
+        inst_sandbox, monkeypatch, tmp_path):
+    inst, prompts, _ = inst_sandbox
+    victim = next(r["id"] for r in ROUTINES if r["enabled"])
+    (prompts / f"{victim}.md").unlink()
+    home = tmp_path / "home"
+    home.mkdir()
+    reg = _registry(home)
+
+    rc, out = _install(inst, monkeypatch, home, "Darwin", ["--repo", str(REPO), "--register"])
+    assert rc == 1, "an incomplete install must not report success"
+    assert not (home / ".claude/scheduled-tasks" / victim).exists()
+    registered = {t["id"] for t in json.loads(reg.read_text(encoding="utf-8"))["scheduledTasks"]}
+    assert victim not in registered, "filePath would point at a SKILL.md that was never written"
+    assert victim not in out.split("=" * 78)[-1], "it must not appear in the paste-in block"
+
+
+def test_a_literal_working_directory_in_the_manifest_is_honoured(
+        inst_sandbox, monkeypatch, tmp_path):
+    """The manifest can record a routine that deliberately runs outside this checkout."""
+    inst, _, manifest = inst_sandbox
+    data = json.loads(manifest.read_text(encoding="utf-8"))
+    target = next(r for r in data["routines"] if r["enabled"])
+    elsewhere = str(tmp_path / "other-project")
+    target["cwd"] = elsewhere
+    manifest.write_text(json.dumps(data, indent=2), encoding="utf-8")
+    home = tmp_path / "home2"
+    home.mkdir()
+    reg = _registry(home)
+
+    _install(inst, monkeypatch, home, "Darwin", ["--repo", str(REPO), "--register"])
+    entry = {t["id"]: t for t in json.loads(reg.read_text(encoding="utf-8"))["scheduledTasks"]}
+    assert entry[target["id"]]["cwd"] == elsewhere
+
+
+# --------------------------------------------------------------- export: never lose work
+
+@pytest.fixture
+def exp_sandbox(exp, tmp_path, monkeypatch):
+    """The export module writing into tmp_path instead of the repository."""
+    prompts = tmp_path / "prompts"
+    prompts.mkdir()
+    manifest = tmp_path / "routines.json"
+    monkeypatch.setattr(exp, "PROMPTS", prompts)
+    monkeypatch.setattr(exp, "MANIFEST", manifest)
+    return exp, prompts, manifest
+
+
+def _seed(manifest: pathlib.Path, prompts: pathlib.Path, ids, note="n"):
+    manifest.write_text(json.dumps({
+        "note": note, "exported_from": "Windows",
+        "routines": [{"id": i, "displayName": "", "description": f"d {i}",
+                      "schedule": "manual", "enabled": True, "useWorktree": False,
+                      "cwd": "{{REPO}}"} for i in ids],
+    }, indent=2), encoding="utf-8")
+    for i in ids:
+        (prompts / f"{i}.md").write_text(f"exported body of {i} in {{{{REPO}}}} {{{{PLATFORM_NOTE}}}}\n",
+                                         encoding="utf-8")
+
+
+def _live_task(home: pathlib.Path, tid: str, repo: str, exists=True, **kw):
+    skill = home / ".claude" / "scheduled-tasks" / tid / "SKILL.md"
+    if exists:
+        skill.parent.mkdir(parents=True, exist_ok=True)
+        skill.write_text(f"---\nname: {tid}\ndescription: live {tid}\n---\n\nlive body {tid}\n",
+                         encoding="utf-8")
+    task = {"id": tid, "cwd": repo, "enabled": True, "filePath": str(skill)}
+    task.update(kw)
+    return task
+
+
+def _export(exp, monkeypatch, tasks, argv=()):
+    monkeypatch.setattr(exp, "load_registry", lambda: list(tasks))
+    monkeypatch.setattr(sys, "argv", ["export_routines.py", "--repo", str(REPO), *argv])
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        rc = exp.main()
+    return rc, buf.getvalue()
+
+
+def test_an_unreadable_skill_never_deletes_its_exported_prompt(exp_sandbox, monkeypatch, tmp_path):
+    """The failure mode: SKILL.md cannot be read, so the routine is skipped — and the prune
+    step then deletes the committed copy, which is the only remaining copy."""
+    exp, prompts, manifest = exp_sandbox
+    _seed(manifest, prompts, ["keeper"])
+    home = tmp_path / "home"
+    rc, _ = _export(exp, monkeypatch, [_live_task(home, "keeper", str(REPO), exists=False)])
+
+    assert (prompts / "keeper.md").exists(), "the exported prompt was destroyed"
+    assert [r["id"] for r in json.loads(manifest.read_text(encoding="utf-8"))["routines"]] == ["keeper"]
+    assert rc == 1, "an incomplete export must not report success"
+
+
+def test_exporting_from_a_second_machine_carries_absent_routines_forward(
+        exp_sandbox, monkeypatch, tmp_path):
+    """The Mac never installed the retired cron routine; exporting there must not drop it."""
+    exp, prompts, manifest = exp_sandbox
+    _seed(manifest, prompts, ["here", "only-on-the-other-machine"])
+    home = tmp_path / "home"
+    rc, out = _export(exp, monkeypatch, [_live_task(home, "here", str(REPO))])
+
+    assert rc == 0
+    ids = [r["id"] for r in json.loads(manifest.read_text(encoding="utf-8"))["routines"]]
+    assert ids == ["here", "only-on-the-other-machine"]
+    assert (prompts / "only-on-the-other-machine.md").exists()
+    assert "carried forward" in out or "not registered on this machine" in out
+
+
+def test_prune_drops_routines_this_machine_does_not_have(exp_sandbox, monkeypatch, tmp_path):
+    exp, prompts, manifest = exp_sandbox
+    _seed(manifest, prompts, ["here", "deleted-in-the-app"])
+    home = tmp_path / "home"
+    rc, _ = _export(exp, monkeypatch, [_live_task(home, "here", str(REPO))], ["--prune"])
+
+    assert rc == 0
+    ids = [r["id"] for r in json.loads(manifest.read_text(encoding="utf-8"))["routines"]]
+    assert ids == ["here"]
+    assert not (prompts / "deleted-in-the-app.md").exists()
+
+
+def test_export_does_not_delete_files_it_never_generated(exp_sandbox, monkeypatch, tmp_path):
+    exp, prompts, manifest = exp_sandbox
+    _seed(manifest, prompts, ["here"])
+    stray = prompts / "NOTES.md"
+    stray.write_text("hand-written, not an export product\n", encoding="utf-8")
+    home = tmp_path / "home"
+    _export(exp, monkeypatch, [_live_task(home, "here", str(REPO))], ["--prune"])
+    assert stray.exists(), "the export deleted a file that was not its own"
+
+
+def test_export_ignores_routines_belonging_to_other_checkouts(exp_sandbox, monkeypatch, tmp_path):
+    exp, prompts, manifest = exp_sandbox
+    _seed(manifest, prompts, [])
+    home = tmp_path / "home"
+    other = str(tmp_path / "some-other-project")
+    rc, out = _export(exp, monkeypatch, [
+        _live_task(home, "ours", str(REPO)),
+        _live_task(home, "theirs", other, cwd=other),
+    ])
+    assert rc == 0
+    ids = [r["id"] for r in json.loads(manifest.read_text(encoding="utf-8"))["routines"]]
+    assert ids == ["ours"], "another project's routine was committed into this repo"
+    assert "not this checkout" in out
+
+
+def test_check_notices_a_change_outside_the_routines_array(exp_sandbox, monkeypatch, tmp_path):
+    exp, prompts, manifest = exp_sandbox
+    home = tmp_path / "home"
+    tasks = [_live_task(home, "here", str(REPO))]
+    _export(exp, monkeypatch, tasks)                       # write a correct export
+    assert _export(exp, monkeypatch, tasks, ["--check"])[0] == 0
+
+    data = json.loads(manifest.read_text(encoding="utf-8"))
+    data["note"] = "something else entirely"
+    manifest.write_text(json.dumps(data, indent=2), encoding="utf-8")
+    assert _export(exp, monkeypatch, tasks, ["--check"])[0] == 1
+
+
+def test_detect_repo_treats_two_spellings_of_one_path_as_one(exp):
+    variants = [{"cwd": str(REPO)}, {"cwd": str(REPO) + os.sep}]
+    assert exp.detect_repo(variants, None) in {v["cwd"] for v in variants}
+
+
+def test_load_registry_collapses_a_routine_registered_twice(exp, monkeypatch, tmp_path):
+    files = []
+    for n in ("a", "b"):
+        f = tmp_path / f"{n}.json"
+        f.write_text(json.dumps({"scheduledTasks": [
+            {"id": "same", "cwd": f"/{n}", "enabled": True}]}), encoding="utf-8")
+        files.append(f)
+    monkeypatch.setattr(exp, "registry_paths", lambda: files)
+    tasks = exp.load_registry()
+    assert [t["id"] for t in tasks] == ["same"]
