@@ -19,7 +19,7 @@ two scripts to move them between machines.
 
 | file | what it is |
 |---|---|
-| `routines.json` | manifest: one entry per routine — id, description, schedule, enabled, working directory |
+| `routines.json` | manifest: one entry per routine — id, display name, description, schedule, enabled, worktree flag, working directory |
 | `prompts/<id>.md` | the routine's prompt body, verbatim, with machine-specific strings tokenized |
 | `export_routines.py` | regenerate the two above from this machine's live routines |
 | `install_routines.py` | materialize the routines on another machine, any OS |
@@ -76,12 +76,20 @@ repository open. It calls the scheduled-task tool once per routine, which is exa
 these routines were created in the first place, and the app picks them up immediately.
 
 **B. `--register`.** Patches the registry file directly, after writing a timestamped
-backup. It needs the registry to exist already (i.e. at least one routine created on that
-machine), and the app must be restarted afterwards. Use it when you want no interactive
-step; prefer A otherwise.
+backup. For a routine that does not exist yet it writes the full entry the app expects —
+schedule, working directory, enabled flag, display name, worktree flag, and a `createdAt`
+stamp — so the routine appears named and dated rather than blank. It needs the registry to
+exist already (i.e. at least one routine created on that machine), and the app must be
+restarted afterwards. Use it when you want no interactive step; prefer A otherwise.
 
 ## Things worth knowing
 
+- **Definition travels; history does not.** The export carries what a routine *is* — its
+  prompt, schedule, display name (including the `1.` / `2.` / `3.` ordering prefixes),
+  enabled flag, worktree flag and working directory. It deliberately leaves behind the
+  app's runtime record for this machine: `createdAt`, `lastRunAt`, `lastScheduledFor`,
+  `notifySessionId`. So a freshly installed routine has no run history on the new machine,
+  which is correct — it has not run there.
 - **Routines only run while Claude Code is open.** A due routine that was missed fires on
   next launch.
 - **The per-routine model picker is app state and is not exported.** These routines are
