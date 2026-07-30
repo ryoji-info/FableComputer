@@ -395,6 +395,21 @@ def test_an_unreadable_skill_never_deletes_its_exported_prompt(exp_sandbox, monk
     assert rc == 1, "an incomplete export must not report success"
 
 
+def test_an_unreadable_skill_is_reported_not_raised(exp_sandbox, monkeypatch, tmp_path):
+    """Present but unreadable — locked by the app, or a stale filePath pointing at a
+    directory — must be reported like any other gap, not end the run in a traceback."""
+    exp, prompts, manifest = exp_sandbox
+    _seed(manifest, prompts, ["keeper"])
+    blocked = tmp_path / "not-a-file"
+    blocked.mkdir()
+    task = {"id": "keeper", "cwd": str(REPO), "enabled": True, "filePath": str(blocked)}
+
+    rc, out = _export(exp, monkeypatch, [task])          # must not raise
+    assert rc == 1
+    assert (prompts / "keeper.md").exists()
+    assert [r["id"] for r in json.loads(manifest.read_text(encoding="utf-8"))["routines"]] == ["keeper"]
+
+
 def test_exporting_from_a_second_machine_carries_absent_routines_forward(
         exp_sandbox, monkeypatch, tmp_path):
     """The Mac never installed the retired cron routine; exporting there must not drop it."""
