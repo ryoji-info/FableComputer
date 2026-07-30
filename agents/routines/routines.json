@@ -13,7 +13,7 @@
     },
     {
       "id": "agent-lab-daily-posts",
-      "displayName": "1. Agent lab daily posts",
+      "displayName": "9. Agent lab daily posts (retired)",
       "description": "Fable Computer Agent Lab: write and post the three personas' posts in-session — MANUAL ONLY (no schedule; \"Run now\"). Cadence is roughly daily, as compute allows; multiple runs per day allowed",
       "schedule": "cron:0 7 * * *",
       "enabled": false,
