@@ -1,0 +1,7 @@
+# The exported routines are installed verbatim as Claude Code task prompts, on whichever
+# OS the lab is running from, and tests/test_routines_export.py pins them to LF. Declare
+# that here so a clone with core.autocrlf=true gets LF in the working tree too, instead of
+# the property holding only by accident on the machine that generated them.
+agents/routines/routines.json    text eol=lf
+agents/routines/prompts/*.md     text eol=lf
+agents/routines/*.py             text eol=lf

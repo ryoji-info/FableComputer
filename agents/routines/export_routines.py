@@ -5,8 +5,13 @@
 Reads the live tasks — the app's registry plus each task's SKILL.md — and writes a
 portable, reviewable representation into this directory:
 
-    routines.json      manifest: id, description, schedule, enabled, cwd-relative notes
+    routines.json      manifest: id, description, display name, schedule, enabled,
+                       worktree flag, working directory
     prompts/<id>.md    the prompt body, with machine-specific strings tokenized
+
+Only a routine's *definition* is exported. Runtime state the app records — createdAt,
+lastRunAt, lastScheduledFor, notifySessionId — is deliberately left behind: it describes
+this machine's history, not the routine.
 
 Machine-specific strings become placeholders so the same files import cleanly on another
 OS.  Tokens used:
@@ -93,10 +98,39 @@ def split_frontmatter(text: str) -> tuple[str, str]:
     return "", text
 
 
+def detect_repo(tasks: list[dict], override: str | None) -> str:
+    """The checkout the routines run in — the string that becomes {{REPO}}.
+
+    Deliberately does NOT fall back to a common ancestor of divergent working
+    directories: the common ancestor of two different checkouts is their *parent*, and
+    tokenizing a parent path would rewrite every prompt to a {{REPO}} that resolves one
+    directory too high. Refuse and ask instead.
+    """
+    if override:
+        repo = str(pathlib.Path(override).resolve())
+    else:
+        cwds = {t["cwd"] for t in tasks if t.get("cwd")}
+        if not cwds:
+            repo = str(pathlib.Path.cwd())
+        elif len(cwds) == 1:
+            repo = next(iter(cwds))
+        else:
+            raise SystemExit(
+                "! the routines have different working directories:\n    "
+                + "\n    ".join(sorted(cwds))
+                + "\n  Pass --repo <path> to name the FableComputer checkout."
+            )
+    if not (pathlib.Path(repo) / "papers").is_dir():
+        raise SystemExit(f"! {repo} is not a FableComputer checkout (no papers/). Pass --repo.")
+    return repo
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true",
                     help="exit 1 if the exported files are stale (do not write)")
+    ap.add_argument("--repo", help="the FableComputer checkout the routines run in "
+                                   "(default: inferred from the routines' working directory)")
     args = ap.parse_args()
 
     tasks = load_registry()
@@ -104,8 +138,7 @@ def main() -> int:
         print("No scheduled-task registry found for this OS — nothing to export.", file=sys.stderr)
         return 2
 
-    repo_guess = os.path.commonpath([t["cwd"] for t in tasks if t.get("cwd")]) if any(
-        t.get("cwd") for t in tasks) else str(pathlib.Path.cwd())
+    repo = detect_repo(tasks, args.repo)
 
     entries, bodies = [], {}
     for t in sorted(tasks, key=lambda x: x["id"]):
@@ -121,21 +154,26 @@ def main() -> int:
             desc = m.group(1).strip()
         entries.append({
             "id": tid,
+            # how the app labels the routine in its list; the numeric prefixes the
+            # maintainer uses for ordering live in here, so it has to survive the trip
+            "displayName": t.get("displayName") or "",
             "description": desc,
             # exactly one of these is meaningful; "manual" means run-now only
             "schedule": ("cron:" + t["cronExpression"]) if t.get("cronExpression")
                         else ("once:" + t["fireAt"]) if t.get("fireAt") else "manual",
             "enabled": bool(t.get("enabled", True)),
-            "cwd": "{{REPO}}" if t.get("cwd") and os.path.normcase(t["cwd"]) == os.path.normcase(repo_guess)
+            "useWorktree": bool(t.get("useWorktree", False)),
+            "cwd": "{{REPO}}" if t.get("cwd") and os.path.normcase(t["cwd"]) == os.path.normcase(repo)
                    else t.get("cwd", "{{REPO}}"),
         })
-        bodies[tid] = tokenize(body, repo_guess)
+        bodies[tid] = tokenize(body, repo)
 
     manifest = {
-        "$schema": "./routines.schema.md",
         "note": ("Exported Claude Code routines (scheduled tasks) for the Fable Computer "
                  "Agent Lab. Import with install_routines.py; see README.md. Placeholders: "
-                 "{{REPO}} = checkout path, {{PLATFORM_NOTE}} = interpreter/encoding note."),
+                 "{{REPO}} = checkout path, {{PLATFORM_NOTE}} = interpreter/encoding note. "
+                 "Definition only — the app's runtime state (createdAt, lastRunAt, "
+                 "lastScheduledFor, notifySessionId) is intentionally not exported."),
         "exported_from": platform.system(),
         "routines": entries,
     }
@@ -167,7 +205,9 @@ def main() -> int:
         return 0
 
     PROMPTS.mkdir(parents=True, exist_ok=True)
-    MANIFEST.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    # newline="\n" on every write: the export must be byte-identical whichever OS ran it
+    MANIFEST.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
+                        encoding="utf-8", newline="\n")
     for tid, body in bodies.items():
         (PROMPTS / f"{tid}.md").write_text(body, encoding="utf-8", newline="\n")
     for f in sorted(PROMPTS.glob("*.md")):          # drop prompts whose routine is gone

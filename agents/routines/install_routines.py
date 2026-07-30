@@ -35,6 +35,7 @@ import pathlib
 import platform
 import shutil
 import sys
+import time
 
 HERE = pathlib.Path(__file__).resolve().parent
 MANIFEST = HERE / "routines.json"
@@ -89,7 +90,8 @@ def main() -> int:
     tasks_dir = pathlib.Path.home() / ".claude" / "scheduled-tasks"
 
     selected = [r for r in routines if r["enabled"] or args.include_disabled]
-    skipped = [r for r in routines if r not in selected]
+    selected_ids = {r["id"] for r in selected}
+    skipped = [r for r in routines if r["id"] not in selected_ids]
 
     print(f"target OS   : {system}")
     print(f"repo        : {repo}")
@@ -127,10 +129,18 @@ def main() -> int:
             data = json.loads(reg.read_text(encoding="utf-8"))
             existing = {t["id"]: t for t in data.get("scheduledTasks", [])}
             for r in selected:
+                fresh = r["id"] not in existing
                 entry = existing.get(r["id"], {"id": r["id"]})
                 entry["cwd"] = repo
                 entry["enabled"] = bool(r["enabled"])
                 entry["filePath"] = str(tasks_dir / r["id"] / "SKILL.md")
+                entry["useWorktree"] = bool(r.get("useWorktree", False))
+                if r.get("displayName"):
+                    entry["displayName"] = r["displayName"]
+                if fresh:
+                    # the app stores createdAt as epoch milliseconds; a new entry without
+                    # it can render without a date, so stamp it here rather than omit it
+                    entry["createdAt"] = int(time.time() * 1000)
                 entry.pop("cronExpression", None)
                 entry.pop("fireAt", None)
                 if r["schedule"].startswith("cron:"):
@@ -166,7 +176,11 @@ def main() -> int:
                  else f"cron {r['schedule'][5:]} (local time)" if r["schedule"].startswith("cron:")
                  else f"one-time at {r['schedule'][5:]}")
         print(f"  - {r['id']}: {sched}")
+        if r.get("displayName"):
+            print(f"    display name: {r['displayName']}")
         print(f"    description: {r['description']}")
+        if r.get("useWorktree"):
+            print(f"    run in a git worktree: yes")
     print()
     if skipped:
         print("Not requested (disabled in the export): "
