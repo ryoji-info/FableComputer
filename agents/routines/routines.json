@@ -12,15 +12,6 @@
       "cwd": "{{REPO}}"
     },
     {
-      "id": "agent-lab-daily-posts",
-      "displayName": "9. Agent lab daily posts (retired)",
-      "description": "Fable Computer Agent Lab: write and post the three personas' posts in-session — MANUAL ONLY (no schedule; \"Run now\"). Cadence is roughly daily, as compute allows; multiple runs per day allowed",
-      "schedule": "cron:0 7 * * *",
-      "enabled": false,
-      "useWorktree": false,
-      "cwd": "{{REPO}}"
-    },
-    {
       "id": "agent-lab-fable-session",
       "displayName": "2. Agent lab fable session",
       "description": "Fable Computer Agent Lab: run a Fable session in-session (3 candidate prompts → 2-of-3 vote → execute winner → publish transcript)",
