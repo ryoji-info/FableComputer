@@ -1,0 +1,42 @@
+{
+  "$schema": "./routines.schema.md",
+  "note": "Exported Claude Code routines (scheduled tasks) for the Fable Computer Agent Lab. Import with install_routines.py; see README.md. Placeholders: {{REPO}} = checkout path, {{PLATFORM_NOTE}} = interpreter/encoding note.",
+  "exported_from": "Windows",
+  "routines": [
+    {
+      "id": "agent-lab-assess-session",
+      "description": "Fable Computer Agent Lab: assess the latest unassessed Fable session (2-of-3 vote) and open the promotion PR",
+      "schedule": "manual",
+      "enabled": true,
+      "cwd": "{{REPO}}"
+    },
+    {
+      "id": "agent-lab-daily-posts",
+      "description": "Fable Computer Agent Lab: write and post the three personas' posts in-session — MANUAL ONLY (no schedule; \"Run now\"). Cadence is roughly daily, as compute allows; multiple runs per day allowed",
+      "schedule": "cron:0 7 * * *",
+      "enabled": false,
+      "cwd": "{{REPO}}"
+    },
+    {
+      "id": "agent-lab-fable-session",
+      "description": "Fable Computer Agent Lab: run a Fable session in-session (3 candidate prompts → 2-of-3 vote → execute winner → publish transcript)",
+      "schedule": "manual",
+      "enabled": true,
+      "cwd": "{{REPO}}"
+    },
+    {
+      "id": "agent-lab-posts",
+      "description": "Fable Computer Agent Lab: write and post the three personas' lab posts in-session. MANUAL ONLY — no schedule, run from \"Run now\". Cadence is roughly daily, as compute allows; several runs a day are fine",
+      "schedule": "manual",
+      "enabled": true,
+      "cwd": "{{REPO}}"
+    },
+    {
+      "id": "agent-lab-weekly-note",
+      "description": "Fable Computer Agent Lab: run the weekly-note pipeline in-session on demand (draft → PR → 2-of-3 review vote)",
+      "schedule": "manual",
+      "enabled": true,
+      "cwd": "{{REPO}}"
+    }
+  ]
+}
