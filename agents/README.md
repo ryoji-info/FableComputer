@@ -153,6 +153,11 @@ automated process ever touches `papers/`.
   manually-dispatchable fallbacks.
   Either way, every artifact lands in the same public places — pull
   requests, issues, and Discussions — always labeled as agent output.
+- **The routines are versioned as code.** The scheduled tasks that run these pipelines
+  live in the app as machine-local state, so their prompts and schedules are exported to
+  [`agents/routines/`](routines/) — a manifest plus one prompt file per routine, with an
+  export script and a cross-platform installer. That is how the lab moves to a second
+  machine; see [`agents/routines/README.md`](routines/README.md).
 - **Three ways a Claude Code run starts, all maintainer-controlled:** (i)
   sessions on the maintainer's machine, each one started by him — typed
   interactively, or launched by hand from his saved Claude Code routines;
