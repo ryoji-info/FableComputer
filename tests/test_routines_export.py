@@ -53,6 +53,28 @@ def inst():
     return _load("install_routines", RD / "install_routines.py")
 
 
+@pytest.fixture
+def inst_disabled(inst_sandbox):
+    """The installer with one deliberately disabled cron routine added to its manifest.
+
+    No live routine is disabled any more — the retired `agent-lab-daily-posts` was deleted
+    on 2026-07-31 — but the installer still has to handle a disabled entry correctly, and
+    that handling is load-bearing: the registration tool cannot set an enabled flag, so a
+    disabled routine must never be requested with a live schedule. Synthesize the case
+    rather than let deleting a routine quietly turn these tests into skips.
+    """
+    inst, prompts, manifest = inst_sandbox
+    tid = "retired-cron-routine"
+    (prompts / f"{tid}.md").write_text("body in {{REPO}} — {{PLATFORM_NOTE}}\n", encoding="utf-8")
+    data = json.loads(manifest.read_text(encoding="utf-8"))
+    data["routines"].append({
+        "id": tid, "displayName": "9. Retired routine", "description": "a retired cron routine",
+        "schedule": "cron:0 7 * * *", "enabled": False, "useWorktree": False, "cwd": "{{REPO}}",
+    })
+    manifest.write_text(json.dumps(data, indent=2), encoding="utf-8")
+    return inst, tid
+
+
 # --------------------------------------------------------------------------- manifest
 
 def test_manifest_has_no_dangling_schema_pointer():
@@ -72,6 +94,23 @@ def test_manifest_entries_carry_the_definitional_fields():
         assert r["cwd"] == "{{REPO}}", r["id"]
         assert isinstance(r["enabled"], bool) and isinstance(r["useWorktree"], bool)
         assert r["schedule"] == "manual" or r["schedule"].startswith(("cron:", "once:"))
+
+
+def test_every_routine_has_a_display_name():
+    """All five are named, so a blank one means an export ran on a machine whose app had
+    not been given the names — which silently drops them from the record."""
+    unnamed = [r["id"] for r in ROUTINES if not r["displayName"]]
+    assert not unnamed, f"no display name (exported from an unconfigured machine?): {unnamed}"
+
+
+def test_display_name_prefixes_do_not_collide():
+    """The maintainer orders the sidebar with numeric prefixes, so two routines claiming
+    the same number is ambiguous — and it is how a retired routine ends up sitting in the
+    live run order."""
+    named = [r["displayName"] for r in ROUTINES if r["displayName"]]
+    prefixes = [n.split(".")[0].strip() for n in named]
+    dupes = {p for p in prefixes if prefixes.count(p) > 1}
+    assert not dupes, f"display-name prefixes collide: {sorted(dupes)} in {sorted(named)}"
 
 
 def test_manifest_and_prompts_are_in_one_to_one_correspondence():
@@ -158,17 +197,17 @@ def test_install_resolves_every_placeholder_for_each_os(inst, monkeypatch, tmp_p
         assert skill.read_bytes().count(b"\r\n") == 0
 
 
-def test_install_skips_disabled_routines_unless_asked(inst, monkeypatch, tmp_path):
-    disabled = [r["id"] for r in ROUTINES if not r["enabled"]]
-    if not disabled:
-        pytest.skip("no disabled routine in the manifest")
-    _install(inst, monkeypatch, tmp_path, "Darwin", ["--repo", str(REPO)])
-    assert not (tmp_path / ".claude/scheduled-tasks" / disabled[0]).exists()
+def test_install_skips_disabled_routines_unless_asked(inst_disabled, monkeypatch, tmp_path):
+    inst, tid = inst_disabled
+    home = tmp_path / "default"
+    home.mkdir()
+    _install(inst, monkeypatch, home, "Darwin", ["--repo", str(REPO)])
+    assert not (home / ".claude/scheduled-tasks" / tid).exists()
 
     other = tmp_path / "with-disabled"
     other.mkdir()
     _install(inst, monkeypatch, other, "Darwin", ["--repo", str(REPO), "--include-disabled"])
-    assert (other / ".claude/scheduled-tasks" / disabled[0] / "SKILL.md").exists()
+    assert (other / ".claude/scheduled-tasks" / tid / "SKILL.md").exists()
 
 
 def test_install_refuses_a_repo_that_is_not_a_checkout(inst, monkeypatch, tmp_path):
@@ -260,21 +299,18 @@ def test_register_without_a_registry_reports_instead_of_crashing(inst, monkeypat
     assert (tmp_path / ".claude/scheduled-tasks").exists(), "prompts should still be installed"
 
 
-def test_paste_block_never_asks_for_a_retired_schedule(inst, monkeypatch, tmp_path):
+def test_paste_block_never_asks_for_a_retired_schedule(inst_disabled, monkeypatch, tmp_path):
     """The creation tool has no `enabled` parameter, so "create with the cron then disable"
     would leave the schedule live in between. A retired routine must be requested with no
     schedule, and its old cron must not appear as something to create."""
+    inst, tid = inst_disabled
     _, out = _install(inst, monkeypatch, tmp_path, "Darwin",
                       ["--repo", str(REPO), "--include-disabled"])
-    disabled = [r for r in ROUTINES if not r["enabled"] and r["schedule"].startswith("cron:")]
-    if not disabled:
-        pytest.skip("no disabled cron routine in the manifest")
-    for r in disabled:
-        block = out.split(f"  - {r['id']}")[1].split("  - ")[0]
-        assert "schedule: NONE" in block, r["id"]
-        assert "must not be recreated" in block, r["id"]
-        # the cron may be named as history, but never as the schedule to set
-        assert f"schedule: cron {r['schedule'][5:]}" not in block, r["id"]
+    block = out.split(f"  - {tid}")[1].split("  - ")[0]
+    assert "schedule: NONE" in block
+    assert "must not be recreated" in block
+    # the cron may be named as history, but never as the schedule to set
+    assert "schedule: cron 0 7 * * *" not in block
 
 
 def test_paste_block_does_not_ask_the_tool_for_fields_it_cannot_set(inst, monkeypatch, tmp_path):

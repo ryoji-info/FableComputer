@@ -45,9 +45,9 @@ and `prompts/`. Commit the result.
 
 **The export is additive.** A routine that is already in `routines.json` but is not
 installed on the machine you are exporting from is *carried forward untouched*, and the
-run says so. That is what makes exporting from a second machine safe: the Mac has never
-installed the retired `agent-lab-daily-posts`, and an export from there must not silently
-delete it. Likewise, a routine whose `SKILL.md` cannot be read keeps its committed copy
+run says so. That is what makes exporting from a second machine safe: a routine you chose
+not to install on the Mac must not be deleted from the record just because you exported
+from there. Likewise, a routine whose `SKILL.md` cannot be read keeps its committed copy
 rather than losing it, and the run exits non-zero so the gap is visible.
 
 When you genuinely did delete a routine in the app and want it gone from the export:
@@ -113,9 +113,14 @@ and nothing else. So two things the block *cannot* ask it to do, and says so ins
 backup. For a routine that does not exist yet it writes the full entry the app expects —
 schedule, working directory, enabled flag, display name, worktree flag, and a `createdAt`
 stamp — so the routine appears named and dated rather than blank. It needs the registry to
-exist already (i.e. at least one routine created on that machine). **Quit Claude Code
-before running it**: the app owns that file and can overwrite the patch when it exits.
-Use it when you want no interactive step; prefer A otherwise.
+exist already (i.e. at least one routine created on that machine).
+
+**Quit Claude Code before running it.** The app owns that file and rewrites it in full
+from its own in-memory state whenever a task changes — not only on exit. This is observed,
+not theoretical: on 2026-07-31 a display name written directly into the registry was
+discarded a few minutes later when the app processed an unrelated task deletion. Anything
+you patch underneath a running app should be treated as provisional until you have
+confirmed it in the sidebar. Prefer path A, and set display names in the Edit form.
 
 ## Things worth knowing
 
@@ -144,11 +149,13 @@ Use it when you want no interactive step; prefer A otherwise.
 - **Tool approvals are per-machine.** The first run of each routine on the Mac will prompt
   for the tools it needs (git, python, the GitHub API). Approving once sticks for that
   routine, so a "Run now" on each is a good way to pre-approve before relying on them.
-- **`agent-lab-daily-posts` is exported disabled.** It is the retired cron version of the
-  posts routine, superseded by the manual `agent-lab-posts`; `install_routines.py` skips
-  disabled routines unless you pass `--include-disabled`. Since 2026-07-27 nothing in the
-  lab runs on a schedule — every run is started by hand, at roughly daily cadence as
-  compute allows.
+- **Nothing runs on a schedule.** All four routines are manual/Run-now; since 2026-07-27
+  every run is started by hand, at roughly daily cadence as compute allows. The last
+  scheduled routine — `agent-lab-daily-posts`, the retired `0 7 * * *` version of the posts
+  pipeline — was deleted on 2026-07-31, so the lab has no cron anywhere. If you ever do
+  disable a routine rather than delete it, `install_routines.py` skips disabled routines
+  unless you pass `--include-disabled`, and the registration block asks for them with no
+  schedule at all.
 - **The prompts are the contract.** Each one defers to `agents/scripts/*.py` as the
   specification for its pipeline and starts with a duplicate/state check, so running a
   routine twice, or on a second machine, does not double-post. That is what makes a
