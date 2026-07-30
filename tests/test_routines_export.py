@@ -74,6 +74,13 @@ def test_manifest_entries_carry_the_definitional_fields():
         assert r["schedule"] == "manual" or r["schedule"].startswith(("cron:", "once:"))
 
 
+def test_every_routine_has_a_display_name():
+    """All five are named, so a blank one means an export ran on a machine whose app had
+    not been given the names — which silently drops them from the record."""
+    unnamed = [r["id"] for r in ROUTINES if not r["displayName"]]
+    assert not unnamed, f"no display name (exported from an unconfigured machine?): {unnamed}"
+
+
 def test_display_name_prefixes_do_not_collide():
     """The maintainer orders the sidebar with numeric prefixes, so two routines claiming
     the same number is ambiguous — and it is how a retired routine ends up sitting in the
