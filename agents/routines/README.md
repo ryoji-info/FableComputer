@@ -33,8 +33,11 @@ Two placeholders keep the prompts OS-neutral:
 
 ## Exporting (on the machine that has the routines)
 
+Today that is the Windows machine, where the interpreter is `python`; substitute `python3`
+if you are exporting from the Mac.
+
 ```bash
-python3 agents/routines/export_routines.py
+python agents/routines/export_routines.py
 ```
 
 It reads the app registry and each `SKILL.md`, tokenizes, and rewrites `routines.json`
@@ -50,7 +53,7 @@ rather than losing it, and the run exits non-zero so the gap is visible.
 When you genuinely did delete a routine in the app and want it gone from the export:
 
 ```bash
-python3 agents/routines/export_routines.py --prune
+python agents/routines/export_routines.py --prune
 ```
 
 Routines belonging to *other* checkouts are ignored, so `--repo` cannot accidentally drag
@@ -58,7 +61,7 @@ another project's routines — or their absolute paths — into this repository.
 check is available:
 
 ```bash
-python3 agents/routines/export_routines.py --check   # exit 1 if the export is behind
+python agents/routines/export_routines.py --check   # exit 1 if the export is behind
 ```
 
 Run that after editing a routine in the app — **it cannot run in CI**, because CI has no
@@ -69,9 +72,10 @@ manifest into a sandbox for macOS, Linux and Windows in turn.
 
 ## Importing on a Mac
 
-Prerequisites: this repository cloned, Claude Code installed, `python3` available, and a
-**GitHub token reachable from `git credential fill`** — the routines get their token that
-way rather than from `gh`, so on macOS store a PAT once with the `osxkeychain` helper:
+Prerequisites: this repository cloned, Claude Code installed, **Python ≥ 3.10** (both
+scripts write files with an explicit newline mode, which is 3.10+), and a **GitHub token
+reachable from `git credential fill`** — the routines get their token that way rather than
+from `gh`, so on macOS store a PAT once with the `osxkeychain` helper:
 
 ```bash
 git config --global credential.helper osxkeychain
@@ -93,10 +97,17 @@ finish it:
 
 **A. Ask Claude Code (recommended).** Paste the printed block into Claude Code with this
 repository open. It calls the scheduled-task tool once per routine, which is exactly how
-these routines were created in the first place, and the app picks them up immediately. The
-block states each routine's **enabled flag explicitly**, including "must not fire" for a
-disabled one — silence there would read as "enabled", which for a routine carrying a
-retired cron expression would put that schedule back into service.
+these routines were created in the first place, and the app picks them up immediately.
+
+That tool accepts a task id, prompt, description, schedule and notification preference —
+and nothing else. So two things the block *cannot* ask it to do, and says so instead:
+
+- **A disabled routine has to be created and then paused**, because there is no `enabled`
+  parameter on creation. The block spells that out for the retired cron routine; silence
+  there would read as "enabled" and put a retired schedule back into service.
+- **Display name and worktree flag are set in the app's per-task Edit form**, the same
+  place as the model picker. The block lists the values to type in. `--register` sets both
+  directly, which is the one respect in which path B is more complete than path A.
 
 **B. `--register`.** Patches the registry file directly, after writing a timestamped
 backup. For a routine that does not exist yet it writes the full entry the app expects —
@@ -114,6 +125,15 @@ Use it when you want no interactive step; prefer A otherwise.
   app's runtime record for this machine: `createdAt`, `lastRunAt`, `lastScheduledFor`,
   `notifySessionId`. So a freshly installed routine has no run history on the new machine,
   which is correct — it has not run there.
+- **Run-completion notifications do not transfer.** The app records the notification
+  subscription as a *session* id, which means nothing on another machine. A freshly
+  created routine notifies whichever session created it (the tool's default); pass
+  `notifyOnCompletion: false` when registering if you would rather it stayed quiet.
+- **One prompt still carries a machine fact.** `agent-lab-posts` asserts that the `gh` CLI
+  is not installed. The instruction it leads to — use the REST/GraphQL API with a token
+  from `git credential fill` — is correct on any machine, but the premise would be false
+  on a Mac that has `gh`. Fixing it means editing the live routine's prompt and
+  re-exporting, which is a maintainer action; nothing breaks if it is left alone.
 - **Routines only run while Claude Code is open.** A due routine that was missed fires on
   next launch.
 - **The per-routine model picker is app state and is not exported.** These routines are

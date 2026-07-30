@@ -173,12 +173,14 @@ def test_install_refuses_a_repo_that_is_not_a_checkout(inst, monkeypatch, tmp_pa
 
 
 def test_paste_block_carries_the_display_names(inst, monkeypatch, tmp_path):
-    """Path A (asking Claude Code) must be able to reproduce the app-side naming."""
+    """Path A cannot set a display name through the creation tool, so the block must still
+    surface the value — as something to set in the app afterwards."""
     _, out = _install(inst, monkeypatch, tmp_path, "Darwin", ["--repo", str(REPO)])
     assert MAC_NOTE in out and str(REPO) in out
     for r in ROUTINES:
         if r["enabled"] and r["displayName"]:
             assert r["displayName"] in out, r["id"]
+    assert "Edit form" in out, "the block must say where a display name actually gets set"
 
 
 # --------------------------------------------------------------------------- --register
@@ -253,18 +255,35 @@ def test_register_without_a_registry_reports_instead_of_crashing(inst, monkeypat
     assert (tmp_path / ".claude/scheduled-tasks").exists(), "prompts should still be installed"
 
 
-def test_paste_block_states_the_enabled_flag_on_every_routine(inst, monkeypatch, tmp_path):
-    """Silence reads as "enabled". For a routine carrying a retired cron, a registration
-    request that omits the flag would put that schedule back into service."""
+def test_paste_block_never_asks_for_a_retired_schedule(inst, monkeypatch, tmp_path):
+    """The creation tool has no `enabled` parameter, so "create with the cron then disable"
+    would leave the schedule live in between. A retired routine must be requested with no
+    schedule, and its old cron must not appear as something to create."""
     _, out = _install(inst, monkeypatch, tmp_path, "Darwin",
                       ["--repo", str(REPO), "--include-disabled"])
+    disabled = [r for r in ROUTINES if not r["enabled"] and r["schedule"].startswith("cron:")]
+    if not disabled:
+        pytest.skip("no disabled cron routine in the manifest")
+    for r in disabled:
+        block = out.split(f"  - {r['id']}")[1].split("  - ")[0]
+        assert "schedule: NONE" in block, r["id"]
+        assert "must not be recreated" in block, r["id"]
+        # the cron may be named as history, but never as the schedule to set
+        assert f"schedule: cron {r['schedule'][5:]}" not in block, r["id"]
+
+
+def test_paste_block_does_not_ask_the_tool_for_fields_it_cannot_set(inst, monkeypatch, tmp_path):
+    """create_scheduled_task takes taskId/prompt/description/schedule/notifyOnCompletion
+    only. Asking it for a display name in the routine list would be asking for something
+    impossible; the values belong in the Edit-form section instead."""
+    _, out = _install(inst, monkeypatch, tmp_path, "Darwin", ["--repo", str(REPO)])
+    request, _, edit_form = out.partition("cannot set")
+    assert edit_form, "the block must name the fields the tool cannot set"
     for r in ROUTINES:
-        block = out.split(f"- {r['id']}:")[1].split("  - ")[0]
-        if r["enabled"]:
-            assert "enabled: yes" in block, r["id"]
-        else:
-            assert "must not fire" in block, r["id"]
-            assert "enabled: yes" not in block, r["id"]
+        if r["enabled"] and r["displayName"]:
+            assert r["displayName"] not in request, \
+                f"{r['id']}'s display name is inside the tool request"
+            assert r["displayName"] in edit_form, r["id"]
 
 
 # ------------------------------------------------------- install: a broken manifest entry
