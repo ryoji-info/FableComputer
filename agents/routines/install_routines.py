@@ -20,7 +20,10 @@ registry, not in the task folder. Two ways to complete it:
 
   A. Ask Claude Code (recommended, fully supported): paste the block this script prints.
      Claude calls the scheduled-task tool once per routine, which is exactly how these
-     were created originally.
+     were created originally. That tool takes taskId / prompt / description / schedule /
+     notifyOnCompletion and nothing else, so a routine's display name and worktree flag
+     are listed separately for the app's Edit form, and a disabled routine has to be
+     created and then paused — the creation call has no "enabled" parameter.
   B. --register: patch the registry file directly. Only works if the app has created it
      already (i.e. you have at least one routine on this machine). QUIT Claude Code first
      — it owns that file and can overwrite the patch on exit. A timestamped backup is
@@ -193,25 +196,42 @@ def main() -> int:
     print("with this repository open:")
     print("=" * 78)
     print()
-    print("Please register these scheduled tasks on this machine. For each one, use the")
+    print("Please create these scheduled tasks on this machine. For each one, use the")
     print(f"prompt body in agents/routines/prompts/<id>.md verbatim, substituting {{{{REPO}}}} with")
     print(f"{repo} and {{{{PLATFORM_NOTE}}}} with \"{note}\"")
     print(f"and set the working directory to {repo}:")
     print()
     for r in installed:
-        print(f"  - {r['id']}: {describe_schedule(r['schedule'])}")
-        if r.get("displayName"):
-            print(f"    display name: {r['displayName']}")
+        print(f"  - {r['id']}")
         print(f"    description: {r['description']}")
-        # state it on every routine: silence here reads as "enabled", and for a routine
-        # carrying a retired cron that would put the schedule back into service
-        print(f"    enabled: {'yes' if r['enabled'] else 'NO — create it paused/disabled, it must not fire'}")
-        if r.get("useWorktree"):
-            print(f"    run in a git worktree: yes")
+        if r["enabled"]:
+            print(f"    schedule: {describe_schedule(r['schedule'])}")
+        else:
+            # The creation tool has no `enabled` parameter, so "create it with the cron,
+            # then disable it" would leave the schedule live between the two calls and
+            # depends on the second one happening. A retired routine is registered with no
+            # schedule instead: the manifest still records what it used to run on.
+            print("    schedule: NONE — create it with no schedule at all.")
+            print(f"    (It is retired and disabled; the export records its old "
+                  f"{describe_schedule(r['schedule'])}, which must not be recreated.)")
         cwd = routine_cwd(r, repo)
         if cwd != repo:
             print(f"    working directory: {cwd}  (not this checkout)")
     print()
+
+    # The creation tool takes taskId / prompt / description / schedule / notifyOnCompletion
+    # and nothing else, so these two cannot be part of the request above. Say where they
+    # do get set rather than asking for something that cannot be done.
+    named = [r for r in installed if r.get("displayName")]
+    worktree = [r for r in installed if r.get("useWorktree")]
+    if named or worktree:
+        print("Two fields the creation tool cannot set — set them afterwards in the app's")
+        print("per-task Edit form (same place as the model picker):")
+        for r in named:
+            print(f"  display name   {r['id']} -> {r['displayName']}")
+        for r in worktree:
+            print(f"  worktree       {r['id']} -> run in a git worktree")
+        print()
     if skipped:
         print("Not requested (disabled in the export): "
               + ", ".join(r["id"] for r in skipped))
