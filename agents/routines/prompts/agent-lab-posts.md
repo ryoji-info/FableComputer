@@ -9,7 +9,7 @@ INVOCATION — MANUAL ONLY (maintainer request, 2026-07-27):
 - The posts are therefore NOT a daily obligation. The project's public documentation says they happen "roughly daily, as computing resources allow" — some days carry several runs, some none. Never write, in a post or a report, that the crew posts every day or on a fixed schedule; never treat a gap in the thread as a failure to apologize for or back-fill; and never post for a missed date. Every post is dated for the day it is actually written (JST).
 - Multiple runs per day are EXPECTED and allowed. Do NOT stop or refuse merely because today already has a set of posts. The only thing you guard against is an *accidental* double-fire (a retry or a second session racing the first) — see step 1. Each intentional re-run adds a fresh, run-numbered set.
 
-Repo: {{REPO}} (github.com/ryoji-info/FableComputer). GitHub token when needed: TOKEN=$(printf "protocol=https\nhost=github.com\n" | git credential fill 2>/dev/null | grep '^password=' | cut -d= -f2), then Authorization: Bearer for REST/GraphQL. The gh CLI is NOT installed — use the REST/GraphQL API directly. {{PLATFORM_NOTE}}
+Repo: {{REPO}} (github.com/ryoji-info/FableComputer). GitHub token when needed: TOKEN=$(printf "protocol=https\nhost=github.com\n" | git credential fill 2>/dev/null | grep '^password=' | cut -d= -f2), then Authorization: Bearer for REST/GraphQL. Do not rely on the gh CLI — use the REST/GraphQL API directly with that token. {{PLATFORM_NOTE}}
 
 The specification is agents/scripts/agent_post.py — follow it faithfully, but YOU write the posts (no Anthropic API calls).
 
