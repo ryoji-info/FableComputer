@@ -6,7 +6,12 @@ This ledger records the status once, so a reviewer can see at a glance which cit
 are load-bearing and which are still unverified.
 
 **Status values.** `verified` — checked against the primary source (volume, page, year
-confirmed). `memory-sourced` — quoted from recall; the claim may be right, the locator
+confirmed). `locator-verified (publisher metadata)` — the bibliographic locator
+(authors, title, journal, volume, pages, year) checked against publisher-deposited
+metadata (e.g. Crossref); the article text itself unread, so any number quoted from
+inside it keeps its own status. One notch below `verified`, which requires the primary
+text. (Status proposed in the [2026-07-31 lab posts](https://github.com/ryoji-info/FableComputer/discussions/1#discussioncomment-17846634).)
+`memory-sourced` — quoted from recall; the claim may be right, the locator
 is unconfirmed. `chain-internal` — the number the record actually relies on comes from
 the released code, not the citation. `n/a` — cited for context, nothing rests on it.
 
@@ -24,7 +29,7 @@ chain-internal.
 | Kiselev & Schmalian, hydrodynamic slip length | [2026-07-18-boundary-channel-bench-discriminants](2026-07-18-boundary-channel-bench-discriminants.md) | the *rejected* alternative — the note argues a slip length does not fit a carrier-crossing contact | **memory-sourced** | low priority: it is cited to be set aside |
 | Goto's parametron machines (operating well below the resonator carrier) | [2026-07-22-flush-noise-figure-negative](2026-07-22-flush-noise-figure-negative.md) §7; [2026-07-23](2026-07-23-reset-switch-adjudication.md) §4 | a historical precedent for the ≈0.1 THz conclusion, not the conclusion | **n/a** (context) | none |
 | RSFQ single-flux-quantum threshold comparison | [2026-07-21-composed-regeneration-envelope](2026-07-21-composed-regeneration-envelope.md) §(RSFQ comparison) | a contrast used to characterise the fabric's *linear* margin behaviour | **n/a** (context) | none |
-| hBN ultra-flat substrate disorder figure (2.5×10⁹ cm⁻²) | [2026-07-15-finite-sharpness-is-not-a-variance](2026-07-15-finite-sharpness-is-not-a-variance.md) Limitation 5 | the reachability side of a β-dependent requirement the note leaves **open** | **memory-sourced** | verify if the requirement is ever quoted as a spec; the note states it as open |
+| J. Xue et al., "Scanning tunnelling microscopy and spectroscopy of ultra-flat graphene on hexagonal boron nitride," *Nat. Mater.* **10**, 282–285 (2011), doi:[10.1038/nmat2968](https://doi.org/10.1038/nmat2968) — Part I ref [12]; source of the hBN ultra-flat disorder figure (2.5×10⁹ cm⁻²) | [2026-07-15-finite-sharpness-is-not-a-variance](2026-07-15-finite-sharpness-is-not-a-variance.md) Limitation 2 (this row said Limitation 5 until 2026-07-31 — a ledger mis-pointer; Limitation 5 is trim-residual slot-staticity) | the reachability side of a β-dependent requirement the note leaves **open** | **locator-verified (publisher metadata)** — the 2.5×10⁹ cm⁻² value itself stays **memory-sourced** | locator checked against Crossref 2026-07-31 ([Quanta's lab post](https://github.com/ryoji-info/FableComputer/discussions/1#discussioncomment-17846645)); read the article to confirm where the 2.5×10⁹ cm⁻² figure appears before the requirement is quoted as a spec. β (the Limitation 2 convention) gates first regardless — nothing in either manuscript pins β·A_swing = n vs ≈ 0.1n |
 
 ## Unverified-by-third-party numbers (a different category, recorded for completeness)
 
