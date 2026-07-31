@@ -44,6 +44,7 @@ post-promotion blockquote.
 | 07-23 | [reset-switch-adjudication](2026-07-23-reset-switch-adjudication.md) | **no de-Q rate — including D = ∞ — closes the flushed F = 2 ledger at 4 ps**; rebuild time binds; the defensible headline is **≈0.1 THz logic** (E1 79–92, E2 98–128, E3 100–148 GHz) | ⚠️ §4's E1 row and `f_max_F2_flushed_THz` = 0.115 carry 07-25's burst proviso (the centre is reached at no measured burst length); §0.2's pedestal figures are floor-referenced (data-referenced +10.0/+28.4 dB ⇒ spec ≥ ~20–38 dB); E3's 81 GHz demonstrated-calibrated corner is omitted from the row |
 | 07-25 | [e1-burst-scaling-proviso](2026-07-25-e1-burst-scaling-proviso.md) | transient gain is set by **drive duration**, not slot length: the released 3-cycle burst falls 0.9–3.0 dB short of F = 2 at every slot; ncyc ≈ 12 needed | stands. Its three tracked code items (`solver.run` not forwarding `ncyc`; dead `rep_ratio`; `_cavity` not forwarding `f0`) remain open — see the CI item in [ROADMAP.md](../ROADMAP.md) |
 | 07-26 | [record-audit-ten-findings](2026-07-26-record-audit-ten-findings.md) | ten findings on where the published artifacts diverge from the record: stale metadata, six days of timing physics in neither manuscript, the dead generator, the public on-ramp, and why hand-reading could not certify completeness | current. This index, [CITATIONS.md](CITATIONS.md), [../papers/ERRATA.md](../papers/ERRATA.md) and the CI sweep are its implementation |
+| 07-31 | [physical-launch-gated-frontier](2026-07-31-physical-launch-gated-frontier.md) | the E1 launch made physical: the knee migrates to the CW corner, the slot-filling '0'-floor gives back 5–6 dB and pp breaks the 1-dB criterion at 91 GHz; a duty-0.8 data-gated launch closes F = 2 at 67–71 GHz (measured rungs); 91 GHz survives as an F = 1 wire | current — supersedes 07-25's `f_max_F2_burst12_GHz` for physical drives (qualification recorded in both notes' terms) |
 
 ## Chains at a glance
 
@@ -52,7 +53,7 @@ post-promotion blockquote.
 - **avg16 / decoder band:** 07-12 crossover → 07-14 → 07-15 → 07-16 → Part II v1.6/v1.7 → the 2026-07-26 relabels.
 - **Boundary channel:** 07-12 boundary-factor → 07-13 signed band → 07-18 ×2 (contact-gated on σ_c, still open).
 - **Fan-out / regeneration:** 07-20 loaded fan-out → 07-21 composed envelope.
-- **ISI / flush / reset / burst:** 07-22 ring-down → 07-22 flush → 07-23 reset-switch → 07-25 burst proviso. **This is the chain neither manuscript carries.**
+- **ISI / flush / reset / burst / launch:** 07-22 ring-down → 07-22 flush → 07-23 reset-switch → 07-25 burst proviso → 07-31 gated launch. **This is the chain neither manuscript carries.**
 
 ---
 
