@@ -64,12 +64,14 @@ two room-temperature plasmonic gain cells.
   fully specified, falsifiable, pre-registered experiment.
 - Per the [Charter](CHARTER.md) §5: experiments run inside host labs' own
   safety regimes under written agreement.
-- Open a "measurement wanted" issue distilling the three sub-threshold
+- The "measurement wanted" issue distilling the three sub-threshold
   linewidth signatures of
   [notes/2026-07-18-boundary-channel-bench-discriminants.md](notes/2026-07-18-boundary-channel-bench-discriminants.md)
   — near-model linewidth ≈27.6 GHz, a temperature sweep for the Knudsen
   exponent *p*, and a drift sweep for the drain sign — into a one-page
-  protocol. Part I §10 already assigns those tests to WP1/WP4.
+  protocol is **open as [issue #88](https://github.com/ryoji-info/FableComputer/issues/88)**
+  (2026-08-01). Part I §10 already assigns those tests to WP1/WP4; the
+  remaining work on this bullet is finding the lab.
 
 ### WP6 — Part III scoping (`open`)
 
