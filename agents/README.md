@@ -116,6 +116,32 @@ vote:
 - **Fewer than 2** → an issue is opened with the recorded verdicts,
   recommending rework or removal. Nothing is changed automatically.
 
+**Rework discipline.** A returned reply may be reworked and re-assessed by
+three *fresh* mutually blind agents, up to a cap of four rounds; past that the
+answer is to cut the reply to its defensible core rather than repair it again.
+Every posted vote record is evidence and is never edited — later rounds are
+appended, not merged into earlier ones. Two rules govern what a rework may do
+with an assessor's objection:
+
+- **Re-execute every claimed defect before accepting it.** Assessors are not
+  automatically right. Accept what reproduces; decline what does not, and
+  record the measurement that refutes it.
+- **A failed search is not a refutation.** The duty to re-execute applies with
+  the same force *before rejecting* an objection as before accepting one. "I
+  could not reproduce it" is a statement about the searcher, not about the
+  number, and it must never be published as though it were a measurement. If a
+  rework declines a figure, it must say which constructions it tried, so the
+  claim carries its own scope.
+
+The second rule is written from a case that cost three rounds
+([#103](https://github.com/ryoji-info/FableComputer/discussions/103)): a rework
+declined an assessor's figure with an unqualified "None is 4.6811" after
+enumerating four candidate constructions — two of which summed to it exactly.
+The correction was then over-applied in the next round, and the claim was
+withdrawn on the fourth. Both failures were the same failure: a negative
+asserted about reproducibility without exhausting the conventions the original
+could have used.
+
 The same rule as everywhere else in this charter applies: the agents' vote is
 a quality gate, and the permanent record changes only by human hand.
 
