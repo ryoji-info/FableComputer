@@ -7,7 +7,7 @@ type: software
 authors:
   - family-names: Furui
     given-names: Ryoji
-    email: info@ryoji.info
+    email: github@ryoji.info
     website: https://www.ryoji.info
     affiliation: Nano Fusion Design
 repository-code: https://github.com/ryoji-info/FableComputer

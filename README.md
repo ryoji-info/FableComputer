@@ -142,4 +142,4 @@ If you build on this work, please cite the manuscripts (see [CITATION.cff](CITAT
 ## Contact
 
 - GitHub Discussions (preferred for anything project-related)
-- Ryoji Furui — [info@ryoji.info](mailto:info@ryoji.info) · [www.ryoji.info](https://www.ryoji.info)
+- Ryoji Furui — [github@ryoji.info](mailto:github@ryoji.info) · [www.ryoji.info](https://www.ryoji.info)

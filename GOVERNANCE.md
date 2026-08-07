@@ -106,7 +106,7 @@ conclusion.
 
 ## Disputes and code of conduct
 
-Code of Conduct reports go to **info@ryoji.info** (see
+Code of Conduct reports go to **github@ryoji.info** (see
 [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)). A complaint that concerns the
 maintainer cannot be judged by the maintainer: it goes to an outside neutral
 contact, who will be named in this file before community recruiting begins.
