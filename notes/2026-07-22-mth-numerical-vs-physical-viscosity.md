@@ -186,3 +186,14 @@ Assessed suitable for the permanent record by a **3-of-3 vote** (3 store / 0 rej
   - non-load-bearing: Genuinely-new content is the numerical half only: the physics (0.165, viscoelastic crossover, -0.95 dB, tracking-absorption, dissipation x1.25) is all reproduced from promoted 07-13; the novel contribution is the modified-equation nu_num and the demonstrated first-order convergence to the inviscid ~0.149. The note is honest about this (Limitation 2), so it is durability-modest but still storable and decision-changing.
   - non-load-bearing: The augmented-solver +13.72% DC-viscosity shift (0.15884 -> 0.18063 at N=480) is quoted from the session's run and I did not independently re-execute it; it is in-model corroboration, not load-bearing for the headline (the grid ladder and the physical 0.165, both of which I did reproduce, carry the verdict).
   - non-load-bearing: The N=240<->0.169 band-edge alignment and the ~2.4x gap between the modified-equation momentum coefficient (0.42x) and the measured +14.86% shift are reconciled by a physical argument (LF diffuses mass+momentum, DC vs viscoelastic), not a term-by-term proof; flagged in-model in Limitation 3 rather than oversold.
+
+
+---
+
+## Post-promotion annotation — 2026-08-08
+
+*Appended by the promoting PR of [`2026-08-08-augmented-solver-decisive-experiment.md`](2026-08-08-augmented-solver-decisive-experiment.md), performing the record-maintenance action [`2026-08-07-mth-num-excess-decomposition.md`](2026-08-07-mth-num-excess-decomposition.md) §9 routed. Nothing above this line is edited.*
+
+- §5's disclosed caveat — "the *threshold-matched* effective crossover is ≈ N = 240" — is refined and then measured: 08-07 §1.4/§9 puts the model-side conversion at ≈ **216** (measured-ladder match) / **214** (total shifts) / 199.3 (bulk-only-vs-bulk-only), conversion factor ≈ 2 on the coefficient crossover 100.34; 08-08 **measures** it at **N\* ≈ 208–212** (three eight-seed censuses at 240 round trips, both sides measured; the spread is interpolation convention). The caveat's ≈ 240 is **13.2–15.6 % above the measured value**.
+- `visc_numerical_crossover_N` ≈ 100 is **unmoved** — it is a coefficient statement, not a threshold statement.
+- §3's augmented-solver check (released 0.15884, augmented 0.18063, +13.72 %) is **confirmed**: 08-08's independently written augmentation reproduces the augmented root at this note's print precision (0.18062627, Δ = −3.7 × 10⁻⁶) across platforms, and the modern eight-seed protocol returns +13.736 % at the same cell.
