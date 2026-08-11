@@ -9,6 +9,8 @@
 
 ---
 
+> **Correction — 2026-07-31 (post-promotion): §2's mechanism story, not its numbers.** Every number in this note reproduces — the §6 listing runs byte-for-byte against its pasted output, and the ladder is bit-for-bit against `results.json`. What was wrong is the *explanation* §2 gives for one ratio. §2 compares `ν_num` against the **full** ν₀, but `ν_num` is a characteristic **mean** — identically ½·tr **D** for the Lax–Friedrichs diffusion matrix **D** — whereas a momentum-only physical viscosity `diag(0, ν₀)` is seen by the two DS characteristics with weights (1±M)/2, i.e. as **ν₀/2 exactly, at every M**. The two columns of §2's table are therefore in different normalizations, off by exactly 2. Like-for-like the shipped N=240 injects **0.836·ν₀**, not 0.42·ν₀, and the crossover is at **N\* ≈ 200.7**, not ≈100. Consequently the factor ≈2 that §2 attributes to physics — "the extra, unphysical mass-diffusion channel **plus the boundary-ghost damping** of the DS standing mode roughly double the effective damping" — is a bookkeeping identity that needs no boundary-ghost term at all, and the residual it leaves is ≈1.2–1.4×, not ≈2.4×. Independently derived in [Fable Session — 2026-08-07, discussion #108](https://github.com/ryoji-info/FableComputer/discussions/108), which reached the same trace identity and graded this note's co-attribution *"confirmed in kind and refuted in size."* **The verdict is untouched and is if anything firmer:** §1's "at the shipped N=240 it happens to ≈ ν₀" is *correct* on the like-for-like comparison (0.836), and the threshold consequence holds to under 1 %. §2's prose, §5's `visc_numerical_crossover_N`, and §7's Limitation 3 are corrected below, with a dated verification listing in §2. The original §6 listing, its printed output, and the appended vote record are the verbatim record and are **not** edited.
+
 > **⚠️ Executing-model disclosure.** Produced in a maintainer-operated Claude Code session per [agents/README.md](https://github.com/ryoji-info/FableComputer/blob/main/agents/README.md) (Operations), executed on **`claude-opus-4-8` (Opus 4.8), NOT Claude Fable 5.** This routine's default is Fable 5; that model was not active. The three candidate drafts and the recorded 2-of-3 vote were produced earlier in the same session, also on Opus 4.8, in isolated **blind** subagent contexts (one persona each, no self-votes). Nothing here is labeled Fable 5 output. Every anchor, the grid ladder, and the viscosity-augmented solver run were re-executed against the released `fable-model-chain/` (`PYTHONIOENCODING=utf-8`, Windows/CPython); the §6 listing reproduces the closed-form parts and the ladder/augmented values are quoted from the runs below. Adversarially checked before posting by independent in-session contexts — which **caught and corrected** an earlier draft that quoted the raw-Navier–Stokes threshold 0.169 as the physical central value; that draft omitted the viscoelastic crossover the promoted 07-13 note already carries, and the verdict below is corrected to the promoted `M_th_kinetic_353K = 0.165`.
 
 ---
@@ -37,7 +39,82 @@ Reply to the winning prompt of **Fable Session — 2026-07-22** (Kinetic 🌊, 2
 
 with `ν₀(norm) = (v_F²τ_ee/4)/(L·s) = 1.527×10⁻²` (the DC kinematic viscosity, no crossover). `ν_num ∝ 1/N` (first-order, vanishing on refinement — matching the ladder's first-order threshold convergence, demonstrated). **`ν_num(N*) = ν₀` at N* ≈ 100**, so by the momentum-diffusion coefficient the shipped N=240 injects ~0.4× ν₀.
 
-**The gap, flagged (in-model).** The measured N=240 threshold shift (+14.86 %) is the *DC/Navier–Stokes* shift (raw viscous_fraction 0.128, no crossover → ~+15 %, the band edge), larger than the 0.42× momentum coefficient predicts. The reconciliation is physical: **LF diffuses the *conserved* variables — both the continuity (mass) and momentum equations — whereas kinematic viscosity is momentum-only.** The extra, unphysical mass-diffusion channel plus the boundary-ghost damping of the DS standing mode roughly double the effective damping per unit momentum-coefficient. So N=240 lands at the NS/band-edge threshold; it does **not** reproduce the physical *central* 0.165, because (a) it is DC (no viscoelastic roll-off) and (b) it is a coincidental alignment of differently-sized numerical effects — which is exactly why it evaporates under refinement.
+**The gap — and what it actually is (corrected 2026-07-31).** The measured N=240 threshold shift (+14.86 %) is the *DC/Navier–Stokes* shift (raw viscous_fraction 0.128, no crossover → ~+15 %, the band edge), which looks larger than the 0.42× above predicts. **That apparent gap is mostly a normalization mismatch, not physics.** `ν_num` as defined here is a characteristic *mean* — identically ½·tr **D**, where **D** = (Δx²/2Δt)(**I** − (Δt/Δx)²**A**²) is the Lax–Friedrichs diffusion matrix on the conserved vector q = (δh, δm) and **A** is the DS flux Jacobian. A momentum-only physical viscosity is the matrix `diag(0, ν₀)`, and the two DS characteristics see it with weights (1±M)/2 — mean **exactly ν₀/2, at every M**. So the ratio column above divides a characteristic mean by a *full* ν₀: the two sides differ by exactly 2 before any physics enters.
+
+Compared like with like, the shipped N=240 injects **0.836·ν₀** and the crossover sits at **N\* ≈ 200.7** — close to the shipped grid, which is why the measured shift is essentially the full-ν₀ DC/NS shift. The residual after that exact factor is **≈1.2–1.4×** depending on which full-ν₀ shift you reference (+15 % raw, +13.7 % augmented-solver, +12.6 % on an independent reconstruction), comfortably inside the in-model slop of a coupled boundary problem. *The earlier text attributed the whole ≈2.4× to "the extra, unphysical mass-diffusion channel plus the boundary-ghost damping of the DS standing mode"; the mass channel is real but its contribution here is exact and equal to 2 — it is the trace identity — and no boundary-ghost term is required.* The conclusion is unchanged and slightly stronger: N=240 lands at the NS/band-edge threshold; it does **not** reproduce the physical *central* 0.165, because it is DC (no viscoelastic roll-off) — and it still evaporates under refinement, since ν_num ∝ 1/N in either normalization.
+
+**Verification (2026-07-31, runnable; independent of the §6 listing, which is unedited).**
+
+```python
+# Correction listing (2026-07-31): the factor 2 of section 2 is a normalization identity.
+import sys
+import numpy as np
+CHAIN = r"...\fable-model-chain"                    # adjust to your checkout
+sys.path.insert(0, CHAIN)
+import constants as C, ds_cell as DS, kinetic as K
+s = DS.plasmon_speed(); L = DS.cell_length(s); Mth = DS.M_threshold(L, s, C.tau(C.Tcap))
+nu0 = (C.vF**2 * K.tau_ee(C.Tcap) / 4.0) / (L * s)          # DC kinematic viscosity, normalized
+jac = lambda M: np.array([[0.0, 1.0], [1 - M * M, 2 * M]])  # DS flux Jacobian, eigenvalues 1+-M
+
+def nu_num(N, cfl=0.4, M=Mth):                              # the note's scalar, section 2
+    dx = 1.0 / N; cmax = 1.0 + abs(M) + 0.2; dt = cfl * dx / cmax; pref = dx**2 / (2 * dt)
+    return 0.5 * (pref * (1 - ((1 + M) * dt / dx)**2) + pref * (1 - ((1 - M) * dt / dx)**2))
+
+def D_LF(N, cfl=0.4, M=Mth):                                # the LF diffusion MATRIX on q=(dh,dm)
+    dx = 1.0 / N; cmax = 1.0 + abs(M) + 0.2; dt = cfl * dx / cmax; A = jac(M)
+    return (dx**2 / (2 * dt)) * (np.eye(2) - (dt / dx)**2 * (A @ A))
+
+def char_mean(B, M):                        # mean diffusivity the two characteristics actually see
+    A = jac(M); w, R = np.linalg.eig(A); Lf = np.linalg.inv(R)
+    return float(np.mean([(Lf[k] @ B @ R[:, k]) / (Lf[k] @ R[:, k]) for k in range(2)]))
+
+print("(a) the note's nu_num IS 0.5*tr(D_LF) -- an identity, not an agreement")
+for N in (240, 480, 720):
+    print("    N=%3d  nu_num=%.6e  0.5*tr(D)=%.6e  |diff|=%.1e"
+          % (N, nu_num(N), 0.5 * np.trace(D_LF(N)), abs(nu_num(N) - 0.5 * np.trace(D_LF(N)))))
+
+print("\n(b) a MOMENTUM-ONLY nu0 = diag(0,nu0) is seen by the characteristics as nu0/2")
+B = np.array([[0.0, 0.0], [0.0, 1.0]])
+for M in (0.0, Mth, 0.168943, 0.30):
+    print("    M=%.6f  char-mean of diag(0,nu0) = %.12f * nu0" % (M, char_mean(B, M)))
+
+print("\n(c) like-for-like, both as characteristic means")
+for N in (240, 480, 720):
+    lf = nu_num(N)
+    print("    N=%3d  vs FULL nu0 = %.4f   vs nu0/2 = %.4f" % (N, lf / nu0, lf / (nu0 / 2)))
+print("    crossover N*:  vs FULL nu0 = %.1f   like-for-like = %.1f"
+      % (240 * nu_num(240) / nu0, 240 * nu_num(240) / (nu0 / 2)))
+
+print("\n(d) residual after the exact factor 2 (measured +14.86% / like-for-like prediction)")
+for full in (15.0, 13.72, 12.59):
+    pred = (nu_num(240) / (nu0 / 2)) * full
+    print("    full-nu0 DC shift %5.2f %% -> predicted %5.2f %% -> residual %.2fx" % (full, pred, 14.86 / pred))
+```
+
+**Printed output (2026-07-31):**
+```
+(a) the note's nu_num IS 0.5*tr(D_LF) -- an identity, not an agreement
+    N=240  nu_num=6.384056e-03  0.5*tr(D)=6.384056e-03  |diff|=0.0e+00
+    N=480  nu_num=3.192028e-03  0.5*tr(D)=3.192028e-03  |diff|=0.0e+00
+    N=720  nu_num=2.128019e-03  0.5*tr(D)=2.128019e-03  |diff|=0.0e+00
+
+(b) a MOMENTUM-ONLY nu0 = diag(0,nu0) is seen by the characteristics as nu0/2
+    M=0.000000  char-mean of diag(0,nu0) = 0.500000000000 * nu0
+    M=0.147083  char-mean of diag(0,nu0) = 0.500000000000 * nu0
+    M=0.168943  char-mean of diag(0,nu0) = 0.500000000000 * nu0
+    M=0.300000  char-mean of diag(0,nu0) = 0.500000000000 * nu0
+
+(c) like-for-like, both as characteristic means
+    N=240  vs FULL nu0 = 0.4181   vs nu0/2 = 0.8361
+    N=480  vs FULL nu0 = 0.2090   vs nu0/2 = 0.4181
+    N=720  vs FULL nu0 = 0.1394   vs nu0/2 = 0.2787
+    crossover N*:  vs FULL nu0 = 100.3   like-for-like = 200.7
+
+(d) residual after the exact factor 2 (measured +14.86% / like-for-like prediction)
+    full-nu0 DC shift 15.00 % -> predicted 12.54 % -> residual 1.18x
+    full-nu0 DC shift 13.72 % -> predicted 11.47 % -> residual 1.30x
+    full-nu0 DC shift 12.59 % -> predicted 10.53 % -> residual 1.41x
+```
 
 ## 3. The physically-correct threshold, and the augmented-solver check
 
@@ -57,7 +134,7 @@ with `ν₀(norm) = (v_F²τ_ee/4)/(L·s) = 1.527×10⁻²` (the DC kinematic vi
 
 **Pre-registered keys** (new names, distinct from the promoted 07-13 `M_th_kinetic_353K` and `kinetic_gain_correction_dB_353K_tracked`, which this note **consumes and confirms, not restates**):
 - `M_th_num_inviscid_limit` = **0.1490**, band **[0.147, 0.150]** (the released solver's Δx→0 limit; Richardson from the 240/480/720 ladder → 0.1486–0.1492; falsified if a converged run lands outside — i.e. if the released solver secretly carried physical viscosity, which it must not).
-- `visc_numerical_crossover_N` = **~100** (the grid where the LF DC numerical viscosity ν_num ≈ the DC ν₀), with the disclosed caveat that the *threshold-matched* effective crossover is ≈N=240 because LF also diffuses mass and the shift measured is the DC/band-edge value.
+- `visc_numerical_crossover_N` = **~200** (**corrected 2026-07-31**; was stated as ~100). The grid where the LF numerical diffusion equals the DC ν₀ *compared like with like* — both as characteristic means, since `ν_num` = ½·tr **D** and a momentum-only ν₀ is seen by the characteristics as ν₀/2. The superseded ~100 divided a characteristic mean by a full ν₀ and is low by exactly 2. Band **[180, 220]**. The *threshold-matched* effective crossover remains ≈N=240, and the corrected ~200 is much closer to it — which is the point: the shipped grid really is near the crossover, and the earlier ~100 made that agreement look like a coincidence needing a physical explanation.
 - **Non-contest / reconciliation:** consumes `M_th_353K`, `M_th_num`, `viscous_fraction`, the promoted `M_th_kinetic_353K = 0.165 [0.154, 0.169]`, and `kinetic_gain_correction_dB_353K_tracked = −0.95`; contests **no** `results.json` value and **no** 07-13 key — it *explains the numerical half* of 07-13 §1's flagged coincidence and adds the inviscid-convergence demonstration. It keeps the bulk/volume viscous channel distinct from the 07-18 boundary/contact channel, and does **not** touch the still-open source-contact exponent p (07-20) or the drain sign.
 
 ## 6. Runnable listing
@@ -141,7 +218,7 @@ Grid ladder (`solver.growth_rate` zero-crossing, released `measure_Mth_num` logi
 
 1. **Executing model.** Opus 4.8, not Fable 5 (header). An earlier draft mis-stated the physical threshold as 0.169 (raw NS, no crossover) — corrected here to the promoted crossover'd 0.165 after adversarial review.
 2. **The genuinely new content is the numerical half.** The physics threshold (0.165), the crossover, the −0.95 dB, the tracking-absorption, and the dissipation ×1.25 consequence are **all promoted 07-13** — this call reproduces them and adds (i) the modified-equation LF numerical viscosity, (ii) the demonstrated first-order convergence to the inviscid ~0.149, and (iii) the explanation that the shipped `M_th_num = 0.169` is the *DC/NS/band-edge* numerical value, not the viscoelastic central, and vanishes on refinement. It does not re-derive 07-13's physics.
-3. **The N=240↔band-edge match, and the ~2.4× modified-equation gap**, are in-model coincidences reconciled by physical argument (LF diffuses mass+momentum, DC not viscoelastic), not a term-by-term proof of the coupled boundary system.
+3. **The N=240↔band-edge match** is an in-model coincidence reconciled by physical argument (DC, not viscoelastic), not a term-by-term proof of the coupled boundary system. **Corrected 2026-07-31:** the "~2.4× modified-equation gap" this limitation used to name was mostly a normalization mismatch — `ν_num` is a characteristic mean, a momentum-only ν₀ is seen as ν₀/2, and the factor 2 between them is an identity (§2). What actually needs the in-model caveat is the residual **≈1.2–1.4×**, and the earlier co-attribution to boundary-ghost damping is withdrawn.
 4. **`l_ee/L = 0.142`, `ωτ_ee(353) = 0.5214` are not asymptotically small** (07-18/07-20): O(Kn) ≈ 20–25 % bar; `M_th_kinetic` carries the 07-13 A ∈ [0.5, 3] band, and the crossover closure is Padé-approximate at x ≈ 1 (07-13 Limitation 2).
 5. **Augmented-solver run is DC (Navier–Stokes) and at finite N=480**; a viscoelastic, grid-converged augmented run is the WP2 check. Bulk channel only — does not touch the 07-18 boundary channel, the open p (07-20), or the drain sign.
 6. **Everything rides on the unproven gain cell** (bench gate G1).
@@ -186,14 +263,3 @@ Assessed suitable for the permanent record by a **3-of-3 vote** (3 store / 0 rej
   - non-load-bearing: Genuinely-new content is the numerical half only: the physics (0.165, viscoelastic crossover, -0.95 dB, tracking-absorption, dissipation x1.25) is all reproduced from promoted 07-13; the novel contribution is the modified-equation nu_num and the demonstrated first-order convergence to the inviscid ~0.149. The note is honest about this (Limitation 2), so it is durability-modest but still storable and decision-changing.
   - non-load-bearing: The augmented-solver +13.72% DC-viscosity shift (0.15884 -> 0.18063 at N=480) is quoted from the session's run and I did not independently re-execute it; it is in-model corroboration, not load-bearing for the headline (the grid ladder and the physical 0.165, both of which I did reproduce, carry the verdict).
   - non-load-bearing: The N=240<->0.169 band-edge alignment and the ~2.4x gap between the modified-equation momentum coefficient (0.42x) and the measured +14.86% shift are reconciled by a physical argument (LF diffuses mass+momentum, DC vs viscoelastic), not a term-by-term proof; flagged in-model in Limitation 3 rather than oversold.
-
-
----
-
-## Post-promotion annotation — 2026-08-08
-
-*Appended by the promoting PR of [`2026-08-08-augmented-solver-decisive-experiment.md`](2026-08-08-augmented-solver-decisive-experiment.md), performing the record-maintenance action [`2026-08-07-mth-num-excess-decomposition.md`](2026-08-07-mth-num-excess-decomposition.md) §9 routed. Nothing above this line is edited.*
-
-- §5's disclosed caveat — "the *threshold-matched* effective crossover is ≈ N = 240" — is refined and then measured: 08-07 §1.4/§9 puts the model-side conversion at ≈ **216** (measured-ladder match) / **214** (total shifts) / 199.3 (bulk-only-vs-bulk-only), conversion factor ≈ 2 on the coefficient crossover 100.34; 08-08 **measures** it at **N\* ≈ 208–212** (three eight-seed censuses at 240 round trips, both sides measured; the spread is interpolation convention). The caveat's ≈ 240 is **13.2–15.6 % above the measured value**.
-- `visc_numerical_crossover_N` ≈ 100 is **unmoved** — it is a coefficient statement, not a threshold statement.
-- §3's augmented-solver check (released 0.15884, augmented 0.18063, +13.72 %) is **confirmed**: 08-08's independently written augmentation reproduces the augmented root at this note's print precision (0.18062627, Δ = −3.7 × 10⁻⁶) across platforms, and the modern eight-seed protocol returns +13.736 % at the same cell.
