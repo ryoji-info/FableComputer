@@ -9,6 +9,8 @@
 
 ---
 
+> **Correction — 2026-07-31 (post-promotion).** One parenthetical cross-check mixed two bias conventions — the thing §8's own comment forbids. `pulse_gain_dB_at_0p7_streaming = 7.797 dB` is computed by `run_all.py` at `0.7·M_th_num`, but §2/§3/§6/§8 added to it a slot-0 deficit measured at `0.7·M_th_analytic` (−3.78 dB) to get "+4.0 dB". Held at a consistent analytic bias the streaming reference is **6.625 dB** and the flushed per-slot gain is **+2.84 dB**, not +4.0. So "+4.0 dB" is a *deficit-sensitivity* figure against a reference pinned at `0.7·M_th_num`, not an operating point at the analytic bias; it is relabelled as such below. The companion clause *"the two bias conventions bracket the in-model +4.57 dB"* was also false — **+3.61 and +4.01 both sit below +4.57** — and is corrected to §2's phrasing. **Nothing load-bearing moves:** the demonstrated headline (−4.18 dB deficit, +3.61 dB flushed gain, at the bias-consistent `0.7·M_th_num`) is unaffected and still reproduces bit-for-bit, and the error direction is conservative — +2.84 < +3.61 < +4.01 — so the demonstrated **negative is strengthened, not weakened**. Same error class as [`2026-07-23-reset-switch-adjudication.md`](2026-07-23-reset-switch-adjudication.md) line 630, graded there as footnote-level. The §8 listing and its printed output are the verbatim record of what was executed and are **not** edited; a footnote after them carries the correction. The appended vote record is evidence and is not edited.
+
 > **Qualified — 2026-07-26 (post-promotion).** §9's WP3 prediction is **half** superseded. Its passive half is confirmed — a passive-floor run cannot hit both targets. Its positive half (ISI ≤ 1 dB and gain ≥ knee simultaneously reachable above ~10 dB/rt) is **struck at the 4-ps slot**: no rate suffices, because rebuild time binds ([2026-07-23-reset-switch-adjudication.md](2026-07-23-reset-switch-adjudication.md)). The active, memory-only de-Q this note asked for survives only at stretched slots, as a ≈+10 % clock optimization over a passive guard — and **0 %** at the 81 GHz demonstrated-calibrated corner. The demonstrated negative itself stands. Full supersession map: [notes/INDEX.md](INDEX.md).
 
 
@@ -49,11 +51,11 @@ The transient net gain over `n` round trips from a clean start, referenced to th
 | 16 | +7.28 | 2.58 |
 | ∞ (CW) | +9.66 | 2.769 |
 
-The n = 8 value **+4.57 dB** is the in-model gain of a cavity that flushes clean and rebuilds over one whole slot; it brackets the demonstrated slot-0 gain (**+3.6 dB** streaming-consistent bias, +4.0 dB analytic bias, §3) to within the geometric-vs-nonlinear-solver gap.
+The n = 8 value **+4.57 dB** is the in-model gain of a cavity that flushes clean and rebuilds over one whole slot; it bounds the demonstrated slot-0 gain from above (**+3.6 dB** at the bias-consistent `0.7·M_th_num`; **+2.8 dB** at the bias-consistent `0.7·M_th_analytic` — §3, corrected 2026-07-31) to within the geometric-vs-nonlinear-solver gap.
 
 ## 3. The flush-and-rebuild timing budget (demonstrated gain deficit + guard arithmetic)
 
-**Demonstrated (released `solver.run`, `drive_kind='pulse'`, §8).** A pulse stream started from the uniform (clean) state *is* a flushed-then-rebuilt cavity on its first slot. The per-slot intracavity peak builds up over the first ~3 slots and settles at the streaming level. Driven at the streaming reference's own bias `M = 0.7·M_th_num` (so the settled level *is* the released `pulse_gain_dB_at_0p7_streaming = 7.797 dB`, bit-for-bit — bias-consistent), **slot 0 sits −4.18 dB below the settled peak**, so the **flushed-and-rebuilt per-slot gain is ≈ 7.80 − 4.18 = +3.6 dB** — demonstrated, released solver, no custom flush required. (At the analytic-threshold bias `0.7·M_th_analytic` the deficit is −3.78 dB → +4.0 dB; the two bias conventions bracket the in-model +4.57 dB.) The released streaming +7.80 dB is itself −1.86 dB below CW +9.66 dB — the "buildup foregone in a finite window" gap 07-11 §7 flagged; **the per-slot flush deepens it by another ~4 dB, to ≈ +3.6 dB — roughly a third of the CW gain, in dB terms less than half.**
+**Demonstrated (released `solver.run`, `drive_kind='pulse'`, §8).** A pulse stream started from the uniform (clean) state *is* a flushed-then-rebuilt cavity on its first slot. The per-slot intracavity peak builds up over the first ~3 slots and settles at the streaming level. Driven at the streaming reference's own bias `M = 0.7·M_th_num` (so the settled level *is* the released `pulse_gain_dB_at_0p7_streaming = 7.797 dB`, bit-for-bit — bias-consistent), **slot 0 sits −4.18 dB below the settled peak**, so the **flushed-and-rebuilt per-slot gain is ≈ 7.80 − 4.18 = +3.6 dB** — demonstrated, released solver, no custom flush required. (At the analytic-threshold bias `0.7·M_th_analytic` the deficit is −3.78 dB. **Corrected 2026-07-31:** the flushed gain at *that* bias is 6.62 − 3.78 = **+2.84 dB**, because the streaming reference itself falls to 6.62 dB there; the "+4.0 dB" this note previously printed adds the analytic-bias deficit to the `0.7·M_th_num` streaming reference, so it is a deficit-sensitivity figure at a pinned reference, not an operating point. Both bias-consistent values, +3.61 and +2.84 dB, sit **below** the in-model +4.57 dB, which bounds them from above rather than being bracketed by them.) The released streaming +7.80 dB is itself −1.86 dB below CW +9.66 dB — the "buildup foregone in a finite window" gap 07-11 §7 flagged; **the per-slot flush deepens it by another ~4 dB, to ≈ +3.6 dB — roughly a third of the CW gain, in dB terms less than half.**
 
 **Guard-interval budget (in-model).** To be signal-preserving, dump S dB of prior memory before the bit. The passive de-Q rate is `D_pass = −20·log₁₀(a_loss) = 2.555` dB/rt *(demonstrated a_loss)*. Guard = `S/2.555` rt; rebuild = `8 − S/2.555` rt:
 
@@ -91,7 +93,7 @@ Feeding each `F_flush` through the released `resync_spacing(nf_dB, snr_launch=20
 
 New keys; none collides with `results.json` or the 07-11/07-17/07-20/07-21/07-22 keys. Falsification = an independent rerun of the §8 listing (or a gated time-domain transient) landing outside the band.
 
-- `flush_and_rebuild_gain_deficit_dB_slot0` = **−4.18** (slot-0 vs settled streaming, bias-consistent `0.7·M_th_num`; band **[−4.5, −3.6]** spanning the `M_th_num`/`M_th_analytic` bias conventions). **Demonstrated** (released solver). ⇒ flushed per-slot gain ≈ **+3.6 dB** (band [+3.3, +4.1]).
+- `flush_and_rebuild_gain_deficit_dB_slot0` = **−4.18** (slot-0 vs settled streaming, bias-consistent `0.7·M_th_num`; band **[−4.5, −3.6]** spanning the `M_th_num`/`M_th_analytic` bias conventions). **Demonstrated** (released solver). ⇒ flushed per-slot gain ≈ **+3.6 dB** (band [+3.3, +4.1] — **corrected 2026-07-31:** this band is the deficit band carried onto a streaming reference *pinned* at `0.7·M_th_num`, so it is a sensitivity range, not a span of bias conventions. The bias-consistent analytic-convention operating point is **+2.84 dB**, below the band's floor.)
 - `nf_flush_blind_penalty_dB_per_dB` = **1.0** (Friis slope, `NF = 2.77 + S`; band **[0.85, 1.0]** — the worst-case full-Friis; lower only if part of the dumped field is post-amplification). **In-model.**
 - `resync_spacing_cells_blind_flush_1dB_eye` = **1.33** (S = 10 dB; band **[1.0, 2.0]**). **In-model** (released `resync_spacing`, in-model NF input).
 - `flush_rebuild_gain_dB_sigpres_1dB_eye_passivefloor` = **+2.33** (S = 10 dB guard; band **[+1.5, +3.5]**). **In-model.**
@@ -282,6 +284,24 @@ SIG-PRESERVING flush: S=10 dB -> guard eats 3.9 rt, rebuild 4.1 rt -> gain 2.33 
 ESCAPE: an ACTIVE, signal-preserving, memory-only de-Q at ~15 dB/rt (5.9x passive) clears 30 dB in a 2-rt guard, leaving 6 rt to rebuild ~+4 dB.
         clear 10 dB in 1-rt guard needs ~10 dB/rt (3.9x passive).
 ```
+
+**Footnote on the cross-check line (added 2026-07-31; the listing and its output above are the
+verbatim record of the run and are deliberately unedited).** The line
+
+```
+   [cross-check at 0.7*M_th_analytic bias: slot-0 deficit -3.78 dB -> flushed ~4.01 dB; brackets the in-model +4.57]
+```
+
+mixes two bias conventions, which the comment four lines above it in the listing expressly warns
+against: `RES['pulse_gain_dB_at_0p7_streaming']` is computed by `run_all.py` at `0.7·M_th_num`
+(7.7967 dB, bit-for-bit), while `d_a` is the slot-0 deficit at `0.7·M_th_analytic`. Re-running the
+same recipe with the bias held consistent gives a streaming reference of **6.6247 dB** at the
+analytic bias, hence a flushed per-slot gain of **+2.84 dB** — 1.17 dB below the printed +4.01 and
+outside §6's [+3.3, +4.1]. An independent non-decomposed measurement (slot-0 active peak over
+settled passive peak, one recipe) returns 2.8412 dB, confirming a genuine bias mismatch rather than
+a decomposition artifact. The word *brackets* is wrong in either convention: +3.61 and +4.01 both
+lie **below** +4.57. The bias-consistent headline in the same output block — deficit −4.18 dB,
+flushed gain +3.61 dB at `0.7·M_th_num` — is unaffected.
 
 ## 9. Limitations and the WP3 next check
 
