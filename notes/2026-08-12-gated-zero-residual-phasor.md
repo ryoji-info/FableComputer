@@ -14,6 +14,8 @@
 
 ---
 
+> **Annotation — 2026-08-13 (post-promotion): the open mechanism is closed; one in-model entry superseded.** This note's **MECHANISM OPEN** on the walk excess is closed by [2026-08-13-walk-excess-clamp-placement.md](2026-08-13-walk-excess-clamp-placement.md): the excess along the released path is the linear spectrum of the released scheme itself, dominantly the ghost-centre placement of the two Dirichlet clamps — confirmed by a pre-registered prediction fired at **four grids × two closures**, in the direction this note's §3 left standing (LF-viscosity refuted; LF-discretization not refuted). The walk key's **in-model** continuum cluster (81.92–82.71 °/slot, "pinned only under an *assumed* first order") is superseded: the first order is now demonstrated and the continuum walk is **82.823 °/slot** (predictor + exact cross-term C). Limitation 3's δ_relax provenance is shown there (§6). **Every measured rung of every key in this note is untouched and consumed as registered.** The verbatim record below is unedited.
+
 ## 0. What this note claims, and what it does not
 
 **Claims.** At the gated rungs the fabric's inter-slot residual is a **walking phasor**, measured for the first time at the slots the record defends: run-length 1 binds, run-length ≥ 2 never does, and the walk carries a **first-order phase error along the released refinement path whose mechanism is open**.
