@@ -5,6 +5,8 @@
 **Method:** hand/symbolic derivation only, per the promoted notes' standard — no code execution. All inputs are the documented solver equations, ghost-cell boundary conditions, and the linear driven-cavity response verified in the promoted note (whose eigencondition reproduces the chain's Eq. (2) term-for-term). Numerical evaluation by standalone calculator scripts.
 **Labels:** demonstrated / in-model / open, per [notes/README.md](README.md).
 
+> **Correction — 2026-08-13 (post-promotion): §1's `f_line` exactness claim is scoped to M = 0.** The formula `f_line = (1−M²)/4 − δ_relax`, labelled "(damping line-shift, exact linear BVP)", is **exact at M = 0** — confirmed bit-equal from the continuum eigencondition `d·cosh d = t·sinh d` in [2026-08-13-walk-excess-clamp-placement.md](2026-08-13-walk-excess-clamp-placement.md) §6, the check this note's own appended record requested before the form became load-bearing. At M ≠ 0 the additive form is off by exactly the drift × damping cross-term **C** (closed form; ≈ 5–6×10⁻⁶ in f at the record's biases — the cross-term §5's table prices only in combination, now separated and exact). No number printed in this note moves at its stated precision; the correction is load-bearing on 08-12's phase-walk leg (+0.107 °/slot at the continuum bias). The original text below is unedited.
+
 ## 1. Setup — demonstrated
 
 Shipped streaming run: cavity at the zero-drift length L₀ = 582.80 nm, drive carrier f0_n = f₀L₀/s = 0.25 exactly, bias M_run = 0.7·M_th,num = 0.118260, single cell (no cascade count exists — the "cascade" table is a disjoint closed form), drive_amp = 3×10⁻³, per-slot-peak metric; reported 7.7967069614868425 dB against the CW analytic 9.66100611708918 dB: **gap = 1.8643 dB**.
