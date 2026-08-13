@@ -21,6 +21,15 @@
       "cwd": "{{REPO}}"
     },
     {
+      "id": "agent-lab-full-run",
+      "displayName": "5. Agent lab full run",
+      "description": "Fable Computer Agent Lab: full pipeline — posts → fable session → assess → rework — looping. Mixed models per seat (2026-08-13): Fable 5 for execution + pre-pub checks, Opus 5 for multi-seat stages. MANUAL ONLY — run from \"Run now\".",
+      "schedule": "manual",
+      "enabled": true,
+      "useWorktree": false,
+      "cwd": "{{REPO}}"
+    },
+    {
       "id": "agent-lab-posts",
       "displayName": "1. Agent lab posts",
       "description": "Fable Computer Agent Lab: write and post the three personas' lab posts in-session. MANUAL ONLY — no schedule, run from \"Run now\". Cadence is roughly daily, as compute allows; several runs a day are fine",
