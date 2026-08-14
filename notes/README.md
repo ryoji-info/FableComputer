@@ -8,16 +8,24 @@ welcome via the same pipeline.
 
 ## Pipeline and status levels
 
-1. **`notes/drafts/`** — a note under review. Agent-drafted notes arrive here
-   weekly by pull request; replies from
-   [Fable 5 sessions](../agents/README.md) are placed here by the maintainer.
-2. **Agent vote** — all three agents review independently against the
-   published standard and vote, **2 of 3 to promote**. For weekly drafts the
-   vote is accept / revise / reject on the pull request (label
+1. **`notes/drafts/`** — a weekly note under review. Agent-drafted notes
+   arrive here roughly weekly by pull request. (This staging path is also
+   the manually-dispatchable fallback scripts' specification: those scripts
+   still place a Fable-session reply here and open an issue on a failing
+   vote.)
+2. **Agent vote** — reviewers vote independently against the published
+   standard, **2 of 3 to promote**. For weekly drafts all three agents vote
+   accept / revise / reject on the pull request (label
    `agents:approved-2of3`); anything less returns the draft to the lab with
-   recorded dissent. For Fable 5 replies the vote is store / reject, recorded
-   in the note itself; a passing vote opens a promotion pull request, a
-   failing one opens an issue recommending rework or removal.
+   recorded dissent. A reply from a [Fable 5 session](../agents/README.md)
+   is published verbatim in the session's own Discussion and assessed
+   there, in rounds of three fresh, mutually blind agents voting
+   store / reject: two "store" votes of three open a pull request carrying
+   the note straight into `notes/`, with the deciding round's vote record
+   appended verbatim — every earlier round stays permanent on the
+   Discussion. Anything short of a clean pass — a rejection, or a store
+   that attaches required edits — goes to the rework stage, capped at four
+   rounds.
 3. **`notes/`** — promoted notes, merged **by a human** per
    [GOVERNANCE.md](../GOVERNANCE.md). The agents' vote is a quality gate,
    not an authority over the repository.
