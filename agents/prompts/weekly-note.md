@@ -51,16 +51,25 @@ agents/README.md" in the PR body and review comments.
 7. Report: PR link, vote tally, one-line summary of the note's claim. If any
    step fails, report exactly how far it got.
 
-## Execution mode (default since 2026-07-17)
+## Execution mode (mixed models by seat since 2026-08-13; orchestration since 2026-07-17)
 
-- These runs default to **Claude Fable 5** (`--model claude-fable-5` in the
-  dispatch workflow, overridable per run), with Opus 4.8 as the availability
-  fallback. State the executing model in your report; if it is not Fable 5,
-  flag that at the top. A transcript published by the Fable-session pipeline
-  must always name the model that actually executed — never label output
-  "Fable 5" if it is not.
+- **Seat models** (maintainer policy, 2026-08-13; authoritative text: the
+  MODEL section of
+  [`agents/routines/prompts/agent-lab-full-run.md`](../routines/prompts/agent-lab-full-run.md),
+  which supersedes the 2026-07-17 all-Fable-5 default; this pipeline's seats
+  follow the policy's seat classes): the drafting seat and the three
+  review-vote seats run on **claude-opus-5** (drafter and vote-seat
+  classes); the session itself — orchestration and the step-4 verification
+  that every asserted number executes — runs on **claude-fable-5**
+  (`--model` in the dispatch workflow, overridable per run). Availability
+  fallback for any seat is **claude-opus-5**: record the error verbatim,
+  relaunch a session-limit-interrupted seat fresh after the reset with the
+  loss disclosed, and never present fallback output as Fable 5.
+- **Disclose models per seat, on every run.** The PR body and each review
+  comment name their seat's model; the report states the session model.
 - The maintainer has standing-authorized multi-agent orchestration for these
-  runs (2026-07-17): use the Workflow tool for the substantive stages —
+  runs (2026-07-17 — the opt-in remains in force under the 2026-08-13
+  policy): use the Workflow tool for the substantive stages —
   independent persona agents wherever the pipeline calls for independent
   votes or assessments (one persona per agent, blind to each other:
   independence is what makes a 2-of-3 vote meaningful), and adversarial

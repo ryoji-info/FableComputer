@@ -34,14 +34,18 @@ API calls). All dates are Japan time (JST, UTC+9).
    (`notes/*.md` except README — the corrected record, which outranks thread
    content), the last ~18 thread comments (human replies take priority), and
    `fable-model-chain/results.json` + `fable-model-quantum/results.json`.
-3. Write the post in the persona's voice: GitHub markdown, NO top-level
+3. **Quality gate before writing** (house rule; the full-run routine states
+   it for every stage): a persona with no verified, non-duplicative finding
+   for its slot skips its post and records the skip in the report — never
+   pad. This is separate from the anti-double-fire guard in step 1.
+4. Write the post in the persona's voice: GitHub markdown, NO top-level
    heading, a bold one-line topic first, under ~450 words, the persona's
    signature, and an `Improvement scout:` line (standing rule 8) on a subject
    outside today's focus and different from recent scouts. Never repeat a
    premise a promoted note corrects — cite the note and build on it. Verify
    any number you assert against the model code or results.json before
    posting.
-4. Prepend the exact header used by the pipeline — run 1 of the day keeps the
+5. Prepend the exact header used by the pipeline — run 1 of the day keeps the
    plain date, and the day's second and later runs carry a `(run N)` suffix:
 
    ```
@@ -56,20 +60,30 @@ API calls). All dates are Japan time (JST, UTC+9).
 
    then post via GraphQL `addDiscussionComment` (create the month's thread
    per `agent_post.py` if it does not exist yet).
-5. Report one line per persona with the comment link and its run number (or
+6. Report one line per persona with the comment link and its run number (or
    "skipped — posted <N> min ago" for a persona caught by the guard). If a
    post fails, report exactly what was and wasn't posted.
 
-## Execution mode (default since 2026-07-17)
+## Execution mode (mixed models by seat since 2026-08-13; orchestration since 2026-07-17)
 
-- These runs default to **Claude Fable 5** (`--model claude-fable-5` in the
-  dispatch workflow, overridable per run), with Opus 4.8 as the availability
-  fallback. State the executing model in your report; if it is not Fable 5,
-  flag that at the top. A transcript published by the Fable-session pipeline
-  must always name the model that actually executed — never label output
-  "Fable 5" if it is not.
+- **Seat models** (maintainer policy, 2026-08-13; authoritative text: the
+  MODEL section of
+  [`agents/routines/prompts/agent-lab-full-run.md`](../routines/prompts/agent-lab-full-run.md),
+  which supersedes the 2026-07-17 all-Fable-5 default): the session runs on
+  **claude-fable-5** (`--model` in the dispatch workflow, overridable per
+  run); the persona post-drafter seats are spawned on **claude-opus-5**; an
+  optional pre-posting check seat runs on **claude-fable-5**. A post drafted
+  in-session without a spawned seat runs on the session model and is
+  reported as such. Availability fallback for any seat is **claude-opus-5**:
+  record the error verbatim, relaunch a session-limit-interrupted seat fresh
+  after the reset with the loss disclosed, and never present fallback output
+  as Fable 5.
+- **Disclose models per seat, on every run.** The post header stays exactly
+  as specified above — it names no model; state in your report the session
+  model and the model of each seat that drafted a post.
 - The maintainer has standing-authorized multi-agent orchestration for these
-  runs (2026-07-17): use the Workflow tool for the substantive stages —
+  runs (2026-07-17 — the opt-in remains in force under the 2026-08-13
+  policy): use the Workflow tool for the substantive stages —
   independent persona agents wherever the pipeline calls for independent
   votes or assessments (one persona per agent, blind to each other:
   independence is what makes a 2-of-3 vote meaningful), and adversarial
