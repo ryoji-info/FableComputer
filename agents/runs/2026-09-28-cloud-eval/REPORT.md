@@ -1,0 +1,31 @@
+# Agent Lab full run — final report — 2026-09-28 (JST), cloud evaluation
+
+**Session model:** `claude-fable-5-1` (configured and served; the maintainer's live choice, disclosed — the 2026-08-13 policy names `claude-fable-5`). **Seat models, per stage:** stage 1 drafters ×3 on `claude-opus-5-5`, check seats ×3 on the Fable alias; stage 2 candidates ×3 and votes ×3 on `claude-opus-5-5`, execution on the session model, pre-publication checks ×2 on the Fable alias; stage 3 assessors ×3 on `claude-opus-5-5`; stage 4 re-assessors ×9 (rounds 2–4) on `claude-opus-5-5`, reworks on the session model; Fable consults: 0. Every Opus seat was requested as `claude-opus-5-5` (the maintainer's instruction for this run, in place of the policy's `claude-opus-5`) and the orchestration harness recorded that model per seat; each seat's own model note is in its record. No fallback fired. **Platform** for every executed number: Linux x86_64 / Python 3.11.15 / numpy 2.4.6 (the record's numbers reproduce to 1.6×10⁻¹⁶ … 1.8×10⁻¹⁴ relative, never exact equality).
+
+**Overall verdict, one line:** one cycle — 3 lab posts filed, 1 session executed and checked, assessed through **4 rounds (the cap): round 1 2/3 with edits, round 2 0/3, round 3 3/3 with edits, round 4 0/3 — closed without storing anything; nothing promoted, nothing opened**; every artifact filed on the repository branch for hand-posting because the cloud session cannot reach Discussions.
+
+## Cloud-path evaluation (the purpose of this run)
+
+- **Discussions are unreachable from the cloud session**: the Claude Code cloud GitHub proxy refuses the GraphQL endpoint, and Discussions exist only in GraphQL. Every post, session comment and vote record was therefore written verbatim under this directory; `PASTE-ORDER.md` gives the order. The pipeline's state checks (double-fire guard, "latest unassessed session") were done against page reads, disclosed in `README.md`.
+- **The rest of the routine ran as specified**: mutually blind seats through the orchestration harness with per-seat model overrides, re-execution of every number against the released chain by every seat, pre-publication checks, four assessment rounds, verbatim vote records, and stage reports.
+- **The maintainer merged the artifact PRs mid-run** (#125 during round 3, #126 during round 4). The branch was restarted from `main` each time and the follow-up work carried on a fresh draft PR, as the harness requires; nothing in the pipeline depended on the PRs staying open.
+- **One process defect was the run's own:** the round-2 rework builder silently reverted corrected tables from a stale file (caught by all three round-2 seats; fixed in round 3 with build-time assertions). The round-4 defects — a scan quoted beyond its domain and a J = −1 result applied to the −3 dB class — were caught only by the fresh seats.
+
+## Cycle 1
+
+### Stage 1 — lab posts (`stage1-posts/`)
+Three posts filed (🧵 Fabric, 🌊 Kinetic, ⚛️ Quanta; Monday slot, run 1), each drafted on a `claude-opus-5-5` seat and cleared by a Fable check seat that re-executed every number; three mechanical digit / key-name fixes applied by the orchestrator, disclosed in `*-record.md`. Report: `stage1-posts/REPORT.md`. Paste target: "Agent Lab — 2026-09" (#123).
+
+### Stage 2 — Fable session (`stage2-session/`)
+Candidates ×3 → vote ×3 (no self-votes) → 🧵 Fabric's two-cell time-domain cascade prompt won 2-of-3 → executed in the session against the released chain (11 campaign families, a five-stage depth run, 34 matched-amplitude rows; instrument gated on the promoted rows to ≤ 2×10⁻¹³ relative) → two blind pre-publication check seats, both *revise* (3 blocking, 14 minor; all re-executed and applied) → published to file. Report: `stage2-session/REPORT.md`. Files, in paste order: `10-discussion-body.md`, `02-losing-candidates.md`, `13-prepublication-checks.md`, `11-reply.md`, `12-listings.md` (+ `listings/`).
+
+### Stage 3 — assessment (`stage3-assessment/`)
+Round 1: **2 store (both with required edits) / 1 reject** → rework. Report: `stage3-assessment/REPORT.md`; records `round-1-*.md`.
+
+### Stage 4 — rework (`stage4-rework/`)
+Rounds 2, 3 and 4 (the cap): **0/3 → 3/3 with edits → 0/3**; the session is **closed without storing anything**; no round 5; no promotion PR; no issue. Report with the per-round accounting (what was accepted, what was declined and on what measurement, what was withdrawn, no Fable consult): `stage4-rework/REPORT.md`; records `round-{2,3,4}-record.md`, `round-{2,3,4}-{fabric,kinetic,quanta}.md`, `round-{2,3,4}-tally.md`; texts `round-{2,3,4}-reply.md` (+ appendices); re-execution listings `stage4-rework/listings/`.
+
+**What the four rounds established, in the assessors' own words:** the measured core — the record's first two-cell time-domain cascade under the session's ideal-buffer density coupling; 08-01 gated §4's waveform premise confirmed at matched amplitude to ≤ 0.6 dB; the ring-down that stops a windowed '0'-floor transferring through a resonant stage (6.2–8.1 dB peak / 8.6–10.4 dB slot-mode under the promoted rule; ablation-confirmed); "≈ 2×" as the 1.96 small-signal limit under the rule; the single cell's own floor moving 8.3–8.4 dB with the decision window — reproduced by all twelve seats on their own instruments, and never contested. What failed the cap was the text: the round-4 seats named one over-extended universal (the placement-lever result at J = −1 applied to the −3 dB class, where ⚛️ Quanta measured matched G4 1.79 at a −10.3 dB floor), scan-truncated ranges, a latency ladder mixing junction classes, one wrong bound, a stale label and a stale shipped listing — each mechanical or a one-class rescoping, none moving a measurement. Per the routine's precedent (PR #98, 2026-08-02) the path past the cap is the maintainer's: cut the note to its defensible core rather than patch it a fifth time. That decision is not this run's to make; the record is filed for it.
+
+## Loop decision
+The loop stops after one cycle, on the routine's "anything that would need a human decision" rule: every artifact of this cycle is unposted and awaits the maintainer's hand (and, past the cap, the maintainer's scope decision), so a second cycle would generate a second unposted set racing the first. Nothing is scheduled.
