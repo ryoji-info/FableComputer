@@ -33,7 +33,7 @@ def cell(m, N, J, path, fmt="{:.3f}", sname="rule"):
 
 
 print("### Table 1 — two-cell G4 ratio (chain dB over single-cell dB), density-plane coupling, ratio bias, duty-0.8 gated launch, window rule shift = passive-chain latency\n")
-print("Definition A (defended): both chain and single cell over their identical passive twins (the promoted gain convention), `cav` observable, worst-'1' statistic; mean-'1' in the second column. Definition B: absolute drain-density gain over the 2×10⁻³ launch amplitude, mean-'1'. Seed-7 value [min, max over seeds 7/11/13] at N = 240.\n")
+print("Definition A (defended): both chain and single cell over their identical passive twins (the promoted gain convention), `cav` observable, worst-'1' statistic; mean-'1' in the second column. Definition B: absolute drain-density gain over the 2×10⁻³ launch amplitude, mean-'1'. Seed-7 value [min, max over seeds 7/11/13, each at its own rule placement — the ⅛-rt window-rule envelope, not pattern dependence: at a fixed placement the three seeds give identical worst-'1' chains to ≤ 0.001 dB (mean-'1' to ≤ 0.05 dB)] at N = 240.\n")
 print("| m (GHz) | N | J (dB) | G_single worst (dB) | G_chain^A worst (dB) | **G4_A worst** | G4_A mean | G4_A (`drn_h`) | G4_B | chain worst, unshifted window |")
 print("|---|---|---|---|---|---|---|---|---|---|")
 for N in (240, 480, 720):
