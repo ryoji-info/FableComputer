@@ -81,7 +81,7 @@ def released_dt(M, N, cfl=0.4):
 def run_cell(M, N, n_roundtrips, clamp, cfl=0.4, T=C.Tcap):
     """One released cell, released stepping verbatim; `clamp` is a callable of the
     step index k and time t returning the source-clamp perturbation (h_left - 1).
-    Returns the three drain/intracavity series and the time grid."""
+    Returns the three recorded series (cav = max over the cell of |u - u0|, the drain density and the drain velocity) and the time grid."""
     s, tau, L, tau_n, f0n = _setup(N, T)
     u0 = M
     dx = 1.0 / N
