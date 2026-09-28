@@ -9,7 +9,7 @@ The caption reads: "at −3 dB junctions the model itself fails the gate, so the
 
 | gate | j\* (dB/junction) | N_op at flip, −1 dB | N_op to pass, −3 dB | T for ≤ 10⁻², −1 / −3 dB |
 |---|---|---|---|---|
-| QG3 (2-bit, 77 K) | 1.613 | 294 | 784 | 107.5 / 34.5 K |
+| QG3 (2-bit, 77 K) | 1.613 | 295 | 784 | 107.5 / 34.5 K |
 | QG4 (1-bit, 300 K) | **1.535** | 306 | 816 | 355.6 / 179.6 K |
 
 That leaves 0.53–0.61 dB of headroom on the default. *In-model replica:* the order holds for every sampled static offset c (1/√12, 0.02, 0.0065, 0), with j\* = 1.549 (QG4) / 1.679 (QG3) at [07-15](https://github.com/ryoji-info/FableComputer/blob/main/notes/2026-07-15-finite-sharpness-is-not-a-variance.md)'s bound c ≤ 0.02. Recovering at −3 dB by raising N_op takes about 2× the "launch-budget-capped" 400, and no released key defines what that cap denominates ([08-25](https://github.com/ryoji-info/FableComputer/blob/main/notes/2026-08-25-what-the-20db-launch-budget-denominates.md) §1(c)).

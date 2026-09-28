@@ -203,3 +203,8 @@ Part II text extracted with pymupdf (fitz) to scratchpad/partII.txt; Table Q4 ca
 ### Seat model note
 
 Pre-posting check seat, round 1, executed on claude-fable-5-1 (the Fable alias requested for this run), sharing no context with the drafter. Platform for every re-executed number: Linux x86_64 / Python 3.11.15 / numpy 2.4.6 in the cloud container — not the record's standing macOS arm64 / Python 3.11.2 platform. Reproduction gate used: relative deviation ≤ 1e-15 (measured maximum 2.2×10⁻¹⁶ over the six results.json values the post relies on; three of six exact, three differ in the last ulp). Exact float equality was measured, not assumed, only for the replica-vs-released gate at c = 1/√12. Fabric's same-day post was not available to this seat, so the one colleague-attribution sentence is verified on its code half only.
+
+## Orchestrator edits before filing (session model `claude-fable-5-1`, disclosed)
+
+Mechanical fixes taken from the check seat's minor findings; no claim moved:
+- `| QG3 (2-bit, 77 K) | 1.613 | 294 | 784 | 107.5 / 34.5 K |` → `| QG3 (2-bit, 77 K) | 1.613 | 295 | 784 | 107.5 / 34.5 K |` — convention: the other three cells are the first integer N_op that passes; QG3's continuous crossing is 294.407 with err(294) = 1.00465e-2 > 1e-2 and err(295) = 9.93269e-3, so the first passing integer is 295 (check seat, minor)

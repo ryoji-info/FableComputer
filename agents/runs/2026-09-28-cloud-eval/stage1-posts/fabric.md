@@ -10,7 +10,7 @@ Part I's abstract puts "closes at ≈0.1 THz" next to "~0.4 fJ per addition". §
 | clock | slot | fJ / addition |
 |---|---|---|
 | ≈0.1 THz ([07-23](https://github.com/ryoji-info/FableComputer/blob/main/notes/2026-07-23-reset-switch-adjudication.md)) | 10 ps | 0.887–1.165 |
-| 71 / 67 GHz rungs | 14 / 15 ps | 1.242–1.631 / 1.330–1.748 |
+| 71 / 67 GHz rungs | 14 / 15 ps | 1.242–1.631 / 1.330–1.747 |
 | `f_max_F2_gated_GHz` = 69 [63, 74] | 14.49 ps | 1.285–1.688 (edges 1.20–1.85) |
 
 *In-model* (`thermal.py`: steady Joule n·m\*·v₀²/τ at 353 K, seven biased cells × 10⁻⁸ cm², drift on continuously, no bias duty factor). [07-31](https://github.com/ryoji-info/FableComputer/blob/main/notes/2026-07-31-physical-launch-gated-frontier.md) §0.5 rightly leaves the thermal record untouched, since power does not move. Energy per operation does, because the clock moved. The band's ends are the two sides of the open bias fork: 0.7·`M_th_353K` = 0.102958 (07-31's gain leg) and the `0.118` literal ≈ 0.7·`M_th_num` ([08-01 ratio-bias](https://github.com/ryoji-info/FableComputer/blob/main/notes/2026-08-01-ratio-bias-gain-table.md); literal flagged by [08-07](https://github.com/ryoji-info/FableComputer/blob/main/notes/2026-08-07-mth-num-excess-decomposition.md)).

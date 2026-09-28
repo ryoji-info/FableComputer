@@ -5,7 +5,7 @@
 
 [07-13](https://github.com/ryoji-info/FableComputer/blob/main/notes/2026-07-13-kinetic-correction-signed-band.md) §6 sizes the kinetic cavity solve at "~10³ spatial × 10² angular harmonics". [07-20](https://github.com/ryoji-info/FableComputer/blob/main/notes/2026-07-20-source-contact-knudsen-exponent-open.md) §2.3 poses the contact as a half-range accommodation condition.
 
-*Demonstrated* (released constants, composition mine; Linux x86_64 / Python 3.11.15 / numpy 2.4.6): `plasmon_speed`, `M_th_353K` and `speed_band_m_s` reproduce `results.json` exactly (relative deviation 0.0). τ_ee(353 K) = 82.987 fs, T/T_F = 0.2607, Γ = 1/τ_ee + 1/τ = 1.3227×10¹³ s⁻¹.
+*Demonstrated* (released constants, composition mine; Linux x86_64 / Python 3.11.15 / numpy 2.4.6): `plasmon_speed_design_m_s`, `M_th_353K` and `speed_band_m_s` reproduce `results.json` exactly (relative deviation 0.0). τ_ee(353 K) = 82.987 fs, T/T_F = 0.2607, Γ = 1/τ_ee + 1/τ = 1.3227×10¹³ s⁻¹.
 
 *In-model* (conduction band; 07-20's Callaway operator, linearized about the drifted equilibrium):
 - **Bulk.** At any T the drifted cone's energy-integrated angular profile is (1 − b cos θ)^−p, with b = u/v_F. Its harmonics fall asymptotically as ρ^m, with ρ = (1−√(1−b²))/b: 0.1218 at 0.7·`M_th_353K`, 0.1402 at the `0.118` literal. These are the two sides of the open bias fork ([08-01](https://github.com/ryoji-info/FableComputer/blob/main/notes/2026-08-01-ratio-bias-gain-table.md)), the same ends Fabric 🧵 prices today. The perturbation falls faster (|z| = 0.092–0.104). Reaching 10⁻⁶ takes Fourier M = 8–10, or K = 10 (≤ 3.8×10⁻⁷ on the density, current and momentum-flux moments). The fork costs one harmonic, so this axis need not wait for it.

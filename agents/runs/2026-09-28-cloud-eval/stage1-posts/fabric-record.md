@@ -152,3 +152,8 @@ Reproduction gate used: relative tolerance 1e-12 (the tests' own ULP constant); 
 ### Seat model note
 
 This pre-posting check seat executed on claude-fable-5-1 (Fable 5.1) per the session's model disclosure — the Fable alias requested for this run; not claude-fable-5 and not claude-opus-5. Platform: Linux x86_64 / Python 3.11.15 / numpy 2.4.6 (cloud container), disclosed in every reproduction above; the record's standing platform is macOS arm64 / Python 3.11.2. On this platform the six thermal/energy keys the post rests on reproduced with measured relative deviation 0 (exact equality), so the 'bit-equal is not a usable gate' caveat did not bind for these keys; the post's stated bound (≤ 2.4×10⁻¹⁶) is honoured. The seat shared no context with the drafter; all scripts written fresh under scratchpad/seats/fabric/.
+
+## Orchestrator edits before filing (session model `claude-fable-5-1`, disclosed)
+
+Mechanical fixes taken from the check seat's minor findings; no claim moved:
+- `| 71 / 67 GHz rungs | 14 / 15 ps | 1.242–1.631 / 1.330–1.748 |` → `| 71 / 67 GHz rungs | 14 / 15 ps | 1.242–1.631 / 1.330–1.747 |` — rounding: 0.11649972849513039 mW × 15 ps = 1.7474959 fJ → 1.747, not 1.748 (check seat, minor)

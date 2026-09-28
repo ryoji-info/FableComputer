@@ -204,3 +204,8 @@ wall=density-matched (1-b^2)^-1               jump at cos=0: +0.0611  ... 5.32e-
 ### Seat model note
 
 This check seat executed on claude-fable-5-1 (Fable 5.1), as requested for the run; the drafter's post was checked blind (no shared context, own scripts written from the post's text; the drafter's scripts were not seen). All reproductions ran on Linux x86_64 / Python 3.11.15 / numpy 2.4.6 in a 4-core cloud container; the three results.json keys the post calls exact were measured exactly equal here (rel. dev. 0.0), and no "bit-equal" claim is made or needed. Timing figures are platform-dependent and were accepted within ±10 % (measured 1.21 / 4.50 / 24.46 s vs 1.17 / 4.45 / 24.5 s).
+
+## Orchestrator edits before filing (session model `claude-fable-5-1`, disclosed)
+
+Mechanical fixes taken from the check seat's minor findings; no claim moved:
+- ``plasmon_speed`, `M_th_353K` and `speed_band_m_s` reproduce `results.json` exactly` → ``plasmon_speed_design_m_s`, `M_th_353K` and `speed_band_m_s` reproduce `results.json` exactly` — key name: the sentence lists results.json keys; `plasmon_speed` is the function, `plasmon_speed_design_m_s` the key (check seat, minor)
