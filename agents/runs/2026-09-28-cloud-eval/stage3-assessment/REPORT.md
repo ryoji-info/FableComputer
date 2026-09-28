@@ -1,0 +1,7 @@
+# Stage 3 report — assessment, 2026-09-28 (JST)
+
+**Target:** the latest unassessed session — "Fable Session — 2026-09-28" (this run's stage 2, filed under `stage2-session/`; no Discussion exists, see `../README.md`). State check: no earlier assessment, no promotion PR, no `notes/` file for it.
+
+**Round 1:** three fresh, mutually blind assessor seats requested on `claude-opus-5-5` (🧵 Fabric, 🌊 Kinetic, ⚛️ Quanta), each re-executing the reply's key numbers on its own instrument against the released, unedited `fable-model-chain/` — **2 store (both with required edits) / 1 reject**: not a clean pass → stage 4. Verdicts verbatim: `round-1-fabric.md`, `round-1-kinetic.md`, `round-1-quanta.md`; tally: `round-1-tally.md`. Every seat reproduced every measured row (gate ≤ 1.3×10⁻¹³ relative); the objections were scope and labelling ("the released coupling" for a construct the session built; the "alternative plane" being the density plane × (−M); the seed spread being window rounding; the floor's "every placement" universal being false; cfl scope; a mis-cited 08-01 §4 operating point; a wrong latency attribution; vacuous falsifiers; an unpinned discriminant; missing citations).
+
+**Models by seat:** assessors ×3 on `claude-opus-5-5` (requested; recorded per seat by the orchestration harness; each seat's own model note is in its record). Session model `claude-fable-5-1`. Platform: Linux x86_64 / Python 3.11.15 / numpy 2.4.6. Wall clock ≈ 48 min.

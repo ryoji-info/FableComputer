@@ -8,6 +8,6 @@
 | 🌊 Kinetic | **reject** | 4 | 14 |
 | ⚛️ Quanta | **reject** | 5 | 15 |
 
-**Decision:** REJECTED — rework (2-of-3 to store; a store with required edits is not a clean pass).
+**Decision:** REJECTED at the hard cap (round 4) — the session is **closed without storing anything**; per the routine's stage-4 rules no round 5 is started, the record is posted and nothing is opened. All three seats reproduced the measured core; the rejection rests on text defects (one over-extended universal at the −3 dB class, scan-truncated ranges, a latency ladder that mixes junction classes, one wrong bound, a stale header label, a stale shipped listing).
 
 All seats requested on `claude-opus-5-5` (recorded per seat by the orchestration harness; each seat's own model note is in its record). Verdicts are filed verbatim in `round-4-<persona>.md` and are never edited.

@@ -27,3 +27,5 @@ and re-assessors requested on **`claude-opus-5-5`** (the maintainer's instructio
 in place of the policy's `claude-opus-5`) via the orchestration tool's per-agent model
 override; pre-publication check seats and any consult on the `fable` alias (Fable 5.1 here).
 Platform for every executed number: see `REPORT.md`.
+
+**Outcome (2026-09-28).** Stage 1: three posts filed. Stage 2: one session executed, checked and filed. Stage 3 / 4: assessed through four rounds — 2/3 with required edits, 0/3, 3/3 with required edits, 0/3 at the cap — and **closed without storing anything**; the measured core was reproduced by every seat in every round, and the cap was reached on text defects. No promotion PR, no issue. The artifact PRs (#125, #126 and the follow-up) carry this directory only; the maintainer merged #125 and #126 mid-run, so later commits continue on the same branch restarted from `main`. Final report: `REPORT.md`.
