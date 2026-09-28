@@ -57,7 +57,7 @@ for r in sorted([r for r in T2 if r["kind"] == "matched"], key=lambda r: (r["N"]
     if e is None: continue
     c = e["rule"]["cell2_on_real_input"]["cav"]
     print(f"| {r['m']} | {r['N']} | {r['seed']} | {r['J']:+d} | {r['amp']:.5f} | {c['G_worst1_dB']:.3f} / {c['G_mean1_dB']:.3f} | {r['cav']['G_worst1_dB']:.3f} / {r['cav']['G_mean1_dB']:.3f} | **{c['G_worst1_dB']-r['cav']['G_worst1_dB']:+.3f} / {c['G_mean1_dB']-r['cav']['G_mean1_dB']:+.3f}** | {R['cell1']['cav']['G_worst1_dB']:.4f} |")
-print("\n### Table 2b — boundary-driven single-cell gain ladder G(A), same convention (seed 7)\n")
+print("\n### Table 2b — boundary-driven single-cell gain ladder G(A): the single released cell driven at its source clamp by the duty-0.8 gated launch at amplitude A, over its identical passive twin, promoted window, ratio bias, cfl = 0.4, seed 7\n")
 print("| m | N | A | G worst / mean (dB) | floor (dB) | pp (dB) |")
 print("|---|---|---|---|---|---|")
 lad = [r for r in T2 if r["kind"] == "ladder"]
@@ -115,7 +115,7 @@ for tag, R in sorted(A.items(), key=lambda kv: (kv[1]["N"], -kv[1]["m"], kv[1]["
     print(f"| {R['m']}{' (junction sweep)' if tag.endswith('_Jext') else ''} | {R['N']} | {R['seed']} | {e['rule']['passive_transfer_stage1_dB']:.2f} | {e['rule']['passive_transfer_stage2_dB']:.2f} | {L['peak_passive']/2:.3f} / {L['env_passive']/2:.3f} | {L['peak_active']/2:.3f} / {L['env_active']/2:.3f} | {L['rule_rt']:.3f} rt, {L['rule_ps']:.3f} ps, {L['rule_frac_slot']:.3f} |")
 
 
-print("\n### Residue — what the next cell actually receives (cell 1's active drain density h[−1] − 1, seed 7, N = 240; a '0' slot that follows a '1' carries that '1's ring-down, one that follows a '0' does not). Denominators, named per column: **(a)** = the mean-'1' peak inside the promoted window [0.25, 0.72]·repT, the promoted floor key's own denominator; **(b)** = the mean-'1' peak inside the same sub-window (same phase of the slot, where the '1' is still ringing up). Computed by `residue.py`\n")
+print("\n### Residue — what the next cell actually receives (cell 1's active drain density h[−1] − 1, seed 7, N = 240; a '0' slot that follows a '1' carries that '1's ring-down, one that follows a '0' does not). Denominators, named per column: **(a)** = the mean-'1' drain-density peak inside the promoted window [0.25, 0.72]·repT — the denominator of 08-02 §3.2's `drn_h` floor column (not of the promoted `max0_below_mean1_dB`, which is a source-plane `cav` ratio); **(b)** = the mean-'1' peak inside the same sub-window (same phase of the slot, where the '1' is still ringing up). Computed by `residue.py`\n")
 import residue as RS
 print("| m | promoted window [0.25, 0.72]·repT, over (a) | first quarter [0, 0.25]·repT, over (a) | first quarter, over (b) | whole slot, over (a) | whole slot, over (b) | '0'-slot energy over mean '1'-slot energy (max / median) | cell 2's windowed stage-2 floor at J = −1, `drn_h` / `cav` (Table 5) |")
 print("|---|---|---|---|---|---|---|---|")
@@ -144,4 +144,6 @@ def table5():
             g = ent["rule"]["chain_over_passive"]
             print(f"| {R['m']} | {R['N']} | {R['seed']} | {int(J):+d} | {g['cav']['max0_below_mean1_dB']:.2f} | {g['drn_h']['max0_below_mean1_dB']:.2f} | {g['floor_mode_drn_h']:.2f} | {g['cav']['pp_raw_dB']:.3f} | {g['cav']['eye_dB']:+.2f} | {R['cell1']['cav']['max0_below_mean1_dB']:.2f} / {R['cell1']['floor_mode_drn_h']:.2f} |")
 
+print("\n### Table 5 — stage-2 '0'-floors, every family and class, both denominations, with cell 1's own floor (window rule shift = passive-chain latency, rounded to the ⅛-rt grid; the ideal-buffer density coupling of §2; released cfl = 0.4; the cell-1 columns at the promoted window)\n")
+table5()
 full = open(S + "/tables.md").read() if os.path.exists(S + "/tables.md") else ""
