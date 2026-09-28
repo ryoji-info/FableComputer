@@ -17,10 +17,21 @@ def load(tag, st):
 
 
 def score(cell, ref, bits, repT, nslots, shift):
-    mk = slot_windows(cell["t"], repT, nslots, shift=shift); mr = slot_windows(ref["t"], repT, nslots, shift=shift)
-    out = {o: metrics(bits, slot_peaks(cell[o], mk), slot_peaks(ref[o], mr)) for o in ("cav", "drn_h")}
+    """No cap on the shift: a stage-k window may run into the following slot's time (wave
+    pipelining). Slots whose shifted window would run past the end of the record are dropped
+    (n_scored is reported), so no slot is scored on a truncated window."""
+    tend = min(cell["t"][-1], ref["t"][-1])
+    n_ok = sum(1 for k in range(nslots) if (k + 0.72) * repT + shift <= tend)
+    mk = slot_windows(cell["t"], repT, n_ok, shift=shift); mr = slot_windows(ref["t"], repT, n_ok, shift=shift)
+    NANS = {k: float("nan") for k in ("G_worst1_dB", "G_mean1_dB", "pp_raw_dB", "mean1_level", "min1_level", "eye_dB", "max0_below_mean1_dB", "max0_level")}
+    if n_ok <= 4 or not np.all(np.isfinite(cell["drn_h"])) or not np.all(np.isfinite(ref["drn_h"])):
+        # a record that ended in the solver's blow-up guard (non-finite series) or is too short to score
+        return {"cav": dict(NANS), "drn_h": dict(NANS), "floor_mode_drn_h": float("nan"), "n_scored": 0, "note": "not scorable (non-finite or truncated record)"}
+    out = {o: metrics(bits[:n_ok], slot_peaks(cell[o], mk), slot_peaks(ref[o], mr)) for o in ("cav", "drn_h")}
+    for o in ("cav", "drn_h"):
+        for k2, v in NANS.items(): out[o].setdefault(k2, v)
     a, _ = slot_modes(cell["drn_h"], cell["t"], mk, F0N, repT, 0.8, shift=shift)
-    out["floor_mode_drn_h"] = floor_mode(bits, a)
+    out["floor_mode_drn_h"] = floor_mode(bits[:n_ok], a); out["n_scored"] = n_ok - 4
     return out
 
 
@@ -32,7 +43,16 @@ def run(tag):
     ds = max(1, len(c10["t"]) // 20000)
     L_pas = envelope_lag(c10["drn_h"][::ds], st2_00["drn_h"][::ds], c10["t"][::ds])
     L_act = envelope_lag(c1M["drn_h"][::ds], st2_MM["drn_h"][::ds], c1M["t"][::ds])
-    res = {"tag": tag, "L_passive": L_pas, "L_active": L_act, "stages": {}}
+    res = {"tag": tag, "L_passive": L_pas, "L_active": L_act, "stages": {}, "stage_lags": {}}
+    # per-stage latencies: stage k-1 -> k on the passive twin chain and on the active chain
+    prev0, prevM = c10, c1M
+    for k in stages:
+        n0 = load(tag, f"st{k}_00"); nM = load(tag, f"st{k}_MM")
+        lp = envelope_lag(prev0["drn_h"][::ds], n0["drn_h"][::ds], prev0["t"][::ds]); la = envelope_lag(prevM["drn_h"][::ds], nM["drn_h"][::ds], prevM["t"][::ds])
+        pp0 = float(np.median((np.array([np.argmax(np.abs(n0["drn_h"][(n0["t"] >= j * repT) & (n0["t"] < (j + 1) * repT)])) * n0["t"][1] for j in range(ns)]) - np.array([np.argmax(np.abs(prev0["drn_h"][(prev0["t"] >= j * repT) & (prev0["t"] < (j + 1) * repT)])) * prev0["t"][1] for j in range(ns)]))[4:][np.array(bits[4:]) == 1]))
+        res["stage_lags"][k] = {"passive_env": lp, "active_env": la, "passive_peak": pp0}
+        print(f" stage {k-1}->{k} lag: passive env {lp/2:.3f} rt, peak {pp0/2:.3f} rt; active env {la/2:.3f} rt")
+        prev0, prevM = n0, nM
     print(f"=== {tag}: L_passive {L_pas:.3f} units ({L_pas/2:.3f} rt, {L_pas/2*RT_PS:.3f} ps, {L_pas/repT:.3f} slot); L_active {L_act:.3f}")
     s1 = score(c1M, c10, bits, repT, ns, 0.0)
     print(f" stage 1: G_worst {s1['cav']['G_worst1_dB']:.3f} G_mean {s1['cav']['G_mean1_dB']:.3f} floor cav {s1['cav']['max0_below_mean1_dB']:.3f} drn_h {s1['drn_h']['max0_below_mean1_dB']:.3f} mode {s1['floor_mode_drn_h']:.3f} pp {s1['cav']['pp_raw_dB']:.3f} eye {s1['cav']['eye_dB']:+.2f}")
@@ -41,7 +61,6 @@ def run(tag):
         MM, M0, O0 = load(tag, f"st{k}_MM"), load(tag, f"st{k}_M0"), load(tag, f"st{k}_00")
         ent = {}
         for name, sh in (("rule", (k - 1) * L_pas), ("unshifted", 0.0), ("active_lag", (k - 1) * L_act)):
-            sh = min(sh, 0.9 * repT - 0.72 * repT)   # keep the window inside the slot
             g = score(MM, O0, bits, repT, ns, sh); c = score(MM, M0, bits, repT, ns, sh)
             ent[name] = {"shift": sh, "chain_over_passive": g, "cell_on_real_input": c}
         res["stages"][k] = ent

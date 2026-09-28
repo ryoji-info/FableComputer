@@ -1,6 +1,6 @@
 # §7 Runnable listings — verbatim sources
 
-The exact files that produced every number in the reply (`listings/` in this run directory; adjust `CHAIN` and the scratch paths). Run order and cost on this container (4 workers): `gate.py` (~2.5 min) → `launch.py` + `campaign.py families.json 4` (~45 min for the N = 240 families, ~35 min per N = 480 family) → `campaign.py families2.json 4` (N = 720 rung, the N = 480 m = 28 family and the junction sweep, ~70 min) → `depth.py depth_cfgs.json 2` (~11 min) → `gen_table2.py` + `table2.py` (~50 min single worker) → `analyze.py`, `analyze_depth.py`, `render_tables.py` (seconds). `campaign.py` is published in its final form: its scorer was rewritten mid-campaign to hold one window-shift mask at a time after the first version was OOM-killed at N = 720; the scoring arithmetic is unchanged and the N = 240/480 families it produced were re-scored identically.
+The exact files that produced every number in the reply (`listings/` in this run directory; adjust `CHAIN` and the scratch paths). Run order and cost on this container (4 workers): `gate.py` (~2.5 min) → `launch.py` + `campaign.py families.json 4` (~45 min for the N = 240 families, ~35 min per N = 480 family) → `campaign.py families2.json 4` (N = 720 rung, the N = 480 m = 28 family and the junction sweep, ~70 min) → `depth.py depth_cfgs.json 2` (~11 min) → `gen_table2.py` + `table2.py` (~50 min single worker) → `analyze.py`, `analyze_depth.py`, `residue.py`, `render_tables.py` (seconds). `analyze_depth.py`, `residue.py` and `render_tables.py` are published as revised after the pre-publication checks (the window-shift cap removed, per-stage lags and scored counts added, the residue table's denominators named and its computation shipped). `campaign.py` is published in its final form: its scorer was rewritten mid-campaign to hold one window-shift mask at a time after the first version was OOM-killed at N = 720; the scoring arithmetic is unchanged and the N = 240/480 families it produced were re-scored identically.
 
 ### `cascade_driver.py`
 
@@ -667,10 +667,21 @@ def load(tag, st):
 
 
 def score(cell, ref, bits, repT, nslots, shift):
-    mk = slot_windows(cell["t"], repT, nslots, shift=shift); mr = slot_windows(ref["t"], repT, nslots, shift=shift)
-    out = {o: metrics(bits, slot_peaks(cell[o], mk), slot_peaks(ref[o], mr)) for o in ("cav", "drn_h")}
+    """No cap on the shift: a stage-k window may run into the following slot's time (wave
+    pipelining). Slots whose shifted window would run past the end of the record are dropped
+    (n_scored is reported), so no slot is scored on a truncated window."""
+    tend = min(cell["t"][-1], ref["t"][-1])
+    n_ok = sum(1 for k in range(nslots) if (k + 0.72) * repT + shift <= tend)
+    mk = slot_windows(cell["t"], repT, n_ok, shift=shift); mr = slot_windows(ref["t"], repT, n_ok, shift=shift)
+    NANS = {k: float("nan") for k in ("G_worst1_dB", "G_mean1_dB", "pp_raw_dB", "mean1_level", "min1_level", "eye_dB", "max0_below_mean1_dB", "max0_level")}
+    if n_ok <= 4 or not np.all(np.isfinite(cell["drn_h"])) or not np.all(np.isfinite(ref["drn_h"])):
+        # a record that ended in the solver's blow-up guard (non-finite series) or is too short to score
+        return {"cav": dict(NANS), "drn_h": dict(NANS), "floor_mode_drn_h": float("nan"), "n_scored": 0, "note": "not scorable (non-finite or truncated record)"}
+    out = {o: metrics(bits[:n_ok], slot_peaks(cell[o], mk), slot_peaks(ref[o], mr)) for o in ("cav", "drn_h")}
+    for o in ("cav", "drn_h"):
+        for k2, v in NANS.items(): out[o].setdefault(k2, v)
     a, _ = slot_modes(cell["drn_h"], cell["t"], mk, F0N, repT, 0.8, shift=shift)
-    out["floor_mode_drn_h"] = floor_mode(bits, a)
+    out["floor_mode_drn_h"] = floor_mode(bits[:n_ok], a); out["n_scored"] = n_ok - 4
     return out
 
 
@@ -682,7 +693,16 @@ def run(tag):
     ds = max(1, len(c10["t"]) // 20000)
     L_pas = envelope_lag(c10["drn_h"][::ds], st2_00["drn_h"][::ds], c10["t"][::ds])
     L_act = envelope_lag(c1M["drn_h"][::ds], st2_MM["drn_h"][::ds], c1M["t"][::ds])
-    res = {"tag": tag, "L_passive": L_pas, "L_active": L_act, "stages": {}}
+    res = {"tag": tag, "L_passive": L_pas, "L_active": L_act, "stages": {}, "stage_lags": {}}
+    # per-stage latencies: stage k-1 -> k on the passive twin chain and on the active chain
+    prev0, prevM = c10, c1M
+    for k in stages:
+        n0 = load(tag, f"st{k}_00"); nM = load(tag, f"st{k}_MM")
+        lp = envelope_lag(prev0["drn_h"][::ds], n0["drn_h"][::ds], prev0["t"][::ds]); la = envelope_lag(prevM["drn_h"][::ds], nM["drn_h"][::ds], prevM["t"][::ds])
+        pp0 = float(np.median((np.array([np.argmax(np.abs(n0["drn_h"][(n0["t"] >= j * repT) & (n0["t"] < (j + 1) * repT)])) * n0["t"][1] for j in range(ns)]) - np.array([np.argmax(np.abs(prev0["drn_h"][(prev0["t"] >= j * repT) & (prev0["t"] < (j + 1) * repT)])) * prev0["t"][1] for j in range(ns)]))[4:][np.array(bits[4:]) == 1]))
+        res["stage_lags"][k] = {"passive_env": lp, "active_env": la, "passive_peak": pp0}
+        print(f" stage {k-1}->{k} lag: passive env {lp/2:.3f} rt, peak {pp0/2:.3f} rt; active env {la/2:.3f} rt")
+        prev0, prevM = n0, nM
     print(f"=== {tag}: L_passive {L_pas:.3f} units ({L_pas/2:.3f} rt, {L_pas/2*RT_PS:.3f} ps, {L_pas/repT:.3f} slot); L_active {L_act:.3f}")
     s1 = score(c1M, c10, bits, repT, ns, 0.0)
     print(f" stage 1: G_worst {s1['cav']['G_worst1_dB']:.3f} G_mean {s1['cav']['G_mean1_dB']:.3f} floor cav {s1['cav']['max0_below_mean1_dB']:.3f} drn_h {s1['drn_h']['max0_below_mean1_dB']:.3f} mode {s1['floor_mode_drn_h']:.3f} pp {s1['cav']['pp_raw_dB']:.3f} eye {s1['cav']['eye_dB']:+.2f}")
@@ -691,7 +711,6 @@ def run(tag):
         MM, M0, O0 = load(tag, f"st{k}_MM"), load(tag, f"st{k}_M0"), load(tag, f"st{k}_00")
         ent = {}
         for name, sh in (("rule", (k - 1) * L_pas), ("unshifted", 0.0), ("active_lag", (k - 1) * L_act)):
-            sh = min(sh, 0.9 * repT - 0.72 * repT)   # keep the window inside the slot
             g = score(MM, O0, bits, repT, ns, sh); c = score(MM, M0, bits, repT, ns, sh)
             ent[name] = {"shift": sh, "chain_over_passive": g, "cell_on_real_input": c}
         res["stages"][k] = ent
@@ -706,6 +725,52 @@ if __name__ == "__main__":
     tags = sorted({os.path.basename(p)[:-5] for p in glob.glob(f"{D}/*.json")})
     out = {t: run(t) for t in tags}
     json.dump(out, open(os.path.join(SESSION, "analysis_depth.json"), "w"), indent=1)
+
+```
+
+### `residue.py`
+
+```python
+# -*- coding: utf-8 -*-
+"""The '0'-slot residue the next cell receives, from the depth re-run's stored cell-1 series
+(active drain density h[-1]-1; m = 30 and 28, N = 240, seed 7). Two denominators, both named
+wherever a number is quoted:
+  (a) the mean-'1' peak inside the PROMOTED window [0.25, 0.72]·repT (the promoted floor
+      key's own denominator, so the ratio is comparable with max0_below_mean1_dB);
+  (b) the mean-'1' peak inside the SAME sub-window (same phase of the slot).
+'0' slots are split into those that follow a '1' (carrying its ring-down) and those that
+follow a '0'. Also the '0'-slot energy over the mean '1'-slot energy (whole slot)."""
+import numpy as np, json, os
+D = os.path.join(os.path.dirname(os.path.abspath(__file__)), "depth")
+WINDOWS = ((0.25, 0.72, "promoted window"), (0.0, 0.25, "first quarter"), (0.0, 1.0, "whole slot"))
+
+
+def compute(tag):
+    meta = json.load(open(f"{D}/{tag}.json")); bits = np.array(meta["bits"]); repT = meta["repT"]; ns = meta["nslots"]
+    t = np.load(f"{D}/{tag}_st1_M_t.npy").astype(float); x = np.load(f"{D}/{tag}_st1_M_drn_h.npy").astype(float)
+
+    def pk(lo, hi):
+        return np.array([np.max(np.abs(x[(t >= (k + lo) * repT) & (t < (k + hi) * repT)])) for k in range(ns)])[4:]
+    b = bits[4:]; ones = b == 1; zeros = b == 0; prev1 = np.array([bits[k - 1] == 1 for k in range(4, ns)])
+    ref_a = float(np.mean(pk(0.25, 0.72)[ones]))
+    out = {"tag": tag, "mean1_windowed_peak_a": ref_a, "windows": {}}
+    for lo, hi, lbl in WINDOWS:
+        p = pk(lo, hi); ref_b = float(np.mean(p[ones]))
+        a1 = float(np.max(p[zeros & prev1])); a0 = float(np.max(p[zeros & ~prev1]))
+        out["windows"][lbl] = {"lo": lo, "hi": hi, "mean1_same_window_b": ref_b, "after1_peak": a1, "after0_peak": a0,
+                               "after1_over_a_dB": 20 * np.log10(a1 / ref_a), "after1_over_b_dB": 20 * np.log10(a1 / ref_b),
+                               "after0_over_a_dB": 20 * np.log10(a0 / ref_a), "after0_over_b_dB": 20 * np.log10(a0 / ref_b)}
+    e = np.array([np.sum(x[(t >= k * repT) & (t < (k + 1) * repT)] ** 2) for k in range(ns)])[4:]
+    out["energy_max_dB"] = float(10 * np.log10(np.max(e[zeros]) / np.mean(e[ones]))); out["energy_median_dB"] = float(10 * np.log10(np.median(e[zeros]) / np.mean(e[ones])))
+    return out
+
+
+if __name__ == "__main__":
+    for tag in ("D_N240_m30_s7", "D_N240_m28_s7"):
+        r = compute(tag); print(f"{tag}: (a) mean-'1' windowed peak {r['mean1_windowed_peak_a']:.6f}")
+        for lbl, w in r["windows"].items():
+            print(f"  {lbl:16s} [{w['lo']:.2f}, {w['hi']:.2f}]·repT: '0' after '1' peak {w['after1_peak']:.6f} -> over (a) {w['after1_over_a_dB']:7.2f} dB, over (b) same-window mean-'1' {w['mean1_same_window_b']:.6f}: {w['after1_over_b_dB']:7.2f} dB | '0' after '0': over (a) {w['after0_over_a_dB']:7.2f}, over (b) {w['after0_over_b_dB']:7.2f}")
+        print(f"  '0'-slot energy over mean '1'-slot energy: max {r['energy_max_dB']:.2f} dB, median {r['energy_median_dB']:.2f} dB")
 
 ```
 
@@ -778,18 +843,35 @@ lad = [r for r in T2 if r["kind"] == "ladder"]
 for r in sorted(lad, key=lambda r: (r["N"], -r["m"], r["amp"])):
     print(f"| {r['m']} | {r['N']} | {r['amp']:.4f} | {r['cav']['G_worst1_dB']:.3f} / {r['cav']['G_mean1_dB']:.3f} | {r['cav']['max0_below_mean1_dB']:.3f} | {r['cav']['pp_raw_dB']:.3f} |")
 
-print("\n### Table 3 — stage by stage (J = −1 dB, density plane, seed 7, N = 240): gain over the passive twin chain, the stage cell's gain on its real input, '0'-floor in both denominations, '1' pp, eye, latency\n")
+print("\n### Table 3 — stage by stage (J = −1 dB, density plane, seed 7, N = 240). Window rule: the promoted window delayed by (k − 1) × the passive twin chain's stage-1→2 envelope lag (5.136 units = 2.568 rt at m = 30; 5.111 = 2.556 rt at m = 28), applied exactly and **without a cap**: at stage 5 the delay is 0.34 slot, so the window runs into the following slot's time (the wave-pipelining reading of a cascade); slots whose delayed window would run past the record's end are dropped and the scored count is shown. Columns: gain over the passive twin chain; the stage cell's gain on its real input; '0'-floor in both denominations; '1' pp; eye; the stage's mean-'1' drain density (h − 1; the shallow-water equilibrium is h = 1); and the measured stage-(k − 1)→k latency — on the passive twin chain by envelope cross-correlation and by per-slot peak time, on the active chain by envelope\n")
 if os.path.exists(S + "/analysis_depth.json"):
     Dp = json.load(open(S + "/analysis_depth.json"))
-    print("| m | stage | window shift (rt) | chain/passive worst / mean (dB) | stage cell worst / mean (dB) | floor peak `cav` / `drn_h` (dB) | floor slot-mode `drn_h` (dB) | '1' pp (dB) | eye (dB) | mean-'1' drain density |")
-    print("|---|---|---|---|---|---|---|---|---|---|")
-    for tag, D in sorted(Dp.items(), key=lambda kv: -int(kv[0].split("_m")[1].split("_")[0])):
+    print("| m | stage k | window shift (rt) | slots scored | lag (k − 1)→k: passive env / peak; active env (rt) | chain/passive worst / mean (dB) | stage cell on real input, worst / mean (dB) | floor peak `cav` / `drn_h` (dB) | floor slot-mode `drn_h` (dB) | '1' pp (dB) | eye (dB) | mean-'1' drain density |")
+    print("|---|---|---|---|---|---|---|---|---|---|---|---|")
+    order = sorted(Dp.items(), key=lambda kv: -int(kv[0].split("_m")[1].split("_")[0]))
+    for tag, D in order:
         m = int(tag.split("_m")[1].split("_")[0])
         for k, ent in sorted(D["stages"].items(), key=lambda kv: int(kv[0])):
-            g = ent["rule"]["chain_over_passive"] if "chain_over_passive" in ent["rule"] else ent["rule"]
-            c = ent["rule"].get("cell_on_real_input", g)
-            sh = ent["rule"].get("shift", 0.0)
-            print(f"| {m} | {k} | {sh/2:.2f} | {g['cav']['G_worst1_dB']:.3f} / {g['cav']['G_mean1_dB']:.3f} | {c['cav']['G_worst1_dB']:.3f} / {c['cav']['G_mean1_dB']:.3f} | {g['cav']['max0_below_mean1_dB']:.2f} / {g['drn_h']['max0_below_mean1_dB']:.2f} | {g['floor_mode_drn_h']:.2f} | {g['cav']['pp_raw_dB']:.3f} | {g['cav']['eye_dB']:+.2f} | {g['drn_h']['mean1_level']:.4f} |")
+            k = int(k); r = ent["rule"]
+            if k == 1:
+                g = r; ccell = "—"; sh = 0.0; lag = "—"; n = r.get("n_scored", 36)
+            else:
+                g = r["chain_over_passive"]; c = r["cell_on_real_input"]; sh = r["shift"]; L = D["stage_lags"][str(k)]
+                lag = f"{L['passive_env']/2:.3f} / {L['passive_peak']/2:.3f}; {L['active_env']/2:.3f}"; n = g.get("n_scored")
+                ccell = "n/a (record truncated at the solver's blow-up guard: the passive stage-5 twin driven by the active chain)" if c.get("note") else f"{c['cav']['G_worst1_dB']:.3f} / {c['cav']['G_mean1_dB']:.3f}"
+            print(f"| {m} | {k} | {sh/2:.2f} | {n} | {lag} | {g['cav']['G_worst1_dB']:.3f} / {g['cav']['G_mean1_dB']:.3f} | {ccell} | {g['cav']['max0_below_mean1_dB']:.2f} / {g['drn_h']['max0_below_mean1_dB']:.2f} | {g['floor_mode_drn_h']:.2f} | {g['cav']['pp_raw_dB']:.3f} | {g['cav']['eye_dB']:+.2f} | {g['drn_h']['mean1_level']:.4f} |")
+    print("\n#### Table 3b — window-placement sensitivity of Table 3 (same runs; `cav`, chain over the passive twin chain): the rule above, the unshifted promoted window, and the window delayed by (k − 1) × the *active* chain's stage-1→2 envelope lag (11.42 units = 5.71 rt at m = 30; 11.53 = 5.77 rt at m = 28), also uncapped\n")
+    print("| m | stage k | rule shift (rt): worst (dB) / floor `cav` (dB) / eye (dB) | unshifted window: worst / floor / eye | active-lag shift (rt) [slots scored]: worst / floor / eye |")
+    print("|---|---|---|---|---|")
+    for tag, D in order:
+        m = int(tag.split("_m")[1].split("_")[0])
+        for k, ent in sorted(D["stages"].items(), key=lambda kv: int(kv[0])):
+            if int(k) == 1: continue
+            r, u, a = (ent[n]["chain_over_passive"] for n in ("rule", "unshifted", "active_lag"))
+            f = lambda g: f"{g['cav']['G_worst1_dB']:.3f} / {g['cav']['max0_below_mean1_dB']:.2f} / {g['cav']['eye_dB']:+.2f}"
+            print(f"| {m} | {k} | {ent['rule']['shift']/2:.2f}: {f(r)} | {f(u)} | {ent['active_lag']['shift']/2:.2f} [{a.get('n_scored')}]: {f(a)} |")
+    lp = {int(t.split("_m")[1].split("_")[0]): D for t, D in Dp.items()}
+    print(f"\nStage-1→2 lags (Table 3 runs): passive envelope {lp[30]['L_passive']:.3f} units ({lp[30]['L_passive']/2:.3f} rt, {lp[30]['L_passive']/2*RT_PS if False else lp[30]['L_passive']/2*0.5:.3f} ps, {lp[30]['L_passive']/60:.3f} slot) at m = 30 and {lp[28]['L_passive']:.3f} ({lp[28]['L_passive']/2:.3f} rt, {lp[28]['L_passive']/2*0.5:.3f} ps, {lp[28]['L_passive']/56:.3f} slot) at m = 28; active {lp[30]['L_active']:.2f} / {lp[28]['L_active']:.2f} units ({lp[30]['L_active']/2:.2f} / {lp[28]['L_active']/2:.2f} rt). The later stages' lags are in the table; they belong to the out-of-regime stages and are not registered.")
 
 print("\n### Junction sweep (primary rungs, N = 240, seed 7): where the chain returns to the small-signal limit\n")
 print("| m | J (dB) | κ | input amp to cell 2 | c2c worst / mean (dB) | G4_A worst / mean | stage-2 floor peak `cav` / slot-mode (dB) | eye (dB) |")
@@ -806,10 +888,41 @@ for m in (30, 28):
 print("\n### Passive port-to-port density transfer and latency\n")
 print("| m | N | seed | T_passive stage 1 (dB, drain density over launch) | T_passive stage 2 (dB) | latency passive: peak-time / envelope (rt) | latency active: peak-time / envelope (rt) | rule shift (rt, ps, slot fraction) |")
 print("|---|---|---|---|---|---|---|---|")
-for tag, R in sorted(A.items(), key=lambda kv: (kv[1]["N"], -kv[1]["m"], kv[1]["seed"])):
-    if tag.endswith("_Jext"): continue
-    e = R["J"].get("-1_h"); L = R["latency"]
+for tag, R in sorted(A.items(), key=lambda kv: (kv[1]["N"], -kv[1]["m"], kv[1]["seed"], kv[0].endswith("_Jext"))):
+    e = next((R["J"][k] for k in ("-1_h", "-3_h", "-10_h") if k in R["J"]), None); L = R["latency"]
     if e is None: continue
-    print(f"| {R['m']} | {R['N']} | {R['seed']} | {e['rule']['passive_transfer_stage1_dB']:.2f} | {e['rule']['passive_transfer_stage2_dB']:.2f} | {L['peak_passive']/2:.3f} / {L['env_passive']/2:.3f} | {L['peak_active']/2:.3f} / {L['env_active']/2:.3f} | {L['rule_rt']:.3f} rt, {L['rule_ps']:.3f} ps, {L['rule_frac_slot']:.3f} |")
+    print(f"| {R['m']}{' (junction sweep)' if tag.endswith('_Jext') else ''} | {R['N']} | {R['seed']} | {e['rule']['passive_transfer_stage1_dB']:.2f} | {e['rule']['passive_transfer_stage2_dB']:.2f} | {L['peak_passive']/2:.3f} / {L['env_passive']/2:.3f} | {L['peak_active']/2:.3f} / {L['env_active']/2:.3f} | {L['rule_rt']:.3f} rt, {L['rule_ps']:.3f} ps, {L['rule_frac_slot']:.3f} |")
+
+
+print("\n### Residue — what the next cell actually receives (cell 1's active drain density h[−1] − 1, seed 7, N = 240; a '0' slot that follows a '1' carries that '1's ring-down, one that follows a '0' does not). Denominators, named per column: **(a)** = the mean-'1' peak inside the promoted window [0.25, 0.72]·repT, the promoted floor key's own denominator; **(b)** = the mean-'1' peak inside the same sub-window (same phase of the slot, where the '1' is still ringing up). Computed by `residue.py`\n")
+import residue as RS
+print("| m | promoted window [0.25, 0.72]·repT, over (a) | first quarter [0, 0.25]·repT, over (a) | first quarter, over (b) | whole slot, over (a) | whole slot, over (b) | '0'-slot energy over mean '1'-slot energy (max / median) | cell 2's windowed stage-2 floor at J = −1, `drn_h` / `cav` (Table 5) |")
+print("|---|---|---|---|---|---|---|---|")
+for tag in ("D_N240_m30_s7", "D_N240_m28_s7"):
+    r = RS.compute(tag); m = int(tag.split("_m")[1].split("_")[0]); W = r["windows"]
+    fl = next(R for t, R in A.items() if R["m"] == m and R["N"] == 240 and R["seed"] == 7 and not t.endswith("_Jext"))["J"]["-1_h"]["rule"]["chain_over_passive"]
+    q = W["first quarter"]; w = W["whole slot"]; pw = W["promoted window"]
+    print(f"| {m} | {pw['after1_over_a_dB']:.2f} dB (after a '1'); {pw['after0_over_a_dB']:.1f} (after a '0') | **{q['after1_over_a_dB']:.2f} dB**; {q['after0_over_a_dB']:.1f} | {q['after1_over_b_dB']:.2f} dB; {q['after0_over_b_dB']:.1f} | {w['after1_over_a_dB']:.2f} dB; {w['after0_over_a_dB']:.1f} | {w['after1_over_b_dB']:.2f} dB; {w['after0_over_b_dB']:.1f} | {r['energy_max_dB']:.1f} / {r['energy_median_dB']:.1f} dB | {fl['drn_h']['max0_below_mean1_dB']:.2f} / {fl['cav']['max0_below_mean1_dB']:.2f} dB |")
+print("\nThe first-quarter and whole-slot columns agree under denominator (a) because the '0' slot's un-windowed maximum sits at ≈ 0.01 slot, inside the first quarter; the registered key `zero_slot_residue_unwindowed_dB` is the bold column.")
+
+# ---------------- per-table files for the finalizer ----------------
+import io, contextlib
+def capture(fn):
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        fn()
+    return buf.getvalue()
+
+def table5():
+    print("| m | N | seed | J (dB) | stage-2 floor, peak `cav` (dB) | peak `drn_h` (dB) | slot-mode `drn_h` (dB) | '1' pp (dB) | eye (dB) | cell-1 floor peak `cav` / slot-mode (dB) |")
+    print("|---|---|---|---|---|---|---|---|---|---|")
+    for tag, R in sorted(A.items(), key=lambda kv: (kv[1]["N"], -kv[1]["m"], kv[1]["seed"], kv[0].endswith("_Jext"))):
+        for Jk, ent in sorted(R["J"].items(), key=lambda kv: -int(kv[0].split("_")[0])):
+            J, plane = Jk.split("_")
+            if plane != "h": continue
+            g = ent["rule"]["chain_over_passive"]
+            print(f"| {R['m']} | {R['N']} | {R['seed']} | {int(J):+d} | {g['cav']['max0_below_mean1_dB']:.2f} | {g['drn_h']['max0_below_mean1_dB']:.2f} | {g['floor_mode_drn_h']:.2f} | {g['cav']['pp_raw_dB']:.3f} | {g['cav']['eye_dB']:+.2f} | {R['cell1']['cav']['max0_below_mean1_dB']:.2f} / {R['cell1']['floor_mode_drn_h']:.2f} |")
+
+full = open(S + "/tables.md").read() if os.path.exists(S + "/tables.md") else ""
 
 ```
