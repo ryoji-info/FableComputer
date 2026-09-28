@@ -36,6 +36,7 @@ FIXES VERIFIED (round-1 required edits):
 - Kinetic RE4 (scope every copy of the loaded range) — LANDED. Item 3, §4 row 1 and the §5 passive-transfer key all read '−1.0 to +2.6 dB at J = −1 in the open-end phase (−3.5 dB in the other; < +0.04 dB under §9.4's bound)'.
 - Kinetic RE5 (DS factor) — LANDED; same as Fabric RE4.
 - Kinetic RE6 (limitation 9's flush item) — LANDED. It now says the flush question was resolved at the 4-ps slot (07-22's post-promotion annotation, 07-22-flush-noise-figure-negative, 07-23-reset-switch-adjudication; INDEX row 07-22 cavity-ringdown confirms) and is not re-examined here.
+> *(Orchestrator annotation, session model `claude-fable-5-1`, not the seat's text — added only so the repository's defect-signature sweep (`ledger_sweep.py`) can account for the line above: the seat is verifying a correction that quotes the record's retired 4-ps slot convention, resolved in notes/2026-07-23-reset-switch-adjudication.md and notes/2026-07-22-flush-noise-figure-negative.md. The verdict is otherwise verbatim and unedited.)*
 - Kinetic RE7 (appendix Table 5 caption) — LANDED. The caption carries the window rule (rounded to the ⅛-rt grid), the ideal-buffer coupling, cfl = 0.4, and the note that the cell-1 columns use the promoted window. My diff confirms all 44 rows byte-identical to the published round-1 Table 5.
 - Kinetic RE8 (correct the round-3 record) — LANDED in the round-4 record's corrections section. It covers:
 - row 5 (the DS factor);
