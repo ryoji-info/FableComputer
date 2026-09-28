@@ -42,6 +42,7 @@ E@4ps [0.3547675569831641, 0.4659989139805215] committed [0.3547675569831641, 0.
   rel dev 0.0
   rel dev 1.1912291974478325e-16
 bias M op, hi: 0.10295833333333332 0.118  0.7*M_th_353K = 0.10295833333333332  0.7*M_th_num = 0.11826023624361653
+[orchestrator note, not seat output: the 0.25 THz / 4-ps row below is the retired design baseline — F = 2 logic at the 4-ps slot was retired by notes/2026-07-23-reset-switch-adjudication.md; the row is quoted to price it, not to assert it]
 0.25 THz (4 ps baseline)         slot=  4.000 ps  E=[0.3548, 0.4660] fJ  x1.0000
 0.1 THz (07-23 headline)         slot= 10.000 ps  E=[0.8869, 1.1650] fJ  x2.5000
 74 GHz (gated band top)          slot= 13.514 ps  E=[1.1985, 1.5743] fJ  x3.3784
@@ -56,6 +57,7 @@ per-cell bias energy per slot 14.493 ps = 183.627 aJ; / pulse_energy_knee_aJ 0.0
 Relative deviation from the committed results.json: block_power_mW 0.0 (lower) and 1.19e-16 (upper); energy_per_add_fJ 0.0 (lower) and 2.38e-16 (upper). Gate: rel ≤ 1e-12, passed. Exact equality holds on the lower ends only, so the post never says "bit-equal".
 The rt = 0.5 ps (m = 28 -> 14 ps, m = 30 -> 15 ps) and the 07-31 gain-leg bias 0.7·M_th_analytic = 0.10295833333333332 are from 07-31 §1–§2 and match the op-bias printed above.
 Source reads: thermal.py line 38 `def energy_per_add(P_mW, slot=C.slot)`; constants.py `f_sym = 0.25e12`, `slot = 1.0/f_sym`; run_all.py line 99 calls TH.energy_per_add(P_block) with no slot; run_all.py line 54 has the 0.118 literal.
+[orchestrator note, not seat output: the manuscript passages quoted below name the 4-ps slot / 0.25 THz design baseline, retired for F = 2 logic by notes/2026-07-23-reset-switch-adjudication.md; the post treats that as an errata-class observation]
 Manuscript text was extracted with `unzip -p papers/Fable-Computer-Part-I.docx word/document.xml | sed 's/<[^>]*>//g' | grep`. It contains the abstract "fan-out-2 logic closes at ≈0.1 THz rather than at the 4-ps slot (Section 6.2) — at ~0.4 fJ per addition on the fabric side", §8.1 "≈ 0.35–0.5 fJ per addition at one addition per 4 ps. This is CMOS-class, not below it.", and Table 5 "Energy per addition (fabric side) ≈ 0.35–0.5 fJ". README.md line 30: "one addition per 4-picosecond slot ... at roughly 0.4 femtojoules per addition".
 The count of 12 test functions comes from `grep -c "def test" tests/test_published_claims.py` -> 12. No tracked file was modified (`git status --short` was empty).
 ```
