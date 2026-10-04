@@ -1,0 +1,67 @@
+
+====================================================================================================
+§1  THE LANE AT b ACTIVATION BITS AND BLOCK WIDTH W [V1][V2] (in-model)
+====================================================================================================
+reference lane (b = 8, W = 32, record idiom): 236 counters in 8 stages, 12-bit adder, 5160 logic cells (select 1056, fan-out 384, adders 3720); 13 output bits -- matches digital_lane_bonsai.py section 2
+
+activation bits b (W = 32):
+  b  counters  stages  adder  out bits | logic cells:  record  aligned    TFA  TFA, select in CMOS | launched bits/MAC at L = 2/3/7
+  8       236       8     12        13 |                5160     5904   2680                 1240 | 6.00/4.67/3.14
+  6       176       8     10        11 |                3974     4532   2114                  930 | 5.00/4.00/2.86
+  4       116       8      8         9 |                2532     2904   1292                  620 | 4.00/3.33/2.57
+  2        56       8      6         7 |                1218     1404    598                  310 | 3.00/2.67/2.29
+
+block width W (b = 8, record idiom):
+   W  counters  stages  adder  out bits  logic cells  cells/MAC  readout bits/MAC  CMOS scaling GFLOP/token
+  32       236       8     12        13         5160      161.2             0.406                      2.40
+  64       491      10     13        14        10440      163.1             0.219                      1.20
+ 128      1002      12     14        15        21000      164.1             0.117                      0.60
+
+[V2] the native threshold full adder: carry = MAJ3 (one threshold cell, enhancing a, b, c, high threshold); sum = one threshold cell with enhancing a, b, c and a depleting coupling of weight 2 from the carry; three alignment buffers; 5 biased cells, depth 2. The record's full adder is 2 HA + OR = 15 biased cells, depth 7. Neither the 3-input fan-in nor the weighted inhibitory input is in the record (open).
+
+====================================================================================================
+§2  THE YARDSTICK AND THE CEILING AT b BITS [V3][V4] (in-model; emulation runnable)
+====================================================================================================
+yardstick = dot-product SNR of the b-bit absmax-per-32 quantiser alone (K = 5120, 4,000 dot products, 1/3 zero weights); kappa_b = block-sum error variance per unit decision BER (gate-level emulation, 1,024 x 5,120 rows, BER 2e-5); ceiling = BER at which the lane's error power equals the quantiser's
+  b   SNR t4  SNR gauss    kappa_b    flips   blocks   ceiling t4  ceiling gauss
+  8     42.5       45.5   2.93e+08   16,736  163,840      6.1e-09        5.7e-09
+  6     30.4       33.1   1.80e+07   12,945  163,840      9.5e-08        9.7e-08
+  4     17.9       20.3   1.26e+06    8,271  163,840      1.3e-06        1.4e-06
+  2      3.5        3.6   6.83e+04    3,972  163,840      1.3e-05        2.4e-05
+(b = 8 reproduces the reference lane's 42.5 dB / 45.5 dB yardstick, kappa 2.8e8 within its 13 % spread, and the 6.3e-9 ceiling; lower-bit activations relax the ceiling because the model's own quantisation error grows faster than the lane's error weights shrink)
+
+====================================================================================================
+§3  PASS TEMPERATURES OF THE BOOKINGS AT b BITS, AND THE TOLERANCE LEVER [V5] (in-model)
+====================================================================================================
+highest temperature at which each booking's per-decision BER stays below the ceiling (t4 yardstick)
+booking                                 b = 8        b = 6        b = 4        b = 2
+A0 released (k 8, full rail)            394 K  above 400 K  above 400 K  above 400 K
+A1 F=2 k_eff, full rail                 291 K        350 K  above 400 K  above 400 K
+A2 A1 + split swing (-3 dB)             144 K        173 K        213 K        267 K
+A3 A2 + one junction (-1 dB)            114 K        137 K        168 K        211 K
+
+tolerance lever at b = 8: the model tolerates fabric error power equal to 1x / 10x / 100x its Q8_0 error (an error-aware fine-tuning target, not a record quantity)
+booking                                    1x          10x         100x
+A0 released (k 8, full rail)            394 K  above 400 K  above 400 K
+A1 F=2 k_eff, full rail                 291 K        338 K  above 400 K
+A2 A1 + split swing (-3 dB)             144 K        168 K        200 K
+A3 A2 + one junction (-1 dB)            114 K        132 K        158 K
+
+lane digital-error SNR at 300 K and 353 K for 10x / 100x tolerance is unchanged (the lane is the same); what moves is the pass line: 42.5 -> 32.5 -> 22.5 dB
+
+====================================================================================================
+§4  SUMMARY KEYS (new names; contest no results.json value)
+====================================================================================================
+   p3_counters_b8_W32                       = 236
+   p3_logic_cells_b8_W32_record             = 5160
+   p3_logic_cells_b4_W32_record             = 2532
+   p3_logic_cells_b8_W32_TFA                = 2680
+   p3_logic_cells_b4_W32_TFA_selectCMOS     = 620
+   p3_ceiling_b8_t4                         = 6.05e-09
+   p3_ceiling_b4_t4                         = 1.25e-06
+   p3_yardstick_b4_t4_dB                    = 17.9
+   p3_T_pass_A1_b8_K                        = 291.3
+   p3_T_pass_A1_b4_K                        = 400.0
+   p3_T_pass_A2_tol10_K                     = 167.6
+
+released chains imported read-only; nothing written to the repository; runtime 16 s

@@ -1,4 +1,4 @@
-# Revision history — both manuscripts
+# Revision history — the manuscripts
 
 **What this file is.** The manuscripts in `papers/` are living documents: community
 findings promoted into [`notes/`](../notes/) are folded back into them in periodic
@@ -22,6 +22,7 @@ The current manuscripts are archived on Zenodo. Cite the version you read.
 | Part I | v5.5 | [10.5281/zenodo.21369405](https://doi.org/10.5281/zenodo.21369405) |
 | Part II | **v2.0** (current) | [10.5281/zenodo.21607070](https://doi.org/10.5281/zenodo.21607070) |
 | Part II | v1.6 | [10.5281/zenodo.21385646](https://doi.org/10.5281/zenodo.21385646) |
+| Part III | **v1.0** (draft, current) | not yet deposited |
 
 Earlier version DOIs continue to resolve to the manuscripts as they stood. The
 repository copies in [`papers/`](.) and the current deposits are the same text.
@@ -37,6 +38,7 @@ repository copies in [`papers/`](.) and the current deposits are the same text.
 | Part I | v5.3 | July 2026 | This third update incorporates the community notes promoted since v5.2 — notes/2026-07-12-effective-loop-von-neumann.md (3-of-3), notes/2026-07-12-boundary-factor-exact-operator.md (2-of-3 … |
 | Part I | v5.2 | July 2026 | This second update incorporates the community notes promoted since v5.1 — notes/2026-07-11-nf-floor-structural-verdict.md and notes/2026-07-11-retuned-streaming-gain-prediction.md (each a … |
 | Part I | v5.1 | July 2026 | This revision incorporates the July 2026 community review of the released model chain — the Agent Lab discussions (#1–#6) and the technical notes … |
+| Part III | **v1.0** | October 2026 · draft, not yet deposited | First manuscript of Part III: Ternary Bonsai 2 27B embedded as a streaming matrix-multiply coprocessor — the bit-exact Part-I digital lane (fable-model-ternary/digital_lane_bonsai.py), the Part-II analog counter tree (ternary_qmac_design.py), one error yardstick (the runtime's own Q8_0 quantisation error), the booking fork that leaves warm operation undecided (gate DG1), and the fabric-side and model-side levers (variants.py). Folds the two design studies of the 2026-10-03 Claude Code session (each independently re-checked; second revisions) and names their open rework items. |
 | Part II | **v2.0** | July 2026 · [DOI](https://doi.org/10.5281/zenodo.21607070) | Reader-focused revision. Folds in the July 2026 record audit and the timing thread: §5/§6's slot-rate and throughput figures are conditioned on the per-slot flush/reset record with ring-down memory added to the slot-independence threat list, the "same cells, re-programmed" framing carries its comparator-redesign qualification at every headline site, the rail's anchoring caveat lands in §3.1, the knee drive band is stated correctly (0.76–1.15 %), and Appendix QA's key queue points at the tracked WP1 deliverable. Revision notes moved to this file; version statements removed. |
 | Part II | v1.7 | July 2026 | This seventh update folds two promoted community notes: notes/2026-07-16-no-physical-avg16-accumulator.md (promoted 3-of-3) and notes/2026-07-17-what-the-38-quanta-knee-denominates-after-the-july-plane-aud.md (promoted 3-of-3). |
 | Part II | v1.6 | July 2026 | This sixth update incorporates one promoted community note, notes/2026-07-15-finite-sharpness-is-not-a-variance.md (promoted 3-of-3, July 2026), and completes a withdrawal that v1.5 began. |
@@ -47,6 +49,18 @@ repository copies in [`papers/`](.) and the current deposits are the same text.
 | Part II | v1.1 | July 2026 | This revision incorporates the July 2026 community review (Agent Lab discussions #1–#6; technical notes at github.com/ryoji-info/FableComputer). |
 
 ---
+
+## Part III — v1.0 (October 2026): first manuscript
+
+**Not yet deposited.** The manuscript and its companion listings (`fable-model-ternary/`)
+enter the repository together. The two design studies it folds in were executed in a
+maintainer-operated Claude Code session on 2026-10-03 and each was re-checked by independent
+adversarial verification before its second revision; the second check of the analog study
+left five rework items open (an unphysical −3 dB junction gain, the hybrid-alignment
+accounting, a 1.7 dB overstatement of the dot-product SNR from per-block scales, the TG1
+threshold, and the warm-lane reference temperature), which the manuscript lists in Appendix TA
+rather than resolving. Pre-registered keys are listed in Appendix TA; none collides with
+either released `results.json`.
 
 ## Part I — v6.0 (July 2026): this revision
 

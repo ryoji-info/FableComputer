@@ -1,0 +1,206 @@
+
+====================================================================================================
+§0  RELEASED ANCHORS (demonstrated: released calls, unedited chain)
+====================================================================================================
+N_rail = 3832.5990 quanta (x_rail = 87.551); eps_one = 1.6153004211e-03; k_dec = 16; E_quantum = 6.6261e-22 J
+T =   300 K: qmac.error_2bit = 1.3793e-01, error_1bit = 3.9343e-03, classical_ber = 3.6059e-11, G_dec = 9.77 dB, decoder_amp_noise = 5.6036, nbar = 5.764, tau_q = 1.000 ps
+T =    77 K: qmac.error_2bit = 3.0957e-03, error_1bit = 4.8333e-09, classical_ber = 5.7397e-37, G_dec = 10.10 dB, decoder_amp_noise = 1.4940, nbar = 1.156, tau_q = 2.000 ps
+T =     4 K: qmac.error_2bit = 1.3364e-06, error_1bit = 6.2745e-22, classical_ber = 1.5402e-117, G_dec = 10.10 dB, decoder_amp_noise = 0.4511, nbar = 6.156e-06, tau_q = 2.000 ps
+results.json: N_op_default = 400, pulse_energy_rail_aJ = 2.5395; chain dissipation (353 K, operating/upper) = 1.2670/1.6643 kW/cm^2, hydro_expiry_K = 254.9
+
+====================================================================================================
+§1  THE K-INPUT COUNTER TILE AND ITS VALIDATION (demonstrated, runnable)
+====================================================================================================
+K = 2, quiet launch: tile == released qmac.error_2bit BIT-FOR-BIT at 48 points (T 300/77/4 K x N_op 400/800 x junction 1/3 dB x launch quiet/20 dB x both propagation conventions)
+[E2] fanout_K_dB(2) == qmac.fanout_dB at 300/77/4 K (exact)
+K = 3: levels equally spaced at 77 K (max gap deviation 1.8e-15); every arm sees the same path
+K = 5: levels equally spaced at 77 K (max gap deviation 1.8e-15); every arm sees the same path
+  released verify_mc at 300 K: K=2 analytic 1.3793e-01 vs MC 1.3834e-01; QFA-3 (REF) analytic 1.4759e-01 vs MC 1.4781e-01 (2e6 samples)
+  released verify_mc at  77 K: K=2 analytic 3.0957e-03 vs MC 3.0950e-03; QFA-3 (REF) analytic 5.0161e-03 vs MC 5.0130e-03 (2e6 samples)
+
+====================================================================================================
+§2  THE COUNTER FRONTIER AND THE SPLIT LAW (in-model)
+====================================================================================================
+conventions: REF = P2 plane, relaunched inputs [E7], quarter-wave per extra level, c = 1/sqrt(12);
+             CONS = REF at the P1 plane; PERM = quiet launch, P2, junction-only levels, multiport, c = 0.02
+bits removed per decode = K - ceil(log2(K+1)): K=2 -> 0 (half adder), K=3 -> 1 (full adder), K=4 -> 1, K=5 -> 2, K=6 -> 3, K=7 -> 4
+ K  N_op P2  N_op P1     REF 4 K    REF 20 K    REF 77 K   REF 300 K    PERM 4 K
+ 2   2733.7   1916.3   2.106e-12   1.901e-11   1.212e-06   5.479e-03   2.472e-40
+ 3   2599.8   1277.5   1.302e-05   3.917e-05   5.016e-03   1.476e-01   4.058e-13
+ 4   1949.9    958.1   1.847e-03   3.508e-03   5.216e-02   3.310e-01   2.396e-06
+ 5   2225.3    766.5   3.820e-02   5.417e-02   2.164e-01   5.702e-01   7.343e-04
+ 6   1854.4    638.8   1.054e-01   1.336e-01   3.414e-01   6.680e-01   1.021e-02
+ 7   1589.5    547.5   1.909e-01   2.267e-01   4.472e-01   7.354e-01   4.155e-02
+
+split law (77 K, quiet launch): per-comparator spacing^2 = (2 N_op/K) eta_in eta_extra eta_fo(K); with the P2 cap it is 2 N_rail eta_fo(K) / K^2 (eta_fo carries the 1/K split, so roughly K^-3)
+  K = 2: spacing^2 at N_op = 400:   98.5114 (formula   98.5114); at P2:   673.250 (formula   673.250)
+  K = 3: spacing^2 at N_op = 400:   21.5443 (formula   21.5443); at P2:   140.029 (formula   140.029)
+  K = 4: spacing^2 at N_op = 400:   12.1306 (formula   12.1306); at P2:    59.133 (formula    59.133)
+  K = 8: spacing^2 at N_op = 400:    1.4938 (formula    1.4938); at P2:     5.194 (formula     5.194)
+
+====================================================================================================
+§3  HOW TO ENCODE THE TERNARY PRODUCT (in-model)
+====================================================================================================
+(a) phase-native signed trits + coherent offset arm [E6], quiet launch, rail at P2:
+   T =   4 K, K_t = 1: 3 levels on 2 comparators, N_op = 3899.8, p = 5.526e-22  (K_t = 1 sums nothing: one trit in, one trit out)
+   T =   4 K, K_t = 2: 5 levels on 4 comparators, N_op = 1949.9, p = 5.434e-04
+   compare at   4 K, same quiet conventions: QFA-3 p = 3.462e-07
+   T =  77 K, K_t = 1: 3 levels on 2 comparators, N_op = 3899.8, p = 2.213e-11  (K_t = 1 sums nothing: one trit in, one trit out)
+   T =  77 K, K_t = 2: 5 levels on 4 comparators, N_op = 1949.9, p = 3.264e-02
+   compare at  77 K, same quiet conventions: QFA-3 p = 1.299e-03
+(b) dual-rail balanced ternary, popcount first, then 3^j recombination (5 trits span only +-121:
+    int8 needs a 6th trit or a requantisation to 243 levels; both counts below are lower bounds):
+   5 trits: 10 rail-planes x 26 counters + 127 recombination counters = 387 counters per 32-MAC block
+   6 trits: 12 rail-planes x 26 counters + 197 recombination counters = 509 counters per 32-MAC block
+(c) two's-complement bit columns, ternary weight as a select: 236 counters, 8 stages, 12-bit final adder -> (b) costs 1.64-2.16x more
+
+====================================================================================================
+§4  THE QFA-3 TILE: OPERATING ENVELOPE (in-model)
+====================================================================================================
+     T | REF: N_op half/sig          p | CONS: N_op          p | PERM: N_op          p
+     4 |    2599.8     4.33  1.302e-05 |     1277.5  4.010e-04 |     1822.5  4.058e-13
+    20 |    2599.8     4.08  3.917e-05 |     1277.5  9.554e-04 |     1822.5  2.467e-11
+    48 |    2599.8     3.29  8.801e-04 |     1277.5  9.318e-03 |     1822.5  4.059e-07
+    77 |    2599.8     2.76  5.016e-03 |     1277.5  3.034e-02 |     1822.5  3.529e-05
+   150 |    2599.8     2.08  3.299e-02 |     1277.5  1.031e-01 |     1822.5  2.391e-03
+   300 |    3338.3     1.38  1.476e-01 |     1277.5  3.213e-01 |     2065.1  4.080e-02
+threshold temperatures (p <= target below T):
+   p <= 1e-03: REF 49.60 K, CONS 20.45 K, PERM 126.49 K
+   p <= 1e-04: REF 27.17 K, CONS none, PERM 88.14 K
+   p <= 1e-05: REF none, CONS none, PERM 66.41 K
+   p <= 1e-06: REF none, CONS none, PERM 52.30 K
+one-at-a-time sensitivities from REF:
+     4 K:
+      REF                                  1.302e-05
+      c = 0.02                             8.419e-07
+      c = 0                                8.278e-07
+      quiet launch (no relaunch noise)     3.462e-07
+      junction-only extra levels           6.966e-06
+      multiport junctions                  2.237e-06
+      P1 plane (CONS)                      4.010e-04
+      N_op = 800                           2.728e-03
+      N_op = 400                           2.306e-02
+      -3 dB junctions (rail re-solved)     9.932e-04
+      inputs one with prob. 1/3            1.240e-05
+      +R3, dcrit 0.0289 (07-15)            1.552e-05
+      +R3, dcrit 0.089 (rail-clamped)      2.072e-05
+    77 K:
+      REF                                  5.016e-03
+      c = 0.02                             3.323e-03
+      c = 0                                3.315e-03
+      quiet launch (no relaunch noise)     1.299e-03
+      junction-only extra levels           3.464e-03
+      multiport junctions                  1.698e-03
+      P1 plane (CONS)                      3.034e-02
+      N_op = 800                           7.291e-02
+      N_op = 400                           1.804e-01
+      -3 dB junctions (rail re-solved)     4.636e-02
+      inputs one with prob. 1/3            4.777e-03
+      +R3, dcrit 0.0289 (07-15)            5.431e-03
+      +R3, dcrit 0.089 (rail-clamped)      6.293e-03
+noise requirements:
+     4 K: unsaturated '0' output of a regenerative cell: V0 = 9.722 (sigma = 3.56 % of the rail swing); keeping p within 2x of the quiet-launch value (3.462e-07) needs V0 <= 1.862 (sigma <= 1.56 % of the swing)
+         comb-launched (quiet) '1' amplitude jitter, released additive convention: p within 2x needs S >= 37.50 dB, sigma_rel <= 1.333 %; at the coded 20 dB p = 1.060e-02
+    20 K: unsaturated '0' output of a regenerative cell: V0 = 10.643 (sigma = 3.73 % of the rail swing); keeping p within 2x of the quiet-launch value (1.669e-06) needs V0 <= 2.207 (sigma <= 1.70 % of the swing)
+         comb-launched (quiet) '1' amplitude jitter, released additive convention: p within 2x needs S >= 36.40 dB, sigma_rel <= 1.513 %; at the coded 20 dB p = 1.186e-02
+relaunch attenuation rail -> N_op(REF) = 1.69 dB; pulse energy at 2600 quanta = 1.723 aJ; -3 dB junctions re-solve the P2 rail to N_op = 6530.5
+
+====================================================================================================
+§5  THE LANE: 32-wide int8 x ternary block sum as a Wallace tree (in-model)
+====================================================================================================
+tree: 236 3:2 counters over 8 stages; per column {0: 15, 1: 23, 2: 27, 3: 29, 4: 30, 5: 30, 6: 30, 7: 30, 8: 14, 9: 6, 10: 2, 11: 0}; 12-bit digital ripple adder
+tolerance proxy (the model's own tolerance is open): dot-product SNR of the runtime's own Q8_0 quantisation (absmax per 32, ternary weights): K=5120 gauss 44.3 dB, K=17408 gauss 44.6 dB, K=5120 t4 42.8 dB, K=17408 t4 42.7 dB
+int8 activation rms under that quantiser: gauss 55.2, t4 46.1 LSB (the first draft's 127/4 = 31.75 understated the signal)
+functional tree exact on 20000 random blocks: select = one's complement for w = -1, sign bit inverted, block constants (+n_neg, -32*128) applied in CMOS
+measured counter-level occupancy (s=0..3): [0.2293 0.406  0.2838 0.0809] vs Binomial(3,1/2) [0.125 0.375 0.375 0.125]
+error model check at per-boundary tail 0.002: MC variance/block 17975.4 (mean +1.747) vs analytic sum of 4^c E[err^2] 18271.3 (ratio 0.984); occupancy p 3.379e-03 vs Binomial p 3.500e-03 (budget conservative by x1.036)
+coherent bias over 160 blocks at this inflated rate: 2.64% of the error power (scales with p)
+
+dot-product SNR at K = 5120 (Q8_0-quantised activations, 1/3 zero weights; t4 / gauss), target 41 dB:
+   REF:
+          4 K: all-QFA tree   28.2 /   29.8 dB | b* =  6 /  6 -> analog counters 184 / 184 of 236
+         20 K: all-QFA tree   23.4 /   25.0 dB | b* =  5 /  5 -> analog counters 154 / 154 of 236
+         48 K: all-QFA tree    9.9 /   11.5 dB | b* =  3 /  3 -> analog counters  94 /  94 of 236
+         77 K: all-QFA tree    2.4 /    3.9 dB | b* =  2 /  2 -> analog counters  65 /  65 of 236
+        150 K: all-QFA tree   -5.8 /   -4.2 dB | b* =  1 /  1 -> analog counters  38 /  38 of 236
+        300 K: all-QFA tree  -12.3 /  -10.7 dB | b* =  0 /  0 -> analog counters  15 /  15 of 236
+   CONS:
+          4 K: all-QFA tree   13.3 /   14.9 dB | b* =  3 /  4 -> analog counters  94 / 124 of 236
+         20 K: all-QFA tree    9.6 /   11.1 dB | b* =  3 /  3 -> analog counters  94 /  94 of 236
+         48 K: all-QFA tree   -0.3 /    1.2 dB | b* =  1 /  2 -> analog counters  38 /  65 of 236
+         77 K: all-QFA tree   -5.4 /   -3.9 dB | b* =  1 /  1 -> analog counters  38 /  38 of 236
+        150 K: all-QFA tree  -10.8 /   -9.2 dB | b* =  0 /  0 -> analog counters  15 /  15 of 236
+        300 K: all-QFA tree  -15.7 /  -14.1 dB | b* = -1 /  0 -> analog counters   0 /  15 of 236
+   PERM:
+          4 K: all-QFA tree  103.3 /  104.9 dB | b* = 12 / 12 -> analog counters 236 / 236 of 236
+         20 K: all-QFA tree   85.4 /   87.0 dB | b* = 12 / 12 -> analog counters 236 / 236 of 236
+         48 K: all-QFA tree   43.3 /   44.9 dB | b* = 12 / 12 -> analog counters 236 / 236 of 236
+         77 K: all-QFA tree   23.9 /   25.5 dB | b* =  5 /  5 -> analog counters 154 / 154 of 236
+        150 K: all-QFA tree    5.6 /    7.2 dB | b* =  2 /  2 -> analog counters  65 /  65 of 236
+        300 K: all-QFA tree   -6.7 /   -5.2 dB | b* =  0 /  1 -> analog counters  15 /  38 of 236
+
+common cells: select stage 1024 (4 per product bit), weight fan-out 384, 12-bit ripple adder, re-sync every 24..10 gates
+cell saving vs the all-digital lane at the SAME temperature, per accounting (REF, t4 b*):
+   record idiom (FA 15, QFA 12, select on fabric)  : TQ-4 (4 K) +10.76% (184 QFA); TQ-20 (20 K)  +9.01% (154 QFA); TQ-77 (77 K)  +3.80% (65 QFA)
+   + hybrid QFA->FA alignment (+4 per QFA)         : TQ-4 (4 K)  -3.59% (184 QFA); TQ-20 (20 K)  -3.00% (154 QFA); TQ-77 (77 K)  -1.27% (65 QFA)
+   FA 18 (wave-pipelined composition)              : TQ-4 (4 K) +18.80% (184 QFA); TQ-20 (20 K) +15.74% (154 QFA); TQ-77 (77 K)  +6.64% (65 QFA)
+   FA 18 + select in CMOS                          : TQ-4 (4 K) +24.73% (184 QFA); TQ-20 (20 K) +20.70% (154 QFA); TQ-77 (77 K)  +8.74% (65 QFA)
+same accounting with every counter analog (the most an all-QFA tree could save, if its errors allowed it):
+   record idiom (FA 15, QFA 12, select on fabric)  : +13.81%
+   + hybrid QFA->FA alignment (+4 per QFA)         : +13.81%
+   FA 18 (wave-pipelined composition)              : +24.11%
+   FA 18 + select in CMOS                          : +31.72%
+all-digital lane (record idiom): 5342-5641 cells, 0.147-0.155 mm^2
+
+====================================================================================================
+§6  COOLING, SYSTEM AND THE BOOKING FORK (in-model / arithmetic)
+====================================================================================================
+per-cell dissipation [E8]: 353 K 12.67 uW (the chain's stored value), 300 K 7.78-10.22 uW, <=150 K 0.972 uW (ratio to 300 K: 0.1250); uncertified below ~255 K (Part II section 1)
+all-digital lane at 300 K: 41.5-57.6 mW
+Carnot work per watt removed (300 K ambient): 77 K 2.896, 20 K 14.000, 4 K 74.000
+wall-plug power relative to the warm all-digital lane (record-idiom cells):
+   lane            equal dissipation, Carnot  Joule model, Carnot  Joule model: Carnot fraction needed
+   TQ-4 (4 K)                          66.93                8.366                        beyond Carnot
+   TQ-20 (20 K)                        13.65                1.706                        beyond Carnot
+   TQ-77 (77 K)                         3.75                0.468                               39.6 %
+   digital @77 K                        3.90                0.487                               41.4 %
+(any cold win is a cooling win: the cold all-digital lane needs about the same cooler as the analog hybrid)
+break-even cold-cell dissipation ratio r = P_cell(77 K)/P_cell(300 K) vs cooler efficiency (fraction of Carnot);
+the Joule model [E8] predicts r = 0.125:
+   TQ-77         : 100 % -> r <= 0.2668, 40 % -> r <= 0.1262, 30 % -> r <= 0.0976, 20 % -> r <= 0.0672, 10 % -> r <= 0.0347
+   digital @77 K : 100 % -> r <= 0.2567, 40 % -> r <= 0.1214, 30 % -> r <= 0.0939, 20 % -> r <= 0.0646, 10 % -> r <= 0.0334
+
+system (external workload inputs): 25,598,361,600 ternary MACs/token, 5.669 GB/token streamed; one lane = 86.26 tok/s at 69 GHz
+   0.5 TB/s ->   88.2 tok/s (memory-bound) -> 2 lanes; operand launch 44.2 Tb/s (320 lines/lane; no on-fabric storage)
+   1.0 TB/s ->  176.4 tok/s (memory-bound) -> 3 lanes; operand launch 66.2 Tb/s (320 lines/lane; no on-fabric storage)
+   3.0 TB/s ->  529.2 tok/s (memory-bound) -> 7 lanes; operand launch 154.6 Tb/s (320 lines/lane; no on-fabric storage)
+   lane cells at 300 K, full utilisation: 0.48 mJ/token; in-fabric photons at 2600 quanta, 10 bits/MAC, 50 % ones: 0.220 uJ/token
+
+booking fork for the digital lane's decisions:
+   A = released qerrors.classical_ber (rail restored after every split, Part I); B = this note's [E4]/[E7] QMAC calculus applied to a rail-referenced half-adder decode (an in-model reading)
+       4 K: A 1.540e-117 | B 2.106e-12 | all-digital lane SNR (t4, incl. ripple adder) A  1133.9 dB, B    90.0 dB
+      20 K: A 2.347e-98 | B 1.901e-11 | all-digital lane SNR (t4, incl. ripple adder) A   942.1 dB, B    80.4 dB
+      48 K: A 1.756e-55 | B 1.752e-08 | all-digital lane SNR (t4, incl. ripple adder) A   513.4 dB, B    50.8 dB
+      77 K: A 5.740e-37 | B 1.212e-06 | all-digital lane SNR (t4, incl. ripple adder) A   328.2 dB, B    32.4 dB
+     150 K: A 2.419e-20 | B 1.644e-04 | all-digital lane SNR (t4, incl. ripple adder) A   162.0 dB, B    11.0 dB
+     300 K: A 3.606e-11 | B 5.479e-03 | all-digital lane SNR (t4, incl. ripple adder) A    70.2 dB, B    -4.2 dB
+   under B the all-digital lane meets 41 dB only below 61.4 K
+
+====================================================================================================
+§7  PRE-REGISTERED PREDICTIONS (new key names; contest no results.json value)
+====================================================================================================
+   qfa3_err_4K_p2_relaunch_c0289              = 1.3019183870140534e-05
+   qfa3_err_20K_p2_relaunch_c0289             = 3.9173562009810806e-05
+   qfa3_err_77K_p2_relaunch_c0289             = 0.005016084102792079
+   qfa3_err_4K_p1_relaunch_c0289              = 0.0004010063821889532
+   qfa3_err_4K_p2_quiet_c002_multiport        = 4.0577929141708224e-13
+   qfa3_N_op_p2_relaunch_cold                 = 2599.834803039348
+   qfa3_T_below_1e-4_p2_relaunch_c0289_K      = 27.1668701171875
+   relaunch_zero_sigma_max_pct_4K             = 1.5584907437551707
+   tq_allqfa_snr_dB_4K_p2_relaunch_t4         = 28.225047095161727
+   tq_bstar_77K_p2_relaunch_t4                = 2
+   tq77_carnot_fraction_needed_joule          = 0.3958460701970164
+   ha_decode_error_bookingB_300K              = 0.005479332804558518
+no key collides with fable-model-quantum/ or fable-model-chain/ results.json
+
+released chains imported read-only; nothing written to the repository

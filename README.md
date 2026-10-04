@@ -9,6 +9,7 @@
 
 [![Part I PDF](https://img.shields.io/badge/Part_I-PDF-blue)](https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-I.pdf)
 [![Part II PDF](https://img.shields.io/badge/Part_II-PDF-blue)](https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-II.pdf)
+[![Part III PDF](https://img.shields.io/badge/Part_III-PDF-blue)](https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-III.pdf)
 [![Part I DOI](https://img.shields.io/badge/Part_I_DOI-10.5281%2Fzenodo.21606810-blue)](https://doi.org/10.5281/zenodo.21606810)
 [![Part II DOI](https://img.shields.io/badge/Part_II_DOI-10.5281%2Fzenodo.21607070-blue)](https://doi.org/10.5281/zenodo.21607070)
 ![Status](https://img.shields.io/badge/status-paper_design_%2B_runnable_models-blue)
@@ -58,6 +59,7 @@ from the no-cryogenics charter and are labelled as such wherever they appear.
 |---|---|---|
 | **Part I** (v6.0) | [The Fable Computer: A Room-Temperature Terahertz Half Adder on a Regenerative Graphene-Plasmon Logic Fabric](papers/Fable-Computer-Part-I.pdf) · [PDF](https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-I.pdf) | Concept, architecture, and a five-pass reduced-order feasibility chain for the clocked, regenerative logic fabric and its half-adder demonstrator. Ends with a pre-registered five-gate bench protocol. |
 | **Part II** (v2.0) | [Quantum-Limited Analog Tensor Processing on the Regenerative Graphene-Plasmon Fabric](papers/Fable-Computer-Part-II.pdf) · [PDF](https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-II.pdf) | Quantizes the Part-I cell: the plasmonic-qubit no-go, the QMAC-1 analog tensor unit with on-chip classical decoding, and the temperature budget of the quantum–classical crossover. |
+| **Part III** (v1.0, draft) | [A Ternary Language Model on the Regenerative Graphene-Plasmon Fabric](papers/Fable-Computer-Part-III.pdf) · [PDF](https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-III.pdf) | Embeds Ternary Bonsai 2 27B as a streaming matrix-multiply coprocessor: a bit-exact digital lane on the Part-I fabric (2–7 lanes keep pace with 0.5–3 TB/s of weight streaming), a cold analog counter tree on the Part-II fabric, one error yardstick for both, and the single loaded-margin measurement (gate DG1) that decides whether the lane works warm. Not yet deposited. |
 
 Both manuscripts carry a full authorship and status disclaimer: they were prepared by an independent researcher with AI assistance (including an orchestrated literature-verification audit), they are not peer-reviewed, and their claims are offered as a starting point for discussion — which is exactly where this community comes in.
 
@@ -82,9 +84,16 @@ python figures.py            # regenerates Figures 6-10
 cd ../fable-model-quantum
 python run_all.py --json     # prints every Part-II number; writes results.json
 python figures.py            # regenerates Figures Q1-Q5
+
+# Part III — the ternary-model embedding (imports the two chains read-only)
+cd ../fable-model-ternary
+python digital_lane_bonsai.py   # the digital lane: netlist, bit-exact emulation, timing, error bookings
+python ternary_qmac_design.py   # the analog counter tree on the Part-II fabric
+python variants.py              # the levers: activation bits, block width, a threshold full adder, tolerance
+python figures.py               # regenerates Figures T1-T5
 ```
 
-Each module is also runnable on its own and prints a self-check against the manuscript values (e.g. `python ds_cell.py`, `python qmode.py`). See the READMEs in [fable-model-chain](fable-model-chain/README.md) and [fable-model-quantum](fable-model-quantum/README.md) for what each pass computes and — just as important — the documented caveats and free parameters.
+Each module is also runnable on its own and prints a self-check against the manuscript values (e.g. `python ds_cell.py`, `python qmode.py`). See the READMEs in [fable-model-chain](fable-model-chain/README.md), [fable-model-quantum](fable-model-quantum/README.md) and [fable-model-ternary](fable-model-ternary/README.md) for what each pass computes and — just as important — the documented caveats and free parameters.
 
 ## What is proven, what is modeled, what is open
 
@@ -132,7 +141,7 @@ The near-term arc: publish and harden the models → grow a reviewing community 
 
 ## License and citation
 
-- **Code** (`fable-model-chain/`, `fable-model-quantum/`): Apache License 2.0 — permissive, with an explicit patent grant that protects contributors and users.
+- **Code** (`fable-model-chain/`, `fable-model-quantum/`, `fable-model-ternary/`): Apache License 2.0 — permissive, with an explicit patent grant that protects contributors and users.
 - **Manuscripts, documentation, and figures:** CC BY 4.0.
 
 The full scheme — including the license declared in advance for future hardware design files and the commitment never to tighten any of it — is in [LICENSING.md](LICENSING.md).

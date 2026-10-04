@@ -73,10 +73,13 @@ two room-temperature plasmonic gain cells.
   (2026-08-01). Part I §10 already assigns those tests to WP1/WP4; the
   remaining work on this bullet is finding the lab.
 
-### WP6 — Part III scoping (`open`)
+### WP6 — Part III scoping (`active` — first manuscript drafted, October 2026)
 
-Part III is the architecture chapter. The record already fixes several of its
-inputs, and this work package is scoping only — no new physics:
+Part III is the architecture chapter. A first manuscript — *A Ternary Language Model on
+the Regenerative Graphene-Plasmon Fabric* (papers/, with `fable-model-ternary/`) — embeds
+Ternary Bonsai 2 27B as a streaming matrix-multiply coprocessor and ends at one loaded-margin
+measurement (gate DG1). The record already fixes several of its inputs, and this work
+package remains scoping — no new physics:
 
 - **The operating point is a stretched slot.** F = 2 logic does not close at a
   4-ps slot at any de-Q rate; the defensible in-model headline is ≈0.1 THz,

@@ -50,3 +50,17 @@ references:
     version: v2.0
     doi: 10.5281/zenodo.21607070
     url: https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-II.pdf
+  - type: report
+    title: >-
+      The Fable Computer, Part III: A Ternary Language Model on the
+      Regenerative Graphene-Plasmon Fabric
+    authors:
+      - family-names: Furui
+        given-names: Ryoji
+    year: 2026
+    month: 10
+    version: v1.0
+    url: https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-III.pdf
+    notes: >-
+      Draft, not yet deposited on Zenodo; every number reproduces from
+      fable-model-ternary/ in this repository.

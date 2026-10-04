@@ -1,0 +1,110 @@
+
+====================================================================================================
+§0  RECORD ANCHORS (demonstrated: released values, unedited chains)
+====================================================================================================
+per biased cell at 353 K: 12.67 uW (stored, hydrodynamic), 16.64 uW (upper bound); Part I 8.2 kinetic-corrected 15.9-16.7 uW
+300 K by tracked-bias tau^-3 scaling [D3] x0.6138: 7.78-10.22 uW (hydrodynamic tier; the kinetic correction at 300 K is not evaluated in the record)
+Part I Table 5 half adder: 0.09-0.12 mW for 7 biased cells -> 0.0887-0.1165 mW (match)
+static noise margin law (cell.py): k = 8 -> 0.2564; F = 2 softened k_eff = 8/sqrt2 -> 0.2210 (07-21: 0.221)
+classical decision BER (booking A0, released): 300 K 3.606e-11, 353 K 9.101e-10, 77 K 5.740e-37
+re-sync spacing (released law; 08-25 sec. 5 item 5): NF 4 dB -> 10.0 cells, NF floor 2.769 dB -> 13.3 cells (Part I's '24' is not reachable)
+slot rate: gated F = 2 frontier 69 GHz, band 63-74 GHz (07-31, in-model, adjudicated at the 353 K bias); one slot = 14.5 ps
+
+====================================================================================================
+§1  WORKLOAD PER DECODED TOKEN [D6] (external inputs, cross-checked)
+====================================================================================================
+ternary MACs/token = 25,598,361,600; ternary weights incl. embedding = 26,869,760,000; (PQ2_0 - PTQ1_0 file bytes)/6*128 = 26,869,760,000 -> match True
+weights streamed per token (PTQ1_0, embedding table excluded) = 5.669 GB; GDN state read+write 314 MB (+5.5%); FP16 KV at 32k context +2.147 GB (+38%)
+32-wide int8 x ternary block sums per token = 799,948,800; FP16 weight-group scales = 199,987,200
+
+====================================================================================================
+§2  THE LANE [D1] AND ITS TIMING CLOSURE [D7] (in-model)
+====================================================================================================
+logic cells: select 1024 + sign 32 + weight fan-out 384 + 248 full adders x 15 = 5160; Wallace 236 FAs in 8 stages (87 pass-through bit-stages) + 12-bit ripple adder
+depth model: 5472 wires, critical path 92 cells (~31 ps at ~0.33 ps/cell = 2.1 slots); largest wait of a wire for its last consumer: 44 cells; output bits span depths 26-92 (fixed per readout line, deskewed at the receiver)
+balancing buffers to regenerate every waiting wire (latch-free wave pipeline): tolerance 0 cells -> 2,616 (+51%), tolerance 4 cells -> 581 (+11%), tolerance 14 cells -> 189 (+4%)
+re-sync stations (one per wire crossing each cut): spacing 10.0 -> 679, spacing 13.3 -> 393 (the earlier cell-fraction rule gave 215-516)
+   timing-closed lane, t0: 8,169-8,455 cells
+   timing-closed lane, t4: 6,134-6,420 cells
+   timing-closed lane, t14: 5,742-6,028 cells
+reference lane (t = 0, as Part I's half adder balances its own paths with a DLY cell): 8,169-8,455 cells, 0.224-0.232 mm^2
+lane power at 300 K (tau^-3 scaled, hydrodynamic tier): 64-86 mW -> 29-39 fJ/MAC at full utilisation
+lane power at 353 K (kinetic-corrected, Part I 8.2): 130-141 mW -> 59-64 fJ/MAC at full utilisation
+
+====================================================================================================
+§3  TRY: GATE-LEVEL EMULATION ON BONSAI-SHAPED MATRICES [D1][D2]
+====================================================================================================
+the netlist's exactness is also provable: every full adder keeps s + 2c = a + b + c_in, and each product's 8-bit pattern (one's complement for w = -1, sign bit inverted) is an unsigned u in [0, 255], so the tree output U = sum(u) lies in [0, 8160] < 2^13; the emulation checks the implementation of that argument
+ATT k (full matrix)             :   163,840 block sums (  5.2 M MACs) through the gate-level netlist in  0.3 s -> all exact: True; CMOS scaling code reproduces the int8 reference: True; vs unquantised float 45.4 dB (Q8_0 only)
+GDN ssm_out (full matrix)       :   983,040 block sums ( 31.5 M MACs) through the gate-level netlist in  1.6 s -> all exact: True; CMOS scaling code reproduces the int8 reference: True; vs unquantised float 45.0 dB (Q8_0 only)
+FFN down (1,024 of 5,120 rows)  :   557,056 block sums ( 17.8 M MACs) through the gate-level netlist in  2.2 s -> all exact: True; CMOS scaling code reproduces the int8 reference: True; vs unquantised float 45.6 dB (Q8_0 only)
+(BER = 0: the threshold cells act as Boolean logic, so this is a netlist check, not a physics check)
+
+====================================================================================================
+§4  ERROR BUDGET [D2][D5][D8] (in-model)
+====================================================================================================
+cell-decision flips at BER 1e-05: 8,361 flips in 163,840 blocks -> per-unit-BER block-sum error variance 2.577e+08
+cell-decision flips at BER 2e-05: 16,736 flips in 163,840 blocks -> per-unit-BER block-sum error variance 2.954e+08
+cell-decision flips at BER 4e-05: 33,611 flips in 163,840 blocks -> per-unit-BER block-sum error variance 2.939e+08
+kappa = 2.82e+08 (spread 13 %)
+launched-bit flips at 1e-04: 5,265 flips -> per-unit-rate block-sum error variance 6.906e+05
+launched-bit flips at 3e-04: 15,785 flips -> per-unit-rate block-sum error variance 6.716e+05
+Q8_0 yardstick (4,000 dot products, K = 5120): gauss 45.5 dB, t4 42.5 dB
+ceilings (digital error power = the Q8_0 error power, t4): 6.3e-09 per cell decision; 2.6e-06 per launched bit (10 dB below Q8_0: 10x lower)
+
+booking                                             300 K                  353 K                   77 K   (BER per decision; lane digital-error SNR, t4)
+A0 released (k 8, full rail)           3.61e-11   64.9 dB       9.10e-10   50.9 dB       5.74e-37  322.9 dB
+A1 F=2 k_eff (07-21), full rail        9.73e-09   40.6 dB       1.09e-07   30.1 dB       5.62e-28  233.0 dB
+A2 A1 + split swing (-3 dB)            3.57e-05    5.0 dB       1.24e-04   -0.4 dB       6.34e-15  102.5 dB
+A3 A2 + one junction (-1 dB)           2.00e-04   -2.5 dB       5.44e-04   -6.9 dB       3.19e-12   75.5 dB
+B QMAC calculus (HA decode, emul.)     5.48e-03   -4.0 dB       1.01e-02   -6.7 dB       1.21e-06   35.4 dB
+B mapped onto the cell-decision axis through the 300 K emulation: KAPPA_B_RATIO = 0.0510 (equivalent cell BER per HA-decode error); mapped lane SNR 300 K -4.0 dB, 353 K -6.6 dB, 77 K 32.6 dB (the direct 77 K emulation above sees ~25 error events)
+pass line: SNR >= 42.5 dB (equal to Q8_0, t4), BER <= 6.3e-09; 10 dB under Q8_0: BER <= 6.3e-10
+highest temperature at which each booking meets the pass line (BER <= ceiling):
+   A0 released (k 8, full rail)      : below 394.5 K
+   A1 F=2 k_eff (07-21), full rail   : below 292.0 K
+   A2 A1 + split swing (-3 dB)       : below 144.4 K
+   A3 A2 + one junction (-1 dB)      : below 114.1 K
+   B QMAC calculus (HA decode)       : below 59.4 K
+
+launch noise [D8]: Part II's launch_excess_variance added at the first decision after each launch
+   300 K, k 8: per-bit error at the coded 20 dB = 8.5e-03; launch-bit ceiling 2.6e-06 needs S >= 27.9 dB (amplitude jitter <= 4.02 % of the swing)
+   300 K, k_eff: per-bit error at the coded 20 dB = 2.0e-02; launch-bit ceiling 2.6e-06 needs S >= 30.9 dB (amplitude jitter <= 2.84 % of the swing)
+   353 K, k 8: per-bit error at the coded 20 dB = 9.2e-03; launch-bit ceiling 2.6e-06 needs S >= 28.7 dB (amplitude jitter <= 3.67 % of the swing)
+   353 K, k_eff: per-bit error at the coded 20 dB = 2.1e-02; launch-bit ceiling 2.6e-06 needs S >= 32.7 dB (amplitude jitter <= 2.31 % of the swing)
+
+====================================================================================================
+§5  SYSTEM: lanes, input/output, CMOS perimeter, heat, scale (in-model + arithmetic)
+====================================================================================================
+one lane = 86.26 tok/s at 69 GHz (band 78.8-92.5)
+0.5 TB/s ->   88.2 tok/s -> 2 lanes (51% busy); 16,850-17,422 cells (0.46-0.48 mm^2); fabric 0.13-0.18 W (300 K), 0.27-0.29 W (353 K); 1.5-3.3 mJ/token
+      launch 384 lines (26.5 Tb/s), readout 26 lines (1.79 Tb/s); 6.00 launched bits per MAC computed
+1.0 TB/s ->  176.4 tok/s -> 3 lanes (68% busy); 25,531-26,389 cells (0.70-0.72 mm^2); fabric 0.20-0.27 W (300 K), 0.41-0.44 W (353 K); 1.1-2.5 mJ/token
+      launch 448 lines (30.9 Tb/s), readout 39 lines (2.69 Tb/s); 4.67 launched bits per MAC computed
+3.0 TB/s ->  529.2 tok/s -> 7 lanes (88% busy); 60,255-62,257 cells (1.65-1.71 mm^2); fabric 0.47-0.64 W (300 K), 0.96-1.04 W (353 K); 0.9-2.0 mJ/token
+      launch 704 lines (48.6 Tb/s), readout 91 lines (6.28 Tb/s); 3.14 launched bits per MAC computed
+cooled to 77 K (Joule model [D3] extended below the hydrodynamic expiry, uncertified): cell power x0.125 -> 0.059-0.079 W for the 7 lanes; Carnot work at 77 K x2.90 -> wall-plug 0.23-0.31 W at ideal cooling (x0.49 the warm fabric power)
+heat: fill 3.6% -> dT = 2.8-3.7 K at 0.78-1.02 kW/cm^2 (300 K) vs the 55 K budget
+heat: fill 3.6% -> dT = 5.8-6.1 K at 1.59-1.67 kW/cm^2 (353 K kinetic) vs the 55 K budget
+Part I's only system-scale figure is illustrative (8.1: 'a 1 W-class drive over 1e4-1e5 active cells'), not a cap
+within 1e5 cells: 11 timing-closed lanes -> 949 tok/s with batching (B >= 2 at 3 TB/s)
+
+CMOS perimeter per token: 2.40 GFLOP of block-sum scaling (1.27 TFLOP/s at 529 tok/s), n_neg popcounts 800 M (fixed by the weights: precompute and stream +10.6%, or count in CMOS), FWHT 21.7-29.1 M adds, GDN ~151 M FP32 MAC, attention 0.81 G MAC at 4k context
+reported decode rates (external): RTX 4090 86.0 tok/s (PTQ1_0 tg128), M5 Max 46.8 (press), RTX 5090 143 (press)
+
+====================================================================================================
+§6  PRE-REGISTERED NUMBERS (new key names; rounded to the precision the estimators support)
+====================================================================================================
+   dl_lane_cells_t0_low                 = 8169
+   dl_lane_cells_t0_high                = 8455
+   dl_balancing_buffers_t0              = 2616
+   dl_kappa_int2_per_block_per_BER      = 282000000.0
+   dl_ber_ceiling_equal_q80_t4          = 6.28e-09
+   dl_snr_A0_300K_t4_dB                 = 64.9
+   dl_snr_A1_300K_t4_dB                 = 40.6
+   dl_snr_B_300K_dB                     = -4.0
+   dl_launch_S_min_300K_k8_dB           = 27.9
+   dl_lanes_for_3TBs                    = 7
+   dl_kappa_B_ratio_300K                = 0.051
+
+released chains imported read-only; nothing written to the repository; runtime 21 s
