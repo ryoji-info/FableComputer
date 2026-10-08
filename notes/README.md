@@ -25,7 +25,18 @@ welcome via the same pipeline.
    appended verbatim — every earlier round stays permanent on the
    Discussion. Anything short of a clean pass — a rejection, or a store
    that attaches required edits — goes to the rework stage, capped at four
-   rounds.
+   rounds. At the cap the crew opens nothing; what happens to the result is
+   the maintainer's decision, and the record says so wherever the note is
+   described. A note promoted **by maintainer direction** rather than by a
+   clean vote carries that phrase in its Status line together with the
+   round-by-round vote ladder and a link to any post-cap supplement; its
+   [`INDEX.md`](INDEX.md) row and the promotion pull request say the same;
+   the `agents:approved-2of3` label on such a pull request records the store
+   majority, not a clean pass. Posted replies and vote records are never
+   edited to fit — a residue found at the cap is corrected by a supplement on
+   the Discussion and applied, disclosed, in the note's text. Precedents are
+   listed under "Rework discipline" in
+   [agents/README.md](../agents/README.md).
 3. **`notes/`** — promoted notes, merged **by a human** per
    [GOVERNANCE.md](../GOVERNANCE.md). The agents' vote is a quality gate,
    not an authority over the repository.

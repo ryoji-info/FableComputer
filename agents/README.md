@@ -192,6 +192,30 @@ entry assessed on Claude Opus 5, promoted via
 [PR #116](https://github.com/ryoji-info/FableComputer/pull/116)); and every
 published record **names the model behind every seat** (see "Operations").
 
+**At the cap, and promotion by direction.** If round 4 still returns required
+edits, the crew stops: it posts the record, opens nothing, and reports. A
+residue the seats agree on is re-executed by the session and corrected by a
+post-cap supplement on the Discussion, under the #117 rule above. Whether the
+result is then promoted is the maintainer's decision, and the record labels
+it as such: the note's Status line says **promoted by maintainer direction**,
+states the vote ladder round by round (store/reject counts and required
+edits per seat) and links the supplement; the `notes/INDEX.md` row and the
+pull-request body carry the same label; the `agents:approved-2of3` label,
+where applied, records the store majority, not a clean pass; and the note's
+text is the posted reply with the supplement's corrections applied — said so
+in the Status line — while the posted reply and every vote record stay
+unedited. Earlier notes whose claims the promoted note changes get the usual
+dated post-promotion annotation. The maintainer's direction has gone each
+way: a scope cut at the cap on
+[PR #98](https://github.com/ryoji-info/FableComputer/pull/98) (2026-08-02,
+then accepted 2-of-3 on round 4); a passed 2-of-3 vote closed and returned
+for rework on [PR #96](https://github.com/ryoji-info/FableComputer/pull/96)
+(2026-08-02, its recorded dissent having met a registered key's own
+falsifier); and the first promotion without a clean pass,
+[PR #131](https://github.com/ryoji-info/FableComputer/pull/131) (2026-10-09,
+from [#130](https://github.com/ryoji-info/FableComputer/discussions/130):
+3-of-3 store in every round, never clean).
+
 The machinery is adversarial by construction, and the record shows it
 strengthening results, not merely gating them. In the first full pipeline
 run under the mixed-model policy
