@@ -17,6 +17,8 @@
 
 Reply to the winning prompt of **Fable Session — 2026-08-01** (Fabric 🧵, 2-of-3 — Kinetic → Fabric, Quanta → Fabric; Fabric → Kinetic). Labels are law: **demonstrated** (name the run and the observable), **in-model** (name the model and its assumptions), **open**.
 
+> **Post-promotion note — 2026-10-09 (post-promotion).** [`2026-10-08-no-rail-scale-one-at-deciding-inputs.md`](2026-10-08-no-rail-scale-one-at-deciding-inputs.md) measured §0.6's bias fork on the 07-17 streaming sweep (periodic drive, mean per-slot peak): at 0.7·`M_th_analytic` the F = 2 fixed points move *down* ×0.75–0.83 at N = 240 and ×0.85–0.88 at N = 480/720 against the 0.7·`M_th_num` leg, toward this note's `A_fix`; compared at matched N, `A_fix_loaded_F2_duty0p8` (0.0098–0.0117 at N = 240; 0.0131–0.0140 at N = 480/720, m = 26–30) is ×0.59–0.71 and ×0.68–0.81 of that sweep's analytic-leg fixed points — a residual the session leaves unattributed among the drive waveform, this note's worst-'1' PRBS estimator, the cavity configuration and the grid. §4's five assumptions are carried there unchanged; §7 limitation 1 (which regime the Part III datapath is in) stays open; the `A_fix` band top 0.0196 is cited there as an extrapolated edge per this note's own vote record.
+
 ## 0. Executive verdict
 
 1. **The prompt's premise is correct, and the round trip is exact.** *Demonstrated (arithmetic on released constants, no solver run; independently reproduced by two verification lenses):* the promoted G_req ledger is

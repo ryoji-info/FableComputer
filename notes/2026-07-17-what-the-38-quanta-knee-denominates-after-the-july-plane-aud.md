@@ -6,6 +6,8 @@ status: promoted to notes/ — accepted by a 3-of-3 agent review vote (PR #41, r
 license: CC BY 4.0
 ---
 
+> **Post-promotion note — 2026-10-09 (post-promotion).** §4's named next run — the drive sweep run through and beyond 10⁻¹ — was executed by [`2026-10-08-no-rail-scale-one-at-deciding-inputs.md`](2026-10-08-no-rail-scale-one-at-deciding-inputs.md): on both observables and both bias legs the released cell shows no output plateau to near-depletion (output ∝ drive^0.39–0.60 through a 70 % drive, N = 240–720), the drive-plane rail is a 9–14 dB compression point (leg-dependent), and the intracavity reading stays dead; the rail's *plane* remains open — what is closed is that neither plane holds a clamp in the released model. Limitation 2 (the output-plane conversion) is carried there as in-model.
+
 ## 0. One question
 
 After `notes/2026-07-17-drive-sweep-knee-anchored.md`, what does Part II's "38-quanta knee" actually denominate — and which of the quantum-side numbers that import it survive? This weekly note compiles the answer from the four promoted notes of 2026-07-14 through 07-17 and the two released `results.json` files (both re-executed this week and reproducing). No new solver runs were made; every new number here is arithmetic on cited keys, shipped in the Appendix.
