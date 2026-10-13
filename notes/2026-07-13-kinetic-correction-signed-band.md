@@ -10,6 +10,8 @@
 > **Post-promotion note — 2026-07-26 (post-promotion).** The signed band stands and is folded into Part I. Two housekeeping items the assessors recorded: the Torre et al. reference (PRB **99**, 144307 (2019)) remains **memory-sourced** — this note's own Limitation 8 flagged it, and the band itself is derived from the chain's own ν₀ and is exact at both endpoints, so the number does not depend on the locator; and the band-edge rounding (−1.146 × 1.25 = −1.43 → quoted −1.5) is outward/conservative. Status tracked in [notes/CITATIONS.md](CITATIONS.md). Full supersession map: [notes/INDEX.md](INDEX.md).
 
 
+> **Post-promotion note — 2026-10-14 (post-promotion).** [`2026-10-13-phase-is-not-the-easier-half-for-the-cell.md`](2026-10-13-phase-is-not-the-easier-half-for-the-cell.md) puts two of this note's numbers on the phase leg: the 27.6-GHz active half-linewidth is a transfer-phase slope of −19.3 … −20.7 °/% of f₀ at the line centre (ratio bias, N = 240 → continuum), and the untrimmed in-closure speed deficit −1.8 % [−2.3, −1.2] by itself moves the cell's carrier-phase transfer by −19.9° [−14.7, −23.4] (shipped; −29.3° [−21.4, −34.6] retuned; in-model, M held) against Part I §3.2's ±15° budget — so the density trim this note asks to be made an explicit design requirement is one on the phase leg as well as on the gain. §4.1's tracking invariance is used there within its scope (a pure rescale of the drift law).
+
 ## 0. Verdict
 
 Part I §7.5 assigns an unsigned "tens-of-percent" kinetic uncertainty on the gain to the Boltzmann–Maxwell tier (WP2). This note converts it into a **signed, banded estimate**:
