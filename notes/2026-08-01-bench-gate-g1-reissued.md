@@ -8,6 +8,8 @@
 
 ---
 
+> **Post-promotion note — 2026-10-14 (post-promotion).** [`2026-10-13-phase-is-not-the-easier-half-for-the-cell.md`](2026-10-13-phase-is-not-the-easier-half-for-the-cell.md) registers three further bench discriminants under this note's pins (i), (iv) and (v) — in-model premises, not executed falsifiers: **PHX-1** (two-sided) the transfer-phase slope against drive frequency at the line centre, at G1a's small-signal drive, band [−26, −15] °/% of f₀; **PHX-2** (one-sided) the energy-centroid lag of an isolated gated burst against its post-burst decay time, threshold ×1.5; **PHX-3** (two-sided) the AM-to-PM at the line centre between a drive ten times below the CW 1-dB knee and twice that knee, band [−33, −21]°. It also reads the model's CW knee at the line centre of the shipped cavity (0.0099 / 0.0090 / 0.0085 at N = 240 / 480 / 720; active-cell-only, interpolated between rows) — a different tuning from the 576.62-nm cavity at its carrier behind §1's model target.
+
 ## 0. Why re-issue the row
 
 Table 7's G1 row is right about the two things that matter — the observable (single-cell per-pulse net gain at ≤ 80 °C) and the pass bar (≥ +2.6 dB, beating the 2.555 dB per-gate loss) — and the record has not moved either. What the record *has* moved is everything around them:
