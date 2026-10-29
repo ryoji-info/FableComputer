@@ -19,7 +19,7 @@ python variants.py               # the levers: activation bits, block width, a t
 python figures.py                # regenerates Figures T1-T5 into figures/
 ```
 
-Each listing prints every number of its manuscript section; the `.out` file beside it is
+Each listing prints every number it computes for its manuscript section (values from the community record enter as cited inputs); the `.out` file beside it is
 the reference output on this platform (macOS arm64, Python 3.11.2, numpy 2.4.6; runtimes about 21 s for the digital lane, 2 s for the analog tree and 16 s for the variants). Run from
 anywhere inside the repository, or set `FABLE_REPO=<repo root>`.
 
@@ -27,9 +27,9 @@ anywhere inside the repository, or set `FABLE_REPO=<repo root>`.
 
 | File | Role | Key outputs |
 |------|------|-------------|
-| `digital_lane_bonsai.py` (v2.1) | the Part-I digital lane | 32-wide int8 × ternary block sum per slot; 5,160 logic cells, 8,169–8,455 timing-closed; bit-exact on 1.70 M Bonsai-shaped block sums; κ = 2.8×10⁸; pass line 6.3×10⁻⁹ per decision; bookings A0–A3 and B with their pass temperatures 394 / 292 / 144 / 114 / 59 K; launch SNR ≥ 28–33 dB; 2 / 3 / 7 lanes at 0.5 / 1 / 3 TB/s |
-| `ternary_qmac_design.py` | the Part-II analog counter tree | K-input counter tile reproducing `qmac.error_2bit` bit-for-bit at K = 2; QFA-3 error 1.3×10⁻⁵ (4 K) … 0.15 (300 K); 184 / 154 / 65 / 15 analog-eligible counters of 236 at 4 / 20 / 77 / 300 K; cell saving ≤ 32 %; 77 K lane needs a ≥ 40 %-of-Carnot cooler |
-| `variants.py` | the levers (Section 8) | lane size vs activation bits and block width; a native threshold full adder (5 cells vs 15); the yardstick and ceiling at b bits; pass temperatures at 4-bit activations and under 10× / 100× error tolerance |
+| `digital_lane_bonsai.py` (v2.1) | the Part-I digital lane | 32-wide int8 × ternary block sum per slot; 5,160 logic cells, 8,169–8,455 timing-closed; bit-exact on 1.70 M Bonsai-shaped block sums; κ = 2.8×10⁸; pass line 6.3×10⁻⁹ per decision; bookings A0–A3 and B referred to the coded rail (A0/A1 at the rail, 3,833 quanta; A2/A3 at its −3/−4 dB swings; B at 3,098 quanta per arm), with pass temperatures 394 / 292 / 144 / 114 / 59 K — at the 1.5–277 quanta the record's deciding inputs carry, none passes warm ([note 2026-10-08](../notes/2026-10-08-no-rail-scale-one-at-deciding-inputs.md), in-model); launch SNR ≥ 28–33 dB at the rail swing; 2 / 3 / 7 lanes at 0.5 / 1 / 3 TB/s |
+| `ternary_qmac_design.py` | the Part-II analog counter tree | K-input counter tile reproducing `qmac.error_2bit` bit-for-bit at K = 2; QFA-3 error 1.3×10⁻⁵ (4 K) … 0.15 (300 K), with inputs relaunched from the coded rail level, which no run delivers; 184 / 154 / 65 / 15 analog-eligible counters of 236 at 4 / 20 / 77 / 300 K; cell saving ≤ 32 %; 77 K lane needs a ≥ 40 %-of-Carnot cooler |
+| `variants.py` | the levers (Section 8) | lane size vs activation bits and block width; a native threshold full adder (5 cells vs 15; a lever only for a cell that thresholds a three-way sum and takes a depleting input, Part III Section 8.1); the yardstick and ceiling at b bits; pass temperatures at 4-bit activations and under 10× / 100× error tolerance |
 | `figures.py` | figures | Figures T1–T5 |
 
 ## Provenance

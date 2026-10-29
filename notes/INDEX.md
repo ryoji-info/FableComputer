@@ -70,7 +70,7 @@ post-promotion blockquote.
 - **avg16 / decoder band:** 07-12 crossover → 07-14 → 07-15 → 07-16 → Part II v1.6/v1.7 → the 2026-07-26 relabels.
 - **Boundary channel:** 07-12 boundary-factor → 07-13 signed band → 07-18 ×2 (contact-gated on σ_c, still open).
 - **Fan-out / regeneration:** 07-20 loaded fan-out → 07-21 composed envelope.
-- **ISI / flush / reset / burst / launch:** 07-22 ring-down → 07-22 flush → 07-23 reset-switch → 07-25 burst proviso → 07-31 gated launch → 08-01 gated requirement → 08-01 ratio-bias table → 08-02 '0'-floor spec dissolved. **This is the chain neither manuscript carries.**
+- **ISI / flush / reset / burst / launch:** 07-22 ring-down → 07-22 flush → 07-23 reset-switch → 07-25 burst proviso → 07-31 gated launch → 08-01 gated requirement → 08-01 ratio-bias table → 08-02 '0'-floor spec dissolved. **The deposited Parts I v6.0 and II v2.0 carry it through 07-25; 07-31 onward is carried by Part III (v1.1, draft) and by the repository copies of Parts I v6.1 and II v2.1, not yet deposited ([../papers/ERRATA.md](../papers/ERRATA.md)).**
 - **Plane / denomination audits:** 07-17 knee-denominates → 08-02 '0'-floor spec dissolved (the same method, applied to the floor the gated adjudication turns on) → 08-25 launch-budget denomination (the method applied to the constant upstream of both manuscripts' self-declared sharpest requirements).
 
 ---

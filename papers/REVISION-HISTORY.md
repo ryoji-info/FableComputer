@@ -14,23 +14,29 @@ spliced into the original text.
 
 ## Deposits
 
-The current manuscripts are archived on Zenodo. Cite the version you read.
+The deposited manuscripts are archived on Zenodo. Cite the version you read.
 
 | paper | version | Zenodo DOI |
 |---|---|---|
-| Part I | **v6.0** (current) | [10.5281/zenodo.21606810](https://doi.org/10.5281/zenodo.21606810) |
+| Part I | **v6.1** (current; not yet deposited) | — |
+| Part I | **v6.0** (current deposit) | [10.5281/zenodo.21606810](https://doi.org/10.5281/zenodo.21606810) |
 | Part I | v5.5 | [10.5281/zenodo.21369405](https://doi.org/10.5281/zenodo.21369405) |
-| Part II | **v2.0** (current) | [10.5281/zenodo.21607070](https://doi.org/10.5281/zenodo.21607070) |
+| Part II | **v2.1** (current; not yet deposited) | — |
+| Part II | **v2.0** (current deposit) | [10.5281/zenodo.21607070](https://doi.org/10.5281/zenodo.21607070) |
 | Part II | v1.6 | [10.5281/zenodo.21385646](https://doi.org/10.5281/zenodo.21385646) |
-| Part III | **v1.0** (draft, current) | not yet deposited |
+| Part III | **v1.1** (draft, current) | not yet deposited |
+| Part III | v1.0 | draft, superseded; never deposited |
 
 Earlier version DOIs continue to resolve to the manuscripts as they stood. The
-repository copies in [`papers/`](.) and the current deposits are the same text.
+repository copies of Part I (v6.1) and Part II (v2.1) in [`papers/`](.) are ahead of
+their current deposits (v6.0 / v2.0): [`ERRATA.md`](ERRATA.md) carries the gap, one row
+per correction that a promoted note binds, until v6.1 and v2.1 are deposited. Part III has not been deposited.
 
 ## Index
 
 | paper | version | date | summary |
 |---|---|---|---|
+| Part I | **v6.1** | October 2026 · not yet deposited | Folds the community notes promoted after v6.0 into the text as dated qualifications and corrections, in each note's own numbers and scope. From October: notes/2026-10-08-no-rail-scale-one-at-deciding-inputs.md, notes/2026-10-15-graphene-fluid-threshold-turns-on-current-channel.md, notes/2026-10-16-no-density-route-to-a-not-in-the-released-cell.md and notes/2026-10-17-a-pumped-cell-restores-phase-in-a-narrow-window.md (each promoted by maintainer direction after the round-4 cap), and notes/2026-10-13-phase-is-not-the-easier-half-for-the-cell.md (3-of-3 clean on round 4). From July–August: notes/2026-07-31-physical-launch-gated-frontier.md; the three notes of 2026-08-01 (bench-gate-g1-reissued, gated-requirement-round-trip, ratio-bias-gain-table); both notes of 2026-08-02 (zero-floor-spec-dissolved, where-the-released-threshold-bracket-stops-working-a-scanned); notes/2026-08-05-idler-added-noise-and-the-nf4db-requirement.md; notes/2026-08-06-mth-num-record-length-and-fit-convention.md; notes/2026-08-07-mth-num-excess-decomposition.md; notes/2026-08-12-gated-zero-residual-phasor.md; and notes/2026-08-25-what-the-20db-launch-budget-denominates.md. What moved: (1) with a physical launch that is confined to its slot and gated by the data, the in-model fan-out-2 frontier is ≈0.07 THz (69 GHz, band 63–74 GHz); ≈0.1 THz survives only under the pulse-knee convention. (2) §5's logic family is labelled the design model. The released cell compresses rather than thresholds, has no density route to a NOT and no output rail, and re-clamps a loaded cascade near a 2 % drive; no multi-cell cascade has been run, so §7.4's cascade figure is a compression-form budget. This qualification is carried to the Abstract, §1, §4, §6.5, §7, §9.4, §11 and Tables 1, A1 and B1. (3) The cells' own transfer phase draws on the ±15° clock budget, and Table 5's latency is picoseconds per cell in-model. (4) The kinetic band, threshold and thermal reading are the closure's. In the single-rate kinetic operator, with the drift heat shed, no 353 K threshold exists for A ≤ 1, and whether graphene's own fluid has one is open, so the Boltzmann–Maxwell solve is asked first whether a threshold exists. (5) Re-sync spacing is 10–13 cells, and NF ≤ 4 dB binds only ahead of the gain and on the idler. (6) Table 7 keeps one pre-registered G1 row; the G1a/G1b re-issue is recorded as a proposal. Issues #88, #97, #139, #140 and #141 are cited as open items only. Part III (v1.1, not deposited) is cited as [45] and Part II as [46]. A primary-source re-check of external facts (October 2026) updates §2 and §3.2. The disclaimer records how the October account was prepared, and Table B1 gains a row for A. Pre-registered pass thresholds and the four kinetic-solve bands are unchanged; no released-chain output changed. ERRATA rows I-11 to I-40 stay in papers/ERRATA.md until this revision is deposited. |
 | Part I | **v6.0** | July 2026 · [DOI](https://doi.org/10.5281/zenodo.21606810) | Reader-focused revision. Folds in the July 2026 record audit (notes/2026-07-26-record-audit-ten-findings.md) and the ISI/flush/reset/burst timing thread (notes 07-22 through 07-25): the ring-down containment mechanism of §6.2(iii) is corrected, F = 2 logic closure at the 4-ps slot is withdrawn in favour of the ≈0.1 THz in-model operating point with the 0.25 THz design baseline retained, gate G2's model target is corrected, the knee/rail reference planes are labelled, §7.3's convergence claim now names the exact inviscid limit and the physical kinetic threshold, and the boundary-channel rider appears in the Abstract and scoreboard. Revision notes moved to this file; version statements removed from the document. |
 | Part I | v5.6 | July 2026 | This update folds the community’s boundary-kinetics resolution and the drive-sweep calibration — notes/2026-07-18-boundary-channel-contact-gated.md (promoted 3-of-3) … |
 | Part I | v5.5 | July 2026 | This update folds in the community’s kinetic note (notes/2026-07-13-kinetic-correction-signed-band.md, promoted 3-of-3; each voter extracted and executed the note’s standalone Appendix B … |
@@ -38,7 +44,9 @@ repository copies in [`papers/`](.) and the current deposits are the same text.
 | Part I | v5.3 | July 2026 | This third update incorporates the community notes promoted since v5.2 — notes/2026-07-12-effective-loop-von-neumann.md (3-of-3), notes/2026-07-12-boundary-factor-exact-operator.md (2-of-3 … |
 | Part I | v5.2 | July 2026 | This second update incorporates the community notes promoted since v5.1 — notes/2026-07-11-nf-floor-structural-verdict.md and notes/2026-07-11-retuned-streaming-gain-prediction.md (each a … |
 | Part I | v5.1 | July 2026 | This revision incorporates the July 2026 community review of the released model chain — the Agent Lab discussions (#1–#6) and the technical notes … |
-| Part III | **v1.0** | October 2026 · draft, not yet deposited | First manuscript of Part III: Ternary Bonsai 2 27B embedded as a streaming matrix-multiply coprocessor — the bit-exact Part-I digital lane (fable-model-ternary/digital_lane_bonsai.py), the Part-II analog counter tree (ternary_qmac_design.py), one error yardstick (the runtime's own Q8_0 quantisation error), the booking fork that leaves warm operation undecided (gate DG1), and the fabric-side and model-side levers (variants.py). Folds the two design studies of the 2026-10-03 Claude Code session (each independently re-checked; second revisions) and names their open rework items. |
+| Part III | **v1.1** | October 2026 · draft, not yet deposited | Folds the community notes promoted after v1.0's record cut-off (2026-08-25), plus three August notes v1.0 had not cited. From October: notes/2026-10-08-no-rail-scale-one-at-deciding-inputs.md, notes/2026-10-15-graphene-fluid-threshold-turns-on-current-channel.md, notes/2026-10-16-no-density-route-to-a-not-in-the-released-cell.md and notes/2026-10-17-a-pumped-cell-restores-phase-in-a-narrow-window.md (each promoted by maintainer direction after the pipeline's round-4 cap), and notes/2026-10-13-phase-is-not-the-easier-half-for-the-cell.md (3-of-3 clean on round 4). From August: notes/2026-08-05-idler-added-noise-and-the-nf4db-requirement.md (2-of-3, round 4), notes/2026-08-12-gated-zero-residual-phasor.md (3-of-3, round 3) and notes/2026-08-13-walk-excess-clamp-placement.md (3-of-3). Issues #88 and #97 and the design questions #139 (clock source), #140 (material gap) and #141 (CMOS boundary) are cited as open items, never as results. A primary-source re-check of the external facts was made on 24 October 2026 (TWLA's 16-bit-activation rows and the AMD MI355X / MI455X product pages confirmed on 25 October): PrismML's per-backend activation formats, mainline llama.cpp, the Bonsai 2 family, 2025–26 HBM3E/HBM4 bandwidths, compact 1-THz sources, 4-bit and error-aware inference, scalable graphene and measured ternary zero shares. What moved: (1) every booking is read on the coded 3,833-quantum rail swing, which no run delivers to a deciding input, so DG1 must report the input-referred swing (DG1-S); (2) the released cell has neither Part I's threshold AND nor a density-route NOT; (3) the 0.33-ps timing unit is contradicted in-model (2.7–4.0 ps per cell, 13–37 slots in flight); (4) the 353 K threshold in graphene's own electron fluid is open. Limitations 27–31 and references [25]–[43] (numbered in order of first citation) are added. Pass thresholds are unchanged; model targets and expectations are corrected. No computed quantity of the listings changed, and the listings reproduce on Windows 11 to last-digit noise. |
+| Part III | v1.0 | October 2026 · draft, superseded | First manuscript of Part III: Ternary Bonsai 2 27B embedded as a streaming matrix-multiply coprocessor — the bit-exact Part-I digital lane (fable-model-ternary/digital_lane_bonsai.py), the Part-II analog counter tree (ternary_qmac_design.py), one error yardstick (the runtime's own Q8_0 quantisation error), the booking fork that leaves warm operation undecided (gate DG1), and the fabric-side and model-side levers (variants.py). Folds the two design studies of the 2026-10-03 Claude Code session (each independently re-checked; second revisions) and names their open rework items. |
+| Part II | **v2.1** | October 2026 · not yet deposited | Folds in the ten promoted notes that postdate the v2.0 deposit and bear on this Part — notes/2026-07-31-physical-launch-gated-frontier.md, notes/2026-08-01-gated-requirement-round-trip.md, notes/2026-08-01-ratio-bias-gain-table.md, notes/2026-08-02-zero-floor-spec-dissolved.md, notes/2026-08-05-idler-added-noise-and-the-nf4db-requirement.md, notes/2026-08-25-what-the-20db-launch-budget-denominates.md, notes/2026-10-08-no-rail-scale-one-at-deciding-inputs.md, notes/2026-10-15-graphene-fluid-threshold-turns-on-current-channel.md, notes/2026-10-16-no-density-route-to-a-not-in-the-released-cell.md and notes/2026-10-17-a-pumped-cell-restores-phase-in-a-narrow-window.md (with note 07-13's post-promotion annotation of 2026-10-16) — completes v1.7's fold of notes/2026-07-16-no-physical-avg16-accumulator.md, and adds forward references to Part III (v1.1, not yet deposited) and one external reference. What moved: §4.2's 20-dB launch wall is restated as the ≤77 K range it is, with the launch requirement in bench units (σ_rel ≤ 8.16 % for the 2-bit error to reach 10⁻³ at some temperature; at 4 K pulse energy buys only 7.3× below the wall); §5's ≈0.1 THz timing figure keeps only its pulse-knee scope beside the 69 GHz (band 63–74 GHz) gated frontier, open at the bench's ratio bias; the rail is relabelled a coded constant whose drive-plane reading, in the notes' retuned cavity configuration, is a 9.1–13.7 dB gain-compression point on the absolute and ratio bias legs, not an output level, and the knee band is scoped to grid and bias leg; Part I's "saturating rail" is qualified (no output plateau; in-model re-clamp near a 2 % drive, a fixed point read off the single-cell sweep under note 08-01's cascade construction, with no multi-cell cascade run); the inverter and AND carry their own in-model qualification beside the comparators', and Part I's k = 8 is marked a design rule the released cell does not deliver; §6's room-temperature digital "win" is scoped to the coded rail swing and its margin's provenance stated, and the ≤59 K cut is scoped to the decoder idler and a quiet launch; Table Q3, Figures Q3 and Q4 and the QG3 and QG4 model targets name their launch and idler conditions (QG4's also the warm-threshold condition), and Table QB1 gains a σ_rel entry; "launch-budget-capped" is marked undefined; the Fock-space checks are scoped to their check points; §7(ii)'s parametric amplifier is confirmed in-model with its noise clause untested; the warm side inherits the open threshold question of note 10-15, on which every warm gain figure is now stated to be conditional; §1 no longer offers averaged modes at 300 K. The disclaimer now defines the four labels and discloses how the revision was prepared; two experimental reports are no longer called "demonstrated" and two solver outputs no longer "measured"; Data and code availability and Appendix QA now say which numbers run_all.py reproduces and where the others reproduce, and Data and code availability says how the repository's issues are cited; and two references are appended (Takeoka and Sasaki as [17], Part III as [18]; the deposited numbers are unchanged). No released-chain output changed; every pre-registered pass threshold is unchanged. ERRATA rows II-6 to II-24 stay in papers/ERRATA.md until this revision is deposited. |
 | Part II | **v2.0** | July 2026 · [DOI](https://doi.org/10.5281/zenodo.21607070) | Reader-focused revision. Folds in the July 2026 record audit and the timing thread: §5/§6's slot-rate and throughput figures are conditioned on the per-slot flush/reset record with ring-down memory added to the slot-independence threat list, the "same cells, re-programmed" framing carries its comparator-redesign qualification at every headline site, the rail's anchoring caveat lands in §3.1, the knee drive band is stated correctly (0.76–1.15 %), and Appendix QA's key queue points at the tracked WP1 deliverable. Revision notes moved to this file; version statements removed. |
 | Part II | v1.7 | July 2026 | This seventh update folds two promoted community notes: notes/2026-07-16-no-physical-avg16-accumulator.md (promoted 3-of-3) and notes/2026-07-17-what-the-38-quanta-knee-denominates-after-the-july-plane-aud.md (promoted 3-of-3). |
 | Part II | v1.6 | July 2026 | This sixth update incorporates one promoted community note, notes/2026-07-15-finite-sharpness-is-not-a-variance.md (promoted 3-of-3, July 2026), and completes a withdrawal that v1.5 began. |
@@ -49,6 +57,238 @@ repository copies in [`papers/`](.) and the current deposits are the same text.
 | Part II | v1.1 | July 2026 | This revision incorporates the July 2026 community review (Agent Lab discussions #1–#6; technical notes at github.com/ryoji-info/FableComputer). |
 
 ---
+
+## Part III — v1.1 (October 2026)
+
+**Not yet deposited.**
+
+This revision folds the notes listed in the index row into the manuscript as dated qualifications and corrections. It uses the record's own numbers and each note's stated scope (grid N, bias leg, operator, convention). It also deepens the use of notes v1.0 already cited (07-13, 07-18, 07-21, 07-23, 07-31, the three of 08-01, 08-02 zero-floor, 08-25).
+
+It was prepared in a maintainer-operated Claude Code session in which Claude Fable 5.1 orchestrated Claude Opus 5.5 agents for mapping, two-lens adversarial verification, drafting and checking. The notes themselves were produced and assessed by the project's disclosed agent pipeline; each note's header gives its promotion route and, where the note records them, its executing models.
+
+- **Pass thresholds:** no pre-registered pass threshold moved.
+- **Listings:** none was edited, and no computed quantity of the four listings changed. A re-run on 24 October 2026 on Windows 11 (x86-64, Python 3.11.9, numpy 2.4.6) reproduces every printed digit except two kinds of noise: the printed runtimes, and the last floating-point digit of five full-precision keys of ternary_qmac_design.py §7. Every rounded value of Table TA2 is identical.
+- **Errata:** there are no ERRATA rows, because Part III is not deposited.
+- **Where the notes live:** the Abstract carries the paper's first note citation, so it now says that the dated notes cited throughout are files in the repository's notes/ directory (https://github.com/ryoji-info/FableComputer/tree/main/notes), listed with their file names in reference [12]; §1's conventions sentence says how a dated citation maps to a file (notes/INDEX.md and each note's header as navigation), and reference [12] names the directory URL and every cited note's file name (22 files for its 19 dates). Added at the maintainer's request on 2026-10-29, once per paper.
+
+1. **The rail swing behind every booking.**
+   - *Where:* Abstract; §1; §2.1 (new paragraph); §2.3; Table T1 rows 'Rail', 'Knee' and 'Booking'; Table T2 rows 'Decision error', 'Rail plane' and 'Temperature'; §5.3 (A0 and B bullets); Table T7 caption; Figure T3; §5.5; §7; Table T10 DG1; §8.2 and the Table T12 caption; §9 Open bullet and limitations 4 and 13; §10.
+   - *v1.0:* "only the released booking passes warm", with no swing stated.
+   - *v1.1:* every booking is referred to the coded 3,833-quantum rail swing (EPS_RAIL), and no run of the record delivers that swing to a deciding input.
+     - The released (unpumped) model has no output plateau through a 70 % drive (demonstrated in the released model; its domain ends near a 3 % drive).
+     - In-model, a loaded cascade re-clamps near a 2 % drive.
+     - At the swings that cascade sustains (99–277 quanta at fan-out 2, absolute and ratio legs; no multi-cell run), no booking passes warm.
+     - At note 2026-08-01's A_fix (≈75 quanta) and at the central F = 2 fixed point (133–201 quanta), A0, A1 and B pass at no temperature. The F = 2 band top passes A0 only below 14–19 K.
+     - The A0 law needs at least 2,924 / 3,434 quanta at the deciding input (300 / 353 K).
+     - B's operating point is 3,098 quanta per arm.
+     - A decision compares its swing with input-referred noise, so the swing that counts is the one at the deciding cell's input. What stays open is the rail's reference plane, that is, where the coded rail swing sits relative to a deciding input (§5.5, §7, §9 Open bullet, limitations 4 and 27).
+   - *Binding note:* notes/2026-10-08 §0, §4–§7, and its grading row on 07-17 §4 ("the rail's plane remains open").
+2. **DG1-S.**
+   - *Where:* Abstract; §1; §2.5 'Temperature'; §5.5; §7 (new paragraph after the gates paragraph); Table T10 DG1.
+   - *What changed:* DG1 must report three things with its result:
+     - the input-referred swing at the deciding cell;
+     - whether the fabric or the bench supplied it;
+     - whether the deciding cell's '1' was re-launched or cascaded.
+   - Which regime the lane is in is open. The DG1 threshold (≤ 6.3×10⁻⁹ per decision; ≤ 6.3×10⁻¹⁰ for a 10-dB margin) is unchanged.
+   - *Binding notes:* 2026-10-08 §0 item 8, §7; 2026-08-01 gated requirement round trip.
+3. **Threshold logic on the released cell.**
+   - *Where:* Abstract; §1; §2.1; §2.5; a new §4.2 paragraph; Table T5 caption; §6 opening; §6.2 (the QFA-3 decoder); §7; §8.1(a)–(b); §8 summary; Tables T1, T2 and the T11 caption; Figure T5; Table TA3 [V2]; §9 Open bullet and limitations 22 and 29; §10.
+   - *What changed:* Eq. (5) logic is Part I's design. In-model the released cell has no threshold AND (two in-phase '1's exceed one by only 2.6–3.3 dB) and no density-route NOT, so the cell compresses rather than thresholds.
+     - In the amplitude encoding it inverts only by destructive interference (within 10.1–12.3° by grid) or behind an external ×9–12 gain stage. Both routes are pump-fed by the clock burst; the phase window is the interferometric route's alone (limitation 31).
+     - Under phase encoding, a NOT is a half-period delay, and the encoding's restoration by a 2f₀ pump is admissible in-model only in a narrow window (§1, §4.2, limitation 29).
+     - The lane's 783 inverting cells have no released mechanism. A dual-rail lane is named but not counted.
+     - The threshold full adder is a lever only for a cell that thresholds a three-way sum and takes a depleting input; a three-way sum is untested.
+     - D-INV-1/2 are registered beside DG1 as discriminants, not gates.
+   - *Binding notes:* 2026-10-16 §0, §4 B.1–B.4, §5–§7; 2026-10-17 §5 Table G.
+4. **k = 8 is a design rule.**
+   - *Where:* §2.1; §2.2 (fan-out); Table T1 rows 'Sharpness k' and 'Fan-out F'; §5.3 (A0, A1); Table T7 A0 row; Table TB1; limitation 4.
+   - *What changed:*
+     - NM 0.256 is the released code's closed-form value at a 10-dB extinction. The same heuristic sits in A0 and in Part I, so the two are not independent witnesses.
+     - On Eq. (5)'s tanh scale, the released cell gives k = 0.18–0.26 by density coupling and ≈2.9 by interference.
+     - The 2.56 disorder ceiling therefore applies to no released cell. That F = 2 closes rests on the gain reserve, which is untouched.
+     - Table TB1's row becomes 'k; k₀; k_eff': k₀ = 8 is the released code's design constant (K_SHARP in cell.py).
+   - *Binding sources:* 2026-08-02 zero-floor §0 item 2, §5.2; 2026-10-16 §6; fable-model-chain/cell.py.
+5. **Gain labels and G1.**
+   - *Where:* §2.1; Table T1 'Regenerative gain'; Table T10 G1.
+   - *What changed:*
+     - +9.7 dB is the CW analytic ratio.
+     - +8 dB is the shipped cavity's per-slot peak in a settled 0.25-THz train. It is +9.2 dB at design length, and at 4 ps Part I §7.3 splits it into ≈+3.0 dB of data-independent gain and a ≈+4.8 dB pedestal.
+     - The gated worst-case '1' gain is 7.7–7.9 dB, on a 720-point solver grid at 67–71 GHz with the cell at 0.7 × the analytic threshold (§2.1 and Table T1).
+     - The −0.95 dB is the closure's figure.
+   - *G1:* its model target now carries the per-slot peak, the drive pin and note 08-01's G1a/G1b proposal, with +10.2 dB expected for G1a. The ≥ +2.6 dB threshold is unchanged.
+   - *Binding notes:* 2026-07-31 §0 item 3; 2026-08-01 bench gate G1 reissued; Part I §7.3.
+6. **The fan-out reserve against the gated headroom.**
+   - *Where:* §2.2; Table T1.
+   - *What changed:* the +2.01 dB reserve is a 0-dB-junction CW figure. The gated existence headroom is +1.21 / +0.98 dB at 67 / 71 GHz, with the cell at 0.7 × the analytic threshold, and it turns negative at the −1.00 dB contact corner. It is taken against the loaded-cascade requirement of 6.515 dB, which has no compression term; the ledger's 7.0 dB (≈7.3 dB extrapolated) is the requirement with that term at the imported operating amplitude (§2.2 states both).
+   - *Binding note:* 2026-08-01 gated requirement round trip §0 items 4–5.
+7. **Slot and '0'-slot floor.**
+   - *Where:* §2.2 (new paragraph); §2.5; Tables T1 and T2 'Slot'; Table T10 DG3; limitation 25.
+   - *What changed:*
+     - The frontier is 69 GHz (band 63–74 GHz) at 0.7 × the analytic threshold.
+     - The gain-requirement check has a bias fork worth +1.20 dB of gain. With both legs at the ratio bias the gain clears the requirement by +1.1–1.3 dB, and the 77-GHz knee is measured.
+     - The floor is the per-slot peak of the intracavity velocity, near the source end. The strict and round specifications are one chained assumption, and the strict margin flips under carrier phase and denomination.
+     - The specification must be imported (from the bench, or from a decode demand that is itself convention-bound). The fitted-order result is ill-conditioned.
+     - Note 08-12's slot-mode residue (at 67 GHz: −15.9 … −15.7 dB, 82–86° at N = 240) moves no floor verdict, and no phase target is set.
+   - *DG3:* the observable gains reporting requirements; the threshold is verbatim.
+   - *Binding notes:* 2026-07-31 §2, §6; 2026-08-01 (×3); 2026-08-02 zero-floor; 2026-08-12 §2, §5; 2026-08-13 §7.
+8. **The clock source and the carrier-phase budget.**
+   - *Where:* §2.2 (its first paragraph and a new paragraph after it); Table T1 'Re-sync station'; Table T5 caption; §4.5; §7; §8.1(e) and (g); limitations 11 and 31.
+   - *What changed:*
+     - Part I's pulsed clock is a proposed extension of demonstrated hardware, and the source class and distribution are open (issue #139). External: the primary-source check of §8.1(e) found no chip-scale source of the gated burst this Part launches.
+     - The record does fix what the launch must meet.
+     - The cell's own transfer moves the carrier phase 12–21° per 1 % of drive detuning and 4–6° per 0.05·M_th of bias, against Part I's ±15° budget.
+     - NF 4 dB is Part I's requirement; a bare cell's NF stays below 3.01 dB, and 24 cells would need NF 0.198 dB at the 6-dB margin.
+     - The clock's distribution is unpriced.
+     - Limitation 31 carries the carrier-phase forks.
+   - *Binding notes:* Part I §3.2; 2026-10-13 §0 items 6–7, Table D; 2026-10-16; 2026-08-05 §1; 2026-08-25 §5 item 5; issue #139.
+9. **Timing.**
+   - *Where:* §4.3; Table T5 rows 'Depth model' and 'Timing-closed lane'; Table T2 'Path balancing'; §7; Table T10 DG2; §8.1(d); §8 summary; limitation 2; Appendix TA.
+   - *The unit:* the listing's 0.33-ps unit is contradicted in-model. An isolated gated 12-ps burst is delayed 2.7–4.0 ps per cell by its energy centroid, and 2.0–7.3 ps across envelope estimators (demonstrated); a narrowband envelope 3.5–5.9 ps on the ratio leg (3.45–5.75 ps in the shipped configuration). The 92-cell path holds 13–37 slots in flight, up to 47; the 7–9 stations it crosses would add 8–10 % if they sit in series.
+   - *Skews:* the 4- and 14-cell skews are 0.6–1.6 and 2.0–5.6 slots, so a tolerant cell would have to accept an input ½–1½ slots late (4 cells) or two to nearly six slots late (14 cells).
+   - *DG2:* it gains the PHX-1 … PHX-3 protocol.
+   - *Counts:*
+     - The 2,616 buffers are "as the listing places cells", not a minimum.
+     - The station cuts fall every 13 / 10 cells.
+     - The ripple adder carries a booking note (8 cells, 0.1 %).
+     - The cell counts do not depend on the unit.
+   - *Binding sources:* 2026-10-13 §0 item 5, §6, Table D.2; digital_lane_bonsai.py §2 (source read).
+10. **Threshold existence and the cost of tracking.**
+    - *Where:* §2.1 (new paragraph); §2.2; §4.5; §6.5; Table T1 'Regenerative gain'; Table T2 'Cell power'; Table T10 L0; Table TA3 [D3], [E8]; §9 Open bullet; limitations 7 and 28; the last sentences of the Abstract and §10.
+    - *Threshold:* whether graphene's own electron fluid has a DS threshold at 353 K is open. The drift law alone keeps one (×1.7). The single-rate kinetic operator finds none at 353 K at the central and lower rates. What decides is the relaxation of the current not locked to momentum, its rate and its finite-drift structure; three admissible continuations, identical at zero drift, give three answers (§2.1, §9 Open bullet, limitation 28).
+    - *Scope of the single-rate 'none':* §2.2 and §4.5 state it with the note's scope: none at the central and lower rates of the band (A ≤ 1) when the electrons shed their drift heat, and at the band's top (A = 3) none only under the note's projected treatment of the DC drive; dropping that term gives a crossing (0.6471 v_F).
+    - *Cost:*
+      - Tracking costs ×1.2–2.1 / ×3.2 the stored dissipation in the released Joule form, and ×1.25–1.35 more in graphene's own form (ΔT 61–176 K at a one-third fill), wherever a tracked threshold exists; §6.5 and [E8] leave its existence at 353 K open.
+      - The record does evaluate the 300 K correction, and every evaluated correction raises the dissipation.
+      - The 353 K figures are closure-corrected.
+    - *L0:* it gains the hydro-only anchor and the D1/D4 discriminants.
+    - *Binding notes:* 2026-10-15 §1 item 1, §6 row 4, §7, key gfl_threshold_kinetic_353K; 2026-07-13 §4.2, §6.
+11. **The lifetime row.**
+    - *Where:* §2.2 (the first statement of τ); Table TB1 τ; limitation 1; §9 Open bullet.
+    - *What changed:* τ = 1 ps is Part I's best-case row, against a measured 0.4–0.6 ps. Whether a scalable stack reaches it is an open design question (issue #140).
+    - *External re-check:*
+      - no 2025–26 experiment claiming net terahertz gain from drifting electrons;
+      - no 2024–26 scalable stack beyond Fukamachi et al. (2023) [42];
+      - in scalable graphene, a measured Q ≈ 2 at ≈2.5 THz in one device, cryogenic only [43].
+    - *Binding sources:* Part I §4; issue #140; [42], [43].
+12. **I/O and the CMOS boundary.**
+    - *Where:* §4.5; §4.6; limitations 11 and 12; §9 Open bullet.
+    - *What changed:*
+      - The read crossing is unbooked: a homodyne decision at DG1's line needs ≥ 406 quanta at 300 K (477 at 353 K), against the 99–277 delivered.
+      - Electrical write and read have their couplings priced (note 10-16; the gate response in-model, the rectification demonstrated), but the RC, the electronics and the read budget are open (issue #141).
+      - The ×3.4–4.9 launch energy per '1' is measured against the 3-cycle burst; time-averaged launch power rises ×1.25–1.30.
+    - *Binding sources:* 2026-10-08 §7; 2026-10-16 B.2, B.4; 2026-07-31 §0 item 5; issue #141.
+13. **Launch noise.**
+    - *Where:* §2.3; §5.4; Tables T1 and T2 'Launch' / 'Launch noise'; Table TB1 S; σ_rel; Table T10 DG4, QG3, TG3 and caption; Table TA3 [D8]; limitations 14 and 18; §8.1(f).
+    - *The 20 dB:* Part I's 20 dB is a link budget its spacing law consumes, and Part II codes it as 10 % jitter. Which one Part I intends is open.
+    - *Bounds:*
+      - The 3.4×10⁻³ floor is at N_op = 400.
+      - The 10⁻³ class needs a jitter ≤ 8.16 %.
+      - The N_op cap's denomination is undefined (18.41 / 21.06 dB).
+      - The ×239 span is at 4 K and N_op = 400.
+    - *[D8]:* it is rail-referenced, and errors grow at a smaller delivered swing (direction only).
+    - *Gates:*
+      - DG4 tests jitter, not level.
+      - QG3's target is a quiet-launch value (1.9×10⁻² at the coded launch).
+      - TG3's plane is stated.
+    - *Station spacing:* the spacing collapse is scoped to the coded plane; the rail readings are 1.0–1.7 or 12.2 cells.
+    - *Binding notes:* 2026-08-25 §1, §3–§5; 2026-10-08 §6.
+14. **The idler.**
+    - *Where:* §2.3; limitation 30.
+    - *What changed:* Part II's Table Q3 assumes an idler at the lattice temperature, so for an idler no colder than the lattice it is optimistic-or-exact. QMAC-1's cold cut is a statement about the idler (105.7 K / 45.8 K / none).
+    - *Binding note:* 2026-08-05 §4, §6.
+15. **Phase encoding and the pumped cell.**
+    - *Where:* §1; §2.1; Table T2 'Memory'; §4.2; §8.1(d) and a new item (g); §8 summary; Table TB1 (new f₀; 2f₀ row); limitations 24, 29 and 31.
+    - *The pumped cell:*
+      - A 2f₀-pumped cell is, in-model, a phase-sensitive amplifier in narrow, grid-scoped windows.
+      - Above a drain-pump onset of (0.70, 0.72] on N = 240, it latches a bit under a CW pump.
+      - Gated in the 69-GHz slot, it amplifies flips ×1.75–3.15 but re-levels none.
+    - *Phase encoding:* NOT is a 0.5-ps delay, restoration comes from the 2f₀ pump, and majority is admissible only at inputs ≤ ⅓ of the knee amplitude (≈3.8 quanta). The scheme needs two coherent lines, and nothing is priced.
+    - *Limitation 24:* phase-sensitive amplification is explored in-model; squeezing is still unexplored.
+    - *Binding note:* 2026-10-17 §0, §3–§7, §9, R.2, R.4.
+16. **The analog tile.**
+    - *Where:* §6.2–§6.6; Table T9 caption; Table T10 TG1; limitations 15, 19, 20 and 21; Table TA3 [E7], [E8]; Appendix TA.
+    - *Comparator margin:* k_dec ≥ 16 is Part II's three-level margin choice, carried to four levels without re-derivation.
+    - *REF's input:*
+      - REF's relaunched '1' is a coded rail level that no run delivers.
+      - At the loaded F = 2 point, N_op would be 14–35× / 15–39× smaller and the errors worse (not computed).
+      - The −3 dB re-solve sets N_op = 6,530.5 quanta (1.70 N_rail), so the attenuator acts as a +2.3-dB gain.
+    - *Attributions:*
+      - The 1.7 / 0.2 dB figures are the unstored second check's.
+      - The analog reference omits the 32 sign-bit inverters; the printed 10.8 % / 13.8 % are kept.
+      - The 0.97 µW comes from the stored-value end.
+    - *Dissipation and verdict:* graphene's own Joule form adds ×1.25–1.35. The cooling comparison is computed under A0 and argued under B.
+    - *The '0' residue:* note 08-12's residue enters limitation 15.
+    - *Binding sources:* Part II §5; ternary_qmac_design.py (source read) and .out §4; 2026-10-08 §2.4, §6; 2026-08-12 §2, §5; 2026-10-15 §6.
+17. **Runtime formats and mainline llama.cpp (external).**
+    - *Where:* Abstract; §2.5; §3.1; Table T3; §5 opening; §5.1; Tables T1 and T2 'Yardstick'; §9.
+    - *Activation formats:* the card states no rule for activation formats, but PrismML's code settles it per backend:
+      - the CUDA path uses Q8_1;
+      - the CPU path pairs PTQ1_0 with Q8_0 and PQ2_0 with Q8_K;
+      - Metal keeps F32 and MLX keeps FP16.
+    - The Q8_0 yardstick therefore matches only part of the runtimes, and the card's Apple figures involve no int8 step.
+    - *Mainline and releases:* mainline llama.cpp merged the Hadamard runtime on 11 October 2026, but neither packing is merged, and PTQ1_0 is an open PR. Bonsai 2 2B/4B/9B were released on 15 October 2026.
+    - *RTX 4090:* the 86.0 tok/s figure is found in no primary source.
+    - *Sources:* [26]–[28], read on 24 October 2026.
+18. **HBM bandwidth (external).**
+    - *Where:* §3.3.
+    - *What changed:* 2025–26 accelerators reach 8 TB/s on HBM3E (B300, MI355X) and 19.2–23.3 TB/s on HBM4 (Rubin, MI455X). By the paper's own rule that is ≈1,410 and ≈3,390–4,110 tok/s, and no lane count is computed for them.
+    - *Sources:* [29]–[32]. [30] and [32] carry the AMD pages' exact titles, "AMD Instinct™ MI355X GPUs" (288 GB HBM3E, 8 TB/s) and "AMD Instinct™ MI455X GPUs" (432 GB HBM4, 23.3 TB/s), read on 25 October 2026.
+19. **Inference literature (external).**
+    - *Where:* §4.4; §8.2 (a)–(b); §8 summary; §10; Abstract (lever sentence); limitation 10.
+    - *What changed:*
+      - Near parity at 4 bits has been reported with quantization-aware training (BitNet v2 7B: A4 58.30 against A8 58.12). Post-training quantization of full-precision 7–8B models to ternary weights with mixed-precision activations in TWLA's 4-bit setting (2–8 bits per layer) loses 11–17 points against FP16, of which about 5–8 are the activations' share against the same ternary weights at 16-bit activations (TWLA Table 1 and Appendix C.1: LLaMA2-7B 69.49 / 62.91 / 58.00, LLaMA3-8B 72.51 / 62.98 / 55.23; read 25 October 2026). The Abstract, the §8 summary and §10 say "reported with quantization-aware training", without "only". The Abstract labels as external only whether a model keeps its quality at 4-bit activations, not the in-model pass temperatures.
+      - Error-aware training now has language-model-scale follow-ups (analog foundation models; low-rank adapters, GSM8K 37.98 % → 70.74 %; fault-tolerant foundation models).
+      - Every lever pass temperature is a rail-swing pass temperature.
+      - Measured ternary zero shares reach up to 51.5 % across 29 models, against the assumed one-third share.
+    - *Sources:* [33], [37]–[41].
+20. **The §9 lists and new limitations.**
+    - *Demonstrated:* the bullet quotes note-labelled demonstrated rows as statements about the released model.
+    - *In-model:* the bullet names every October note's in-model result.
+    - *External:* the bullet lists [26]–[43] in ascending order.
+    - *Open:* the bullet adds
+      - threshold existence at 353 K;
+      - the delivered swing, with only the rail's plane relative to a deciding input left open (the decision's own plane is input-referred);
+      - the inverter route and the dual-rail count;
+      - DG2's regime and per-cell delay;
+      - the floor observable;
+      - clock, material and boundary (issues #139–#141).
+    - The activation-format item is restated.
+    - *Limitations 27–31 (appended so the notes' citations of limitations 2 and 24 keep their numbers):*
+      - 27, the model domain;
+      - 28, threshold existence;
+      - 29, the 783 inverters;
+      - 30, the idler axis;
+      - 31, the carrier-phase budget.
+    - Limitations are cited throughout as "limitation N".
+    - *Binding sources:* notes 2026-10-08, 10-13, 10-15, 10-16 and 10-17; 2026-08-05; issues.
+21. **Apparatus and smaller fixes.**
+    - *Disclosure (P3):* the Authorship and Status Disclaimer says that the manuscript's account of the record promoted through 17 October 2026 and its external re-check (24–25 October 2026) were prepared in a maintainer-operated Claude Code session, Claude Fable 5.1 orchestrating Claude Opus 5.5 agents for mapping, two-lens adversarial verification, drafting and checking. It also states that the cited notes were produced and assessed by the disclosed agent pipeline, each note's header giving its promotion route and, where recorded, its executing models; some were promoted by maintainer direction after the four-round cap. P3 names no version and carries no bracketed citation, so [1]–[24] keep their first-citation order.
+    - *Citation conventions:* §1 states the issue-citation convention. "Principal terms" are collected in Table T1. 'Acoustic' is defined at first use.
+    - *Smaller text fixes:*
+      - §2.4 is dated to the literature and reads "plasmonic".
+      - Equation references read "eq. (T1)/(T2)".
+      - The netlist count is 5,160 flipped decisions.
+      - A3 is cited to Part I §6.3's fan-out budget, and so is every summary of the A2–A3 temperatures (Abstract, §5.5, §10), which no longer call it "Part I's worst-path budget" (Part I Table 5's worst path has a cell between split and junction).
+    - *Abstract and gates:*
+      - The QFA-3 counts are given at the 41-dB target, and the Carnot fractions as 39.6 / 41.4 %.
+      - L0's provenance: Part I gives no numeric threshold, note 07-18 pre-registers the bands, and the protocol is in issues #88 and #97.
+    - *Captions:* Table T9's caption states booking A0, and Table T11's caption states which values are computed from the listing's rows.
+    - *Appendix TA:*
+      - Each listing "prints every number it computes".
+      - The Windows re-run is recorded.
+      - The printed 0.33-ps unit line is graded by note 10-13.
+    - *Data availability:* the stale "enter the repository together" clause is dropped. Clauses are added for note-derived values, PrismML-code facts and issues.
+    - *Table TB1:* κ/κ_b, k, NF, σ_rel, P_cell, v₀ and τ are qualified, and an f₀; 2f₀ row is added.
+    - *References:*
+      - [12] gains eight dates and the promotion-route sentence.
+      - [25] cites the five issues, with full titles and URLs.
+      - [26]–[43] are the external sources, with URLs or DOIs. The appended block [25]–[43] is numbered in order of first citation (BITCOS, first cited in §4.4, is [33]; the compact-source, inference and graphene entries are [34]–[43]); the Abstract carries no bracketed citation of them. [1]–[24] keep their v1.0 numbers.
+    - *Binding sources:* the notes' headers (Status and executing-model lines); the listings (source read); gh/issues_open.txt.
+22. **What did not change.**
+    - Every pre-registered pass threshold (G1, L0, QG1–QG3, DG1–DG5, TG1–TG5).
+    - Every computed value of digital_lane_bonsai.py, ternary_qmac_design.py and variants.py, including the printed 0.33-ps conversion line, which is now graded in the text rather than altered.
+    - Every key in Table TA2.
+    - The recommendation: the digital lane for Bonsai, with QFA-3 as a test tile.
 
 ## Part III — v1.0 (October 2026): first manuscript
 
@@ -61,6 +301,231 @@ accounting, a 1.7 dB overstatement of the dot-product SNR from per-block scales,
 threshold, and the warm-lane reference temperature), which the manuscript lists in Appendix TA
 rather than resolving. Pre-registered keys are listed in Appendix TA; none collides with
 either released `results.json`.
+
+## Part I — v6.1 (October 2026)
+
+**Not yet deposited.**
+
+This revision folds the notes listed in the index row into the manuscript as dated qualifications and corrections. It uses each note's own numbers and the scope the note states (grid N, bias leg, operator, convention, plane). Paragraph locators (P*n*) count the paragraphs of the deposited v6.0 text in document order, from the title (P0).
+
+It was prepared on 24–29 October 2026 in a maintainer-operated Claude Code session in which Claude Fable 5.1 orchestrated Claude Opus 5.5 agents:
+- findings were mapped from the promoted notes, the open issues and Part III;
+- they were verified by two adversarial lenses (record and framing);
+- an editor agent drafted the edits. It re-read every cited note section and re-ran, read-only, the closed forms of the released chain that the text quotes (`cell.static_noise_margin`, `cell.compression_dB`, `noise.resync_spacing`, and the thermal keys of `results.json`), and read the source of `cell.isi_spread_dB` and `coupled.py`;
+- two further checkers, a sources lens and a first-time-reader lens, reviewed the draft over four rounds (the fourth a final check, with rework closed); the maintainer settled the open questions they raised and applied the final check's items.
+
+The notes themselves were produced and assessed by the project's disclosed agent pipeline; each note's header gives its promotion route and, where the note records them, its executing models.
+
+- **Pass thresholds:** none moved (G1 ≥ +2.6 dB, G2 < 1 dB, G3 ≤ 6 dB, G4 ≥ 1.7×, G5 within 55 K). The four pre-registered kinetic-solve quantities of §10 keep their bands. Model targets and expectations are corrected where the record corrected them.
+- **Released chain:** `fable-model-chain/` and `fable-model-quantum/` were not edited, and no released-chain output changed. Every new number is either a promoted note's, a released key, or this paper's own arithmetic on released keys and closed forms, re-executed read-only.
+- **Errata:** the corrections against the deposited v6.0 text are rows I-11 … I-40 of `papers/ERRATA.md`. They stay until v6.1 is deposited. Four corrections have no promoted note that grades them; by the maintainer's decision they are carried in this block only, not as ERRATA rows: the τ-first ordering (item 13), the energy-per-addition slot scope (item 15), the coupled-cell ansatz (item 16) and the design-model scope of the carrier-recovery ISI figure (item 3).
+- **Open before deposit:** the figure rasters still carry v6.0 statements that the v6.1 text qualifies, and are to be redrawn before v6.1 is deposited. Figure 3(b)'s graphic still reads "every 10–24 cells (NF 3–4 dB)" while its caption gives 10–13 cells, and its bias bus still reads "M/M_th = 0.7, set by approach to self-oscillation" (a calibration that presupposes a threshold, open at 353 K); Figure 5(a)'s header still reads "every cell: +10 dB, rails re-clamp levels · depth 3 → latency ≈ 1 ps < one 4-ps slot" and Figure 5(c)'s artwork still draws sub-slot latency, while their captions give the design latency, the in-model ≈1–6 ps per cell and the re-clamping by compression; Figure 8's title still reads "kinetic 0.165" and its panel (C) "(the logic rail)", which the released figures.py draws and which cannot change without a versioned edit to the released chain. Figures 3 and 5 have no source in `figures.py`.
+- **Where the notes live:** at the paper's first note citation (§3.2, P36) the text now says that the dated notes cited by file path are the promoted notes of the community record, one Markdown file each in the repository's notes/ directory (https://github.com/ryoji-info/FableComputer/tree/main/notes), with notes/INDEX.md and each note's header as navigation. Added at the maintainer's request on 2026-10-29, once per paper.
+
+1. **Fan-out-2 frontier for a physical launch.**
+   - *Where:* Abstract (P8); §2 niche sentence (P21) and the 'This fabric' clock cell of Table 1; Table 3 'Symbol/clock rate'; §6.2 clock rider (P83) and rider (iii) (P84); Table 5 'Throughput'; Figure 5(c) caption; the bias-convention sentences of §7.3 (P109) and Appendix A (P163).
+   - *What changed:*
+     - ≈0.1 THz (E1 79–92 GHz, E2 98–128 GHz, E3 100–148 GHz) is kept, scoped to the pulse-knee convention with a stretched burst.
+     - With ring-down booked and a launch that is confined to its slot and gated by the data (a flat burst of duty ≤ ≈0.8, raised-cosine edges of two round trips, '0' slots undriven), fan-out-2 logic closes at ≈0.07 THz: 69 GHz (band 63–74 GHz), and 67–71 GHz at the demonstrated rungs, the 71-GHz edge only under the round ≥ 10-dB floor spec (the noise-margin-anchored 11.8-dB variant shrinks the window to 67 GHz alone). The worst-'1' gain is 7.68 dB at 71 GHz and 7.93 dB at 67 GHz (N = 720, demonstrated); the frontier is an in-model composition. The band is written as Part III writes it, not in brackets, because "[63, 74]" reads as Part I's citation format.
+     - At 91 GHz a slot-filling burst breaks the 1-dB ISI criterion (1.24 dB) and lifts the '0' floor to −5.2 dB (demonstrated), which leaves that slot to F = 1 wires.
+     - The guard and de-Q configurations were not re-run (open).
+     - At the ratio bias of §7.3 the clearance is +1.1 to +1.3 dB but the floor binds, so 69 GHz is neither confirmed nor moved. The bias convention is open, because the two conventions converge to different biases (0.7 × the inviscid against 0.7 × the analytic threshold), a permanent 1.5 % design fork to be settled as a named design decision.
+     - §5 (P62), §7.3 (P109) and Appendix A (P163) no longer say that every solver result is at the ratio bias: the gated-slot rows of §6.2–6.3 and §10 (run at 0.7 of the analytic threshold) and the absolute- and analytic-bias rows of §5–7 (note 10-16's Table B rows: retuned cavity, absolute bias) are labelled where they appear. Appendix A now defines the ratio as to the solver's own threshold on the grid run and the absolute bias as 0.7 of the N = 240 threshold held at every grid (equal to the ratio only at N = 240), because with multi-grid rows in the text 'ratios to the coarse-grid threshold' named the absolute leg (10-08, 'Bias legs, named once'). This is a consistency edit for rows the revision adds; the deposited text quotes no row at another bias, so it has no ERRATA row.
+     - The launch costs ×3.4–4.9 the energy per '1' and ×1.25–1.30 the time-averaged power (demonstrated integrals), borne by the launch subsystem.
+     - The 0.2–0.5 THz range stays the clock-chain design spec.
+   - *Binding note:* notes/2026-07-31-physical-launch-gated-frontier.md §0 (incl. item 4, the floor-spec sensitivity), §4, §6; notes/2026-08-01-ratio-bias-gain-table.md §0 items 1–3, 5; notes/2026-08-01-gated-requirement-round-trip.md §0 item 6.
+   - *Released chain:* unchanged.
+2. **The '0'-slot floor must be imported.**
+   - *Where:* §6.2(iii), closing sentence (P84).
+   - *What changed:*
+     - The released floor is a source-plane velocity maximum, while the specification is a drain-plane density. At 67 GHz the two readings differ by +0.055 dB at N = 240 and −0.445 dB at N = 480 (paired Δ, demonstrated).
+     - The released compact map yields a family of extinctions, not a bound.
+     - The frontier is not moved.
+   - *Binding note:* notes/2026-08-02-zero-floor-spec-dissolved.md §0 items 1, 4, 5, 8; §3; §5.3.
+   - *Released chain:* unchanged.
+3. **§5's logic family is the design model; what the released cell executes.**
+   - *Where:*
+     - Abstract (P7); §1 (P15, P16, P17);
+     - §5: P63, P65, P66 (heading 'Regeneration condition (design rule)'), P68 (support label), and three new paragraphs after P68, the first headed 'What the released cell executes';
+     - Figure 3(a′); §6.2(iii) (P84, the carrier-recovery ISI figure); §6.5 (P90, Table 4 caption P92, P95, Figure 5(a));
+     - §7.2 (P105); Figure 7(C) and (D); §11 (P158);
+     - Table 1 'Restoring logic?'; Table A1 rows 2 and 4; Table B1 rows g(n) and k.
+   - *What changed:* Eq. (5), the sigmoid and k ≥ 8 are labelled the compact design model. The new §5 paragraphs state, in-model on the released Galilean cell, that it departs from Eq. (5) in its shape, in the sign and sharpness of its input coupling, and in having no two-field threshold:
+     - Its g(n) is a resonance curve with no plateau: 10–90 % width 0.15–0.20·n at the pump, Δn = 0.07–0.09·n, n_th 4–7 % below the operating density.
+     - Its only carrier-frequency density coupling, rectification, accumulates: +0.86–1.06 of the swing with the cavity retuned and the bias held absolute (0.69–0.76 in the shipped tuning and at the analytic bias), k = 0.18–0.26 on the tanh scale.
+     - Inversion by bias holds only for an external swing. −0.20·n gives ≥ 10 dB on the drain density at fixed current, and −0.17 … −0.28·n is needed across the configurations where 10 dB is reached at all; on the absolute bias (0.80 of the retuned continuum threshold) −0.20·n also brings the cell to its own threshold, which at G1's bias of 0.7 it reaches at −0.30·n. That swing comes from a gate stage of ×8–17 behind a biased detector (×37–73 behind an unbiased one) or from the §9.6 tap.
+     - The amplitude-encoded NOT is destructive interference within 10.1–12.3° (12.3 / 10.7 / 10.1° on N = 240 / 480 / 720, narrowing under refinement; demonstrated), with an operational k ≈ 1.3, which is 2.9 on the tanh scale.
+     - Two summed '1's read 2.6–3.3 dB above one (demonstrated; those rows run where the model's fluid speed exceeds v_F): the cell compresses, it does not threshold.
+     - Under phase encoding (second paragraph), NOT is a half-period delay (≈2.6 dB of passive line), and a 2f₀ pump restores phase only in narrow windows (in-model).
+     - The coded `cell.transfer` uses A_in as its prefactor and has no caller (third paragraph).
+
+     Elsewhere:
+     - The Abstract states the four properties in four labelled clauses, and the inverter "short of an external bias swing" (both external routes: the gate stage and the §9.6 tap).
+     - Table 4 stands as the netlist's Boolean logic.
+     - §1 now says the chain feasibility-checks the half adder, with §5 recording what the released cell executes ("end to end" removed). §1's "Restoration is intrinsic" (P16) is scoped to the design model: the released cell's soft compression re-clamps a loaded cascade's '1' near a 2 % drive rather than at a rail, but does not meet the regeneration condition (in-model).
+     - §11 adds that the logic family is the design model's.
+     - Table 1 labels the re-clamping in-model and the absent threshold demonstrated.
+     - The carrier-recovery ISI figure (< 0.1 dB at 0.25 THz; §6.2(iii), §7.2, Figure 7(D)) is scoped to the design model's depleting transfer. By source read, `cell.isi_spread_dB` depletes n_local through Eq. (5)'s tanh, while the released cell's only density coupling accumulates. No promoted note grades this figure, so it is carried in this block only.
+   - *Binding note:* notes/2026-10-16-no-density-route-to-a-not-in-the-released-cell.md title, §0 items 1–3, 5–7, §3, §4, §5, §6; notes/2026-10-17-a-pumped-cell-restores-phase-in-a-narrow-window.md §0 items 1, 6, 8, §5, §7; notes/2026-08-02-zero-floor-spec-dissolved.md §2.5, §7 item 1d; fable-model-chain/cell.py `isi_spread_dB` (source read).
+   - *Released chain:* unchanged.
+4. **Static noise margin numbers.**
+   - *Where:* §5, P66.
+   - *What changed:*
+     - "≈ 0.2 … (0.26–0.35 at k = 16, 13–20 dB)" becomes the released closed form's 0.256 at k = 8 and 10 dB (0.338 at 20 dB; 0.221 at k_eff = 8/√2; 0.340–0.394 at k = 16 and 13–20 dB).
+     - Added: the closed form never calls the transfer.
+   - *Binding note:* fable-model-chain/cell.py:68–72 (executed; `results.json` noise_margin_frac = 0.25641); notes/2026-08-02-zero-floor-spec-dissolved.md §0 item 2, §2.5; notes/2026-07-15-finite-sharpness-is-not-a-variance.md limitation 3.
+   - *Released chain:* unchanged.
+5. **No output rail; re-clamping by compression; the cascade figure is a budget.**
+   - *Where:* Abstract (P7, P8); §1 (P16); §5 P67 (heading 'Compression and re-clamping'); §6.2(iii) (P84, "neither the cell's compression nor the stations"); §6.3 (P86); Table 5 'Worst-path gain budget'; §6.5 (P95); §7.4 (P114, P119); Figure 8(C); Figure 9(B); Table 6 'Cascadability'; §7 introduction (P99, "Pass 4 budgets …"); §9.4 (P144); §11 (P158); Table A1 row 4.
+   - *What changed:*
+     - At a 10 % source drive the compression is −9.1 to −12.1 dB at N = 240–720 on the ratio bias, and −9.1 to −13.7 dB on the absolute bias, a fixed M at every grid (demonstrated); the continuum values are −10.2 / −12.4 dB (in-model). ~14 dB is reached only on the absolute bias's CW observable at N ≥ 960, where its fixed M sits at 0.77 of the grid's own falling threshold.
+     - The released cell has no output plateau below near-depletion (demonstrated for drives ≤ 0.7; the note flags that above a ≈ 0.03 drive the model's fluid speed exceeds v_F).
+     - A loaded fan-out-2 cascade re-clamps near a 2 % drive; each gate contracts the level's distance from that fixed point by 0.51–0.59 (the cascade map's local slope). At fan-out 1 the level is 4–5 % (in-model; no multi-cell cascade run). At a 10 % drive the cell gains 1.3–1.6 dB, against the 6.5 dB that F = 2 needs.
+     - §7.4's budget is the compression form at A_op = 0.0116. That swing sits just above the form's 1-dB knee, so junction loss moves the input down through and below the knee. The form's own F = 2 fixed point is 0.0206. The Abstract's "two cascaded cells hold +8.4–9.3 dB per cell", §9.4's "robustness … already established in-model", §11's "cascaded without gain degradation" and Table A1's Pass-4 model ("two-cell cascade") are scoped to that budget.
+     - §6.5's "full rail amplitude" becomes the open regime fork: the launcher's level when clocked, or the fixed point near 2 % when cascaded. No run delivers a rail-scale swing to a deciding input.
+   - *Binding note:* notes/2026-10-08-no-rail-scale-one-at-deciding-inputs.md §0 items 1, 4–6, 8; §2.2; §3; §6 rows 'Part I §5'; notes/2026-08-01-gated-requirement-round-trip.md §0 item 1.
+   - *Released chain:* unchanged.
+6. **Phase: the clock source's budget, the cells' transfer phase, and tolerances.**
+   - *Where:* §3.2 (P36); §6.2 (P83, last sentence); §9.6 (P146); §9.7 (P147).
+   - *What changed:*
+     - "Easier half" is scoped to the clock source.
+     - In-model, a cell's transfer phase moves 12–21° per 1 % of detuning and 4–6° per 0.05·M_th of bias. One cell therefore spends ±15° at ≈±1 % of f₀ (4–10 nm at the ratio bias of §5, 2.7–10 nm across configurations) or, in the released chain's shipped cavity, at +0.10 / −0.22·M_th.
+     - Under the coherent field-sum reading of a station-free cascade, a between-branch error must stay within ±0.32 … ±0.010 % per cell over the 3–91 non-shared cells of Part III's 92-cell-deep lane. Under Eq. (5) this is a single-cell requirement; under the envelope reading it is open.
+     - A 2f₀-pumped chain would not accumulate the error. This is an in-model composition within the pumped cell's slip margin, which is 19.2° at knee-level swings under a 5 % pump but ≈ 6° at the delivered '1' under a 2 % pump, below the single-cell ±15°. How detuning moves a pumped cell's own axis was not computed.
+     - §9.7: a ±5 % length error lies outside the active line (half-width 2.76 %, against the passive line's 9.4 % half-width). It moves the phase by +85° / −34°, and a +5 % drive detuning costs 6.5–7.0 dB. The trim clause becomes a resolution requirement (−5.0 / +7.3 nm per ±15°).
+     - §9.6: whether the station's bias gate re-references the carrier is open. If it does, the station cuts of Part III's lane (every 10 or 13 cells) cap the run at 9 or 12 cells. (Part I's own half-adder netlist has no internal station.)
+   - *Binding note:* notes/2026-10-13-phase-is-not-the-easier-half-for-the-cell.md §0 items 2–3, 6–8; §3 B.7; §5 Table D; §6 rows 'Part I §3.2', 'Part I §9.7'; notes/2026-10-17-a-pumped-cell-restores-phase-in-a-narrow-window.md §0 item 3 (incl. 'The '1' window's margins'), §4 'Against 10-13'.
+   - *Released chain:* unchanged.
+7. **Latency.**
+   - *Where:* Table 5 'Latency'; §6.5 (P90, new sentence); Figure 5(c) caption.
+   - *What changed:*
+     - ≈1 ps (depth 3) is kept as the design value.
+     - In-model on the released cell: on the 3-cycle clock pulses of the 0.25 THz design baseline, 1.1 ps per cell (half-maximum rise) to 3.2–3.4 ps (energy centroid), i.e. ≈3–10 ps at depth 3. These figures were measured by the note's reviewers and recorded in the note.
+     - 6–13 ps for a 12-ps gated burst, and 13–18 ps narrowband.
+     - The Figure 5(c) caption reads "≈1–6 ps per cell by estimator and burst".
+   - *Binding note:* notes/2026-10-13-phase-is-not-the-easier-half-for-the-cell.md §0 item 5(d); §6 row 'Part I Table 5'; limitation 12.
+   - *Released chain:* unchanged.
+8. **Re-sync spacing and the NF ≤ 4 dB requirement.**
+   - *Where:* §6.2 rider (i) (P84); Figure 3(b) caption; Table 5 'Internal re-sync stations'; §7.2 (P105); §7.4 Noise (P115); Table 6 'Noise'; Table 7 G3 model target; the paragraph after Table 7.
+   - *What changed:*
+     - 10–24 becomes 10–13 cells: 13.3 at the 2.77-dB floor and 10.0 at NF 4 dB. 24 cells would need NF ≈ 0.2 dB (0.198 dB in note 08-25).
+     - The rider states the 20 dB as the released law reads it, a link budget over the thermal floor of §7.4, and then says which denomination Part I intends is open.
+     - Within Eq. (7) the bare cell stays below 3.0103 dB at any G ≥ 1 (in-model). NF ≤ 4 dB therefore binds only on two things:
+       - ahead of the gain: a blind flush of S ≳ 1.23 dB under the full-Friis bound;
+       - on the idler: input-referred added noise ≤ 11.14 (353 K) / 9.47 (300 K) quadrature units on the matched floor, which is free of parameters, or 9.31 / 7.80 on the received variance, which holds at Part II's 1-dB junction loss without a preamplifier (demonstrated).
+
+       Both are conditional on the G_dec booking.
+     - What the 20 dB denominates is open: the coded-plane corollary gives 4.4–7.8 cells at 300 K, and the spacing spreads ×12 across planes.
+     - G3's ≤ 6 dB is unchanged.
+   - *Binding note:* notes/2026-08-25-what-the-20db-launch-budget-denominates.md §1 use (a), §3, §5 items 1, 5; notes/2026-08-05-idler-added-noise-and-the-nf4db-requirement.md §1–§3, §6, limitation 4; notes/2026-07-22-flush-noise-figure-negative.md.
+   - *Released chain:* unchanged.
+9. **Fan-out envelope and gated headroom.**
+   - *Where:* §6.3 (P86).
+   - *What changed:*
+     - The composed envelope's k_eff and its F ≤ 2.56 ceiling inherit cell.py's k₀ = 8, which the released cell does not deliver. The +2.01 dB reserve is untouched.
+     - Added the gated existence headroom of a duty-0.8 launch: +0.98 dB (71 GHz) and +1.21 dB (67 GHz) at N = 480, negative at 71 and 77 GHz at the −1.00 dB contact corner. It does not grade the CW reserve.
+     - The 4-ps flush condition is now its own sentence on the CW reserve.
+   - *Binding note:* notes/2026-10-16-no-density-route-to-a-not-in-the-released-cell.md §6 row '07-21'; notes/2026-08-01-gated-requirement-round-trip.md §0 items 4–6, §6.
+   - *Released chain:* unchanged.
+10. **Registers and the electrical boundary.**
+    - *Where:* §6.4 (P88); §9.6 (P146); §9.8 (P148).
+    - *What changed:*
+      - The register clause is labelled: no register built from pumped cells or loops is modeled or priced.
+      - Driven with an added 2f₀ pump at one clamp, the released solver's cell under phase encoding is a pumped bistable cell (in-model). It latches above an onset that rises with refinement: (0.70, 0.72] of the DC drain current at N = 240, and (0.72, 0.80] at N = 720.
+      - In the gated slot it amplifies flips ×1.75–3.15 but re-levels none.
+      - Part III's lane uses no register (Part III, Section 4.3).
+      - Added pointers to issue #141 (the electrical crossing): rectification +1.7–2.1 % (demonstrated; retuned cavity, absolute bias); gate depletion −0.17 … −0.28·n (in-model); gate RC not modeled.
+      - Added the route-(iii) gain stage, which no Part specifies: ×9–12 for −0.20·n, ×8–17 across the band (in-model).
+    - *Binding note:* notes/2026-10-17-a-pumped-cell-restores-phase-in-a-narrow-window.md §0 items 4–5, §1 'Drives', §3, §9; notes/2026-10-16-no-density-route-to-a-not-in-the-released-cell.md §0 item 5, §4 B.1–B.4, §5, §8; issues #141 and #139 (open).
+    - *Released chain:* unchanged.
+11. **The threshold of Eq. (3) and its numerics.**
+    - *Where:* §5 (P62); §7.3 (P109); Figure 8 header and panel (A); Appendix A (P163, and a new paragraph after it); Table B1 'M_th'.
+    - *What changed:*
+      - About a tenth of the ~15 % offset is Eq. (3)'s small-M expansion, not numerics.
+      - The excess over the inviscid 0.1493 is 95 % bulk Lax–Friedrichs diffusion (with an open interior remainder), 4.8 % clamp placement and 0.15 % splitting (in-model; N = 240, cfl = 0.4, eight-seed median).
+      - The operator matches the eight-seed median to 1.79×10⁻⁶; the 0.11 % is record length and seed. The fitted order is 1.04–1.06.
+      - The N = 480 eight-seed median is 0.15883. The N = 720 rung, 0.155568, extrapolates to within 0.07 % of the inviscid limit (pair-dependent).
+      - Threaded to finer grids, the released scan returns no value at N = 920 and 960 (scan floor 0.1544); the failing grid lies in (860, 920] (in-model).
+      - M_th,num is named as a convention (N = 240, cfl = 0.4, seed 1, 90 round trips). cfl is not the Courant number (0.292).
+      - cfl is a lever at fixed grid: 0.1912 / 0.1762 / 0.1688 / 0.1643 at cfl 0.2–0.5; at 67 GHz the ring-down moves 14.7 dB/slot and the '0' residue 10.3 dB across cfl 0.2–0.8.
+      - Figure 8(A)'s markers are stated on its own axis M/M_th(analytic): 1.0, ≈1.15 and ≈1.015. §5's sentence on Section 7's bias reporting now says so too: operating-point results are relative to the solver's own threshold, and Figure 8(A) compares the two thresholds themselves on the analytic axis.
+    - *Binding note:* notes/2026-08-07-mth-num-excess-decomposition.md §0, §1.1, §3.2, §9; notes/2026-08-06-mth-num-record-length-and-fit-convention.md §1–§3; notes/2026-08-02-where-the-released-threshold-bracket-stops-working-a-scanned.md §0–§1; notes/2026-08-01-ratio-bias-gain-table.md §0 item 4; notes/2026-08-12-gated-zero-residual-phasor.md §3, §5; fable-model-chain/figures.py (source read).
+    - *Released chain:* unchanged.
+12. **Kinetic tier: the closure's numbers and graphene's own electron fluid.**
+    - *Where:*
+      - Abstract (P8, P9);
+      - §5: P54 (A defined at first use), a new paragraph after P61 (the Galilean drift law), P62; Table 3 'Drift bias';
+      - §6.1 (P80); §6.3 (P86);
+      - §7.3 (P109); Figure 8 header; §7.4 (P114); §7.5 (P121);
+      - §8.2 (P134); §8.3 (P138); §9.1 (P141); §9.2 (P142);
+      - §10 (P151, P154, P155); §11 (P159);
+      - Table 6 'Thermal', 'Kinetic validity', 'Remaining'; Table 7 G5; Table B1 'M_th' and the new row 'A'.
+    - *What changed:*
+      - The −0.95 / −1.27 dB band, the 0.165 threshold and the ≈4 % thermal margin are labelled the closure's.
+      - The kinetic operator §10 specifies, run with a single rate in the finite-T bulk, carries ×3.8 the closure's e-e damping, two-thirds of it in the current not locked to momentum. With the drift heat shed it finds no 353 K threshold below the Landau ceiling for A ≤ 1 (in-model; stated once in §5, at P54, and in §7.5), and at 300 K one only at A = 3. The tracked correction is undefined rather than shifted.
+      - The smallest lifetime factor that restores a threshold is ×2.56–2.60; d = 5 nm and f₀ ×6 do not. Three admissible two-rate continuations give three answers (open).
+      - Graphene's drag is ½ at every temperature in energy-conserving Dirac hydrodynamics ([19]'s v₀/2 ± v_p at T → 0) and 0.35–0.69 in the kinetic and isothermal closures at finite temperature (in-model). The drift law alone moves the threshold ×1.67 / ×1.74 at T → 0 (in-model).
+      - The finite-T speed shift is computed: the bulk mode sits 11.1 % below Eq. (1), of which ≈9.4 % is the finite-T part; the zero-drift line sits 11.7 / 12.0 % below the released model's continuum line; the trim is +47.6 %. All lie outside the closure's [−4, +1] %, and the pre-registered in-closure target stands.
+      - In every computed row with a threshold, tracking overruns the 55 K budget under graphene's own Joule form (61–120 K, 176 K) and raises J to 0.50–0.56 / 0.74 mA/µm.
+      - The in-situ calibration is a test (discriminant D2), and collision-operator fidelity owns existence. The line's temperature coefficient and its width/shift are discriminants D1/D4; r₁ is glossed as the ratio of that channel's rate to the stress-relaxation rate. The four admissibility gates of the note are listed as four.
+      - §9.1 (P141) and §10 (P155) scope contact fidelity's lead, and the ±1 dB's place as the largest open kinetic exposure, to the gain band: whether a 353 K threshold exists comes before the band and is owned by collision-operator fidelity. Table 6 'Remaining' orders the solve the same way (existence first, then the kinetic gain, with EM coupling and absolute calibration in the electromagnetic tier), and §11 counts a solve that finds no threshold as breaking the bands.
+      - The closure is exact at the collisionless endpoint and 0.12 % off at the hydrodynamic one.
+      - All four solve bands are kept; P155's own falsifier is read for a solve that finds no threshold.
+    - *Binding note:* notes/2026-10-15-graphene-fluid-threshold-turns-on-current-channel.md §1 items 1–7, §2, §3, §6, §7 (keys, and D1, D2, D4).
+    - *Released chain:* unchanged.
+13. **Lifetime row, density row and the material gap.**
+    - *Where:* §4 (P48, P49); Table 3 'Carrier density'; §10 die plan (P154).
+    - *What changed:*
+      - This paper's own in-model arithmetic on the released thermal model (τ⁻³ at the tracked bias, scaling the released ΔT ≈ 42 K at ⅓ fill and τ = 1 ps): the 55 K budget closes in continuous drive only for τ(300 K) ≳ 0.92 ps (0.99 ps at the closure's kinetic threshold), and at the measured 0.4–0.6 ps only at ≈8–28 % duty. Per the maintainer's decision it rests only on released values and carries no lab-post attribution.
+      - The kinetic restore bar is scoped to its operator: in the single-rate operator (A = 1, drift heat shed), a lifetime ×2.6 restores a 353 K threshold and d = 5 nm or a ×6 higher f₀ does not, while two of three admissible two-rate continuations restore one with no change of τ. Added a pointer to issue #140 (open; no figures quoted).
+      - "τ on-die first" is corrected to second after σ, as §10 already orders it (a manuscript-internal correction; carried in this block only, no ERRATA row).
+      - The density selection's yield argument is labelled as resting on the design model's sharpness premise.
+      - The d = 5 nm lever is scoped to the hydrodynamic tier: in the single-rate kinetic operator at 353 K (A = 1, drift heat shed) it restores no threshold.
+    - *Binding note:* fable-model-chain/thermal.py and results.json (re-run: dT_fill_third_operating_K = 42.234; (42.234/55)^(1/3) = 0.916; (52.9/55)^(1/3) = 0.987; duty 55/(42.234·0.4⁻³) = 8.3 %, 55/(42.234·0.6⁻³) = 28.1 %); notes/2026-10-15-graphene-fluid-threshold-turns-on-current-channel.md §1 items 1, 7, §6 row 'smallest change restoring a threshold'; notes/2026-10-16-no-density-route-to-a-not-in-the-released-cell.md §6 row 'disorder.py'; issue #140; Part I §10.
+    - *Released chain:* unchanged.
+14. **Bench protocol: G1, G2, the read-out and the launch jitter.**
+    - *Where:* Table 7 model targets for G1, G2, G3 and G5; a new paragraph after the Table 7 caption; §9.5 (P145); the §10 calibration list (P154); Table 6 'Launch/read-out coupling'.
+    - *What changed:*
+      - Table 7 keeps its single pre-registered G1 row (maintainer decision). The re-issue note's pins are recorded as its proposal (the note says "this note proposes, it does not amend"): G1a, existence, at a retuned cavity, CW drive, intracavity peak, drive ≥ 10× below the knee and bias 0.7 × the measured threshold, for which the proposal expects +10.2 dB, the +8 dB being the shipped streaming reading; and G1b, a knee report, not a gate. Adoption is the maintainer's release decision.
+      - G2's gated-slot spreads are recorded on both bias legs as the released solver reads them: 0.04–0.18 dB (analytic bias) and 0.05–0.31 dB (ratio bias) in the 67–71 GHz window; at 91 GHz, 0.29–0.43 dB (analytic) and 0.40–0.79 dB (ratio). A re-issue of G2 is open.
+      - The launcher's amplitude jitter σ_rel at the post-coupling plane joins the calibration sequence.
+      - §10 reads the D1/D4 linewidth discriminants under the G1a protocol the re-issue proposes, departing from its proposed retuning pin.
+      - §9.5 adds that the LNA's relief is against the detector's own noise only, and that only the input-referred swing counts at the read-out: an amplifier cannot raise the input-referred SNR (the released amplifier multiplies it by 1/(2 − 1/G) < 1) and does not lower the quantum floor; a homodyne decision needs ≥ 406 / 477 quanta, against the cascade's 99–277.
+    - *Binding note:* notes/2026-08-01-bench-gate-g1-reissued.md header, §1–§5; notes/2026-07-31-physical-launch-gated-frontier.md §3; notes/2026-08-01-gated-requirement-round-trip.md §6; notes/2026-08-01-ratio-bias-gain-table.md §3; notes/2026-08-25-what-the-20db-launch-budget-denominates.md §3, §5; notes/2026-10-08-no-rail-scale-one-at-deciding-inputs.md §0 items 2, 3, 7, §5.
+    - *Released chain:* unchanged.
+15. **Energy per addition, contact heat, A_op.**
+    - *Where:* §8.1 (P131); Abstract (P8); Table 1 'Energy/op'; Table 5 'Energy per addition'; Appendix A (P164); Table A1.
+    - *What changed:*
+      - In the released code, energy per addition is power × slot. The ~0.4 fJ figure is therefore the 4-ps baseline's, and it grows with the slot at which F = 2 closes (Table 1 now says so too). This part is read directly from released thermal.py and has no binding note; it is carried in this block only.
+      - Contact Joule heat is not booked. If the contact carries the row current it adds ≈14.8 µW/µm at Part I's own ~100 Ω·µm contact class (§9.1), ≈2× the channel's 7.3 µW/µm. Sunk through the same thermal path it would exceed the whole margin of §8.2; whether the contact carries the bias current, and how its heat is sunk, is open. This is this paper's own in-model arithmetic on released values (maintainer decision; no lab-post attribution).
+      - A_op = 0.0116 has an undocumented origin (it is consistent with the measured curve to 0.24 dB). It is the one free parameter of the F = 2 ledger, and the round-trip note recommends retiring it as a ledger input.
+    - *Binding note:* fable-model-chain/thermal.py, constants.py, results.json (J_mA_per_um = 0.3845; dissipation_operating_kW_cm2 = 1.267, × L = 576 nm → 7.30 µW/µm; J²R_c = 14.8 µW/µm); Part I §9.1; notes/2026-08-01-gated-requirement-round-trip.md §0 item 1, §3, §6; notes/2026-07-17-drive-sweep-knee-anchored.md §7.
+    - *Released chain:* unchanged.
+16. **Coupled-cell check.**
+    - *Where:* §6.1 (P81); §7.5 (P122); §10 (P155); Figure 10; Table 6 'Coupled-cell parasitics'; Table A1 row 5.
+    - *What changed:*
+      - The released Pass 5 is a closed-form ansatz M_th·(2 − c), not an eigenvalue solve.
+      - Charge-channel parasitics are excluded only under that ansatz; a supermode is open. §7.5's tail and §10's list of the Boltzmann–Maxwell tier's questions therefore no longer call radiative coupling the only remaining, or the one surviving, parasitic channel: it is the channel §7.5 leaves to that tier.
+    - *Binding note:* fable-model-chain/coupled.py (source read). No promoted note grades this; the defect was located by an unpromoted lab post and verified against the released code alone. It is carried in this block only.
+    - *Released chain:* unchanged.
+17. **Open items, cross-references, front and back matter.**
+    - *Where:* §3.2 (P34), §10 (P156) and Table 6 'Clock synthesis' (issue #139); §10 P155 (issues #88 and #97; Part III's gate L0); §3.2, §6.4, §6.5, §8.1, §9.5 and §9.6 (Part III [45]); §6.2 (Part II [46]); Data availability (P167); Authorship and Status Disclaimer (P4); References [45], [46].
+    - *What changed:*
+      - These are pointers only. Issues are cited as open design questions or requests, never as results.
+      - Data availability now states this, links the issue tracker, reads "the manuscripts", and says that the notes promoted through 17 October 2026 that bear on this paper are incorporated in its text, with this file listing them.
+      - Part III is cited as v1.1, not deposited, in Part I's own style ("Part III, Section 4.3 [45]"). Its locators were checked against the revised Part III text: Section 2.4 (gate L0), Sections 4.2–4.3 (Table T5; the buffers, stations and cell totals), Section 4.3 (no registers; every waiting bit regenerated), Table T10 (the gates), the 69-GHz slot of its energy booking and its 6.3×10⁻⁹ pass line.
+      - Part II gets a reference entry, [46], in the form Part III's reference [2] gives.
+      - The disclaimer gains one sentence on how the account of the notes promoted from 31 July through 17 October 2026, and the external re-check, were prepared, aligned with Part III's disclaimer (P3). The notes promoted up to 26 July were folded for v5.1–v6.0. P2's date line is left as deposited (maintainer decision).
+    - *Binding note:* issues #88, #97 and #139–#141; Part III v1.1 P3, P34, P67–P75, P82, P151, P225, refs [2] and [25].
+    - *Released chain:* unchanged.
+18. **External re-check (October 2026).**
+    - *Where:* §2 (P19); §3.2 (P35); References [43], [44].
+    - *What changed:*
+      - §2: "No second experiment has appeared as of June 2026" becomes: no 2025–26 experiment claims net THz gain, emission or DS self-oscillation from drifting electrons. The nearest results are a current-driven amplification of THz sound (Barajas-Aguilar et al. 2024, doi:10.1038/s41467-024-46819-2) and a current-induced extra damping of counter-propagating mid-IR plasmons at 170 K (Dong et al. 2025, doi:10.1038/s41467-025-58953-6).
+      - §3.2: ref [36]'s 24 µW at 0.914 THz is added beside the 2.9–10.9 µW range, and no 2020–26 UTC-PD result above these was found.
+      - Both are labelled external.
+    - *Binding note:* the session's research briefs `graphene-gain-and-mobility-2026-10-24.md` and `thz-clock-sources-2026-10-24.md` (primary sources fetched); Crossref metadata for [43] and [44] (fetched 2026-10-25).
+    - *Released chain:* unchanged.
 
 ## Part I — v6.0 (July 2026): this revision
 
@@ -177,6 +642,72 @@ This revision incorporates the July 2026 community review of the released model 
 6. Data and code availability updated to the community repository (github.com/ryoji-info/FableComputer).
 
 7. Observable labels added to the Abstract and Tables 6/7/B1. The pre-registered pass/fail thresholds of Table 7 are unchanged; only the model-target annotations gained their measurement conventions.
+
+## Part II — v2.1 (October 2026)
+
+**Not yet deposited.** The repository copy in `papers/` carries this revision; the deposited v2.0 remains the current deposit, and the corrections below that a promoted note binds are tracked as rows II-6 to II-24 of `papers/ERRATA.md` until v2.1 is deposited.
+
+This revision folds the promoted notes that postdate the v2.0 deposit and bear on this Part: notes/2026-07-31-physical-launch-gated-frontier.md (promoted 3-of-3), notes/2026-08-01-gated-requirement-round-trip.md (promoted 3-of-3), notes/2026-08-01-ratio-bias-gain-table.md (promoted 3-of-3 on round 2 of PR #93), notes/2026-08-02-zero-floor-spec-dissolved.md (revised 2026-08-05 and re-submitted, cited as Part III cites it), notes/2026-08-05-idler-added-noise-and-the-nf4db-requirement.md (promoted 2026-08-07 on round 4, a scope reduction), notes/2026-08-25-what-the-20db-launch-budget-denominates.md (promoted 3-of-3 clean on round 4), and notes/2026-10-08-no-rail-scale-one-at-deciding-inputs.md, notes/2026-10-15-graphene-fluid-threshold-turns-on-current-channel.md, notes/2026-10-16-no-density-route-to-a-not-in-the-released-cell.md and notes/2026-10-17-a-pumped-cell-restores-phase-in-a-narrow-window.md (each promoted by maintainer direction after the round-4 cap), with the 2026-10-16 post-promotion annotation of notes/2026-07-13-kinetic-correction-signed-band.md. It also completes v1.7's fold of notes/2026-07-16-no-physical-avg16-accumulator.md (item 25), and adds forward references to Part III (papers/Fable-Computer-Part-III.pdf; v1.1, October 2026, not yet deposited; new ref. [18]) and one external reference (Takeoka and Sasaki 2008, new ref. [17]), both appended after the deposited list. Beyond the notes it folds one qualification located by an Agent Lab post and verified on the released code (§5 precision, item 14), one code reading surfaced by Part III §6.1 (§4.1 signed weights, item 9), and two literature items located by Agent Lab posts (§3.2 lifetime band, item 6; §4.1 Takeoka–Sasaki, item 8). No released-chain output changed: every edit is to text, no `results.json` value is touched, every number in Tables Q1–Q3 is unchanged, and every pre-registered pass threshold of Table Q4 stands. Labels follow the notes: what they execute on the released chain is labelled demonstrated, what they compose is labelled in-model, and what they leave open is labelled open; numbers carry the notes' own rounding, grids and bias legs.
+
+It was prepared on 24–29 October 2026 in a maintainer-operated Claude Code session in which Claude Fable 5.1 orchestrated Claude Opus 5.5 agents for mapping, two-lens adversarial verification, drafting and checking; two checkers, a sources lens and a first-time-reader lens, reviewed the draft over five rounds, and the maintainer settled the open questions they raised and applied the fifth round's items. The notes themselves were produced and assessed by the project's disclosed agent pipeline; each note's header gives its promotion route and, where the note records them, its executing models.
+
+1. **Restoration "at the saturating rail" (§1; Abstract).** Part I's description of its own design is kept and a short qualification appended: in the released model the level is re-clamped, but not at a rail — the cell as released has no saturating output plateau (demonstrated), and in-model a loaded fan-out-2 cascade, composed from a single-cell sweep with no multi-cell run, re-clamps near a 2 % drive; the cell compresses, it does not threshold (detail in §3.1 — item 5 — and §5). The Abstract calls the rail the coded logic rail, a constant whose swing no run in the merged community record delivers to a deciding input, and glosses "the record" at its first use; the sentence's second mention now reads "that record". Binding notes: notes/2026-10-08-no-rail-scale-one-at-deciding-inputs.md (§0 items 1, 4, 6; §3; §6 row "Part I §5"; limitation 10) and notes/2026-10-16-no-density-route-to-a-not-in-the-released-cell.md (§0 item 3); the scope "without a parametric pump" follows notes/2026-10-17-a-pumped-cell-restores-phase-in-a-narrow-window.md limitation 9. No released-chain output changed.
+
+2. **Noise figure versus added noise, and the DC-bias scope (§1, second quantum fact).** The sentence now separates what coincides from what does not: referred to a matched thermal input the released gain rule's noise figure (with a pointer to §4.1, where the rule is introduced) is F = 2 − 1/G, but its absolute added noise (G − 1)(n̄ + ½) is 2n̄ + 1 times the Caves minimum (×12.5 at 300 K, ×14.7 at 353 K), the two coinciding only as T → 0 (in-model). "The only kind the DS cell provides" is scoped to its DC bias, with a parenthetical pointer to §7(ii). Binding notes: notes/2026-08-05-idler-added-noise-and-the-nf4db-requirement.md §5 and notes/2026-10-17-a-pumped-cell-restores-phase-in-a-narrow-window.md (§7 row on 08-05). No released-chain output changed.
+
+3. **The warm side inherits an open threshold question (§1, temperature classes; §6; §8, dependencies and Table Q4; pointers in the Abstract and §9).** The smooth signed penalty is identified as a statement within note 07-13's closure, which keeps a DS threshold at the warm end. In the finite-temperature single-rate kinetic operator that note named as the next tier's decisive computation, no DS threshold exists below the drift's Landau ceiling (the drift at which the slow cavity leg's phase speed falls to graphene's v_F, as note 10-15 defines it) at 353 K for A ≤ 1 (A run at 0.5, 1 and 3), and at 300 K one exists only at A = 3 with τ_E → 0 (in-model, on the runs whose driven base state is stable); whether graphene's own electron fluid has one at 353 K is open. §1 now closes with a sentence of its own: every warm gain figure in this Part, the 1-bit decode and QG4's model target included, is therefore conditional on the cell having a DS threshold at its operating temperature, which at 300 K no two-rate continuation has tested (the continuations were run at 353 K; the 300 K single-rate result is stated once, in the sentence before); A is glossed in §1 as the prefactor of the electron–electron rate, not the mode area of Eq. (Q1), and named as that prefactor where §8 and the Conclusion repeat the result; §8's list of what the Boltzmann–Maxwell tier owns gains that warm-side question; the Abstract's warm 1-bit figure points to §1, §6's warm 1-bit figures (3.9×10⁻³ at 300 K, 9.6×10⁻³ at the 80 °C cap) carry the same condition, and Table Q4's QG4 model target and caption name it (item 21); and the Conclusion's "1-bit decoding … with no cryogenics" is made conditional "on a warm DS threshold whose existence is open", with the in-model result (none at 353 K for A ≤ 1; at 300 K only at A = 3 with τ_E → 0). Binding note: notes/2026-10-15-graphene-fluid-threshold-turns-on-current-channel.md (§1 item 1, §6), with the 2026-10-16 post-promotion note on notes/2026-07-13-kinetic-correction-signed-band.md. No released-chain output changed.
+
+4. **The knee band is bound to grid and bias leg (§3.1).** The 22–51-quantum band is the N = 240-grid band with the bias at 0.7 of that grid's own threshold, where the absolute and ratio legs coincide (the grid N glossed as a cell count, not quanta, and the three bias legs defined once). On the N = 480 grid it is 21–43 quanta on the ratio leg (bias at 0.7 of each grid's own threshold; essentially unchanged) and 13–26 on the absolute leg (bias held at its N = 240 value, whose relative value drifts with refinement); on the analytic leg it is 57–122 on the N = 240 grid. Brackets demonstrated, crossings interpolated. The 38-quantum headline (the hard-coded ε = 1 %) does not move. Binding note: notes/2026-10-08-no-rail-scale-one-at-deciding-inputs.md (header "Bias legs"; §2.3). No released-chain output changed.
+
+5. **The rail is a coded constant, and its drive-plane reading is a compression point (§3.1; Abstract; §1; §3.3; Figure Q1 caption; §4.1; §7; Appendix QA (i); Table QB1).** "Its drive-plane reading is unmeasured" is retired: on the released solver at 353 K, in the retuned cavity configuration the notes run (operating cell length 576.62 nm; the released chain ships the zero-drift 582.80 nm, since `solver._setup` calls `cell_length(s)` at M = 0), a 10 % source drive is compressed by 9.1–13.7 dB on the N = 240–720 grids on the absolute and ratio bias legs, by leg and observable; the coded −14.15 dB is reached only beyond these grids, on the absolute leg's CW observable, between the N = 960 grid (−14.03 dB, where that fixed bias sits at 0.77 of the grid's own threshold) and the N = 1200 grid (−14.25 dB; its threshold is unregistered). Without a parametric pump the output keeps growing on those two legs as a power 0.39–0.60 of the drive, from a 3 % to a 70 % drive (demonstrated for the released Galilean solver — a shallow-water model with Galilean fluid kinematics and no velocity cap, whose fluid speed exceeds v_F above a ≈3 % drive — the model, not the physical cell). In-model, a loaded fan-out-2 cascade re-clamps near a 2 % drive (99–277 quanta on the absolute and ratio legs, 43–221 on the analytic leg): a fixed point read off this single-cell sweep under note 08-01's cascade construction, which takes a source-driven single cell's gain as the cell-to-cell gain (no multi-cell cascade was run; note 10-08 §3, limitation 2); under note 08-01's gated duty-0.8 launch, run in the shipped configuration (note 10-08 §3), the loaded fixed point sits lower, ≈75 quanta, band 27–147. No run delivers the 3833-quantum rail to a deciding input; "anchored at neither reference plane" stands, and the rail's plane stays open. The paragraph's "a logic pulse on this fabric is a mesoscopic object — tens to thousands of quanta" now opens "By design", since the thousands are the coded, launch-referred rail. The intracavity clause names both of its numbers as model outputs: the released solver's own compression, −0.35 dB at a 10.05 % intracavity swing (note 07-17's plane audit), against the −14.15 dB that the coded compression form `cell.compression_dB` assigns to a 10 % swing, which the sweep sentence then calls "That −14.15 dB". The provenance sentences (§3.1, §3.3, §7, Appendix QA) no longer call the rail a solver amplitude: it is the coded constant `qmode.EPS_RAIL`, which note 10-08 (Table 1) marks assumed, never produced by any run; §3.1's provenance sentence now opens "The provenance of the knee and rail values", and §7's restatement points to §3.1. §3.1 names notes/2026-10-08-no-rail-scale-one-at-deciding-inputs.md as the note that runs the retuned cavity, and Appendix QA states its per-pulse deficit as a variant run with the parent's proposed cavity-retuning fix applied, the released chain still shipping the zero-drift 582.80 nm length (notes/2026-07-12-predictions-resolved.md §5). Binding notes: notes/2026-10-08-no-rail-scale-one-at-deciding-inputs.md (§0 items 1, 4–6; §2's conventions and §2.2; §3; Table 1; §6 row "07-17 §4"; §7 keys `rail_sweep_output_slope`, `loaded_fixed_point_F2_sweep`; limitations 2 and 10), with notes/2026-08-01-gated-requirement-round-trip.md (§4) for the cascade construction; the shipped length is also a source read of `fable-model-chain/solver.py` (`_setup`) and `ds_cell.py` (`cell_length`). No released-chain output changed.
+
+6. **The cryogenic lifetime benchmark crosses bands (§3.2).** Ref. [14]'s ≈1.6 ps is labelled an infrared near-field imaging measurement (external), against room-temperature THz-band lifetimes in Part I §4, so the comparison with the saturated 2 ps crosses bands; issue #140 is cited, without numbers, as the open design question on whether scalable graphene/hBN stacks reach Part I's 1 ps. Located by an Agent Lab post (#129, 2026-10-15) and checked against the cited literature; the issue is a design question, not a result, and Data and code availability now says how the repository's issues are cited (item 22). No ERRATA row (no promoted note qualifies the passage). No released-chain output changed.
+
+7. **Fock-space verification scoped to its check points (§4.1; Appendix QA; Table QA1).** "All three rules are verified" becomes the loss and gain rules (the combiner rule has no Fock-space check), verified to < 10⁻⁴ at the package's check points — loss at α = 3, n̄ = 2, η = 0.5; gain at α = 2, G = 2 with a vacuum and a one-quantum idler (9.9×10⁻⁵ on the thermal case) — neither of which is the operating point; certification at the operating occupation, gain and amplitude is open. Binding note: notes/2026-08-05-idler-added-noise-and-the-nf4db-requirement.md §6 and limitation 2, for the operating-point item; the check count and check points are a source read of `fable-model-quantum/qlindblad.py` and `run_all.py` lines 96–101. No released-chain output changed.
+
+8. **The Helstrom "conservatism" buys little warm and is out of reach cold (§4.1; §7(ii); new ref. [17]).** The sentence now opens "One deliberate modeling choice, conservative in principle only". For the binary decision of a loaded digital cell (≈75 quanta, the gated-launch loaded fixed point `A_fix` of note 08-01) an ideal homodyne threshold sits within 1 % of the Helstrom error at 300 K, while at 4 K the Helstrom error (4×10⁻³⁴) lies far below the homodyne one (2×10⁻¹⁸), a bound this fabric, with no photon counting, cannot reach (in-model). For a binary decision between two pure coherent states no Gaussian receiver with classical communication beats homodyne detection (Takeoka and Sasaki, Phys. Rev. A 78, 022320 (2008), arXiv:0706.1038; external, worded no more strongly than the paper's abstract and its Gaussian-limit section; the full text, arXiv:0706.1038v3, was read on 2026-10-29, notes/CITATIONS.md). Whether either result carries over to QMAC-1's three-level ladder is open; §7(ii)'s squeezing clause is made consistent with it, with the same pure-state scope. Binding note: notes/2026-10-08-no-rail-scale-one-at-deciding-inputs.md §0 item 7 (with notes/2026-08-01-gated-requirement-round-trip.md for `A_fix`); located by an Agent Lab post (#129, 2026-10-16). No released-chain output changed.
+
+9. **Signed weights are a design assertion (§4.1).** The four-quadrant multiply-accumulate is kept as the design, and the text now says that no released call exercises a signed weight (`qnoise.combine` takes w ∈ [0, 1] on non-negative amplitudes; marked "demonstrated, source read", the form the disclaimer now defines). Part III §6.1 (new ref. [18]) is cited for the in-model cost of a signed tile (5.4×10⁻⁴ at 4 K and 3.3×10⁻² at 77 K against 3.5×10⁻⁷ and 1.3×10⁻³ for an unsigned three-input counter, both tiles capped at the coded rail, which no run delivers to a deciding input — note 10-08; Part III's own second check of the listing behind that result leaves five rework items open). Part III's terms are glossed for this Part's reader: the signed tile is an interference counter with a coherent offset arm summing two signed ternary digits (trits), and Part III keeps each weight's sign digital, in the select stage that forms its products. No binding note (a reading of the released code, surfaced through Part III §6.1), so no ERRATA row (maintainer decision). No released-chain output changed.
+
+10. **The 20-dB launch wall is a ≤77 K range, and the requirement has bench units (§4.2; §6's grey-curve sentence; Figure Q3 caption; §8 dependencies; Table QB1).** The v2.0 text said the coded 20-dB launch "pins the decode error near 3.4×10⁻³–1.9×10⁻² at every temperature". Those are the 4 K and 77 K values; the same released call gives 5.166×10⁻² at 150 K, 0.1602 at 300 K and 0.2000 at 353 K (demonstrated), where above ≈152 K the thermal term owns the error. The sentence now says so, describes the coded quantity as the launcher's own amplitude jitter (10 % of the full logic amplitude, additive, symbol-independent, both arms), and states as open which of the two denominations Part I's 20 dB intends (its link budget against the thermal floor, or launcher jitter), at which plane and under which launcher physics — at 4 K the wall's magnitude spans 239× across the launcher-physics and reference-plane readings alone (note 08-25 §4 P3, §5 item 1). The requirement is restated as note 08-25's proposed scalar σ_rel at the in-fabric launch plane: the 2-bit error reaches 10⁻³ at some temperature only for σ_rel ≤ 8.16 % (S ≥ 21.76 dB; in-model, the released threshold algorithm with the launch term added), and the 4-K error is within 2× / 1.1× of its quiet-launch floor only above 34.69 / 43.53 dB (demonstrated, released calls); at the coded 20 dB the 4-K error falls only 7.3× with pulse energy before the 4.6×10⁻⁴ floor, which is the same from 4 to 300 K to within 1 % (in-model). Phase noise and the bench-to-model transfer are recorded as open, and the closing "sharpest new hardware requirement" sentence now names the quiet launch. "Classical launch noise does not cool away" now gives the wall's floor at its printed precision — no temperature takes it below 3.36×10⁻³, its 4-K value to three figures (the released calls give 3.36457×10⁻³ at 4 K and 3.36452×10⁻³ at and below 1 K; note 08-25 §3 item 1 puts the floor over the model's domain at 3.3645×10⁻³) — and §6's grey-curve sentence says the same of the 2-bit error. The 239× span carries the note's own label (in-model replica arithmetic), and the scalar's convention is written S = −20 log₁₀ σ_rel. The open transfer item reads as note 08-25 §5 item 2 states it — a bench measurement, made before the coupling, against σ_rel, defined after it — and the launch-limited floor names its conventions (the coded comparator trim offset c = 0.289 and decoder sharpness k_dec = 16, §5). Table QB1 gains a σ_rel, S entry (the definition; 10 % as coded, S = 20 dB; ≤ 8.16 % for the 2-bit error to reach 10⁻³ at some temperature), and §8 states that threshold in the same words. Binding note: notes/2026-08-25-what-the-20db-launch-budget-denominates.md §1–§5 (it recommends exactly this ERRATA row). No released-chain output changed.
+
+11. **Timing: the ≈0.1 THz figure scoped and the gated frontier added (§5, QMAC-1).** "≈0.1 THz" is kept with its scope — it survives only under the pulse-knee convention (the knee of a released 3-cycle pulse), which the released solver rules out for slot-filling drives, because the compression knee migrates with drive duration (note 07-31 §0 item 2) — and the frontier for a slot-confined, data-gated launch is added: 69 GHz (band 63–74 GHz), a 14.5-ps slot, in-model, adjudicated with the cell biased at 0.7 of the analytic threshold (353 K); at the ratio bias proposed for the bench it is neither confirmed nor moved, because the logic-0-slot floor binds and its specification must be imported (open; Part III §2.2). The slot-rate throughput figures stay baseline figures; no MAC/s figure at 69 GHz is computed. Binding notes: notes/2026-07-31-physical-launch-gated-frontier.md (§0 items 2–3, §6), notes/2026-08-01-ratio-bias-gain-table.md (§0 item 5) and notes/2026-08-02-zero-floor-spec-dissolved.md. No released-chain output changed.
+
+12. **"Launch-budget-capped" is undefined (§5; Table QB1 row N_op and caption; Figure Q4 caption; §4.1).** N_op = 400 keeps its label, and the text now says that what the launch-budget cap on N_op denominates is not defined; read as Part I's 20-dB budget (the note's own inference), 400 quanta lies 18.41 dB over n̄ at 300 K in the quanta convention (N/n̄; below it) and 21.06 dB in the quadrature convention (2N/(n̄ + ½), the squared quadrature mean over its variance; above it; demonstrated, arithmetic). Both conventions are defined where §5 first uses them, as note 08-25 §1 use (c) defines them, so that §6's "the quanta convention of Section 5" resolves. N_op's plane is stated: in-fabric, after launch coupling. Table QB1's caption now says two entries carry caveats (N_op and k). Binding note: notes/2026-08-25-what-the-20db-launch-budget-denominates.md §1 use (c). No released-chain output changed.
+
+13. **The inverter and the AND get their own qualification (§5; pointers in the Abstract, §1, §2, §4.1, §4.2, the Figure Q2 and Q5 captions and §9).** "That framing carries one qualification … the comparators alone" becomes two, and the paragraph now opens "By design, the decoder is not new hardware". The second qualification: the inverter and AND carry over only as Part I §5 states them; in-model the released cell supplies neither as a threshold gate — for a carrier-frequency input, as the decoder's are, its only density coupling (rectification) accumulates, at a sharpness of 0.18–0.26 on Eq. (5)'s tanh scale (note 10-17's annotation on 10-16 scopes the sign so: a 2f₀ drive depletes the drain DC, ≈1,500× more weakly per unit a², and opens no density route to a NOT); two in-phase logic-1 inputs exceed one by only 2.6–3.3 dB (demonstrated, in the retuned configuration of §3.1, in runs whose fluid speed exceeds graphene's v_F, which the released solver does not cap); and in the amplitude encoding the decoder uses, the only inverter the cell itself admits is destructive interference with a coherent clock pulse, of sharpness 2.9 on that tanh scale, reaching 10 dB of extinction only within 10.1–12.3° of phase error (demonstrated, by grid, tightening under refinement), at best marginally restoring; under phase encoding a NOT is a half-period delay. The released decoder treats NOT and AND as ideal digital cells (demonstrated, source read: `qdecode.py`), so no number moves; how the decoder's inverter and AND are to be built is open. §2's "quantized by the same regenerative cell family", §4.2's "decoder cells, which are threshold devices" and the Abstract's "Part-I threshold cells" (now "the Part-I cells themselves, threshold cells by design,") are marked as design statements with a pointer to §5, and so are §4.1's "what the comparator cells physically implement" (now "are designed to implement"), §5's "Part-I threshold cells with staggered, trimmed thresholds" (now "threshold cells by design", the Abstract's words; the deposited continuation "and sharpness k ≥ 16, which is a Part-II requirement whose achievability on a Part-I cell is open (Table QB1)" is unchanged) and the Figure Q5 caption (now "By design, the map is a re-programming of the Part-I half-adder block, not a new tile (comparators redesigned; inverter and AND as Part I states them; Section 5)"). Binding notes: notes/2026-10-16-no-density-route-to-a-not-in-the-released-cell.md (§0 items 1–4, §5, §6) and, for the encoding scope, notes/2026-10-17-a-pumped-cell-restores-phase-in-a-narrow-window.md (its annotation on 10-16). No released-chain output changed.
+
+14. **The per-shot precision is a design point, not a physics bound (§5; Figure Q4A caption; pointers in the Abstract, §1, §2, §7 and §9).** The 0.6 / 2.0 / 2.5 bits are the N_op = 400 values; the released `qmac.analog_enob` grows with pulse energy and stays below log₂(k_dec/(2√3·c)) (in-model, exact algebra of the released code), exactly 4.000 bits at the released k_dec = 16 (a margin design rule) and c = 1/√12 (an open hardware parameter); at N_op = N_rail/2 ≈ 1916 it returns 1.7 / 2.7 / 3.3 bits at 300 / 77 / 4 K (demonstrated, the released function at that argument), an amplitude the coded rail allows but neither the launch budget nor any delivered swing reaches (note 10-08). §1's, §2's and §7's shot-noise sentences now carry "at a given pulse energy", and so does §7's closing sentence ("classical arithmetic executed, at a given pulse energy, at the precision ceiling quantum mechanics assigns to unentangled light"); Data and code availability says that these values reproduce from the released calls, not from run_all.py (item 22). Located by an Agent Lab post (#123, 2026-09-02) and verified on the released code. No binding note, so no ERRATA row (maintainer decision). No released-chain output changed.
+
+15. **The margin behind the classical column (§6, the curve's definition).** 0.256 is the released closed-form rule `cell.static_noise_margin` at Part I's k = 8, 10-dB-extinction design point (Part I, Section 5), which never evaluates the cell's transfer, and `qerrors.NM_CLASSICAL` is its four-decimal copy, so the classical column inherits Part I's margin rather than independently witnessing it (demonstrated, source read and arithmetic — the note's own label, "Demonstrated (source read + arithmetic)"). The text does not quote Part I's own rounding of that margin: the deposited Part I v6.0 §5 gives ≈0.2, and the Part I revision of this run moves its §5 to the code value, 0.256, so a quotation would go stale on the companion's deposit; row II-17 records the deposited texts. Binding note: notes/2026-08-02-zero-floor-spec-dissolved.md (§0 item 2, "Labels, stated"). No released-chain output changed.
+
+16. **Part I's k = 8 is a design rule the released cell does not deliver (§6; Table QB1 row k and its caveat).** In-model the released cell's density coupling (for a carrier-frequency input) reaches a sharpness of 0.18–0.26 on Eq. (5)'s tanh scale at the delivered swing, its amplitude transfer is concave (no threshold), and its interferometric inverter (2.9 on that scale) is at best marginally restoring; Table QB1's k_dec ≈ 1.6 estimate and its "≈10× the β/Δn" are scaled from that design rule. The k row states the qualification as a pointer ("a design rule the released cell does not deliver in-model — caption, Section 5"), and the caption states it in a sentence of its own after the k_dec estimate, so that the range (≈1.6 from Part I's k = 8 design rule to ≈3.2 from k = 16) reads whole: for a carrier-frequency input the released cell's only density coupling, rectification, gives 0.18–0.26 on Eq. (5)'s tanh scale at the delivered swing, and its amplitude transfer is concave, with no threshold. Binding note: notes/2026-10-16-no-density-route-to-a-not-in-the-released-cell.md (§4 B.1, B.3; §6 rows on `cell.py` and on 10-08 item 7). No released-chain output changed.
+
+17. **The classical-digital swing and the room-temperature comparison (§6, the curve's definition and the reading of Table Q3; Table Q3 and Figure Q3 captions).** The classical column is introduced as the physics floor of a digital fabric whose cells meet Part I's margin at the coded rail swing. No run delivers that swing to a deciding input, and the released decision law needs ≈2924 input-referred quanta, 0.76 of the rail, to reach DG1's 6.3×10⁻⁹ per decision at 300 K (in-model, decision noise at the released matched-temperature rule). "Digital restoration wins at room temperature" holds as stated at the coded rail swing only: at the loaded fan-out-2 fixed point composed in §3.1 on the absolute and ratio legs (99–277 quanta), the same law errs 0.040–0.147 per decision at 300 K, within ×3.5 of the 2-bit decode on either side, and 0.18 at note 08-01's gated-launch fixed point, where the comparison reverses (both swings computed at 353 K and paired with 300 K noise, note 10-08 limitation 1); a per-operation comparison would need its own accounting. The rail-scale requirement holds as a property of the released law (0.257 at the knee, reproduced) but the fabric that meets it does not appear in the record, and the 20-dB budget, read as a link budget against the thermal floor (§4.2 leaves open which quantity Part I's 20 dB denominates), "implies" it only weakly: at the budget level itself, 576 quanta at 300 K counted as 100 n̄ (§5's quanta convention) and 626 counted as 100 (n̄ + ½), the law errs 5.8×10⁻³ and 4.2×10⁻³ per decision; the budget's gloss reads "≈600 quanta over it" rather than "≥600 quanta over the thermal floor" (note 08-25 §1(c)). The knee-restored decision's "≈10⁻¹ BER at 300 K" now reads ≈0.26, the 0.257 note 10-08 reproduces at the published knee and the paragraph itself quotes. Binding note: notes/2026-10-08-no-rail-scale-one-at-deciding-inputs.md (§0 items 1–3, §3, §5, §6 rows "Part II §6" and "Part II §6 / QMAC-1", limitations 1–2), with notes/2026-10-16-no-density-route-to-a-not-in-the-released-cell.md for the margin's optimism. No released-chain output changed; the Table Q3 numbers are untouched.
+
+18. **Table Q3 names its conditions (Table Q3 and Figure Q3 captions).** Every column is computed with a quiet launch, and the quantum-analog columns with the decoder amplifier's idler at the lattice occupation; on the idler axis alone the table is optimistic or exact under every classical mechanism note 08-05 names (300 K 2-bit: 1.4×10⁻¹, 0.138 to three figures, rising to 0.205 with an idler at 2n̄; 5.0×10⁻² only at the Caves floor of a vacuum idler; demonstrated), and a separate correction — how the released chain pairs the decoder amplifier's noise with its gain — is undetermined in sign and magnitude. The Figure Q4 caption (the precision budget) now states the same two conditions. Binding note: notes/2026-08-05-idler-added-noise-and-the-nf4db-requirement.md §4, §6. No released-chain output changed.
+
+19. **The ≤59 K per-shot cut is a statement about the idler and the launch (§6; §1's temperature sentence; §6's floors sentence; §7; §9; Abstract).** The 10⁻³ cut, and the 1-bit cuts beside it, hold with a quiet launch and the decoder amplifier's idler at the lattice occupation: with a vacuum idler the 2-bit cut is 105.7 K, at one idler quantum 45.8 K, and from 1.5 idler quanta 10⁻³ is reached at no temperature the released code can evaluate (demonstrated); launcher jitter, an independent cut through a temperature-invariant noise floor (note 08-25 §3's composition), lowers it (58.1 / 52.7 / 33.8 K at S = 40 / 30 / 24 dB), and below 21.76 dB no temperature reaches 10⁻³ (in-model, the released threshold algorithm with the launch term added). §1's "wants ≤77 K", §6's vacuum-set floors, §7's "error floors are set by quantum mechanics" (the conditions now precede "from ≈15–20 K down", so that "not by temperature" again reads as the contrast), the Abstract's 2-bit figures (where the idler is glossed, at its first use, as the decoder amplifier's noise input) and the Conclusion's whole temperature price list ("read with a quiet launch and the decoder amplifier's idler at the lattice occupation (Section 6)", which replaces a condition attached to its 2-bit item alone) carry the same two conditions. The grid-tied 43.25-dB recovery figure is deliberately not presented as a requirement. Binding notes: notes/2026-08-05-idler-added-noise-and-the-nf4db-requirement.md §4 (its §9 asks for exactly this presentation) and notes/2026-08-25-what-the-20db-launch-budget-denominates.md §3. No released-chain output changed.
+
+20. **§7(ii), the parametric route, confirmed in-model with its noise clause untested (§7; cross-reference in §1).** A 2f₀-pumped released cell (in the retuned configuration of §3.1, at 353 K) is a phase-sensitive amplifier for both readings of the modulated bias — the gate (source density clamp: 8.9 dB on the N = 720 grid to 9.7 dB on N = 240 of contrast on the drain density (ratio leg) at a 5 % pump, against 3.1–3.2 dB for the same cell without its DC bias) and the drift (drain current clamp: 16.5 dB at 50 %, N = 240, large signal; a pump on the body force couples only weakly: 0.51 dB on the drain density at a 0.2 modulation, in one assessor seat's rows that the note records, not in its listings, against 6.24 dB for a 0.2 modulation of the drain current in the note's own Table P) — in a narrow admissible window (knee-level swings, where the fluid speed stays below graphene's v_F); above an onset that rises with refinement the drain route latches, and gated in the 07-31 slot it amplifies flips but re-levels no bit. Under Part I's Eq. (1) the source route would need ≈2.3× the density modulation for the same coupling (in-model estimate), and whether a contact can impose the 70–85 % drain-current modulation at which the drain route latches is open. The ideal-PSA statement is kept, scoped to this Part's standard quantum limit (the vacuum-set floor including the decoder's Caves cost) and, for a binary decision between two pure coherent states, not below the homodyne limit (new ref. [17]); for this cell the noise consequence is named, not computed, and squeezing is not run. Binding note: notes/2026-10-17-a-pumped-cell-restores-phase-in-a-narrow-window.md (§0, §1's configuration and its body-force paragraph, §2 Table P, §3, §7 row "Part II §7(ii)", §8 D-PSA-1, limitations 1, 3, 5, 11). No released-chain output changed.
+
+21. **The QG3 and QG4 model targets name their conditions (Table Q4 rows QG3 and QG4; caption).** Both targets, 3.1×10⁻³ at −1 dB and 5.6×10⁻² at −3 dB junctions, assume a quiet launch and the decoder amplifier's idler at the lattice occupation; under the coded 20-dB launch the model itself gives 1.9×10⁻² at −1 dB junctions and fails the gate (demonstrated; `launch20dB_wall_77K`). The caption states the dependence in the pattern it already uses for junctions and points to σ_rel; no reporting requirement is added to the gate. QG4's 300 K model target, 3.9×10⁻³, rests on the same quiet launch, on the decoder amplifier's idler at the lattice occupation (which QG3's also assumes; Table Q3 caption) and, by §1, on the warm DS threshold; its cell and a caption sentence now say so, the caption naming the idler condition outright, since it states only QG3's quiet-launch condition. Both ≤ 10⁻² pass thresholds are unchanged. Binding notes: notes/2026-08-25-what-the-20db-launch-budget-denominates.md §1; for QG4, notes/2026-08-05-idler-added-noise-and-the-nf4db-requirement.md §4 and notes/2026-10-15-graphene-fluid-threshold-turns-on-current-channel.md §1 item 1. No released-chain output changed.
+
+22. **Forward references to Part III, and what reproduces where (§4.1, §5, §6, §9; Data and code availability and Appendix QA; new ref. [18]).** Part III (papers/Fable-Computer-Part-III.pdf; v1.1, October 2026, not yet deposited) is cited where it extends this Part: the signed-tile cost (§4.1), the gated-slot frontier it adopts (§5), DG1's pass line (§6), and, in §9, its in-model finding that the interference core is not a route to a better dot-product lane (glossed as Part III defines a lane: its fixed datapath of cells that forms one 32-wide block sum of a dot product per slot) for a ternary language model's adder tree (five rework items of its listing open): its counters would save at most about a third of the lane's cells, and only cold, where under booking A0 (the released decision law) and with cold-cell dissipation uncertified a 77 K lane needs a cooler at about 40 % of Carnot or better to break even (39.6 % for the hybrid lane, 41.4 % all-digital), and 20 K and 4 K lanes lose even at Carnot; Part III keeps the digital lane, and the three-input counter as a test tile. The counter counts, the dot-product SNR against Part III's pass line and the reference-convention caveat are left to Part III and not repeated in §9. Data and code availability names `fable-model-ternary/` and now speaks of "the manuscripts". It and Appendix QA no longer say that run_all.py reproduces every number in the manuscript. Appendix QA describes the driver by what it does ("reproducing the package’s results and writing them to results.json"), and Data and code availability names four routes: run_all.py reproduces every quantitative claim the manuscript takes from the package's results (results.json); values obtained by calling released functions at other stated arguments, or by exact algebra on them (§5's precision at N_op = 1916 and its 4.000-bit ceiling), reproduce from those calls; numbers quoted from the promoted notes reproduce from the listings and released-code calls those notes document (in the notes or their linked discussions); and those quoted from Part III reproduce from its listings. It also states that the repository's open issues (https://github.com/ryoji-info/FableComputer/issues) are cited as open design questions, not as results (issue #140, the paper's one issue citation, in §3.2). No ERRATA row. No released-chain output changed.
+
+23. **Labels defined, and the revision's preparation disclosed (Authorship and Status Disclaimer; §3.1; §8; Table Q4 row QG1; Appendix QA).** The disclaimer defined only "in-model", as established within the released chain; it now defines it as established within a named model — the released chain or a stated extension of it — and defines "demonstrated" (executed on the released, unedited model chain at the stated convention, or read or computed directly from its source, marked "source read" or "arithmetic" as the record's notes label such results — a model result, not a measurement), "open" and "external"; "All claims are reduced-order model results" becomes "Model claims are reduced-order results". Two passages that used "demonstrated" for experiments now say what they are: §8's photoconductive launch "has been shown experimentally only at 4 K [16], an external fact", and QG1's model target now reads "≥ 99 % (phase budget 42 fs vs 1.4 fs, the ≈9-mrad RMS residual reported for an optical phase lock, expressed at 1 THz — external, an optical-frequency system, not a THz clock; Part I, Section 3.2)": 1.4 fs is Part I's own conversion of that optical residual at 1 THz, not a reported THz lock; the target and the ≥ 90 % pass threshold are unchanged. Two passages that called solver outputs "measured" now say what they are: §3.1's intracavity clause ("the released solver's own compression (−0.35 dB at a 10.05 % intracavity swing, against the −14.15 dB that the coded compression form cell.compression_dB assigns to a 10 % swing)") and Appendix QA's per-pulse deficit ("0.44 dB on the retuned solver (continuous-wave 9.661 dB against the retuned solver's 9.225 dB"). Code readings and arithmetic carry the disclaimer's label forms throughout ("demonstrated, source read"; "demonstrated, arithmetic"). The disclaimer also states, in the words Parts I and III use, that the account of the community notes promoted from 31 July through 17 October 2026 was prepared in a maintainer-operated Claude Code session in which Claude Fable 5.1 orchestrated Claude Opus 5.5 agents, the notes themselves having been produced and assessed by the project's disclosed agent pipeline. No ERRATA row. No released-chain output changed.
+
+24. **Two references appended; the deposited numbers unchanged.** By the maintainer's decision the deposited numbers [1]–[16] stay as they are (Yoshioka et al. remains [16]), and the new entries are appended in their own first-citation order, as the Part I revision does with its [45]/[46]: Takeoka and Sasaki (first cited in §4.1) is [17], cited by DOI 10.1103/PhysRevA.78.022320 and arXiv:0706.1038, and Part III (first cited in §4.1's weights paragraph) is [18]. A citation check of the revised text finds every entry cited and every bracket resolved. Before deposit, [17] needs its notes/CITATIONS.md row, which is added with this revision's repository edits. No ERRATA row.
+
+25. **§1 no longer offers averaged modes at 300 K (§1, temperature classes).** v2.0's §1 said the quantum-analog unit "works at 300 K only in its 1-bit or averaged modes", while its §5, §6 and Conclusion — since v1.7 folded note 07-16 — call 16-slot averaging a cold-class instrument: the buildable accumulate-then-decide average charges the comparator's amplifier noise once, undivided, so it buys ≈2.5× at 300 K and reaches 10⁻⁶ only below ≈45 K. The sentence now reads "only in its 1-bit mode (16-slot averaging is a cold-class instrument, Section 5)". Binding note: notes/2026-07-16-no-physical-avg16-accumulator.md (§0 item 2, §5). No released-chain output changed.
+
+**Typography.** Retained words keep their deposited apostrophes, and new text follows each paragraph's prevailing deposited form (the deposited text mixes straight and curly apostrophes paragraph by paragraph), so no edited paragraph mixes the two where the deposited one did not; Appendix QA, which the deposited text already sets mostly curly, takes "the package’s results" curly, as its retuned-solver sentence does.
+
+**Not touched.** The plasmonic-qubit no-go of §3.3 (only its provenance clause about the ladder, item 5), the Gaussian rules themselves, the passive-core rule of §4.2, the averaging analysis of v1.7, every number in Tables Q1–Q3, and every pass threshold of Table Q4.
+
+**File metadata.** The v2.0 .docx carried "python-docx" as its author file property and "generated by python-docx" as its description property; the repository copy now carries the author's name and no description. This is a file-metadata fix, with no change to the text.
+
+**Where the notes live.** At the Part's first note citation (§1, P10) the text now says that the dated notes cited by file path are the promoted notes of the community record, one Markdown file each in the repository's notes/ directory (https://github.com/ryoji-info/FableComputer/tree/main/notes), with notes/INDEX.md and each note's header as navigation. Added at the maintainer's request on 2026-10-29, once per paper.
 
 ## Part II — v2.0 (July 2026): this revision
 
@@ -304,4 +835,4 @@ This revision incorporates the July 2026 community review (Agent Lab discussions
 
 ---
 
-*Maintained alongside [papers/ERRATA.md](ERRATA.md) (which reports whether any adopted correction is not yet in the current deposit — as of the v6.0/v2.0 deposits, none is) per [notes/2026-07-26-record-audit-ten-findings.md](../notes/2026-07-26-record-audit-ten-findings.md). When a new revision is deposited, its revision notes are appended here, not to the manuscripts.*
+*Maintained alongside [papers/ERRATA.md](ERRATA.md) (which reports whether any adopted correction is not yet in the current deposit — rows I-11 … I-40 and II-6 … II-24 are outstanding until v6.1 and v2.1 are deposited) per [notes/2026-07-26-record-audit-ten-findings.md](../notes/2026-07-26-record-audit-ten-findings.md). When a new revision is prepared, its revision notes are appended here, not to the manuscripts; the deposits table above says which revisions are deposited.*

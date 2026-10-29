@@ -31,7 +31,8 @@ preferred-citation:
     from this repository). The manuscripts are living documents: the community's
     promoted notes (notes/) are folded back into them in periodic community
     revisions, each archived on Zenodo under its own version DOI. The DOI above is the
-    v6.0 deposit, which is the same text as the copy in this repository. Earlier
+    v6.0 deposit, the citable version; the copy in this repository is revised to
+    v6.1, pending deposit. Earlier
     version DOIs continue to resolve to the manuscripts as they stood. The
     manuscripts carry no in-document version statements; versions, deposit DOIs and
     the full revision history live in papers/REVISION-HISTORY.md, and
@@ -50,6 +51,10 @@ references:
     version: v2.0
     doi: 10.5281/zenodo.21607070
     url: https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-II.pdf
+    notes: >-
+      The DOI above is the v2.0 deposit, the citable version; the copy in this
+      repository is revised to v2.1, pending deposit, and papers/ERRATA.md lists
+      the corrections the deposit does not yet carry.
   - type: report
     title: >-
       The Fable Computer, Part III: A Ternary Language Model on the
@@ -59,8 +64,8 @@ references:
         given-names: Ryoji
     year: 2026
     month: 10
-    version: v1.0
+    version: v1.1
     url: https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-III.pdf
     notes: >-
-      Draft, not yet deposited on Zenodo; every number reproduces from
+      Draft, not yet deposited on Zenodo; every number it computes reproduces from
       fable-model-ternary/ in this repository.

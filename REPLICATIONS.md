@@ -19,6 +19,7 @@ self-checks passed or failed.
 | 2026-07 | R. Furui (author) | `fable-model-quantum` full run (`run_all.py --json`) | Python 3.11 | ✅ matches manuscript Part II | Baseline; `results.json` in repo |
 | 2026-07-12 | R. Furui (maintainer), via Claude Fable 5 session | `pulse_gain_dB_at_0p7_streaming` + `classical_BER_300K` baseline re-runs | Windows 11, CPython + numpy | ✅ bit-for-bit (7.7967069614868425; 3.6059121172811077e-11) | Precondition for the prediction resolutions below |
 | 2026-07-12 | R. Furui (maintainer), via Claude Fable 5 session | Pre-registered prediction resolutions: retuned-cavity gain, N=480 threshold, half-bias gain, thermal-only BER | Windows 11, CPython + numpy | ✅ **4/4 CONFIRMED** (9.2246 dB; 0.158748; 5.1291 dB; 5.494×10⁻¹²) | [notes/2026-07-12-predictions-resolved.md](notes/2026-07-12-predictions-resolved.md); runner embedded there |
+| 2026-10-24 | R. Furui (maintainer), via Claude Fable 5.1 session | `fable-model-ternary` listings `digital_lane_bonsai.py`, `ternary_qmac_design.py` and `variants.py`, stdout diffed against the committed `.out` files | Windows 11, Python 3.11.9, numpy 2.4.6 | ✅ identical to the committed macOS `.out` files apart from runtimes and the last digit of five full-precision keys (e.g. `qfa3_err_4K_p2_relaunch_c0289` 1.301918387014054e-05 vs 1.3019183870140534e-05) | Part III's companion listings; the reference `.out` files are macOS arm64 / Python 3.11.2 / numpy 2.4.6 ([fable-model-ternary/README.md](fable-model-ternary/README.md)) |
 
 ## Pre-registered keys
 
