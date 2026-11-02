@@ -95,7 +95,7 @@ interesting as a general-purpose processor, a memory technology, or a qubit host
 Start with the [Introduction](Fable-Computer-Introduction.pdf) (six pages), then
 [Part I](../papers/Fable-Computer-Part-I.pdf) for the machine,
 [Part II](../papers/Fable-Computer-Part-II.pdf) for the quantum extension and
-[Part III](../papers/Fable-Computer-Part-III.pdf) (draft, not yet deposited) for the
+[Part III](../papers/Fable-Computer-Part-III.pdf) for the
 ternary-model embedding. The
 **corrected state of knowledge lives in [`notes/`](../notes/)** — start at
 [`notes/INDEX.md`](../notes/INDEX.md), which maps every note to what it settled and

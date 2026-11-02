@@ -22,22 +22,23 @@ preferred-citation:
     - family-names: Furui
       given-names: Ryoji
   year: 2026
-  month: 7
-  version: v6.0
-  doi: 10.5281/zenodo.21606810
+  month: 10
+  version: v6.1
+  doi: 10.5281/zenodo.23758795
   url: https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-I.pdf
   notes: >-
     Not peer-reviewed; claims are in-model (reduced-order chain, reproducible
     from this repository). The manuscripts are living documents: the community's
     promoted notes (notes/) are folded back into them in periodic community
     revisions, each archived on Zenodo under its own version DOI. The DOI above is the
-    v6.0 deposit, the citable version; the copy in this repository is revised to
-    v6.1, pending deposit. Earlier
+    v6.1 deposit of 29 October 2026, the citable version, and the copy in this
+    repository is that deposited v6.1. Earlier
     version DOIs continue to resolve to the manuscripts as they stood. The
     manuscripts carry no in-document version statements; versions, deposit DOIs and
     the full revision history live in papers/REVISION-HISTORY.md, and
-    papers/ERRATA.md reports any adopted correction not yet in the current deposit. For the quantum extension, cite Part II (see
-    references).
+    papers/ERRATA.md reports any adopted correction not yet in the current deposit
+    (none outstanding since the October 2026 deposits). For the quantum extension
+    cite Part II, and for the ternary-model embedding Part III (see references).
 references:
   - type: report
     title: >-
@@ -47,14 +48,13 @@ references:
       - family-names: Furui
         given-names: Ryoji
     year: 2026
-    month: 7
-    version: v2.0
-    doi: 10.5281/zenodo.21607070
+    month: 10
+    version: v2.1
+    doi: 10.5281/zenodo.23758729
     url: https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-II.pdf
     notes: >-
-      The DOI above is the v2.0 deposit, the citable version; the copy in this
-      repository is revised to v2.1, pending deposit, and papers/ERRATA.md lists
-      the corrections the deposit does not yet carry.
+      The DOI above is the v2.1 deposit of 29 October 2026, the citable version,
+      and the copy in this repository is that deposited v2.1.
   - type: report
     title: >-
       The Fable Computer, Part III: A Ternary Language Model on the
@@ -65,7 +65,9 @@ references:
     year: 2026
     month: 10
     version: v1.1
+    doi: 10.5281/zenodo.23758679
     url: https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-III.pdf
     notes: >-
-      Draft, not yet deposited on Zenodo; every number it computes reproduces from
-      fable-model-ternary/ in this repository.
+      The DOI above is the v1.1 deposit of 29 October 2026, the citable version;
+      every number it computes reproduces from fable-model-ternary/ in this
+      repository.

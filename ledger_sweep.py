@@ -52,9 +52,9 @@ MARKERS = (
 # Whole-document artifacts: .pdf/.docx collapse to one pseudo-line, so they are
 # accounted for at file level with an explicit reason.
 DISPOSED_FILE = {
-    "papers/Fable-Computer-Part-I.pdf":  "corrected in the v6.0 revision (July 2026), deposited as 10.5281/zenodo.21606810; remaining signature words sit inside correction language",
+    "papers/Fable-Computer-Part-I.pdf":  "corrected in the v6.0 revision (July 2026); the repository copy is v6.1 (October 2026), deposited as 10.5281/zenodo.23758795; remaining signature words sit inside correction language",
     "papers/Fable-Computer-Part-I.docx": "corrected in the v6.0 revision; docx twin",
-    "papers/Fable-Computer-Part-II.pdf": "corrected in the v2.0 revision (July 2026), deposited as 10.5281/zenodo.21607070; remaining signature words sit inside correction language",
+    "papers/Fable-Computer-Part-II.pdf": "corrected in the v2.0 revision (July 2026); the repository copy is v2.1 (October 2026), deposited as 10.5281/zenodo.23758729; remaining signature words sit inside correction language",
     "papers/Fable-Computer-Part-II.docx": "corrected in the v2.0 revision; docx twin",
     "docs/Fable-Computer-Introduction.pdf": "corrected 2026-07-26 (rev. 4/5 notes); signatures remain in the historical rev. 3 note",
     "docs/Fable-Computer-Introduction.docx": "corrected 2026-07-26 (rev. 4 note); ditto",
