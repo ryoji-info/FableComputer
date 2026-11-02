@@ -79,13 +79,13 @@ CLEAN_LINE = (
     ("fable-model-chain/README.md", "read-out electronics and any charge-memory",
      "clean: names the charge-memory layer's refresh cost, not the retired avg16 reading"),
     ("papers/REVISION-HISTORY.md", "per-slot peak in a settled 0.25-THz train",
-     "clean: the Part III v1.1 revision note (item 5) labels +8 dB as the settled-train per-slot-peak calibration figure, as audit row I-5 does, beside the gated 67-71 GHz figures; not a 4-ps logic claim"),
-    ("papers/REVISION-HISTORY.md", "per-slot peak of the intracavity velocity",
-     "clean: the Part III v1.1 revision note (item 7) names the released '0'-slot floor observable, cav_u's per-slot peak near the source end (note 08-02), not the retired intracavity knee reading"),
+     "clean: the Part III v1.1 block records the shipped train's per-slot peak beside the gated correction it folds (notes 2026-07-31, 2026-08-01)"),
+    ("papers/REVISION-HISTORY.md", "per-slot peak of the intracavity velocity, near the source end",
+     "clean: the Part III v1.1 block names the released floor's plane as note 2026-08-02 corrects it"),
 )
 
 EXEMPT_DIRS = ("notes",)
-SKIP_DIRS = (".git", "__pycache__", "figures", ".pytest_cache", "node_modules")
+SKIP_DIRS = (".git", ".claude", "__pycache__", "figures", ".pytest_cache", "node_modules")
 SKIP_FILES = ("ledger_listing.py", "ledger_sweep.py")
 EXT = (".md", ".py", ".cff", ".json", ".yml", ".yaml", ".txt", ".pdf", ".docx")
 
