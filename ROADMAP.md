@@ -99,7 +99,7 @@ itself) is an open design question:
 ### WP4 — The bench experiment (`open`, needs lab partners)
 
 Part I, Section 10 specifies a five-gate pre-registered pass/fail protocol
-(G1–G5); Part II adds its quantum gates (QG1–QG5); Part III (draft) adds
+(G1–G5); Part II adds its quantum gates (QG1–QG5); Part III adds
 DG1–DG5 and TG1–TG5, with G1, L0 and QG1–QG3 as prerequisites (its Table T10).
 A promoted note proposes re-issuing G1 as G1a (existence) and G1b (a knee
 report) with every convention pinned; adoption is the maintainer's, and Part I's
@@ -129,7 +129,7 @@ two room-temperature plasmonic gain cells.
   (2026-08-01). Part I §10 already assigns those tests to WP1/WP4; the
   remaining work on this bullet is finding the lab.
 
-### WP6 — Part III scoping (`active` — first manuscript drafted, October 2026; v1.1, not yet deposited)
+### WP6 — Part III scoping (`active` — first manuscript October 2026; v1.1 deposited 29 October 2026, [10.5281/zenodo.23758679](https://doi.org/10.5281/zenodo.23758679))
 
 Part III is the architecture chapter. A first manuscript — *A Ternary Language Model on
 the Regenerative Graphene-Plasmon Fabric* (papers/, with `fable-model-ternary/`) — embeds
