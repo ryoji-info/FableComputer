@@ -1,0 +1,77 @@
+name: Agent Lab — assess a paper against the record (synthesis + attack)
+
+# Dispatch this from the Actions UI. Claude Code reads a run bundle under
+# agents/runs/<run_dir>/ — prepared by the maintainer's local Claude Code
+# session: the primary-source items gathered per topic, the paper's claims,
+# the Fable context, the prompts and a draft assessment — then runs one
+# synthesis subagent and three attack subagents (physics, papers,
+# engineering), finalizes the assessment into REPORT.md and opens a pull
+# request. The per-run instructions are agents/prompts/review-assessment.md.
+#
+# Like agents-claude-run.yml it runs on the maintainer's Claude subscription
+# (CLAUDE_CODE_OAUTH_TOKEN repository secret, created with `claude setup-token`).
+# Nothing runs on a schedule; the agents never push to main; a human merges.
+# Models: default Claude Opus 5.5 for the run and every subagent (the
+# maintainer's standing choice for assessment seats); a fallback, if it fires,
+# is disclosed in REPORT.md and in the pull request.
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_dir:
+        description: "Run bundle directory name under agents/runs/"
+        required: true
+        default: "2026-11-03-review-cui-2021"
+      stage:
+        description: "Stages to run (earlier outputs must already exist in the bundle for the shorter options)"
+        required: false
+        default: "synthesize-attack-finalize"
+        type: choice
+        options: [synthesize-attack-finalize, attack-finalize, finalize]
+      model:
+        description: "Model for the Claude Code run and its subagents"
+        required: false
+        default: "claude-opus-5-5"
+        type: choice
+        options: [claude-opus-5-5, claude-fable-5-1, claude-sonnet-5-5]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  actions: read
+
+concurrency:
+  group: review-assessment-${{ github.event.inputs.run_dir }}
+  cancel-in-progress: false
+
+jobs:
+  assess:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pypdf python-docx requests
+      - name: Run the review assessment with Claude Code
+        uses: anthropics/claude-code-action@v1
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REVIEW_RUN_DIR: ${{ github.event.inputs.run_dir }}
+          REVIEW_STAGE: ${{ github.event.inputs.stage }}
+          REVIEW_MODEL: ${{ github.event.inputs.model }}
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          prompt: |
+            Run the Fable Computer Agent Lab pipeline "review-assessment".
+            Run bundle: agents/runs/${{ github.event.inputs.run_dir }}/
+            Stage: "${{ github.event.inputs.stage }}"
+            Model for every subagent: ${{ github.event.inputs.model }}
+            GitHub run id: ${{ github.run_id }}
+            Read agents/prompts/review-assessment.md in this repository and follow it exactly.
+          claude_args: "--model ${{ github.event.inputs.model || 'claude-opus-5-5' }} --fallback-model claude-sonnet-5-5 --max-turns 400 --allowedTools Bash,Read,Write,Edit,Grep,Glob,WebFetch,WebSearch,Agent"
