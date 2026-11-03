@@ -1,0 +1,292 @@
+{
+ "ITEM_SCHEMA": {
+  "type": "object",
+  "properties": {
+   "items": {
+    "type": "array",
+    "items": {
+     "type": "object",
+     "properties": {
+      "item": {
+       "type": "string"
+      },
+      "value": {
+       "type": "string"
+      },
+      "unit": {
+       "type": "string"
+      },
+      "source_title": {
+       "type": "string"
+      },
+      "source_url": {
+       "type": "string"
+      },
+      "date": {
+       "type": "string"
+      },
+      "confidence": {
+       "type": "string",
+       "enum": [
+        "high",
+        "medium",
+        "low"
+       ]
+      },
+      "note": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "item",
+      "value",
+      "source_title",
+      "source_url",
+      "confidence"
+     ]
+    }
+   },
+   "mapping": {
+    "type": "array",
+    "items": {
+     "type": "object",
+     "properties": {
+      "fable_problem": {
+       "type": "string"
+      },
+      "bearing": {
+       "type": "string",
+       "enum": [
+        "improves",
+        "already_in_record",
+        "not_applicable",
+        "alternative_route",
+        "unknown"
+       ]
+      },
+      "reason": {
+       "type": "string"
+      },
+      "what_must_be_true": {
+       "type": "string"
+      },
+      "quantified_effect": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "fable_problem",
+      "bearing",
+      "reason"
+     ]
+    }
+   }
+  },
+  "required": [
+   "items",
+   "mapping"
+  ]
+ },
+ "OUTLINE_SCHEMA": {
+  "type": "object",
+  "properties": {
+   "full_text_obtained": {
+    "type": "boolean"
+   },
+   "access_notes": {
+    "type": "string"
+   },
+   "outline": {
+    "type": "array",
+    "items": {
+     "type": "object",
+     "properties": {
+      "section": {
+       "type": "string"
+      },
+      "reference_range": {
+       "type": "string"
+      },
+      "content_summary": {
+       "type": "string"
+      },
+      "evidence": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "section",
+      "content_summary",
+      "evidence"
+     ]
+    }
+   },
+   "review_claims": {
+    "type": "array",
+    "items": {
+     "type": "object",
+     "properties": {
+      "claim": {
+       "type": "string"
+      },
+      "where": {
+       "type": "string"
+      },
+      "confidence": {
+       "type": "string",
+       "enum": [
+        "high",
+        "medium",
+        "low"
+       ]
+      }
+     },
+     "required": [
+      "claim",
+      "where",
+      "confidence"
+     ]
+    }
+   }
+  },
+  "required": [
+   "full_text_obtained",
+   "access_notes",
+   "outline",
+   "review_claims"
+  ]
+ },
+ "SYNTH_SCHEMA": {
+  "type": "object",
+  "properties": {
+   "candidates": {
+    "type": "array",
+    "items": {
+     "type": "object",
+     "properties": {
+      "id": {
+       "type": "string"
+      },
+      "claim": {
+       "type": "string"
+      },
+      "bearing": {
+       "type": "string",
+       "enum": [
+        "improves",
+        "already_in_record",
+        "not_applicable",
+        "alternative_route",
+        "unknown"
+       ]
+      },
+      "fable_problem": {
+       "type": "string"
+      },
+      "quantified_effect": {
+       "type": "string"
+      },
+      "conditions": {
+       "type": "string"
+      },
+      "from_review": {
+       "type": "boolean"
+      },
+      "sources": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      }
+     },
+     "required": [
+      "id",
+      "claim",
+      "bearing",
+      "fable_problem",
+      "quantified_effect",
+      "conditions",
+      "from_review",
+      "sources"
+     ]
+    }
+   },
+   "dropped": {
+    "type": "array",
+    "items": {
+     "type": "object",
+     "properties": {
+      "claim": {
+       "type": "string"
+      },
+      "why": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "claim",
+      "why"
+     ]
+    }
+   }
+  },
+  "required": [
+   "candidates",
+   "dropped"
+  ]
+ },
+ "VERDICT_SCHEMA": {
+  "type": "object",
+  "properties": {
+   "verdicts": {
+    "type": "array",
+    "items": {
+     "type": "object",
+     "properties": {
+      "candidate_id": {
+       "type": "string"
+      },
+      "claim": {
+       "type": "string"
+      },
+      "verdict": {
+       "type": "string",
+       "enum": [
+        "confirm",
+        "qualify",
+        "refute"
+       ]
+      },
+      "reason": {
+       "type": "string"
+      },
+      "corrected_statement": {
+       "type": "string"
+      },
+      "sources": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "candidate_id",
+      "claim",
+      "verdict",
+      "reason",
+      "corrected_statement",
+      "sources"
+     ]
+    }
+   },
+   "missing": {
+    "type": "array",
+    "items": {
+     "type": "string"
+    }
+   }
+  },
+  "required": [
+   "verdicts",
+   "missing"
+  ]
+ }
+}
