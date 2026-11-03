@@ -21,7 +21,7 @@ What the exercise did produce is a set of record findings from the primary works
 | 1.4 Observations | Fei 2012 and Chen 2012 nano-imaging (mid-IR, λp ≈ 200 nm, gate-tunable) | already in Part I's reference base |
 | 2.1 Basic parameters | Kubo conductivity with τ "set as 10⁻¹³ s"; TE and TM sheet modes; unscreened λ_sp formula | the unscreened branch; τ default 10× below Fable's best case |
 | 2.2 Nanoribbons, PIT | GNR resonance formula; Ju 2011 THz ribbons; plasmon-induced-transparency metamaterial (simulation) | localized resonances, not a propagating bit |
-| 2.3 Bilayer | Domain-wall plasmon reflection (Jiang 2016, mid-IR expt); gapped-BLG domain-wall plasmons with ps lifetime (theory); resonant gain under population inversion (theory) | mid-IR theory; see section 4 |
+| 2.3 Bilayer | Domain-wall plasmon reflection (Jiang 2016, mid-IR expt); gapped-BLG domain-wall plasmons with ps lifetime (Hasdeo & Song 2017, theory); resonant gain under population inversion (Low, Chen & Basov 2018, theory, ≥ ~48 THz); the review swaps its refs [97]/[98] | mid-IR theory; see section 4 |
 | 2.4 Twisted bilayer | Plasmon classes; s-SNOM: wavelength up and damping down with twist angle (Hu 2017, mid-IR); generation efficiency vs angle (theory) | see section 4 |
 | 2.5–2.6 Multilayer, arrays | ABA trilayer optical/acoustic modes; BLG resonance strongest (Emani 2015); multilayer "supermodes" whose loss falls with layer count (simulations, mid-IR) | see section 4 |
 | 2.7 vdW heterostructures | Ni 2018 (cryogenic, 1.6 ps lifetime, loss from the encapsulant); Dai 2015 / Kumar 2015 plasmon–phonon hybrids (hBN Reststrahlen) | Ni 2018 is Part I [42]; hBN phonons play no role at 1 THz |
@@ -31,7 +31,7 @@ What the exercise did produce is a set of record findings from the primary works
 | 3.4 Lasers | ZnO–graphene superlattice Raman nanolaser; graphene nanospaser with quantum-well gain (proposal, mid-IR); graphene-tuned THz quantum cascade laser (Chakraborty 2016, cryogenic) | alternative gain routes, none at 1 THz / 300 K (section 4) |
 | 4 Outlook | Generic | — |
 
-Overlap with Fable's own reference base: the review's loss and confinement works (Koppens 2011, Jablan 2009, Fei/Chen 2012, Woessner 2015, Ni 2018, Iranzo 2018, Ju 2011) are already cited by Parts I–III. The review does not cite Alonso-González 2017, Lundeberg 2017 (only an editor's summary of it), Epstein 2020 or Principi 2011, i.e. none of the acoustic-mode literature Fable rests on.
+Overlap with Fable's own reference base: of the review's 198 references only Woessner 2015 (Part I [41]) and Ni 2018 (Part I [42], Part II [14]) are cited by Parts I–III; Lundeberg 2017 (Part I [40]) appears in the review only through an editor's summary, and Ju 2011 only in ERRATA I-41. The review does not cite Alonso-González 2017, Lundeberg 2017 itself, Epstein 2020 or Principi 2011, i.e. none of the acoustic-mode literature Fable rests on; conversely Koppens 2011, Jablan 2009, Fei/Chen 2012 and Iranzo 2018 are in the review but not in the papers.
 
 ## 2. The review's mobility figure against Part I's lifetime row (導出)
 
