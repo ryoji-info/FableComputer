@@ -76,6 +76,10 @@ Write `REPORT.md` in the run bundle: the finished assessment. Start from `inputs
 
 Also write `outputs/run_log.md` (what ran, in what order, models, turn counts if known, failures) and `outputs/pr_body.md` (the pull-request body: the bottom line in at most ten lines, what the Action did, the models, a link to `REPORT.md`, and the fallback disclosure if any).
 
+### CI checks before committing
+
+The repository's CI (`.github/workflows/ci.yml`) runs `python -m pytest tests/ -q`, `python ledger_listing.py` and `python ledger_sweep.py` on every pull request, and the sweep fails on any bare occurrence of a retired-claim signature in tracked `.md`/`.json`/`.py` files, your outputs included. Run all three from the repository root before committing. If the sweep reports an undisposed hit inside the run bundle, add a `CLEAN_LINE` entry to `ledger_sweep.py` for that file and a distinctive substring of the line, with a reason that says what the line actually asserts (this is the one edit outside the run bundle you may make, and the pull-request body must mention it); if the hit is a genuine bare assertion of a retired claim, fix the text instead.
+
 ### Commit and pull request (every stage that produced files)
 
 ```bash

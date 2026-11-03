@@ -82,6 +82,8 @@ CLEAN_LINE = (
      "clean: the Part III v1.1 block records the shipped train's per-slot peak beside the gated correction it folds (notes 2026-07-31, 2026-08-01)"),
     ("papers/REVISION-HISTORY.md", "per-slot peak of the intracavity velocity, near the source end",
      "clean: the Part III v1.1 block names the released floor's plane as note 2026-08-02 corrects it"),
+    ("agents/runs/2026-11-03-review-cui-2021/inputs/gather_results.json", "gate-charge memory of Part I",
+     "clean: an agent's note on the gate-charge retention floor (Part I 6.4, hBN tunnelling), not the retired avg16 reading"),
 )
 
 EXEMPT_DIRS = ("notes",)
