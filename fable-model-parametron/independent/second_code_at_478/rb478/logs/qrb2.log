@@ -1,0 +1,9 @@
+[    0.0 s 17:45:09] queue: starting rbb_n100r
+[  316.9 s 17:50:26] queue: finished rbb_n100r exit code 0 | GPU 0 %, 487 MiB, 18 C, 11.52 W
+[  316.9 s 17:50:26] queue: starting rbb_st100r
+[  317.3 s 17:50:26] queue: finished rbb_st100r exit code 0 | GPU 0 %, 487 MiB, 18 C, 11.48 W
+[  317.3 s 17:50:26] queue: starting rbb_n16r
+[  638.6 s 17:55:48] queue: finished rbb_n16r exit code 0 | GPU 0 %, 487 MiB, 18 C, 11.70 W
+[  638.6 s 17:55:48] queue: starting rbb_st16r
+[  639.0 s 17:55:48] queue: finished rbb_st16r exit code 0 | GPU 0 %, 487 MiB, 18 C, 11.66 W
+[  639.0 s 17:55:48] queue done

@@ -1,0 +1,43 @@
+r5: the change of units, K = 1.075 / 0.225 = 4.777778
+
+1. Cell table: 1-THz-class cell (the model's units) and 225-GHz circuit
+   quantity                                           unit     1-THz class        225 GHz
+   diode capacitance C_d                              fF           0.52326            2.5
+   diode delay tau_d                                  ps           0.02093            0.1
+   contact rho                                        ohm               12             12
+   pad capacitor C_p                                  fF            2.8256           13.5
+   tank per half (C_d + C_p)                          fF            3.3488             16
+   odd-mode inductance per half L_odd                 pH            5.5037         26.295
+   half winding L_h                                   pH            4.2336         20.227
+   coupling of the half windings k                                     0.3            0.3
+   damping resistor R_L (in series with each half)    ohm           9.2936         9.2936
+   supply resistor R_b                                ohm              2.5            2.5
+   supply node capacitance C_b                        fF                 1         4.7778
+   coupler R_k                                        ohm                1              1
+   stub capacitance (4 sections, in all)              fF           0.13333        0.63704
+   stub inductance (in all)                           pH            1.3333         6.3704
+   link: mutual inductance, 6 % of L_odd              pH           0.33022         1.5777
+   carrier                                            GHz             1076         225.21
+   pump (twice the carrier)                           GHz             2152         450.42
+   clock period                                       ps              14.5         69.278
+   clock edge (raised cosine)                         ps                 3         14.333
+   on-time (0.75 of the period)                       ps            10.875         51.958
+   time step of the integrator                        ps            0.0025       0.011944
+   reading window                                     ps                 1         4.7778
+   supply level                                       V               0.94           0.94
+   pump level (25 % of the supply)                    mV               235            235
+   drive current of an input pair                     mA               0.4            0.4
+   diode peak current (a quarter of the full device)  mA            6.3481         6.3481
+   model noise factor 'scale' for this circuit at 353 K                    1         0.2093
+   The noise factor: a capacitance K times larger has K times less kT/C noise power, and the shot-noise
+   bandwidth is K times smaller, so the 225-GHz circuit has 1/K = 0.2093 of the noise power of the 1-THz-class cell.
+
+2. Two linked pairs, 30 model ps (143.3 ps in the 225-GHz circuit), 12000 steps, noise of the 225-GHz circuit in both
+   step matrices: largest relative difference of P between the two units 2.26e-16, of Q against Q of the 225-GHz run divided by K 5.20e-16
+   pair 0: largest odd signal 303.3 mV; largest difference between the two traces 3.358e-11 mV (1.1e-13 of the signal)
+   pair 1: largest odd signal 246.4 mV; largest difference between the two traces 3.159e-11 mV (1.3e-13 of the signal)
+   sample  1000, t =  2.502 model ps =  11.956 ps: pair 0 +0.005032504 V / +0.005032504 V, pair 1 +0.005880025 V / +0.005880025 V
+   sample  4000, t = 10.002 model ps =  47.790 ps: pair 0 +0.062229149 V / +0.062229149 V, pair 1 -0.045076201 V / -0.045076201 V
+   sample  8000, t = 20.003 model ps =  95.568 ps: pair 0 -0.220365437 V / -0.220365437 V, pair 1 +0.208481213 V / +0.208481213 V
+   sample 11999, t = 30.000 model ps = 143.333 ps: pair 0 -0.083149651 V / -0.083149651 V, pair 1 +0.074864707 V / +0.074864707 V
+   (each pair of numbers: 1-THz-class units / 225-GHz units at K times the time)

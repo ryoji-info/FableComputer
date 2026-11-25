@@ -1,0 +1,21 @@
+r7: tables of results rebuilt from runs/ (49 batches in runs/MANIFEST.json)
+   T-1. Rows of sixteen at the operating point                                                             5 lines
+   T-2. Rows of sixteen: single tolerances and spreads                                                    99 lines
+   T-3. Rows of sixteen with a 3 % spread of the inductance: supply levels at which the row holds          6 lines
+   T-4. Rows of sixteen at other carriers, with other diodes and contacts, and under other assumptions:  124 lines
+   T-5. Adders without state                                                                             208 lines
+   T-6. Layouts with state: the serial adder and the accumulator                                         199 lines
+   T-7. Rows of 92 pairs                                                                                   5 lines
+   T-8. Spread budget: the four-bit adder with the full set of nine spreads, or a fraction of it           8 lines
+   Batches not in these tables                                                                             7 entries
+      g29a: copy of batch g29 (same result index and arrays, made by a comparison script under another name); nothing stored
+      g29b (row, 16 pairs): results stored, but no analysis file for these tables (the checks of time step, stub grid and precision were compared by a separ
+      g29c (row, 16 pairs): results stored, but no analysis file for these tables (the checks of time step, stub grid and precision were compared by a separ
+      g30a: copy of batch g30 (same result index and arrays, made by a comparison script under another name); nothing stored
+      g30b (serial adder, 20 pairs): results stored, but no analysis file for these tables (the checks of time step, stub grid and precision were compared b
+      g38a (serial adder, 20 pairs): results stored, but no analysis file for these tables (the checks of time step, stub grid and precision were compared b
+      g38b (serial adder, 20 pairs): results stored, but no analysis file for these tables (the checks of time step, stub grid and precision were compared b
+   Lines left out because they have link capacitors (cc > 0): g52: 1.075 THz: full set x 1, with the capacitors, 256 runs.
+tables: 8; characters: 91171; lines: 726
+SHA-256 of the text (UTF-8, line ends LF): f883c4a9 2c0a0194 d1b19c95 169b40cc 5f8d408c 11d70219 fc3d2979 dddedcaf
+tables.md as shipped: equal

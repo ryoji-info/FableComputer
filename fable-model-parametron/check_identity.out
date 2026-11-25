@@ -1,0 +1,31 @@
+id29 (16 pairs, 2 runs):
+   L    float32  (2, 8, 16)   bitwise equal: yes
+   LE   float32  (2, 8, 16)   bitwise equal: yes
+   LL   float32  (2, 8, 16)   bitwise equal: yes
+   P    float32  (2,)         bitwise equal: yes
+   PE   float32  (2, 8, 16)   bitwise equal: yes
+   PH   float32  (2, 8, 16)   bitwise equal: yes
+   PH2  float32  (2, 8, 16)   bitwise equal: yes
+   ref  bool     (2,)         bitwise equal: yes
+   tags int64    (2,)         bitwise equal: yes
+id30 (20 pairs, 2 runs):
+   L    float32  (2, 32, 20)  bitwise equal: yes
+   LE   float32  (2, 32, 20)  bitwise equal: yes
+   LL   float32  (2, 32, 20)  bitwise equal: yes
+   P    float32  (2,)         bitwise equal: yes
+   PE   float32  (2, 32, 20)  bitwise equal: yes
+   PH   float32  (2, 32, 20)  bitwise equal: yes
+   PH2  float32  (2, 32, 20)  bitwise equal: yes
+   ref  bool     (2,)         bitwise equal: yes
+   tags int64    (2,)         bitwise equal: yes
+id29n (16 pairs, 3 runs):
+   L    float32  (3, 8, 16)   bitwise equal: yes
+   LE   float32  (3, 8, 16)   bitwise equal: yes
+   LL   float32  (3, 8, 16)   bitwise equal: yes
+   P    float32  (3,)         bitwise equal: yes
+   PE   float32  (3, 8, 16)   bitwise equal: yes
+   PH   float32  (3, 8, 16)   bitwise equal: yes
+   PH2  float32  (3, 8, 16)   bitwise equal: yes
+   ref  bool     (3,)         bitwise equal: yes
+   tags int64    (3,)         bitwise equal: yes
+every array bitwise equal: yes

@@ -1,0 +1,201 @@
+A. HOW IT WAS COMPUTED
+
+Source: only BLIND_SPEC_T1.md. All code is my own (numpy, Python 3.11), in rebuild_t1x.
+
+Internal units: V, mA, kohm, fF, nH, ps. In these units C dv/dt is in mA, L di/dt in V and R i in V. The spec's ohm and pH values are divided by 1000.
+
+Unknowns per pair (11): supply node vS; junction voltages vj+ and vj-; conduction currents ix+ and ix-; pad voltages vP+ and vP-; stub voltages vT+ and vT-; winding currents iL+ and iL- (pad to tap).
+
+Equations per pair, for each half h:
+- i_rho,h = (vS - vP,h - vj,h)/rho + n_rho,h
+- Cb dvS/dt = (v_clk - vS)/Rb + n_Rb - i_rho,+ - i_rho,-
+- Cd dvj,h/dt = i_rho,h - ix,h - n_shot,h
+- dix,h/dt = (0.25 I_full(vj,h) - ix,h)/tau_d
+- i_k,h = (vP,h - vT,h)/Rk + n_Rk,h
+- Cp dvP,h/dt = i_rho,h - iL,h - i_k,h
+- Cs dvT,h/dt = i_k,h + i_drive,h
+- Inductors, all windings of all pairs together: L di/dt = vP - RL i - e_RL. L is 2N by 2N. Within a pair it has L_h on the diagonal and -k L_h between the halves, with L_h = L_odd/1.3. A link adds +-0.5 M between windings of the two pairs, as in section 3. I invert L once per run (Gamma = L^-1).
+
+M with spread is my choice: M = -0.06 sqrt(L_odd,a L_odd,b), which keeps the coupling coefficient fixed. A reversed link would have the opposite sign, but none was used.
+
+Integrator: BDF2 (second order, L-stable), linearised. The circuit has time constants down to 0.00015 ps (Rk Cs), so an implicit method is needed. Each step takes one Newton step from the predictor 2x_n - x_(n-1), using the diode slope there. Each pair's 11 by 11 system is solved implicitly. The diode slope enters as a rank-2 Woodbury update of a precomputed inverse. The inter-pair inductive coupling (off-diagonal blocks of Gamma) is taken explicitly at the predictor.
+
+Time step: h = T_carrier/128 = 0.007261 ps for all runs. Halving check (h/2, no noise, V_s 0.94, p 0.25):
+- Layout (c): largest phase change over all pairs and slots 0.15 deg; largest level change 0.46 mV (0.16 %).
+- Layout (a): 0.12 deg and 0.38 mV.
+- Lone pumped pair: 0.08 deg and 0.44 mV.
+
+Noise (section 6), T = 353 K, factor f, step h in seconds. Each source is redrawn every step as an independent Gaussian and held for that step. Standard deviations:
+- Resistor as a parallel current source (Rb, each rho, each Rk): sigma_I = sqrt(2 kB T f/(R h)). Units: A, with R in ohm.
+- RL as a series voltage source in each winding branch: sigma_V = sqrt(2 kB T f RL/h), in V.
+- Shot noise in parallel with each junction's conduction: sigma_I = sqrt(q |ix| f/h), in A, with ix taken at the predictor.
+These follow from one-sided densities 4kT/R, 4kTR and 2qI. Two-sided density S/2 sampled at step h gives variance S/(2h). At f = 1 and h = 7.26 fs this gives 0.73 mA (Rb), 0.34 mA (rho), 1.16 mA (Rk), 3.5 mV (RL), and 0.36 mA of shot noise at 6 mA.
+
+Clock and window: exactly as in section 2. Before each pair's first rise (t - dT/4 < -1.5 ps) the supply is held at 0. The drive is +-0.4 mA cos(2 pi f_d t) for the slot's bit, on from sT - T/4 to sT + 3T/4 for the depth-0 pairs. It switches off at the centre of the fall.
+
+Start: all unknowns 0 at t = -2.0 ps (layouts a and c). Task 1 starts from the DC operating point at V_s (bisection on the load line), plus an odd-mode seed of 1 mV. The seed sets the pad and stub odd voltage to 1 mV cos(phi) and the odd winding current to 1 mV sin(phi)/(omega L_odd).
+
+Reading: v_odd = (vT+ - vT-)/2 is stored every 4 steps (32 samples per carrier period). The read window starts 0.25 T + 0.5 ps = 4.125 ps after the pair's slot start and is 2 carrier periods (1.859 ps) long. The phasor is Z = (2/n) sum v_odd exp(-i 2 pi f_d t), with absolute time t. Level = |Z| in mV, the peak amplitude of the carrier component. Phase = arg Z.
+
+Sign convention: the axis of depth d is theta_0 + 135 deg times d. This follows from the pump step of 3/4 turn per depth, which gives 3/8 turn in the carrier, and the measured axes agree. theta_0 comes from the doubled-angle mean over all pairs and slots of the noiseless run. Its orientation is set by the driven pairs: a pair driven with a 1 is on the + end. Measured theta_0 is 3 to 14 deg, near the drive phase.
+
+"Meant" values come from evaluating the netlist (majority or copy). Passing from depth 3 into depth 0 of the next slot flips the label, because 4 x 135 deg = 540 deg. With that, Ct is the carry and St = maj(Mc, Gt, Kt) gives the sum bit. I also checked the other possible convention (-45 deg per depth); it is reported below.
+
+Wrong decision: phase more than 90 deg from the phase in the run without noise and without spread at the same V_s and p, counted over all pairs and slots 1 to 31. "Stream not sum": St signs on the reference axis differ from (a+b) mod 2^32 in any of slots 1 to 31.
+
+Spread: fixed matrices of standard normal g. Seed 20261123 for (c), 20261124 for (a). Draw j uses row j at every point of every scan. Noise streams: seed 11 (tasks 3 and 4), 31 (task 5), 21 and 22 (task 6). The same seed is used at every point of a scan.
+
+B. RESULTS
+
+Task 1(a). Lone pair, p = 0, seeded with 1 mV, run for 400 ps. A small-signal check uses the eigenvalues of the Jacobian at the DC point.
+
+V_s range 0.90 to 1.20 V: it oscillates by itself from 0.97 to 1.14 V, both included. At 0.96 and 1.15 V the seed decays slowly (linear growth rates -0.037 and -0.039 per ps). Below 0.96 and above 1.15 V it decays fast. The linear odd-mode growth rate turns positive between 0.96 and 0.97 V, and again between 1.14 and 1.15 V. So the time-domain and small-signal boundaries agree.
+
+V_s / frequency (THz) / odd-mode level at 400 ps (mV):
+0.97 / 1.0523 / 160
+0.98 / 1.0556 / 188
+1.00 / 1.0621 / 223
+1.03 / 1.0686 / 256
+1.05 / 1.0712 / 271
+1.06 / 1.0720 / 278
+1.10 / 1.0732 / 293
+1.12 / 1.0724 / 294
+1.14 / 1.0706 / 290
+
+Middle of the range (1.05 to 1.06 V): about 1.072 THz and 271 to 278 mV peak.
+
+Task 1(b). Pumped lone pair, 12 seed phases, run for 300 ps. Settle time = when the per-period phasor stays within 10 % of its final value; I give the median and the maximum over the seeds. Where the pair does not oscillate, the seed decays and no frequency exists.
+
+p = 0.10:
+- V_s 0.86 to 0.92: no oscillation (decays).
+- 0.94: locked at 1.0760 THz, 146 mV, 2 phases (5.8 and -174.2 deg, 6 seeds each), settle 26 / 33 ps.
+- 0.96: 1.0760 THz, 197 mV, 2 phases (3.5 and -176.5 deg, 6 each), settle 12 / 16 ps.
+- 0.98: 1.0760 THz, 227 mV, 2 phases (3.6 and -176.4 deg), settle 11 / 14 ps.
+- 1.00: 1.0760 THz, 250 mV, 2 phases (4.4 and -175.6 deg), settle 16 / 20 ps.
+
+p = 0.25:
+- 0.86: no oscillation.
+- 0.88: 1.0760 THz, 65 mV, 2 phases (16.6 and -163.4 deg, 6 each), settle 68 / 100 ps.
+- 0.90: 131 mV, 2 phases (14.5 and -165.5 deg), settle 20 / 28 ps.
+- 0.92: 169 mV, 2 phases (13.7 and -166.3 deg), settle 15 / 20 ps.
+- 0.94: 196 mV, 2 phases (13.3 and -166.7 deg), settle 13 / 17 ps.
+- 0.96: 219 mV, 2 phases (13.2 and -166.8 deg), settle 12.5 / 16 ps.
+- 0.98: 237 mV, 2 phases, settle 13.5 / 16 ps.
+- 1.00: 252 mV, 2 phases, settle 15 / 18 ps.
+
+Every oscillating case is locked at exactly f_d. The two phases are 180 deg apart, with 6 seeds on each. Each case had all 12 seeds stable to 5 deg over the last 50 ps.
+
+Task 2. Layout (c), no noise, no spread, p = 0.25. Each line: V_s / every pair right in every slot / St stream equals the sum / lowest level (pair, slot) / mean levels over slots in mV. The t and c rails came out exactly equal; one value is given per rail pair.
+- 0.880 / yes / yes / 32.5 mV (St, 11) / A,B 167; C 61; M 93; G 89; K 64; S 44; X2 74; X3 65; F 50
+- 0.895 / yes / yes / 100.0 (St, 1) / 191; 127; 150; 144; 134; 111; 136; 131; 129
+- 0.910 / yes / yes / 144.8 (St, 11) / 212; 167; 187; 179; 175; 154; 174; 171; 174
+- 0.940 / yes / yes / 201.6 (St, 11) / 247; 219; 237; 227; 228; 209; 226; 225; 230
+- 0.970 / yes / yes / 237.9 (St, 11) / 274; 254; 271; 261; 264; 245; 262; 261; 267
+- 0.985 / yes / yes / 251.2 (St, 11) / 286; 268; 284; 274; 278; 258; 276; 276; 282
+- 1.000 / yes / yes / 261.3 (St, 11) / 296; 280; 293; 284; 289; 267; 286; 287; 294
+- 1.015 / yes / yes / 263.2 (St, 27) / 304; 289; 300; 291; 297; 271; 293; 296; 302
+
+Under the other sign convention (-45 deg per depth), no run is right: the odd depths come out inverted.
+
+Task 3. Layout (c), f = 1, 3 % spread, 16 draws per level, 9,920 decisions per level. Each line: V_s / wrong decisions / runs with any wrong / runs with St not the sum / pairs that went wrong (count).
+- 0.880 / 724 / 16 / 13 / St 74, Ft 73, Fc 72, Sc 66, Ct 44, Cc 44, X3c 44, Kt 41, Gt 37, X3t 37, Kc 36, X2c 36, Mc 31, Gc 31, Mt 29, X2t 29. Driven pairs: 0.
+- 0.895 / 0 / 0 / 0 / none (lowest level 48 mV)
+- 0.910 / 0 / 0 / 0 / none (108 mV)
+- 0.940 / 0 / 0 / 0 / none (160 mV)
+- 0.970 / 0 / 0 / 0 / none (191 mV)
+- 0.985 / 0 / 0 / 0 / none (201 mV)
+- 1.000 / 0 / 0 / 0 / none (208 mV)
+- 1.015 / 0 / 0 / 0 / none (122 mV)
+
+Extra check at 0.880, separating the causes. Spread only, no noise: 114 wrong, 8 runs, 7 streams not sum. Noise only, no spread: 245 wrong, 16 runs, 12 streams not sum.
+
+Task 4. Layout (c), V_s = 0.94 V.
+
+No noise, no spread: every pair is right in every slot and the stream equals the sum at all three pump levels.
+- p 0.15: lowest level 166.7 mV (St, slot 11). Means: A 229, C 189, M 206, G 197, K 196, S 174, X2 195, X3 194, F 196.
+- p 0.35: lowest 177.6 mV (St, 11). Means: 247, 210, 231, 223, 222, 192, 220, 215, 219.
+- p 0.40: lowest 105.4 mV (St, 11). Means: 234, 154, 185, 179, 167, 117, 167, 157, 136.
+
+With noise and 3 % spread, 16 draws each:
+- p 0.15: 0 / 9,920 wrong; 0 runs.
+- p 0.35: 0 / 9,920; 0 runs.
+- p 0.40: 51 / 9,920; 6 runs with a wrong decision; 5 runs with St not the sum. Pairs: Ft 11, St 10, Fc 7, Sc 6, Cc 2, Kc 2, X2t 2, X3t 2, X3c 2, and Ct, Mt, Mc, Gt, Gc, Kt and X2c once each. The wrong pairs were mostly at low levels (1 to 60 mV).
+
+Task 5. Layout (a), p = 0.25. No noise: every pair is right in every slot at all 13 levels, under the 135 deg convention.
+
+V_s / P14 mean level (min) in mV / with noise and spread, wrong out of 7,936 (runs):
+- 0.865 / 0.1 (0.1) / 2177 (16)
+- 0.880 / 75.5 (72.0) / 0
+- 0.895 / 138.7 (137.6) / 0
+- 0.910 / 177.4 (176.4) / 0
+- 0.925 / 206.2 (205.4) / 0
+- 0.940 / 229.5 (228.7) / 0
+- 0.955 / 249.1 (248.5) / 0
+- 0.970 / 265.9 (265.6) / 0
+- 0.985 / 280.6 (280.0) / 0
+- 1.000 / 293.2 (292.3) / 0
+- 1.015 / 303.7 (302.3) / 0
+- 1.030 / 311.2 (309.0) / 6 (1 run: P13 once, P14 twice, P15 three times)
+- 1.045 / 310.6 (306.4) / 1295 (8)
+
+At 0.865 the wrong decisions were in P4 to P15, rising along the row to P15 with 261. At 1.045 they were in P3 to P15.
+
+Extra check at 1.045, spread only, no noise: 1332 wrong, in the same 8 draws.
+
+Task 6. Layout (c), V_s 0.94, p 0.25, no spread, f = 16, 32 runs.
+- Wrong decisions: 14 out of 19,840.
+- Runs with any wrong decision: 1 of 32.
+- Runs with St not the sum: 0.
+- Lowest level seen: 22 mV.
+
+The one bad run starts with X2c and X3c wrong in slot 28. Then Ct, Mt, Gc, Kt, Sc, X2t, X3t and Fc are wrong in slot 29, and Cc, Kc, Sc and Fc in slot 30.
+
+C. WHAT I DID NOT EXPECT
+
+1. At 0.865 V the row is "right" without noise, but it does not regenerate. The level falls along the row, roughly by 0.6 per pair, to 0.1 mV at P14 and P15 (means 140, 87, 52, 30, 18 mV ...). The sign is carried linearly. With noise this gives 2177 wrong decisions.
+
+2. At 1.045 V a 3 % inductance spread alone breaks the row in 8 of 16 draws. The failure is not random. From some pair onward, the tail of the row is inverted in almost every slot. For example, P14 and P15 were inverted in all 31 slots in one draw, and P10 to P15 in another. At 1.030 V one draw has a few scattered errors at the end of the row.
+
+3. The lone pair oscillates by itself from 0.97 V. Yet layout (c) still works at 0.970 to 1.015 V and the row up to 1.015 V: the pump locks it to f_d with two phases. The small-signal analysis also shows the even (common) mode of the lone pair growing at 1.00 to 1.06 V. I did not study that mode in the time domain.
+
+4. In layout (c) the two rails can split under noise. In the task 6 failure, the c rail of the carry chain went wrong in slot 28 while the t rail stayed right. After that the t and c pairs were no longer complements. St stayed right while Sc and Fc were wrong. "Stream at St equals the sum" therefore did not catch this run.
+
+5. Under noise the sum and output pairs (St, Sc, Ft, Fc) fail most often, and St in slot 11 is always the weakest pair. The driven pairs never failed.
+
+6. At 0.88 V, spread alone and noise alone each cause failures in layout (c).
+
+7. The labels only match what the layout is meant to do with the 135 deg per depth convention. With -45 deg per depth, every odd-depth pair comes out inverted. Wrong-decision counts do not depend on this choice.
+
+D. NOT RUN, AND LIMITS
+
+- Layout (r) was not run; it was not among the tasks.
+- One noise realisation per spread draw; 16 draws per point (32 runs in task 6). Zero errors in 9,920 decisions bounds the error rate only roughly, below about 3e-4 at 95 %. It is not a small rate.
+- One stimulus per layout (the operand streams given).
+- The time step was checked by halving only on noiseless runs at 0.94 V and p 0.25, not on noisy runs or at the scan ends.
+- Noise is a white step-held source, so its bandwidth is set by the step.
+- The read window was fixed (4.125 ps after slot start, 1.859 ps long); I did not vary it.
+- In task 1, "oscillates" means growth from a 1 mV seed within 400 ps (300 ps for task 1b). Points at the edges (0.96, 1.15 V) decay slowly, so a longer run could not change them; the small-signal rates agree with the result.
+- The settle times use my 10 % rule.
+- The even mode was not checked in the time domain.
+- The choice of M with spread (geometric mean of the two L_odd) was not varied.
+
+E. FILES (all in rebuild_t1x)
+
+Scripts:
+- sim.py: model, integrator, layouts, read-out.
+- run_lay.py: runs layouts a and c.
+- task1.py: lone-pair runs.
+- ana_t1.py, ana_t1b.py: task 1 analysis.
+- ana_c.py, ana_a.py: noiseless checks.
+- ana_noisy.py: wrong-decision counts.
+- detail.py: per-run lists of wrong decisions.
+- t0_check.py, t0_dbg.py, t0_eig.py: checks of the diode law, the time step and the eigenvalues.
+
+Results, in folder res:
+- t1a.npz, t1b.npz, t1c_128.npz, t1c_256.npz (task 1)
+- c_nom.npz, c_h256.npz (task 2)
+- c_t3_<Vs>.npz (task 3)
+- c_t4_nom.npz, c_t4_<p>.npz (task 4)
+- a_nom.npz, a_h256.npz, a_t5_<Vs>.npz (task 5)
+- c_t6_a.npz, c_t6_b.npz (task 6)
+- x_a_1.045_spreadonly.npz, x_c_0.880_spreadonly.npz, x_c_0.880_noiseonly.npz (extra cause-separation checks)

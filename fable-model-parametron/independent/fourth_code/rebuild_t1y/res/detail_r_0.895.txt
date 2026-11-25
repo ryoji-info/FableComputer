@@ -1,0 +1,17 @@
+﻿LOW draw 16 pair S3 slot 2 level 2.7 mV dphi 22
+LOW draw 9 pair S2 slot 26 level 8.6 mV dphi -18
+LOW draw 0 pair S1 slot 19 level 9.2 mV dphi 8
+LOW draw 11 pair S1 slot 22 level 12.2 mV dphi 9
+LOW draw 11 pair S1 slot 5 level 15.3 mV dphi 20
+LOW draw 9 pair S1 slot 16 level 16.5 mV dphi 4
+LOW draw 16 pair S3 slot 17 level 16.6 mV dphi -6
+LOW draw 27 pair S1 slot 19 level 17.7 mV dphi -10
+LOW draw 20 pair S2 slot 21 level 18.9 mV dphi 6
+LOW draw 18 pair S3 slot 24 level 21.4 mV dphi 0
+LOW draw 7 pair S1 slot 16 level 24.3 mV dphi -4
+LOW draw 19 pair S1 slot 23 level 25.6 mV dphi -2
+LOW draw 11 pair S1 slot 11 level 31.1 mV dphi 9
+LOW draw 16 pair S3 slot 16 level 32.1 mV dphi 4
+LOW draw 19 pair S1 slot 11 level 32.7 mV dphi -6
+per-draw min level mV: 0:9 1:40 2:60 3:67 4:40 5:47 6:41 7:24 8:65 9:9 10:41 11:12 12:59 13:43 14:35 15:50 16:3 17:44 18:21 19:26 20:19 21:42 22:39 23:52 24:65 25:61 26:65 27:18 28:34 29:49 30:56 31:42
+pair-slots below 100 mV: 3103  below 50 mV: 83

@@ -101,6 +101,9 @@ itself) is an open design question:
 Part I, Section 10 specifies a five-gate pre-registered pass/fail protocol
 (G1–G5); Part II adds its quantum gates (QG1–QG5); Part III adds
 DG1–DG5 and TG1–TG5, with G1, L0 and QG1–QG3 as prerequisites (its Table T10).
+Part IV, a fork in the device (pairs of resonant-tunnelling diodes, no graphene),
+states four gates of its own, RG1–RG4 (its Section 13); RG1 is one pumped pair, and
+their pass thresholds are not yet set.
 A promoted note proposes re-issuing G1 as G1a (existence) and G1b (a knee
 report) with every convention pinned; adoption is the maintainer's, and Part I's
 repository copy keeps one pre-registered G1 row and records the re-issue as a
