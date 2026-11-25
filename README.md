@@ -10,6 +10,7 @@
 [![Part I PDF](https://img.shields.io/badge/Part_I-PDF-blue)](https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-I.pdf)
 [![Part II PDF](https://img.shields.io/badge/Part_II-PDF-blue)](https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-II.pdf)
 [![Part III PDF](https://img.shields.io/badge/Part_III-PDF-blue)](https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-III.pdf)
+[![Part IV PDF](https://img.shields.io/badge/Part_IV-PDF-blue)](https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-IV.pdf)
 [![Part I DOI](https://img.shields.io/badge/Part_I_DOI-10.5281%2Fzenodo.23758795-blue)](https://doi.org/10.5281/zenodo.23758795)
 [![Part II DOI](https://img.shields.io/badge/Part_II_DOI-10.5281%2Fzenodo.23758729-blue)](https://doi.org/10.5281/zenodo.23758729)
 [![Part III DOI](https://img.shields.io/badge/Part_III_DOI-10.5281%2Fzenodo.23758679-blue)](https://doi.org/10.5281/zenodo.23758679)
@@ -66,16 +67,17 @@ from the no-cryogenics charter and are labelled as such wherever they appear.
 | **Part I** (v6.1, deposited 29 October 2026) | [The Fable Computer: A Room-Temperature Terahertz Half Adder on a Regenerative Graphene-Plasmon Logic Fabric](papers/Fable-Computer-Part-I.pdf) · [PDF](https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-I.pdf) | Concept, architecture, and a five-pass reduced-order feasibility chain for the clocked, regenerative logic fabric and its half-adder demonstrator. Ends with a pre-registered five-gate bench protocol. |
 | **Part II** (v2.1, deposited 29 October 2026) | [Quantum-Limited Analog Tensor Processing on the Regenerative Graphene-Plasmon Fabric](papers/Fable-Computer-Part-II.pdf) · [PDF](https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-II.pdf) | Quantizes the Part-I cell: the plasmonic-qubit no-go, the QMAC-1 analog tensor unit with on-chip classical decoding, and the temperature budget of the quantum–classical crossover. |
 | **Part III** (v1.1, deposited 29 October 2026) | [A Ternary Language Model on the Regenerative Graphene-Plasmon Fabric](papers/Fable-Computer-Part-III.pdf) · [PDF](https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-III.pdf) | Embeds Ternary Bonsai 2 27B as a streaming matrix-multiply coprocessor: a bit-exact digital lane on the Part-I fabric (2–7 lanes keep pace with 0.5–3 TB/s of weight streaming), a cold analog counter tree on the Part-II fabric, one error yardstick for both, and the single loaded-margin measurement (gate DG1) that decides whether the lane works warm. |
+| **Part IV** (v1.0, draft) | [A Parametron of Pumped Resonant-Tunnelling-Diode Pairs](papers/Fable-Computer-Part-IV.pdf) · [PDF](https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-IV.pdf) | A fork in the device, with no graphene and no plasmon: phase logic with pairs of resonant-tunnelling diodes (RTDs), each pair biased just below its own oscillation threshold and pumped at twice its carrier. A circuit model, separate from the chains of Parts I–III, runs rows, adders of up to 169 pairs and layouts with stored state at a 225-GHz carrier, with diode figures scaled from one published RTD source, and then a 1-THz-class specification that is validated in the model only. Nothing is built, the pump and the clock are ideal sources in the model, and a literature search found no RTD reported to behave this way: one pumped pair (gate RG1) decides whether the scheme exists. |
 
-All three manuscripts carry a full authorship and status disclaimer: they were prepared by an independent researcher with AI assistance (including an orchestrated literature-verification audit), they are not peer-reviewed, and their claims are offered as a starting point for discussion — which is exactly where this community comes in.
+All four manuscripts carry a full authorship and status disclaimer: they were prepared by an independent researcher with AI assistance (including an orchestrated literature-verification audit), they are not peer-reviewed, and their claims are offered as a starting point for discussion — which is exactly where this community comes in.
 
-*Note: the manuscripts are living documents. The community's vetted findings (see [notes/](notes/)) are folded back into them in periodic community revisions, each archived on Zenodo under its own version DOI (badges above). The repository copies in `papers/` are **Part I v6.1**, **Part II v2.1** and **Part III v1.1**, deposited on 29 October 2026 under the badge DOIs above (the deposited PDFs are the repository copies). Earlier version DOIs keep resolving to the manuscripts as they stood. The manuscripts themselves carry no version statements: the version, the deposit DOIs, and the complete indexed history of every revision and which promoted note required it live in [papers/REVISION-HISTORY.md](papers/REVISION-HISTORY.md); [papers/ERRATA.md](papers/ERRATA.md) lists, row by row, any adopted correction the current deposits do not yet carry (three rows outstanding, opened 3 November 2026, on Part I's own citations).*
+*Note: the manuscripts are living documents. The community's vetted findings (see [notes/](notes/)) are folded back into them in periodic community revisions, each archived on Zenodo under its own version DOI (badges above). The repository copies in `papers/` are **Part I v6.1**, **Part II v2.1** and **Part III v1.1**, deposited on 29 October 2026 under the badge DOIs above (the deposited PDFs are the repository copies). **Part IV v1.0** is a draft and has not been deposited. Earlier version DOIs keep resolving to the manuscripts as they stood. The manuscripts themselves carry no version statements: the version, the deposit DOIs, and the complete indexed history of every revision and which promoted note required it live in [papers/REVISION-HISTORY.md](papers/REVISION-HISTORY.md); [papers/ERRATA.md](papers/ERRATA.md) lists, row by row, any adopted correction the current deposits do not yet carry (three rows outstanding, opened 3 November 2026, on Part I's own citations).*
 
 **New here?** Two short companion documents summarize everything: [The Fable Computer — An Introduction](docs/Fable-Computer-Introduction.pdf) (six pages: the idea, the numbers, and what remains open) and the [Community Guidelines](docs/Fable-Computer-Community-Guidelines.pdf) (how to join in). Editable sources sit alongside them in [docs/](docs/).
 
 ## Run the models yourself
 
-The pure-Python model chains in this repository reproduce every quantitative model claim the papers take from them — Part I's Sections 7–8 and Figures 6–10, and Part II's results and Figures Q1–Q5 — and the listings in `fable-model-ternary/` reproduce every number Part III computes. Numbers the papers quote from the promoted notes reproduce from the listings and released-code calls those notes document, in the notes or their linked discussions. Dependencies: Python 3.11+, `numpy`, and (for figures) `matplotlib`. Depending on your system, the interpreter is `python` or `python3`.
+The pure-Python model chains in this repository reproduce every quantitative model claim the papers take from them — Part I's Sections 7–8 and Figures 6–10, and Part II's results and Figures Q1–Q5 — and the listings in `fable-model-ternary/` reproduce every number Part III computes. Part IV's circuit model is a separate package, `fable-model-parametron/`, which needs only `numpy`: its listings rerun the single pair, a row and two adders on a processor and rebuild the paper's tables from the stored runs of the reported batches, which ran on a graphics processor and are not rerun by the listings. Numbers the papers quote from the promoted notes reproduce from the listings and released-code calls those notes document, in the notes or their linked discussions. Dependencies: Python 3.11+, `numpy`, and (for figures) `matplotlib`. Depending on your system, the interpreter is `python` or `python3`.
 
 ```bash
 git clone https://github.com/ryoji-info/FableComputer.git
@@ -97,9 +99,15 @@ python digital_lane_bonsai.py   # the digital lane: netlist, bit-exact emulation
 python ternary_qmac_design.py   # the analog counter tree on the Part-II fabric
 python variants.py              # the levers: activation bits, block width, a threshold full adder, tolerance
 python figures.py               # regenerates Figures T1-T5
+
+# Part IV — the RTD-pair parametron (a separate circuit model; imports nothing from the chains above)
+cd ../fable-model-parametron
+python r1_pair.py               # one pair: silent without the pump, two phases with it (~2 min)
+python r3_adder.py              # the four-bit adder of 53 pairs (~5 min)
+python r7_tables.py             # the tables of results, rebuilt from the stored runs
 ```
 
-Each module is also runnable on its own and prints a self-check against the manuscript values (e.g. `python ds_cell.py`, `python qmode.py`). See the READMEs in [fable-model-chain](fable-model-chain/README.md), [fable-model-quantum](fable-model-quantum/README.md) and [fable-model-ternary](fable-model-ternary/README.md) for what each pass computes and — just as important — the documented caveats and free parameters.
+Each module is also runnable on its own and prints a self-check against the manuscript values (e.g. `python ds_cell.py`, `python qmode.py`). See the READMEs in [fable-model-chain](fable-model-chain/README.md), [fable-model-quantum](fable-model-quantum/README.md) and [fable-model-ternary](fable-model-ternary/README.md) for what each pass computes and — just as important — the documented caveats and free parameters, and the one in [fable-model-parametron](fable-model-parametron/README.md) for Part IV's listings, what each prints and what the model leaves out.
 
 ## What is proven, what is modeled, what is open
 
@@ -148,7 +156,7 @@ The near-term arc: publish and harden the models → grow a reviewing community 
 
 ## License and citation
 
-- **Code** (`fable-model-chain/`, `fable-model-quantum/`, `fable-model-ternary/`): Apache License 2.0 — permissive, with an explicit patent grant that protects contributors and users.
+- **Code** (`fable-model-chain/`, `fable-model-quantum/`, `fable-model-ternary/`, `fable-model-parametron/`): Apache License 2.0 — permissive, with an explicit patent grant that protects contributors and users.
 - **Manuscripts, documentation, and figures:** CC BY 4.0.
 
 The full scheme — including the license declared in advance for future hardware design files and the commitment never to tighten any of it — is in [LICENSING.md](LICENSING.md).

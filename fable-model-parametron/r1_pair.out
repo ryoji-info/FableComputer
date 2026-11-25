@@ -1,0 +1,101 @@
+r1: one pair of cell F on a constant supply
+K = 1.075 / 0.225 = 4.77778 (model time = physical time / K)
+
+1. Diode law per full device: peak 25.39 mA at 0.750 V, valley 11.40 mA at 1.300 V, peak-to-valley ratio 2.23, steepest slope -55.20 mS at 0.893 V
+   one diode carries 0.25 of it: peak 6.348 mA, valley 2.851 mA, steepest slope -13.799 mS
+   cell (model units / 225-GHz circuit): C_d 0.5233 / 2.500 fF, C_p 2.8256 / 13.500 fF, L_odd 5.5037 / 26.295 pH, L_h 4.2336 / 20.227 pH, k 0.30,
+   R_L 9.294 ohm, rho 12.0 ohm, R_k 1.0 ohm, R_b 2.50 ohm, C_b 1.000 / 4.778 fF, tau_d 0.02093 / 0.1000 ps
+   quality factor of the tank, omega L_odd / R_L at 1.075 model THz: 4.000
+
+2. Own oscillation, no pump (supply 0.85 to 1.25 V in steps of 10 mV; swing from 45 to 70 model ps)
+   oscillates by itself from 0.97 to 1.14 V; at 1.06 V: 283.2 mV per half, 1.07345 model THz = 224.7 GHz
+   swing (mV) by supply level: 0.90 V 0.0, 0.92 V 0.0, 0.94 V 0.0, 0.96 V 0.0, 0.98 V 190.1, 1.00 V 226.9, 1.02 V 251.6, 1.04 V 269.8, 1.06 V 283.2, 1.08 V 292.7, 1.10 V 298.2, 1.12 V 299.3, 1.14 V 5.2, 1.16 V 0.0, 1.18 V 0.0, 1.20 V 0.0
+   session record of cell F (not in this package): 0.97 to 1.14 V; at 1.06 V 283.2 mV, 1.07345 model THz (224.7 GHz)
+   BLIND_SPEC_T1.md does not state the range; the two codes written from it found 0.97 to 1.14 V (independent/README.md)
+
+3. Pumped pair, twelve starting phases (table P-1).  Each entry: this run / the session's stored table P-1
+   pump  0 %:
+      0.82 V: silent                       / silent                       | direct current 11.97 mA, pump-frequency current 0.28 mA, power from the pump source +0.0000 mW
+      0.85 V: silent                       / silent                       | direct current 12.31 mA, pump-frequency current 0.28 mA, power from the pump source +0.0000 mW
+      0.88 V: silent                       / silent                       | direct current 12.56 mA, pump-frequency current 0.29 mA, power from the pump source +0.0000 mW
+      0.91 V: silent                       / silent                       | direct current 12.69 mA, pump-frequency current 0.29 mA, power from the pump source +0.0000 mW
+      0.94 V: silent                       / silent                       | direct current 12.63 mA, pump-frequency current 0.29 mA, power from the pump source +0.0000 mW
+      0.97 V: 160 mV, any phase            / 160 mV, any phase            | direct current 10.73 mA, pump-frequency current 0.47 mA, power from the pump source +0.0000 mW
+      1.00 V: 224 mV, any phase            / 224 mV, any phase            | direct current 9.84 mA, pump-frequency current 0.61 mA, power from the pump source +0.0000 mW
+      1.03 V: 258 mV, any phase            / 258 mV, any phase            | direct current 9.43 mA, pump-frequency current 0.48 mA, power from the pump source +0.0000 mW
+      1.06 V: 279 mV, any phase            / 279 mV, any phase            | direct current 9.16 mA, pump-frequency current 0.26 mA, power from the pump source +0.0000 mW
+   pump 10 %:
+      0.82 V: silent                       / silent                       | direct current 11.88 mA, pump-frequency current 1.61 mA, power from the pump source +0.0195 mW
+      0.85 V: silent                       / silent                       | direct current 12.19 mA, pump-frequency current 1.66 mA, power from the pump source +0.0159 mW
+      0.88 V: silent                       / silent                       | direct current 12.39 mA, pump-frequency current 1.76 mA, power from the pump source +0.0099 mW
+      0.91 V: silent                       / silent                       | direct current 12.45 mA, pump-frequency current 1.95 mA, power from the pump source +0.0012 mW
+      0.94 V: 143 mV, two phases, 38 ps    / 143 mV, two phases, 38 ps    | direct current 11.25 mA, pump-frequency current 2.94 mA, power from the pump source -0.0127 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      0.97 V: 211 mV, two phases, 38 ps    / 211 mV, two phases, 38 ps    | direct current 10.43 mA, pump-frequency current 3.24 mA, power from the pump source -0.0125 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      1.00 V: 247 mV, two phases, 67 ps    / 247 mV, two phases, 67 ps    | direct current 10.05 mA, pump-frequency current 3.21 mA, power from the pump source -0.0138 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      1.03 V: 273 mV, two phases, 191 ps   / 273 mV, two phases, 191 ps   | direct current 9.81 mA, pump-frequency current 3.09 mA, power from the pump source -0.0140 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      1.06 V: 291 mV, two phases, 263 ps   / 291 mV, two phases, 263 ps   | direct current 9.65 mA, pump-frequency current 2.92 mA, power from the pump source -0.0116 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+   pump 15 %:
+      0.82 V: silent                       / silent                       | direct current 11.78 mA, pump-frequency current 2.52 mA, power from the pump source +0.0489 mW
+      0.85 V: silent                       / silent                       | direct current 12.04 mA, pump-frequency current 2.61 mA, power from the pump source +0.0403 mW
+      0.88 V: silent                       / silent                       | direct current 12.18 mA, pump-frequency current 2.77 mA, power from the pump source +0.0259 mW
+      0.91 V: silent                       / silent                       | direct current 12.16 mA, pump-frequency current 3.09 mA, power from the pump source +0.0070 mW
+      0.94 V: 171 mV, two phases, 33 ps    / 171 mV, two phases, 33 ps    | direct current 10.88 mA, pump-frequency current 4.11 mA, power from the pump source -0.0192 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      0.97 V: 219 mV, two phases, 33 ps    / 219 mV, two phases, 33 ps    | direct current 10.42 mA, pump-frequency current 4.33 mA, power from the pump source -0.0227 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      1.00 V: 251 mV, two phases, 48 ps    / 251 mV, two phases, 48 ps    | direct current 10.16 mA, pump-frequency current 4.38 mA, power from the pump source -0.0232 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      1.03 V: 275 mV, two phases, 105 ps   / 275 mV, two phases, 105 ps   | direct current 9.99 mA, pump-frequency current 4.34 mA, power from the pump source -0.0211 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      1.06 V: 272 mV, any phase            / 272 mV, any phase            | direct current 9.42 mA, pump-frequency current 4.21 mA, power from the pump source -0.0112 mW
+   pump 20 %:
+      0.82 V: silent                       / silent                       | direct current 11.64 mA, pump-frequency current 3.43 mA, power from the pump source +0.0880 mW
+      0.85 V: silent                       / silent                       | direct current 11.82 mA, pump-frequency current 3.57 mA, power from the pump source +0.0705 mW
+      0.88 V: silent                       / silent                       | direct current 11.87 mA, pump-frequency current 3.84 mA, power from the pump source +0.0440 mW
+      0.91 V: 123 mV, two phases, 33 ps    / 123 mV, two phases, 33 ps    | direct current 11.18 mA, pump-frequency current 4.64 mA, power from the pump source -0.0014 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      0.94 V: 185 mV, two phases, 29 ps    / 185 mV, two phases, 29 ps    | direct current 10.67 mA, pump-frequency current 5.14 mA, power from the pump source -0.0181 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      0.97 V: 224 mV, two phases, 33 ps    / 224 mV, two phases, 33 ps    | direct current 10.39 mA, pump-frequency current 5.37 mA, power from the pump source -0.0238 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      1.00 V: 252 mV, two phases, 43 ps    / 252 mV, two phases, 43 ps    | direct current 10.22 mA, pump-frequency current 5.49 mA, power from the pump source -0.0246 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      1.03 V: 273 mV, two phases, 72 ps    / 273 mV, two phases, 72 ps    | direct current 10.11 mA, pump-frequency current 5.55 mA, power from the pump source -0.0219 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      1.06 V: 231 mV, any phase            / 231 mV, any phase            | direct current 8.97 mA, pump-frequency current 5.61 mA, power from the pump source -0.0112 mW
+   pump 25 %:
+      0.82 V: silent                       / silent                       | direct current 11.43 mA, pump-frequency current 4.35 mA, power from the pump source +0.1324 mW
+      0.85 V: silent                       / silent                       | direct current 11.53 mA, pump-frequency current 4.57 mA, power from the pump source +0.1019 mW
+      0.88 V: 58 mV, two phases, 33 ps     / 58 mV, two phases, 33 ps     | direct current 11.35 mA, pump-frequency current 5.05 mA, power from the pump source +0.0542 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      0.91 V: 148 mV, two phases, 33 ps    / 148 mV, two phases, 33 ps    | direct current 10.77 mA, pump-frequency current 5.74 mA, power from the pump source +0.0110 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      0.94 V: 193 mV, two phases, 29 ps    / 193 mV, two phases, 29 ps    | direct current 10.49 mA, pump-frequency current 6.13 mA, power from the pump source -0.0060 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      0.97 V: 225 mV, two phases, 33 ps    / 225 mV, two phases, 33 ps    | direct current 10.32 mA, pump-frequency current 6.40 mA, power from the pump source -0.0139 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      1.00 V: 248 mV, two phases, 38 ps    / 248 mV, two phases, 38 ps    | direct current 10.22 mA, pump-frequency current 6.59 mA, power from the pump source -0.0166 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      1.03 V: 264 mV, two phases, 67 ps    / 264 mV, two phases, 67 ps    | direct current 10.15 mA, pump-frequency current 6.76 mA, power from the pump source -0.0164 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      1.06 V: 229 mV, any phase            / 229 mV, any phase            | direct current 9.60 mA, pump-frequency current 7.09 mA, power from the pump source -0.0213 mW
+   pump 30 %:
+      0.82 V: silent                       / silent                       | direct current 11.16 mA, pump-frequency current 5.28 mA, power from the pump source +0.1772 mW
+      0.85 V: silent                       / silent                       | direct current 11.17 mA, pump-frequency current 5.60 mA, power from the pump source +0.1312 mW
+      0.88 V: 107 mV, two phases, 33 ps    / 107 mV, two phases, 33 ps    | direct current 10.77 mA, pump-frequency current 6.25 mA, power from the pump source +0.0689 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      0.91 V: 160 mV, two phases, 33 ps    / 160 mV, two phases, 33 ps    | direct current 10.48 mA, pump-frequency current 6.76 mA, power from the pump source +0.0354 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      0.94 V: 195 mV, two phases, 33 ps    / 195 mV, two phases, 33 ps    | direct current 10.32 mA, pump-frequency current 7.13 mA, power from the pump source +0.0170 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      0.97 V: 220 mV, two phases, 33 ps    / 220 mV, two phases, 33 ps    | direct current 10.22 mA, pump-frequency current 7.44 mA, power from the pump source +0.0056 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      1.00 V: 235 mV, two phases, 38 ps    / 235 mV, two phases, 38 ps    | direct current 10.16 mA, pump-frequency current 7.74 mA, power from the pump source -0.0031 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      1.03 V: 238 mV, two phases, 48 ps    / 238 mV, two phases, 48 ps    | direct current 10.08 mA, pump-frequency current 8.08 mA, power from the pump source -0.0146 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      1.06 V: silent                       / silent                       | direct current 9.36 mA, pump-frequency current 9.56 mA, power from the pump source -0.0729 mW
+   pump 40 %:
+      0.82 V: silent                       / silent                       | direct current 10.45 mA, pump-frequency current 7.24 mA, power from the pump source +0.2569 mW
+      0.85 V: 79 mV, two phases, 33 ps     / 79 mV, two phases, 33 ps     | direct current 10.24 mA, pump-frequency current 7.80 mA, power from the pump source +0.1883 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      0.88 V: 124 mV, two phases, 33 ps    / 124 mV, two phases, 33 ps    | direct current 10.07 mA, pump-frequency current 8.33 mA, power from the pump source +0.1407 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      0.91 V: 146 mV, two phases, 33 ps    / 146 mV, two phases, 33 ps    | direct current 9.97 mA, pump-frequency current 8.83 mA, power from the pump source +0.1029 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      0.94 V: 143 mV, two phases, 33 ps    / 143 mV, two phases, 33 ps    | direct current 9.88 mA, pump-frequency current 9.40 mA, power from the pump source +0.0594 mW; 6 and 6 of 12 on the two phases, spread 0.00 deg
+      0.97 V: silent                       / silent                       | direct current 9.67 mA, pump-frequency current 10.40 mA, power from the pump source -0.0159 mW
+      1.00 V: silent                       / silent                       | direct current 9.48 mA, pump-frequency current 10.99 mA, power from the pump source -0.0440 mW
+      1.03 V: silent                       / silent                       | direct current 9.29 mA, pump-frequency current 11.51 mA, power from the pump source -0.0642 mW
+      1.06 V: silent                       / silent                       | direct current 9.10 mA, pump-frequency current 11.96 mA, power from the pump source -0.0773 mW
+   63 of 63 entries equal the stored table P-1 as printed
+
+4. Against BLIND_SPEC_T1.md (values of the 1-THz-class cell, which are the model's units)
+   C_d (fF)    specification 0.5233   model 0.52326
+   rho (ohm)   specification 12       model 12
+   tau_d (ps)  specification 0.02093  model 0.02093
+   C_p (fF)    specification 2.8256   model 2.8256
+   L_odd (pH)  specification 5.5047   model 5.5037
+   k           specification 0.3      model 0.3
+   R_L (ohm)   specification 9.29     model 9.2936
+   R_b (ohm)   specification 2.5      model 2.5
+   C_b (fF)    specification 1        model 1
+   R_k (ohm)   specification 1        model 1
+   stub: the specification has one node with C_s = 0.1465 fF; the model has a line of 4 sections, 0.1333 fF and 1.3333 pH in all, read at its far end
+   specification: pump at exactly twice 1.076 THz, nominal point 0.94 V and 25 %; this listing at 0.94 V and 25 %: see the row "pump 25 %" above

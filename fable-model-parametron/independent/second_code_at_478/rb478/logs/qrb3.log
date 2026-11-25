@@ -1,0 +1,13 @@
+[    0.0 s 17:45:11] queue: starting rba_clean
+[   20.1 s 17:45:31] queue: finished rba_clean exit code 0 | GPU 1 %, 487 MiB, 18 C, 10.84 W
+[   20.1 s 17:45:31] queue: starting rba_n478p25
+[  404.0 s 17:51:55] queue: finished rba_n478p25 exit code 0 | GPU 1 %, 487 MiB, 18 C, 11.41 W
+[  404.0 s 17:51:55] queue: starting rba_st25
+[  404.4 s 17:51:56] queue: finished rba_st25 exit code 0 | GPU 1 %, 487 MiB, 18 C, 11.28 W
+[  404.4 s 17:51:56] queue: starting rba_n478p15
+[  587.3 s 17:54:58] queue: finished rba_n478p15 exit code 0 | GPU 1 %, 487 MiB, 18 C, 11.69 W
+[  587.3 s 17:54:58] queue: starting rba_n478p35
+[  755.8 s 17:57:47] queue: finished rba_n478p35 exit code 0 | GPU 0 %, 487 MiB, 18 C, 11.65 W
+[  755.8 s 17:57:47] queue: starting rba_st1535
+[  756.1 s 17:57:47] queue: finished rba_st1535 exit code 0 | GPU 0 %, 487 MiB, 18 C, 11.81 W
+[  756.1 s 17:57:47] queue done

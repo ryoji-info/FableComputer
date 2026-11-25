@@ -1,0 +1,30 @@
+run t_c1 c1 G 1 Bg 1 steps 118875 dt 0.01982 ps vjmax 1.265 V time 77.8 s
+run cl_b2 b2 G 1 Bg 1 steps 118875 dt 0.01982 ps vjmax 1.270 V time 93.4 s
+run cl_b1 b1 G 1 Bg 1 steps 118875 dt 0.01982 ps vjmax 1.265 V time 94.0 s
+run cl_c2 c2 G 1 Bg 1 steps 118875 dt 0.01982 ps vjmax 1.270 V time 105.9 s
+run n1_b2 b2 G 32 Bg 1 steps 118875 dt 0.01982 ps vjmax 1.287 V time 407.0 s
+run2 v2_b2_112 b2 G 1 Bg 1 steps 59438 dt 0.03965 ps float64 vjmax 1.263 V time 25.7 s
+run2 v2_b2_112f4 b2 G 1 Bg 1 steps 59438 dt 0.03965 ps float32 vjmax 1.263 V time 25.9 s
+run2 v2_b2_224 b2 G 1 Bg 1 steps 118875 dt 0.01982 ps float64 vjmax 1.270 V time 40.1 s
+run n1_c2 c2 G 32 Bg 1 steps 118875 dt 0.01982 ps vjmax 1.284 V time 778.8 s
+run2 t2_b2 b2 G 32 Bg 1 steps 59438 dt 0.03965 ps float32 vjmax 1.274 V time 62.4 s
+run2 t2_c2 c2 G 32 Bg 1 steps 59438 dt 0.03965 ps float32 vjmax 1.279 V time 123.8 s
+run2 ck_b2 b2 G 5 Bg 1 steps 59438 dt 0.03965 ps float64 vjmax 1.271 V time 21.9 s
+run2 c3_b2 b2 G 1 Bg 11 steps 59438 dt 0.03965 ps float64 vjmax 1.412 V time 22.6 s
+run2 c3_c2 c2 G 1 Bg 11 steps 59438 dt 0.03965 ps float64 vjmax 1.412 V time 31.3 s
+run2 ck_c2 c2 G 5 Bg 1 steps 59438 dt 0.03965 ps float64 vjmax 1.271 V time 31.6 s
+run2 c5_b1 b1 G 1 Bg 1 steps 59438 dt 0.03965 ps float64 vjmax 1.204 V time 14.0 s
+run2 c5_c1 c1 G 1 Bg 1 steps 59438 dt 0.03965 ps float64 vjmax 1.204 V time 15.5 s
+run2 c3_b1 b1 G 1 Bg 11 steps 59438 dt 0.03965 ps float64 vjmax 1.413 V time 18.3 s
+run2 c3_c1 c1 G 1 Bg 11 steps 59438 dt 0.03965 ps float64 vjmax 1.413 V time 25.9 s
+run2 t3v_b2 b2 G 16 Bg 10 steps 59438 dt 0.03965 ps float32 vjmax 1.419 V time 178.4 s
+run2 t3kb_c2 c2 G 32 Bg 1 steps 59438 dt 0.03965 ps float32 vjmax 1.280 V time 203.0 s
+run2 t3ka_c2 c2 G 48 Bg 1 steps 59438 dt 0.03965 ps float32 vjmax 1.280 V time 256.4 s
+run2 t3v_c2 c2 G 16 Bg 10 steps 59438 dt 0.03965 ps float32 vjmax 1.420 V time 361.3 s
+run2 t4_b2 b2 G 1 Bg 64 steps 59438 dt 0.03965 ps float32 vjmax 1.299 V time 63.3 s
+run2 t5_b1 b1 G 32 Bg 1 steps 59438 dt 0.03965 ps float32 vjmax 1.224 V time 73.3 s
+run2 t4_c2 c2 G 1 Bg 64 steps 59438 dt 0.03965 ps float32 vjmax 1.319 V time 105.8 s
+run2 t3k_b2 b2 G 80 Bg 1 steps 59438 dt 0.03965 ps float32 vjmax 1.282 V time 114.5 s
+run2 v2_c2_224 c2 G 1 Bg 1 steps 118875 dt 0.01982 ps float64 vjmax 1.270 V time 29.8 s
+run2 v2_b2_448 b2 G 1 Bg 1 steps 237749 dt 0.00991 ps float64 vjmax 1.270 V time 42.7 s
+run2 t5_c1 c1 G 32 Bg 1 steps 59438 dt 0.03965 ps float32 vjmax 1.233 V time 106.5 s

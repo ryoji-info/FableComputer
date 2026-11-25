@@ -1,0 +1,29 @@
+r6: spread budget of the four-bit ripple-carry adder, 53 pairs, cell F, 0.94 V, pump 25 %, links 6 %, no link capacitors
+
+1. From the stored runs (runs/), lines with 256 draws
+   line                                                             failing      share (exact 95 % interval)  wrong additions bad pairs per thousand   machines right, 1,000 / 10,000 pairs
+   1.075 THz: full set x 1, without the capacitors, 256 runs          7 of 256   2.7 % (1.1 to 5.6 %)          23 of 7,936     0.52 (0.21 to 1.05)      0.60 / 0.006   (g52)
+   1.075 THz: full set x 0.75, without the capacitors, 256 runs       1 of 256   0.39 % (0.01 to 2.2 %)         3 of 7,936     0.07 (0.00 to 0.41)      0.93 / 0.479   (g52)
+   225 GHz noise: full set x 1, without the capacitors, 256 runs      5 of 256   2.0 % (0.64 to 4.5 %)         26 of 7,936     0.37 (0.12 to 0.85)      0.69 / 0.025   (g52)
+   1.075 THz: full set x 0.5, without the capacitors, 256 runs        0 of 256   0.0 % (0.0 to 1.4 %)           0 of 7,936     0.00 (0.00 to 0.27)      1.00 / 1.000   (g53)
+   1.075 THz: full set x 0.625, without the capacitors, 256 runs      0 of 256   0.0 % (0.0 to 1.4 %)           0 of 7,936     0.00 (0.00 to 0.27)      1.00 / 1.000   (g53)
+   1.075 THz: full set x 0.875, without the capacitors, 256 runs     10 of 256   3.9 % (1.9 to 7.1 %)          24 of 7,936     0.74 (0.36 to 1.33)      0.48 / 0.001   (g53)
+   225 GHz noise: full set x 0.5, without the capacitors, 256 runs    0 of 256   0.0 % (0.0 to 1.4 %)           0 of 7,936     0.00 (0.00 to 0.27)      1.00 / 1.000   (g53)
+   225 GHz noise: full set x 0.75, without the capacitors, 256 runs   0 of 256   0.0 % (0.0 to 1.4 %)           0 of 7,936     0.00 (0.00 to 0.27)      1.00 / 1.000   (g53)
+   Read per pair, 7 failing draws of 256 for 53 pairs are 0.52 bad pairs in a thousand (0.21 to 1.05).
+   IF pairs failed independently (an assumption), a machine of N pairs would be right in (1 - 5.16e-04)^N of builds:
+   N = 53: 0.973, N = 1,000: 0.597, N = 10,000: 0.006
+   Failing draws by fraction of the full set, 1-THz-class noise: 0.5: 0, 0.625: 0, 0.75: 1, 0.875: 10, 1: 7
+
+2. How a draw is made: two draws of the nine spreads, made here with numpy (seed 2026)
+   draw 1, largest value of each spread: inductance +0.0945 3.15 sd (pair 49); diode current +0.1127 2.25 sd (pair 19); difference inside a pair -0.0492 -2.46 sd (pair 33); pump phase (rad of pump phase) -0.6540 -3.75 sd (pair 29); pump level +0.2538 2.54 sd (pair 28); link strength +0.2961 2.96 sd (link 32); clock timing (periods) -0.0580 -2.90 sd (pair 6); supply level +0.0296 2.96 sd (pair 43); damping resistor -0.1158 -2.32 sd (pair 28)
+   draw 2, largest value of each spread: inductance +0.0971 3.24 sd (pair 19); diode current +0.1484 2.97 sd (pair 15); difference inside a pair +0.0470 2.35 sd (pair 15); pump phase (rad of pump phase) -0.5046 -2.89 sd (pair 0); pump level -0.2860 -2.86 sd (pair 39); link strength -0.2318 -2.32 sd (link 61); clock timing (periods) -0.0490 -2.45 sd (pair 10); supply level +0.0244 2.44 sd (pair 44); damping resistor -0.1295 -2.59 sd (pair 16)
+   Each value is the rms value of the spread times a standard normal number; it is not bounded. A run without noise or spread has none.
+
+3. How a draw is judged: 4 runs of the full set at the noise of the 1-THz-class cell (scale 1.0), each with its own draw
+   run without noise or spread: 53 of 53 pairs right, lowest level 200.5 mV
+   run 1: wrong decisions 0 of 1,643, wrong additions 0 of 31, lowest level 125.0 mV: right
+   run 2: wrong decisions 0 of 1,643, wrong additions 0 of 31, lowest level 144.0 mV: right
+   run 3: wrong decisions 0 of 1,643, wrong additions 0 of 31, lowest level 150.7 mV: right
+   run 4: wrong decisions 0 of 1,643, wrong additions 0 of 31, lowest level 142.5 mV: right
+   failing runs: 0 of 4 (exact 95 % interval 0.0 to 60.2 %); the stored line with 256 draws is the rate to quote

@@ -1,0 +1,17 @@
+r3: four-bit ripple-carry adder, 53 pairs, 68 links (8 reversed), cell F, 0.94 V, pump 25 %, links 6 %, no link capacitors
+
+1. Run without noise or spread, judged when the next pairs decide
+   pairs right: 53 of 53; smallest margin 0.852; lowest level of any pair in any counted slot 200.5 mV
+   lowest level by kind of pair (mV): C 200.5, G 212.8, K 224.2, M 203.7, S 206.7, a 204.2, b 204.2
+   the lowest is pair C2
+   expected bits of the outputs equal a + b + c_in in every slot: True
+   31 counted additions, 29 of them different: 13+3+0=16 15+15+0=30 15+0+1=16 10+10+1=21 3+6+0=9 4+2+0=6 5+10+0=15 9+6+0=15 6+10+1=17 15+15+1=31 9+9+1=19 4+5+1=10 12+3+1=16 2+10+1=13 0+0+1=1 9+9+1=19 15+15+0=30 14+1+0=15 5+13+0=18 2+6+0=8 14+12+1=27 5+5+0=10 9+4+1=14 14+8+0=22 9+3+1=13 9+3+0=12 4+6+0=10 2+10+0=12 5+9+0=14 10+5+0=15 15+0+0=15
+
+2. 8 runs with physical noise and a 3 % spread of the inductance
+   wrong additions: 0 of 248, in 0 of 8 runs
+   wrong decisions of any pair: 0 of 13144, in 0 runs; first wrong by kind of pair: none
+
+Session, batches of the graphics processor (single precision), the same rules:
+   no noise or spread at 0.94 V (every 0.94-V line of chain_g34b, chain_g40, chain_g48): 53 of 53 right, smallest margin 0.852, lowest level 200.5 mV
+   physical noise and 3 % spread, 32 runs: 0 wrong additions of 992 at 0.94 V (chain_g28b) and at 0.910 and 0.970 V (chain_g37a).
+   At the noise of the 1-THz-class cell and 3 % spread, 0.94 V: 0 of 992 (chain_g40)

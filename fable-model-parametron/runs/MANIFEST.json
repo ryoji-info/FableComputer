@@ -1,0 +1,2205 @@
+{
+ "about": "Stored runs of the paper: batches chain_g*, without link capacitors unless 'capacitors' says otherwise. Written by collect_runs.py. Every number in these runs is in-model.",
+ "conventions": [
+  "sha256: SHA-256 of the original file, in groups of eight hex digits; remove the spaces before comparing",
+  "bytes: size of the original file, with a space between thousands",
+  "runs: runs with noise or spread; each setting has one more run without either (reference_runs)",
+  "stored: where the gzip-compressed copy is, or why the file is not in the package",
+  "command: the line of the queue file that ran the batch on the compute node (paths relative to its work folder)"
+ ],
+ "batches": [
+  {
+   "tag": "g28a",
+   "command": "p4_chain_g28a rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g28a_set.json tag=chain_g28a ncell=16 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gB.txt"
+   ],
+   "layout": [
+    "row"
+   ],
+   "settings": 157,
+   "runs": 5594,
+   "reference_runs": 157,
+   "capacitors": "none (cc = 0)",
+   "pairs": 16,
+   "set_file": "chain_g28a_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g28a_set.json",
+     "bytes": "89 583",
+     "sha256": "a05bbef2 a8285222 971de69f c4dd0792 21d9ec2e c77d7d7f cacff5d4 dc1198e7",
+     "stored": "runs/chain_g28a_set.json.gz"
+    },
+    {
+     "name": "chain_g28a.json",
+     "bytes": "160 275",
+     "sha256": "35c8b461 58e01716 2df62d37 98bd6166 1c5ace81 41580fd5 969dd7f8 3f1b2f6d",
+     "stored": "runs/chain_g28a.json.gz"
+    },
+    {
+     "name": "chain_g28a_c000.npz",
+     "bytes": "15 559 756",
+     "sha256": "ec07b11b 914a3b6e 46738d83 a875218c d67fa405 6e6a3819 45931b0c 1106b9ea",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g28a_summary.json",
+     "bytes": "606 138",
+     "sha256": "67b7444b 7ed02fcc 9c8da039 2d526390 79f39c5a b85ca4df 12c42271 ff9b1631",
+     "stored": "no (large; an_chain3.py rebuilds it from the arrays)"
+    },
+    {
+     "name": "chain_g28a_tol.json",
+     "bytes": "66 576",
+     "sha256": "49ea9714 aa5555b7 0114e42c 769f3961 d80d9316 8a454ca8 975971a9 2b2193c6",
+     "stored": "runs/chain_g28a_tol.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g28b",
+   "command": "p4_chain_g28b rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g28b_set.json tag=chain_g28b ncell=53 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt",
+    "queue_gE.txt"
+   ],
+   "queue_note": "queued 2 times with the same line; the last queue file is given",
+   "layout": [
+    "radd4"
+   ],
+   "settings": 26,
+   "runs": 928,
+   "reference_runs": 26,
+   "capacitors": "none (cc = 0)",
+   "pairs": 53,
+   "set_file": "chain_g28b_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g28b_set.json",
+     "bytes": "15 313",
+     "sha256": "796355a3 064520e9 a3f72223 12146291 c2c327e6 18b34474 8d12ebe8 654e23b3",
+     "stored": "runs/chain_g28b_set.json.gz"
+    },
+    {
+     "name": "chain_g28b.json",
+     "bytes": "59 176",
+     "sha256": "cea17bb0 7be64bad 8568bb7d 36bc9424 56f0f35b 81a235fd 8f8e3c29 de89f309",
+     "stored": "runs/chain_g28b.json.gz"
+    },
+    {
+     "name": "chain_g28b_c000.npz",
+     "bytes": "34 029 031",
+     "sha256": "1f50873f 5443a251 16e4f523 0a385981 f661b1ee 741927b8 d3fc67f5 4c32e0c9",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g28b_logic.json",
+     "bytes": "9 013",
+     "sha256": "2648d8b5 6959ce56 0f0cfb54 e7e026c1 958fe016 7502aef3 1ef1bd94 78777ec3",
+     "stored": "runs/chain_g28b_logic.json.gz"
+    },
+    {
+     "name": "chain_g28b_summary.json",
+     "bytes": "246 906",
+     "sha256": "82a43e32 fd3f3b9a 9b10cdda d6c51078 337d7434 60957cab 729234f4 45d92637",
+     "stored": "no (large; an_chain3.py rebuilds it from the arrays)"
+    }
+   ]
+  },
+  {
+   "tag": "g28c",
+   "command": "p4_chain_g28c rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g28c_set.json tag=chain_g28c ncell=20 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt",
+    "queue_gF.txt"
+   ],
+   "queue_note": "queued 2 times with the same line; the last queue file is given",
+   "layout": [
+    "sdaddx"
+   ],
+   "settings": 24,
+   "runs": 1148,
+   "reference_runs": 24,
+   "capacitors": "none (cc = 0)",
+   "pairs": 20,
+   "set_file": "chain_g28c_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g28c_set.json",
+     "bytes": "14 097",
+     "sha256": "95be591d 25dd3651 0e011282 2aa73e8b 6953cd49 9dea833e c7fe26bd cb9ed7d2",
+     "stored": "runs/chain_g28c_set.json.gz"
+    },
+    {
+     "name": "chain_g28c.json",
+     "bytes": "43 315",
+     "sha256": "bef0fa7c ec2a7e5d 6a3249d5 f05b159e 61265487 24b9f32c 228e6400 716066a1",
+     "stored": "runs/chain_g28c.json.gz"
+    },
+    {
+     "name": "chain_g28c_c000.npz",
+     "bytes": "15 788 676",
+     "sha256": "51b4d647 8464d164 ab85235f 3e6a8c14 7ba55227 7e235e4b 778de703 0b1a2ab6",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g28c_seq.json",
+     "bytes": "19 086",
+     "sha256": "c8ff0f7b d2cefa08 8ed3527b 58c16b98 3921272e cea9db8a 11be7cde d842e0c4",
+     "stored": "runs/chain_g28c_seq.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g28d",
+   "command": "p4_chain_g28d rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g28d_set.json tag=chain_g28d ncell=84 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt",
+    "queue_gF.txt"
+   ],
+   "queue_note": "queued 2 times with the same line; the last queue file is given",
+   "layout": [
+    "sdacc8x"
+   ],
+   "settings": 10,
+   "runs": 384,
+   "reference_runs": 10,
+   "capacitors": "none (cc = 0)",
+   "pairs": 84,
+   "set_file": "chain_g28d_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g28d_set.json",
+     "bytes": "5 848",
+     "sha256": "c19baa3e 382523b1 f7202a5c f78cfcb1 a429287e 73c8d66d d8523682 da40f018",
+     "stored": "runs/chain_g28d_set.json.gz"
+    },
+    {
+     "name": "chain_g28d.json",
+     "bytes": "53 705",
+     "sha256": "8f8d7376 9002c078 65273145 4918b4b5 002a4539 5667f4f1 757f509f af08707b",
+     "stored": "runs/chain_g28d.json.gz"
+    },
+    {
+     "name": "chain_g28d_c000.npz",
+     "bytes": "22 019 366",
+     "sha256": "dafcaa04 1d329f21 1e27d061 af744f21 4f42157d cf9af25e ede7219c f2168620",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g28d_seq.json",
+     "bytes": "8 309",
+     "sha256": "dd0fcb6b bf4525d3 fe93f52f 139636c5 3c59c56c f7900b50 1e3220d2 caac2a4e",
+     "stored": "runs/chain_g28d_seq.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g28e",
+   "command": "p4_chain_g28e rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g28e_set.json tag=chain_g28e ncell=169 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt",
+    "queue_gE.txt"
+   ],
+   "queue_note": "queued 2 times with the same line; the last queue file is given",
+   "layout": [
+    "radd8"
+   ],
+   "settings": 4,
+   "runs": 128,
+   "reference_runs": 4,
+   "capacitors": "none (cc = 0)",
+   "pairs": 169,
+   "set_file": "chain_g28e_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g28e_set.json",
+     "bytes": "2 332",
+     "sha256": "af1e3836 f0e2abf1 362c8270 a3a5e64e 159cac5b 518bb49b 7920715b 65b2637f",
+     "stored": "runs/chain_g28e_set.json.gz"
+    },
+    {
+     "name": "chain_g28e.json",
+     "bytes": "88 157",
+     "sha256": "1431f030 049094b7 b0f5dcc4 7db1dfbf e4e11618 7107b2be 851c28c4 4c5e2d8d",
+     "stored": "runs/chain_g28e.json.gz"
+    },
+    {
+     "name": "chain_g28e_c000.npz",
+     "bytes": "14 975 113",
+     "sha256": "25f19d34 5f0de4e7 7b62baf6 4d40506f ecebabb9 874175f8 7a9c9bc7 3c06b689",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g28e_logic.json",
+     "bytes": "1 334",
+     "sha256": "1f8b10f2 d95ce7da c80264e9 9b55f28a a528acff 4487050c 18d3e498 46b09f9c",
+     "stored": "runs/chain_g28e_logic.json.gz"
+    },
+    {
+     "name": "chain_g28e_summary.json",
+     "bytes": "106 868",
+     "sha256": "d676a55a 655b993a f9d41f83 71ca08db d4b591cb f75c0a45 dd1dd771 3dbb8999",
+     "stored": "no (large; an_chain3.py rebuilds it from the arrays)"
+    }
+   ]
+  },
+  {
+   "tag": "g28f",
+   "command": "p4_chain_g28f rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g28f_set.json tag=chain_g28f ncell=92 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gB.txt"
+   ],
+   "layout": [
+    "row"
+   ],
+   "settings": 5,
+   "runs": 160,
+   "reference_runs": 5,
+   "capacitors": "none (cc = 0)",
+   "pairs": 92,
+   "set_file": "chain_g28f_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g28f_set.json",
+     "bytes": "2 858",
+     "sha256": "73078030 f5303202 90941bde 933fcceb 3af14784 0ab528e8 29a3bc36 8b480ad5",
+     "stored": "runs/chain_g28f_set.json.gz"
+    },
+    {
+     "name": "chain_g28f.json",
+     "bytes": "30 439",
+     "sha256": "83b1c9c0 be68fba4 00c71165 737418c8 a20bbd6e ed463aa8 b077e440 3f2413ef",
+     "stored": "runs/chain_g28f.json.gz"
+    },
+    {
+     "name": "chain_g28f_c000.npz",
+     "bytes": "2 544 572",
+     "sha256": "2735beda ff20a704 2b38b35f 44946191 1b14d8ff 0b3b99aa b574dca0 4bd1af21",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g28f_summary.json",
+     "bytes": "79 501",
+     "sha256": "20979e0e 341513b6 d88dd21f 55042a4f a74bb190 c338b93c d90fe611 58b233f9",
+     "stored": "no (large; an_chain3.py rebuilds it from the arrays)"
+    },
+    {
+     "name": "chain_g28f_count.json",
+     "made_from": [
+      "chain_g28f_summary.json",
+      "chain_g28f_c000.npz",
+      "chain_g28f.json"
+     ],
+     "sources_sha256": "a304e302 b11b552a 652e2921 f811ce09 d134c40a 5ee44495 c01dcee9 8fd65cf0",
+     "stored": "runs/chain_g28f_count.json.gz",
+     "note": "made at collection time by analysis/an_count.py; sources_sha256 is the SHA-256 of the three checksums above, joined"
+    }
+   ]
+  },
+  {
+   "tag": "g28g",
+   "command": "p4_chain_g28g rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g28g_set.json tag=chain_g28g ncell=106 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt",
+    "queue_gG.txt"
+   ],
+   "queue_note": "queued 2 times with the same line; the last queue file is given",
+   "layout": [
+    "rdd4"
+   ],
+   "settings": 7,
+   "runs": 224,
+   "reference_runs": 7,
+   "capacitors": "none (cc = 0)",
+   "pairs": 106,
+   "set_file": "chain_g28g_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g28g_set.json",
+     "bytes": "4 113",
+     "sha256": "6371cd58 a70ef55b 7fbacda9 f2d7e1f8 7533658d 4039fcd8 2372dc53 fd1589ea",
+     "stored": "runs/chain_g28g_set.json.gz"
+    },
+    {
+     "name": "chain_g28g.json",
+     "bytes": "66 391",
+     "sha256": "6e295cf2 3b51d5f3 2d7147ce ab2655e6 5f6408ea df3cbda9 3255d501 9aae1dc9",
+     "stored": "runs/chain_g28g.json.gz"
+    },
+    {
+     "name": "chain_g28g_c000.npz",
+     "bytes": "16 456 159",
+     "sha256": "680034c1 c7fb05bf d66e7814 a80d3e66 44d11d11 8baf92ac f1511cac 145e6a89",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g28g_logic.json",
+     "bytes": "2 445",
+     "sha256": "9b51277e 81b3a396 3dc709c1 571ae13a 7d7f6bd8 8a8d75c8 2703a159 d4251c47",
+     "stored": "runs/chain_g28g_logic.json.gz"
+    },
+    {
+     "name": "chain_g28g_summary.json",
+     "bytes": "121 874",
+     "sha256": "4755560d ccb77c0a 020d3bc8 d527d1a0 f995f149 3a955412 6d610cba 239ff962",
+     "stored": "no (large; an_chain3.py rebuilds it from the arrays)"
+    }
+   ]
+  },
+  {
+   "tag": "g29",
+   "command": "p4_chain_g29 rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g29_set.json tag=chain_g29 ncell=16 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gB.txt"
+   ],
+   "layout": [
+    "row"
+   ],
+   "settings": 5,
+   "runs": 129,
+   "reference_runs": 5,
+   "capacitors": "none (cc = 0)",
+   "pairs": 16,
+   "set_file": "chain_g29_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g29_set.json",
+     "bytes": "2 799",
+     "sha256": "4c5a5419 27b0eba0 76a188fc 17cb8029 1c394365 89603cd9 d8365ec3 8ec3b54b",
+     "stored": "runs/chain_g29_set.json.gz"
+    },
+    {
+     "name": "chain_g29.json",
+     "bytes": "18 978",
+     "sha256": "0a9d3276 4baac461 1bbf81cf 774d09a2 c4a57cd7 525674db ad8ebd55 817deaa6",
+     "stored": "runs/chain_g29.json.gz"
+    },
+    {
+     "name": "chain_g29_c000.npz",
+     "bytes": "355 747",
+     "sha256": "3359c5a2 75263992 653cd778 94913213 c960af11 ab89a50e 6495a18e b3eb685e",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g29_summary.json",
+     "bytes": "17 760",
+     "sha256": "d544a851 0488075a 008ec682 5fcbc585 2ba06076 1bd3e167 a225cfe3 08555057",
+     "stored": "no (large; an_chain3.py rebuilds it from the arrays)"
+    },
+    {
+     "name": "chain_g29_count.json",
+     "made_from": [
+      "chain_g29_summary.json",
+      "chain_g29_c000.npz",
+      "chain_g29.json"
+     ],
+     "sources_sha256": "89b44cb3 780cb5bf 76fb9f5e 3fefba83 54a850ea 0a42d683 50ee5959 13bf4021",
+     "stored": "runs/chain_g29_count.json.gz",
+     "note": "made at collection time by analysis/an_count.py; sources_sha256 is the SHA-256 of the three checksums above, joined"
+    }
+   ]
+  },
+  {
+   "tag": "g29a",
+   "command": null,
+   "queue": [],
+   "layout": [
+    "row"
+   ],
+   "settings": 5,
+   "runs": 129,
+   "reference_runs": 5,
+   "capacitors": "none (cc = 0)",
+   "pairs": 16,
+   "set_file": null,
+   "status": "copy of batch g29 (same result index and arrays, made by a comparison script under another name); nothing stored",
+   "files": [
+    {
+     "name": "chain_g29a.json",
+     "bytes": "18 978",
+     "sha256": "0a9d3276 4baac461 1bbf81cf 774d09a2 c4a57cd7 525674db ad8ebd55 817deaa6",
+     "stored": "no (copy of g29)"
+    },
+    {
+     "name": "chain_g29a_c000.npz",
+     "bytes": "355 747",
+     "sha256": "3359c5a2 75263992 653cd778 94913213 c960af11 ab89a50e 6495a18e b3eb685e",
+     "stored": "no (copy of g29)"
+    }
+   ]
+  },
+  {
+   "tag": "g29b",
+   "command": "p4_chain_g29b rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g29_set.json tag=chain_g29b ncell=16 f=1.076 maxruns=12000 nseg=4 dt=0.00125 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gH.txt"
+   ],
+   "layout": [
+    "row"
+   ],
+   "settings": 5,
+   "runs": 129,
+   "reference_runs": 5,
+   "capacitors": "none (cc = 0)",
+   "pairs": 16,
+   "set_file": "chain_g29_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g29_set.json",
+     "bytes": "2 799",
+     "sha256": "4c5a5419 27b0eba0 76a188fc 17cb8029 1c394365 89603cd9 d8365ec3 8ec3b54b",
+     "stored": "runs/chain_g29_set.json.gz"
+    },
+    {
+     "name": "chain_g29b.json",
+     "bytes": "18 978",
+     "sha256": "0a9d3276 4baac461 1bbf81cf 774d09a2 c4a57cd7 525674db ad8ebd55 817deaa6",
+     "stored": "runs/chain_g29b.json.gz"
+    },
+    {
+     "name": "chain_g29b_c000.npz",
+     "bytes": "355 847",
+     "sha256": "dd6c66cb c3a8da55 d1cb85c7 30cdbbdd 3c7a7524 75db0411 d6b9a06c 9ed6d4ed",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    }
+   ]
+  },
+  {
+   "tag": "g29c",
+   "command": "p4_chain_g29c rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g29_set.json tag=chain_g29c ncell=16 f=1.076 maxruns=12000 nseg=8 dt=0.00125 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gH.txt"
+   ],
+   "layout": [
+    "row"
+   ],
+   "settings": 5,
+   "runs": 129,
+   "reference_runs": 5,
+   "capacitors": "none (cc = 0)",
+   "pairs": 16,
+   "set_file": "chain_g29_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g29_set.json",
+     "bytes": "2 799",
+     "sha256": "4c5a5419 27b0eba0 76a188fc 17cb8029 1c394365 89603cd9 d8365ec3 8ec3b54b",
+     "stored": "runs/chain_g29_set.json.gz"
+    },
+    {
+     "name": "chain_g29c.json",
+     "bytes": "18 978",
+     "sha256": "0a9d3276 4baac461 1bbf81cf 774d09a2 c4a57cd7 525674db ad8ebd55 817deaa6",
+     "stored": "runs/chain_g29c.json.gz"
+    },
+    {
+     "name": "chain_g29c_c000.npz",
+     "bytes": "355 886",
+     "sha256": "e79b85af e9538098 12620659 e66f7fb5 df48a32d b8ef51af db86697a e6e59034",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    }
+   ]
+  },
+  {
+   "tag": "g30",
+   "command": "p4_chain_g30 rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g30_set.json tag=chain_g30 ncell=20 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gB.txt"
+   ],
+   "layout": [
+    "sdaddx"
+   ],
+   "settings": 3,
+   "runs": 33,
+   "reference_runs": 3,
+   "capacitors": "none (cc = 0)",
+   "pairs": 20,
+   "set_file": "chain_g30_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g30_set.json",
+     "bytes": "1 675",
+     "sha256": "8d5af850 868657f1 a520a6da 94e12101 c205637d ef4f66f6 89ea8df7 9ca2ba6e",
+     "stored": "runs/chain_g30_set.json.gz"
+    },
+    {
+     "name": "chain_g30.json",
+     "bytes": "23 253",
+     "sha256": "981fd1bc 00d7eddf 5b6b059c e954a6b3 609b8cca ca352153 e9035d95 99df0050",
+     "stored": "runs/chain_g30.json.gz"
+    },
+    {
+     "name": "chain_g30_c000.npz",
+     "bytes": "458 973",
+     "sha256": "252e79b9 fe09ee68 80786b40 47b9ae49 40eb234a cbd9edd9 bf3bcbf9 74e4b87b",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g30_seq.json",
+     "bytes": "2 269",
+     "sha256": "a9a4e833 946170c4 b0eb175c a69a8759 eadb6474 bd8d324c 0a158222 3365eb94",
+     "stored": "runs/chain_g30_seq.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g30a",
+   "command": null,
+   "queue": [],
+   "layout": [
+    "sdaddx"
+   ],
+   "settings": 3,
+   "runs": 33,
+   "reference_runs": 3,
+   "capacitors": "none (cc = 0)",
+   "pairs": 20,
+   "set_file": null,
+   "status": "copy of batch g30 (same result index and arrays, made by a comparison script under another name); nothing stored",
+   "files": [
+    {
+     "name": "chain_g30a.json",
+     "bytes": "23 253",
+     "sha256": "981fd1bc 00d7eddf 5b6b059c e954a6b3 609b8cca ca352153 e9035d95 99df0050",
+     "stored": "no (copy of g30)"
+    },
+    {
+     "name": "chain_g30a_c000.npz",
+     "bytes": "458 973",
+     "sha256": "252e79b9 fe09ee68 80786b40 47b9ae49 40eb234a cbd9edd9 bf3bcbf9 74e4b87b",
+     "stored": "no (copy of g30)"
+    }
+   ]
+  },
+  {
+   "tag": "g30b",
+   "command": "p4_chain_g30b rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g30_set.json tag=chain_g30b ncell=20 f=1.076 maxruns=12000 nseg=4 dt=0.00125 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gH.txt"
+   ],
+   "layout": [
+    "sdaddx"
+   ],
+   "settings": 3,
+   "runs": 33,
+   "reference_runs": 3,
+   "capacitors": "none (cc = 0)",
+   "pairs": 20,
+   "set_file": "chain_g30_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g30_set.json",
+     "bytes": "1 675",
+     "sha256": "8d5af850 868657f1 a520a6da 94e12101 c205637d ef4f66f6 89ea8df7 9ca2ba6e",
+     "stored": "runs/chain_g30_set.json.gz"
+    },
+    {
+     "name": "chain_g30b.json",
+     "bytes": "23 253",
+     "sha256": "981fd1bc 00d7eddf 5b6b059c e954a6b3 609b8cca ca352153 e9035d95 99df0050",
+     "stored": "runs/chain_g30b.json.gz"
+    },
+    {
+     "name": "chain_g30b_c000.npz",
+     "bytes": "459 161",
+     "sha256": "1ac1e185 a8d63f3f 89f052ce 5576708e 7e7d5d86 975250f5 8511d02f 7ecca5b1",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    }
+   ]
+  },
+  {
+   "tag": "g31",
+   "command": "p4_chain_g31 rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g31_set.json tag=chain_g31 ncell=20 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt"
+   ],
+   "layout": [
+    "sdaddx"
+   ],
+   "settings": 25,
+   "runs": 1275,
+   "reference_runs": 25,
+   "capacitors": "none (cc = 0)",
+   "pairs": 20,
+   "set_file": "chain_g31_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g31_set.json",
+     "bytes": "14 453",
+     "sha256": "9ba9c687 093c185e e14c4435 055c5675 537f0335 83e7d7cc 3ea1bb38 1a398077",
+     "stored": "runs/chain_g31_set.json.gz"
+    },
+    {
+     "name": "chain_g31.json",
+     "bytes": "43 865",
+     "sha256": "c35f0e22 1844e9b1 c1d9e59a c84c1bd3 731c8ae5 ace471de bda51f10 742c2007",
+     "stored": "runs/chain_g31.json.gz"
+    },
+    {
+     "name": "chain_g31_c000.npz",
+     "bytes": "17 614 960",
+     "sha256": "5bb5e5cd 7eeff216 11e9521d 9b68623a cb59b1da eab86c1b 5b761bda e767e023",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g31_seq.json",
+     "bytes": "20 154",
+     "sha256": "4eb74cb6 16654c32 27be0855 dbd3e1ba 15b901f3 d570b4eb 7d71138d b34fc1ec",
+     "stored": "runs/chain_g31_seq.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g32",
+   "command": "p4_chain_g32 rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g32_set.json tag=chain_g32 ncell=16 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gB.txt"
+   ],
+   "layout": [
+    "row"
+   ],
+   "settings": 440,
+   "runs": 14080,
+   "reference_runs": 440,
+   "capacitors": "none (cc = 0)",
+   "pairs": 16,
+   "set_file": "chain_g32_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g32_set.json",
+     "bytes": "246 863",
+     "sha256": "b67d6e75 24b7d26d c3235a73 67c99bd3 b7382a89 92cc8b57 71d889a5 7a875892",
+     "stored": "runs/chain_g32_set.json.gz"
+    },
+    {
+     "name": "chain_g32.json",
+     "bytes": "418 659",
+     "sha256": "eb2a56b6 19d65051 717d1656 b5bbdeb5 a8c63a33 44f75c8b 9baeac52 27562253",
+     "stored": "runs/chain_g32.json.gz"
+    },
+    {
+     "name": "chain_g32_c000.npz",
+     "bytes": "40 041 741",
+     "sha256": "3c2db98a 2cd20a0d 837b9cf9 021d3939 45a834ad a448f4b5 b2d11449 9fde3018",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g32_holds.json",
+     "bytes": "8 494",
+     "sha256": "80a1f3c7 5b97e8ff 03234c8f f66b7517 2406b20d c132fc52 b62f9105 b7dfa455",
+     "stored": "runs/chain_g32_holds.json.gz"
+    },
+    {
+     "name": "chain_g32_scan.json",
+     "bytes": "150 865",
+     "sha256": "02fda5c1 7be40aa0 9e9eba02 f2b8e4d5 938ffd2e f0702ca8 eabc56a6 232b01ba",
+     "stored": "runs/chain_g32_scan.json.gz"
+    },
+    {
+     "name": "chain_g32_summary.json",
+     "bytes": "1 788 797",
+     "sha256": "1d58cb36 12cc856a 13a86b5c d106245b f6b5a30f 0b32a41e 24567bba 57cb8a22",
+     "stored": "no (large; an_chain3.py rebuilds it from the arrays)"
+    }
+   ]
+  },
+  {
+   "tag": "g33",
+   "command": "p4_chain_g33 rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g33_set.json tag=chain_g33 ncell=16 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gB.txt"
+   ],
+   "layout": [
+    "row"
+   ],
+   "settings": 297,
+   "runs": 9504,
+   "reference_runs": 297,
+   "capacitors": "none (cc = 0)",
+   "pairs": 16,
+   "set_file": "chain_g33_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g33_set.json",
+     "bytes": "166 131",
+     "sha256": "8e39fdcb 04dfc53b c80258ae d03b3b19 36eabe6c 73902d04 5a48c605 ff09df46",
+     "stored": "runs/chain_g33_set.json.gz"
+    },
+    {
+     "name": "chain_g33.json",
+     "bytes": "286 733",
+     "sha256": "b5d5985a 54ff52fe 0d2d1a24 afc484c5 50a07720 faff9aa4 21326fcd 282eec0d",
+     "stored": "runs/chain_g33.json.gz"
+    },
+    {
+     "name": "chain_g33_c000.npz",
+     "bytes": "26 593 345",
+     "sha256": "3aee70fb 94723678 c33bc0fc fba53c82 ca2ffbe1 8d5d1022 23a9918a 457e61d1",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g33_holds.json",
+     "bytes": "7 915",
+     "sha256": "ad800660 d6fdbe72 541d0128 a9d6cba4 74f1c8b9 1e0c20c1 2890c07a 7facbac5",
+     "stored": "runs/chain_g33_holds.json.gz"
+    },
+    {
+     "name": "chain_g33_scan.json",
+     "bytes": "101 601",
+     "sha256": "60b84911 ae7f6fe3 244bb44d fa662089 7c02dffc ac5287d7 3e103c34 428efb19",
+     "stored": "runs/chain_g33_scan.json.gz"
+    },
+    {
+     "name": "chain_g33_summary.json",
+     "bytes": "1 108 727",
+     "sha256": "b2746bed 6f4be9d9 938c1eea 67c694a7 58641564 38b0537e 00d1ad66 340fa028",
+     "stored": "no (large; an_chain3.py rebuilds it from the arrays)"
+    }
+   ]
+  },
+  {
+   "tag": "g34a",
+   "command": "p4_chain_g34a rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g34a_set.json tag=chain_g34a ncell=16 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gB.txt"
+   ],
+   "layout": [
+    "row"
+   ],
+   "settings": 49,
+   "runs": 2080,
+   "reference_runs": 49,
+   "capacitors": "none (cc = 0)",
+   "pairs": 16,
+   "set_file": "chain_g34a_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g34a_set.json",
+     "bytes": "30 710",
+     "sha256": "3ad5a2fa 0eafa8d4 ca3f291b c4851cac 892cafc9 22318e03 c487da2c cf0641bc",
+     "stored": "runs/chain_g34a_set.json.gz"
+    },
+    {
+     "name": "chain_g34a.json",
+     "bytes": "62 825",
+     "sha256": "b0a859f9 a9dd9218 69cef76a 24332330 550dbb11 cc36895a 9201666a 1a02b9f7",
+     "stored": "runs/chain_g34a.json.gz"
+    },
+    {
+     "name": "chain_g34a_c000.npz",
+     "bytes": "5 692 401",
+     "sha256": "eb32321e cce9c67d e36d4707 87220037 6d21e477 c5f9474a 08dd7b16 9c1c3509",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g34a_summary.json",
+     "bytes": "186 691",
+     "sha256": "5bcb1707 0682301c e9bdc1e8 81c51a6a ec8ba070 bd614bca 1409fc71 8f9af031",
+     "stored": "no (large; an_chain3.py rebuilds it from the arrays)"
+    },
+    {
+     "name": "chain_g34a_tol.json",
+     "bytes": "22 595",
+     "sha256": "3750f73e a402c6e1 173bab72 5a288f57 ab8a7675 f536be08 06bdcdd2 d56dfaba",
+     "stored": "runs/chain_g34a_tol.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g34b",
+   "command": "p4_chain_g34b rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g34b_set.json tag=chain_g34b ncell=53 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt"
+   ],
+   "layout": [
+    "radd4"
+   ],
+   "settings": 15,
+   "runs": 480,
+   "reference_runs": 15,
+   "capacitors": "none (cc = 0)",
+   "pairs": 53,
+   "set_file": "chain_g34b_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g34b_set.json",
+     "bytes": "9 134",
+     "sha256": "8d39a927 144f076a 31ae466a 21658244 3b633a26 3487195f 37e6949b c15c9bba",
+     "stored": "runs/chain_g34b_set.json.gz"
+    },
+    {
+     "name": "chain_g34b.json",
+     "bytes": "48 989",
+     "sha256": "99d7786d 0c1e7d3b cd1ac7d3 207e1533 6e7c4fc0 f75a68f0 9be032ba 2029175c",
+     "stored": "runs/chain_g34b.json.gz"
+    },
+    {
+     "name": "chain_g34b_c000.npz",
+     "bytes": "17 758 953",
+     "sha256": "aeb0af4a 69cb97df 363ce344 23e2d870 243a76ec 1a262a64 fde0d18d aa45ecbb",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g34b_logic.json",
+     "bytes": "5 269",
+     "sha256": "31025d81 9ab99691 3399a938 aaf75d9e e7fa88a7 2faace9f 38ad3a98 74215d29",
+     "stored": "runs/chain_g34b_logic.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g34c",
+   "command": "p4_chain_g34c rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g34c_set.json tag=chain_g34c ncell=20 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt"
+   ],
+   "layout": [
+    "sdaddx"
+   ],
+   "settings": 15,
+   "runs": 480,
+   "reference_runs": 15,
+   "capacitors": "none (cc = 0)",
+   "pairs": 20,
+   "set_file": "chain_g34c_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g34c_set.json",
+     "bytes": "9 149",
+     "sha256": "f60a36e4 054b2461 144ee903 3780b500 3a52f854 b0c0fb28 b78aa81c 14a8e03d",
+     "stored": "runs/chain_g34c_set.json.gz"
+    },
+    {
+     "name": "chain_g34c.json",
+     "bytes": "35 021",
+     "sha256": "2506f715 6d9f9ef0 6fe3d8e2 1250c483 8caacd1b ed5d8d75 ad88a5f4 6a387dc1",
+     "stored": "runs/chain_g34c.json.gz"
+    },
+    {
+     "name": "chain_g34c_c000.npz",
+     "bytes": "6 693 839",
+     "sha256": "c91b3b29 2e2c2552 4ed6db91 dd4bed7a 40929904 11d90a29 7ad4200b 38152675",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g34c_seq.json",
+     "bytes": "11 900",
+     "sha256": "e4e55f60 833a1aee 8faf4bae 554bf28c 33f7b5a2 366f155a be1bcf38 082fd3aa",
+     "stored": "runs/chain_g34c_seq.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g34d",
+   "command": "p4_chain_g34d rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g34d_set.json tag=chain_g34d ncell=84 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt",
+    "queue_gG.txt"
+   ],
+   "queue_note": "queued 2 times with the same line; the last queue file is given",
+   "layout": [
+    "sdacc8x"
+   ],
+   "settings": 8,
+   "runs": 256,
+   "reference_runs": 8,
+   "capacitors": "none (cc = 0)",
+   "pairs": 84,
+   "set_file": "chain_g34d_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g34d_set.json",
+     "bytes": "4 875",
+     "sha256": "0b86b648 9b7485fa ca9713cc 4aaeaf5a 7c01c51a 3c46068e 2c0428de 80836647",
+     "stored": "runs/chain_g34d_set.json.gz"
+    },
+    {
+     "name": "chain_g34d.json",
+     "bytes": "51 961",
+     "sha256": "b646504d 40919be2 1b5376fe 4190c478 6c61d7c8 fc066ec0 6fdaebef 28ddf903",
+     "stored": "runs/chain_g34d.json.gz"
+    },
+    {
+     "name": "chain_g34d_c000.npz",
+     "bytes": "14 888 705",
+     "sha256": "5a2ec368 1e2d3332 72c05597 e1c74437 cb409695 2b4670c4 5e707d5f b7574796",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g34d_seq.json",
+     "bytes": "6 716",
+     "sha256": "78624d6f 1139dbf6 efa29acf 1b593f77 9080fcfb 01aa4bec 804a148b e30afe84",
+     "stored": "runs/chain_g34d_seq.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g35a",
+   "command": "p4_chain_g35a rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g35a_set.json tag=chain_g35a ncell=53 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt",
+    "queue_gG.txt"
+   ],
+   "queue_note": "queued 2 times with the same line; the last queue file is given",
+   "layout": [
+    "radd4"
+   ],
+   "settings": 14,
+   "runs": 448,
+   "reference_runs": 14,
+   "capacitors": "none (cc = 0)",
+   "pairs": 53,
+   "set_file": "chain_g35a_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g35a_set.json",
+     "bytes": "8 904",
+     "sha256": "a44e1540 a98e3d36 371fab0f 4d2b4d8e 7c6b604e e60e7473 59e13d37 88544714",
+     "stored": "runs/chain_g35a_set.json.gz"
+    },
+    {
+     "name": "chain_g35a.json",
+     "bytes": "48 295",
+     "sha256": "0241cc42 14121620 0443f3d1 71d20024 7a56190d 2c5ab80b 16f25948 ec88a529",
+     "stored": "runs/chain_g35a.json.gz"
+    },
+    {
+     "name": "chain_g35a_c000.npz",
+     "bytes": "16 712 879",
+     "sha256": "57cd598c 5641ef6f d7010ba2 0ee404ef 4bd5e1dd f3fa26eb cc6099d2 f0211b56",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g35a_logic.json",
+     "bytes": "5 141",
+     "sha256": "5884124b a06f6e14 ab9fb9ca cd544fa3 8d4ff125 af71ccbf ea610d95 e6851610",
+     "stored": "runs/chain_g35a_logic.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g35b",
+   "command": "p4_chain_g35b rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g35b_set.json tag=chain_g35b ncell=20 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt",
+    "queue_gE.txt"
+   ],
+   "queue_note": "queued 2 times with the same line; the last queue file is given",
+   "layout": [
+    "sdaddx"
+   ],
+   "settings": 14,
+   "runs": 448,
+   "reference_runs": 14,
+   "capacitors": "none (cc = 0)",
+   "pairs": 20,
+   "set_file": "chain_g35b_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g35b_set.json",
+     "bytes": "8 918",
+     "sha256": "63d4f9ac 8e7f3298 26cfd6a8 f13b1965 64512de9 2978596f 43cd8125 ab5fa4ef",
+     "stored": "runs/chain_g35b_set.json.gz"
+    },
+    {
+     "name": "chain_g35b.json",
+     "bytes": "34 326",
+     "sha256": "1aa494a2 c04126ca 0fefb841 1800e4e0 96f05d21 3b60b200 992d8dd2 d5d44c1b",
+     "stored": "runs/chain_g35b.json.gz"
+    },
+    {
+     "name": "chain_g35b_c000.npz",
+     "bytes": "6 302 097",
+     "sha256": "ede3f293 9d2fa02a a8db6023 b14d2b5d a056ca9c bf92acc5 a92a8905 2b73a989",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g35b_seq.json",
+     "bytes": "11 493",
+     "sha256": "8841b186 979e9c8d fb762422 b449c54f 3788e224 375eed16 d7f3ec07 d67cc7f4",
+     "stored": "runs/chain_g35b_seq.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g36a",
+   "command": "p4_chain_g36a rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g36a_set.json tag=chain_g36a ncell=169 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt",
+    "queue_gE.txt"
+   ],
+   "queue_note": "queued 2 times with the same line; the last queue file is given",
+   "layout": [
+    "radd8"
+   ],
+   "settings": 2,
+   "runs": 128,
+   "reference_runs": 2,
+   "capacitors": "none (cc = 0)",
+   "pairs": 169,
+   "set_file": "chain_g36a_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g36a_set.json",
+     "bytes": "1 088",
+     "sha256": "f11f511d b1f8dcd6 f0f896db 3a76657a 2c0b95a1 ec1fa7d5 25ac9c3c e5286552",
+     "stored": "runs/chain_g36a_set.json.gz"
+    },
+    {
+     "name": "chain_g36a.json",
+     "bytes": "86 225",
+     "sha256": "fa872d8a 39435060 da91e0a3 8bb65eab 9446e06e cdc99356 73a18220 044049f5",
+     "stored": "runs/chain_g36a.json.gz"
+    },
+    {
+     "name": "chain_g36a_c000.npz",
+     "bytes": "14 709 382",
+     "sha256": "75db98ac eb1e0a91 6e72d295 c8e4b28e c39b2508 9ccbdd58 c7d89b9b 4bc559f2",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g36a_logic.json",
+     "bytes": "678",
+     "sha256": "172c6088 72929732 ebf494f7 01b0fbdd 93df5ed8 832aee2e 4f470e15 31f59834",
+     "stored": "runs/chain_g36a_logic.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g37a",
+   "command": "p4_chain_g37a rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g37a_set.json tag=chain_g37a ncell=53 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt"
+   ],
+   "layout": [
+    "radd4"
+   ],
+   "settings": 21,
+   "runs": 672,
+   "reference_runs": 21,
+   "capacitors": "none (cc = 0)",
+   "pairs": 53,
+   "set_file": "chain_g37a_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g37a_set.json",
+     "bytes": "12 146",
+     "sha256": "26e2dce1 d2b98ebf b54513b2 d1e3c26c bf48976b 6f884611 b9cb35c0 a68400da",
+     "stored": "runs/chain_g37a_set.json.gz"
+    },
+    {
+     "name": "chain_g37a.json",
+     "bytes": "54 113",
+     "sha256": "6428322d abfdf919 b7986d9e 2d95db60 8cd36444 3e8708d4 2403ffa0 71082bbf",
+     "stored": "runs/chain_g37a.json.gz"
+    },
+    {
+     "name": "chain_g37a_c000.npz",
+     "bytes": "24 864 950",
+     "sha256": "2c4b01ca a6cbcbc8 a089a4cb 68199732 0f63fe5c 68124165 608f3d1c 135cb789",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g37a_logic.json",
+     "bytes": "7 357",
+     "sha256": "f644a0db b8eaf7d4 9c018331 c118bfa9 ebb61a85 fa27fe53 28711f56 8a733ab6",
+     "stored": "runs/chain_g37a_logic.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g37b",
+   "command": "p4_chain_g37b rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g37b_set.json tag=chain_g37b ncell=169 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt",
+    "queue_gF.txt"
+   ],
+   "queue_note": "queued 2 times with the same line; the last queue file is given",
+   "layout": [
+    "radd8"
+   ],
+   "settings": 2,
+   "runs": 64,
+   "reference_runs": 2,
+   "capacitors": "none (cc = 0)",
+   "pairs": 169,
+   "set_file": "chain_g37b_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g37b_set.json",
+     "bytes": "1 162",
+     "sha256": "f1168153 d7b482b3 7ef8a32f f45684b7 e0955860 8883d316 312bf168 9424f641",
+     "stored": "runs/chain_g37b_set.json.gz"
+    },
+    {
+     "name": "chain_g37b.json",
+     "bytes": "86 273",
+     "sha256": "a0c93bc4 3d0cdbe2 325467f4 2678eb73 a0b98ce7 69305c42 c3a9cd92 326c4c2b",
+     "stored": "runs/chain_g37b.json.gz"
+    },
+    {
+     "name": "chain_g37b_c000.npz",
+     "bytes": "7 499 609",
+     "sha256": "2a08996d 918c34e2 b128261f 84c976c8 65fa9082 9d33b189 d640011c aefd9262",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g37b_logic.json",
+     "bytes": "702",
+     "sha256": "5f5c6f3c 9b976ee1 51e93279 1b1612bc b93a433b 0ede0bd0 b0f210a3 b3cd8d8a",
+     "stored": "runs/chain_g37b_logic.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g37d",
+   "command": "p4_chain_g37d rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g37d_set.json tag=chain_g37d ncell=20 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt",
+    "queue_gF.txt"
+   ],
+   "queue_note": "queued 2 times with the same line; the last queue file is given",
+   "layout": [
+    "sdaddx"
+   ],
+   "settings": 15,
+   "runs": 480,
+   "reference_runs": 15,
+   "capacitors": "none (cc = 0)",
+   "pairs": 20,
+   "set_file": "chain_g37d_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g37d_set.json",
+     "bytes": "9 495",
+     "sha256": "169f36f1 720bec76 8aa9ab25 444bc121 5cb9efad 71244aa3 7e9eda2b 99f2e7ce",
+     "stored": "runs/chain_g37d_set.json.gz"
+    },
+    {
+     "name": "chain_g37d.json",
+     "bytes": "35 260",
+     "sha256": "0aa0a348 62204692 3e88cdba af633b8b b8ef383e f8fc3651 ee57faec 96d69ac6",
+     "stored": "runs/chain_g37d.json.gz"
+    },
+    {
+     "name": "chain_g37d_c000.npz",
+     "bytes": "6 750 919",
+     "sha256": "3a36ebe9 91a908fe a3564530 7cada258 087436a4 a6f8ed0a 37b0261c 391b4981",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g37d_seq.json",
+     "bytes": "12 320",
+     "sha256": "41d5e1f1 c835a0a0 c46b0acf 8297f424 91aafbd7 f9bb1863 b0f5bc72 94314511",
+     "stored": "runs/chain_g37d_seq.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g38a",
+   "command": "p4_chain_g38a rtd/chain4.py chain backend=numpy out=rtd/conv38g set=chain_g38_set.json tag=chain_g38a ncell=20 f=1.076 maxruns=12000 nseg=4 dt=0.0025 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gH.txt"
+   ],
+   "layout": [
+    "sdaddx"
+   ],
+   "settings": 3,
+   "runs": 96,
+   "reference_runs": 3,
+   "capacitors": "none (cc = 0)",
+   "pairs": 20,
+   "set_file": "chain_g38_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g38_set.json",
+     "bytes": "1 747",
+     "sha256": "3aaaa1c6 692cbe47 1292f1d7 38d69080 492ca07c 6b1b55b6 0b1a08e7 0deb81be",
+     "stored": "runs/chain_g38_set.json.gz"
+    },
+    {
+     "name": "chain_g38a.json",
+     "bytes": "23 312",
+     "sha256": "6ea05e09 214d6a81 2813d238 ebe73b2e ed9d859b 37a31e56 94987660 3f2bd28f",
+     "stored": "runs/chain_g38a.json.gz"
+    },
+    {
+     "name": "chain_g38a_c000.npz",
+     "bytes": "1 327 796",
+     "sha256": "67f4d376 9e02d6b3 4c78a4d0 be0bdfc7 92656967 f4b8088a 90bdc0b0 e8a9ef36",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    }
+   ]
+  },
+  {
+   "tag": "g38b",
+   "command": "p4_chain_g38b rtd/chain4.py chain backend=numpy out=rtd/conv38g set=chain_g38_set.json tag=chain_g38b ncell=20 f=1.076 maxruns=12000 nseg=4 dt=0.00125 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gH.txt"
+   ],
+   "layout": [
+    "sdaddx"
+   ],
+   "settings": 3,
+   "runs": 96,
+   "reference_runs": 3,
+   "capacitors": "none (cc = 0)",
+   "pairs": 20,
+   "set_file": "chain_g38_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g38_set.json",
+     "bytes": "1 747",
+     "sha256": "3aaaa1c6 692cbe47 1292f1d7 38d69080 492ca07c 6b1b55b6 0b1a08e7 0deb81be",
+     "stored": "runs/chain_g38_set.json.gz"
+    },
+    {
+     "name": "chain_g38b.json",
+     "bytes": "23 312",
+     "sha256": "6ea05e09 214d6a81 2813d238 ebe73b2e ed9d859b 37a31e56 94987660 3f2bd28f",
+     "stored": "runs/chain_g38b.json.gz"
+    },
+    {
+     "name": "chain_g38b_c000.npz",
+     "bytes": "1 327 647",
+     "sha256": "37747daa caef07bf 0d99e92c 1c8d19d5 ce424e79 21b257e5 a0a35d2b 90572abb",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    }
+   ]
+  },
+  {
+   "tag": "g39",
+   "command": "p4_chain_g39 rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g39_set.json tag=chain_g39 ncell=16 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gB.txt"
+   ],
+   "layout": [
+    "row"
+   ],
+   "settings": 429,
+   "runs": 13728,
+   "reference_runs": 429,
+   "capacitors": "none (cc = 0)",
+   "pairs": 16,
+   "set_file": "chain_g39_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g39_set.json",
+     "bytes": "222 872",
+     "sha256": "d0b2e8cd 360fbfb9 c164a277 44e9588c c5b0d8c8 e3b001b5 684e5499 c17a2d49",
+     "stored": "runs/chain_g39_set.json.gz"
+    },
+    {
+     "name": "chain_g39.json",
+     "bytes": "390 730",
+     "sha256": "d0a5fbe3 3314ead1 d649051c 20fa2e0a fddd54e3 84195a6a 46dd3423 426bc7c5",
+     "stored": "runs/chain_g39.json.gz"
+    },
+    {
+     "name": "chain_g39_c000.npz",
+     "bytes": "38 972 499",
+     "sha256": "58994766 8eff8ba3 f36e4b56 a1778f1b abae5871 28944938 cb16535a 2ce94689",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g39_holds.json",
+     "bytes": "8 761",
+     "sha256": "5bcff59b 6b32dca8 69dbfb57 9eab2be9 7cbcff85 511fe2ba de16165c ad423fa9",
+     "stored": "runs/chain_g39_holds.json.gz"
+    },
+    {
+     "name": "chain_g39_scan.json",
+     "bytes": "141 964",
+     "sha256": "4cebb793 5c7f7f91 062ba322 0b97259d fdfbca13 48e4ffa6 15ecd958 6aa3005d",
+     "stored": "runs/chain_g39_scan.json.gz"
+    },
+    {
+     "name": "chain_g39_summary.json",
+     "bytes": "1 708 015",
+     "sha256": "c4e22386 ea6a4bd0 002fab9d 83e556fc 51dd0401 8d307962 ccf77c56 4b263fbd",
+     "stored": "no (large; an_chain3.py rebuilds it from the arrays)"
+    }
+   ]
+  },
+  {
+   "tag": "g40",
+   "command": "p4_chain_g40 rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g40_set.json tag=chain_g40 ncell=53 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt"
+   ],
+   "layout": [
+    "radd4"
+   ],
+   "settings": 11,
+   "runs": 352,
+   "reference_runs": 11,
+   "capacitors": "none (cc = 0)",
+   "pairs": 53,
+   "set_file": "chain_g40_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g40_set.json",
+     "bytes": "7 250",
+     "sha256": "942edaad 22d6b7df 7d562c86 b34374f5 4a0507c5 b155d40b 6e083880 10026164",
+     "stored": "runs/chain_g40_set.json.gz"
+    },
+    {
+     "name": "chain_g40.json",
+     "bytes": "45 626",
+     "sha256": "d6fc08cc 74aa3d5a e802b8f7 b0278001 d810d686 5ceefc87 dab85a8b bb622aa3",
+     "stored": "runs/chain_g40.json.gz"
+    },
+    {
+     "name": "chain_g40_c000.npz",
+     "bytes": "13 002 393",
+     "sha256": "dcb1356c b29d31e2 85ef796a 927a150d 5f4101ee 17de8bb6 d58353f7 80ebf3df",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g40_logic.json",
+     "bytes": "3 776",
+     "sha256": "2d2864c1 c22a361b 9e5d24f9 14cd1425 cf9d8e1d dcc8cc36 c39cb13e 78fcc54a",
+     "stored": "runs/chain_g40_logic.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g41",
+   "command": "p4_chain_g41 rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g41_set.json tag=chain_g41 ncell=169 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt",
+    "queue_gF.txt"
+   ],
+   "queue_note": "queued 2 times with the same line; the last queue file is given",
+   "layout": [
+    "radd8"
+   ],
+   "settings": 4,
+   "runs": 128,
+   "reference_runs": 4,
+   "capacitors": "none (cc = 0)",
+   "pairs": 169,
+   "set_file": "chain_g41_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g41_set.json",
+     "bytes": "2 495",
+     "sha256": "8ca3b4d4 9c978409 3eb15f31 dd29f7f4 695441a7 ca78188d 0df7b6f3 52357407",
+     "stored": "runs/chain_g41_set.json.gz"
+    },
+    {
+     "name": "chain_g41.json",
+     "bytes": "88 312",
+     "sha256": "1571b242 c55f9aa5 1322bfae 000e3aac ca80373d da576c5e b00db8e4 aa3eb732",
+     "stored": "runs/chain_g41.json.gz"
+    },
+    {
+     "name": "chain_g41_c000.npz",
+     "bytes": "15 007 437",
+     "sha256": "39e40ad7 9177abb0 d0a337fa c8060a9f 0079e561 d7100061 053e9a93 5689e1c4",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g41_logic.json",
+     "bytes": "1 354",
+     "sha256": "420b627c 05c6cbd0 fa3c38ef e9a27aed df7d2e22 d6a1aadb 39d15b69 a010dc24",
+     "stored": "runs/chain_g41_logic.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g41x",
+   "command": "p4_chain_g41x rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g41x_set.json tag=chain_g41x ncell=169 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt",
+    "queue_gE.txt"
+   ],
+   "queue_note": "queued 2 times with the same line; the last queue file is given",
+   "layout": [
+    "radd8"
+   ],
+   "settings": 6,
+   "runs": 256,
+   "reference_runs": 6,
+   "capacitors": "none (cc = 0)",
+   "pairs": 169,
+   "set_file": "chain_g41x_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g41x_set.json",
+     "bytes": "3 583",
+     "sha256": "317d2dc6 23a2ffa9 9e3190a6 75f6f446 0b02aa48 0c013a2a 82b0ef6c 07ebcbf2",
+     "stored": "runs/chain_g41x_set.json.gz"
+    },
+    {
+     "name": "chain_g41x.json",
+     "bytes": "90 138",
+     "sha256": "169eac46 3d21edba a57428e7 45b5dc6f 2ed2d06d b5338d34 ef02dcd5 ed7cc791",
+     "stored": "runs/chain_g41x.json.gz"
+    },
+    {
+     "name": "chain_g41x_c000.npz",
+     "bytes": "29 713 151",
+     "sha256": "9df6830b 21001d9a af02fbf8 82681094 c9cbc1e7 77bb709c e2f88268 afc07c80",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g41x_logic.json",
+     "bytes": "2 029",
+     "sha256": "6657b4a2 ea615e5a 55838e08 39db3638 eb9e75d8 b2dcaaf0 f64c212a 3f224f8c",
+     "stored": "runs/chain_g41x_logic.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g42",
+   "command": "p4_chain_g42 rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g42_set.json tag=chain_g42 ncell=20 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt",
+    "queue_gG.txt"
+   ],
+   "queue_note": "queued 2 times with the same line; the last queue file is given",
+   "layout": [
+    "sdaddx"
+   ],
+   "settings": 30,
+   "runs": 960,
+   "reference_runs": 30,
+   "capacitors": "none (cc = 0)",
+   "pairs": 20,
+   "set_file": "chain_g42_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g42_set.json",
+     "bytes": "18 256",
+     "sha256": "efa25a39 bc94ec8e 9f21cf9c 0ea1512e e367c4b0 1c5bff6e 088587b2 99511cf6",
+     "stored": "runs/chain_g42_set.json.gz"
+    },
+    {
+     "name": "chain_g42.json",
+     "bytes": "49 405",
+     "sha256": "d991df02 028ddc1d 8ef67309 d69f7e41 edbc6b5e a187c9df ab075546 92151c3d",
+     "stored": "runs/chain_g42.json.gz"
+    },
+    {
+     "name": "chain_g42_c000.npz",
+     "bytes": "13 452 753",
+     "sha256": "42b0ac3f 8788c7b5 e25f3845 7075aabb 1d0cd128 d39ce9c9 923278f9 0fca0bb3",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g42_seq.json",
+     "bytes": "23 529",
+     "sha256": "48a2686a ff0b92ba 5f3298c2 84658385 99927382 f0fc1bb4 b7991783 da7c6560",
+     "stored": "runs/chain_g42_seq.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g43",
+   "command": "p4_chain_g43 rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g43_set.json tag=chain_g43 ncell=84 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt",
+    "queue_gG.txt"
+   ],
+   "queue_note": "queued 2 times with the same line; the last queue file is given",
+   "layout": [
+    "sdacc8x"
+   ],
+   "settings": 4,
+   "runs": 128,
+   "reference_runs": 4,
+   "capacitors": "none (cc = 0)",
+   "pairs": 84,
+   "set_file": "chain_g43_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g43_set.json",
+     "bytes": "2 503",
+     "sha256": "26a1f52e 59575a0f f3395e9d 8cf8826b aff3a2ee 765623a5 95b413c2 ff9ee6a8",
+     "stored": "runs/chain_g43_set.json.gz"
+    },
+    {
+     "name": "chain_g43.json",
+     "bytes": "48 150",
+     "sha256": "98059ed8 06663c16 9eced347 92ac55b9 2db234de dc84713d 43e1f2d5 eff494ff",
+     "stored": "runs/chain_g43.json.gz"
+    },
+    {
+     "name": "chain_g43_c000.npz",
+     "bytes": "7 433 654",
+     "sha256": "01dca991 208b68eb 6f9fd747 cd4416c7 8275f02f cfc33227 019bed3d 49e321ff",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g43_seq.json",
+     "bytes": "3 247",
+     "sha256": "5a8f2c1d 4a87be68 5a5cc46b 6fd19466 e88ae494 01785cd4 f97944a7 bce0c6ec",
+     "stored": "runs/chain_g43_seq.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g44",
+   "command": "p4_chain_g44 rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g44_set.json tag=chain_g44 ncell=53 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt",
+    "queue_gE.txt"
+   ],
+   "queue_note": "queued 2 times with the same line; the last queue file is given",
+   "layout": [
+    "radd4"
+   ],
+   "settings": 24,
+   "runs": 768,
+   "reference_runs": 24,
+   "capacitors": "none (cc = 0)",
+   "pairs": 53,
+   "set_file": "chain_g44_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g44_set.json",
+     "bytes": "14 300",
+     "sha256": "3f4419b5 20cbd8a9 ef2f3dd9 316be2c9 0a49b836 039d129d be81e399 c2b548c5",
+     "stored": "runs/chain_g44_set.json.gz"
+    },
+    {
+     "name": "chain_g44.json",
+     "bytes": "57 302",
+     "sha256": "d9ce13c1 8f7b15c8 be46cfaf a93152fc c9bbebcf 137feec0 5bc18f7d 4508176a",
+     "stored": "runs/chain_g44.json.gz"
+    },
+    {
+     "name": "chain_g44_c000.npz",
+     "bytes": "28 572 034",
+     "sha256": "b0620d84 c3b4b018 baec6ebb 200bbb0c abf82e5b ceffe6cd 56e3329e 502db1e0",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g44_logic.json",
+     "bytes": "8 352",
+     "sha256": "cf767ac8 ed91d28f 241b446e f729559c 9e9a2212 69a41361 429c7205 2b7552f0",
+     "stored": "runs/chain_g44_logic.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g46",
+   "command": "p4_chain_g46 rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g46_set.json tag=chain_g46 ncell=16 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gB.txt"
+   ],
+   "layout": [
+    "row"
+   ],
+   "settings": 198,
+   "runs": 6336,
+   "reference_runs": 198,
+   "capacitors": "none (cc = 0)",
+   "pairs": 16,
+   "set_file": "chain_g46_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g46_set.json",
+     "bytes": "104 154",
+     "sha256": "83f85f2c 70ac1954 8786d941 30b59453 6830e01b 91cb7445 60babc18 d6305140",
+     "stored": "runs/chain_g46_set.json.gz"
+    },
+    {
+     "name": "chain_g46.json",
+     "bytes": "189 314",
+     "sha256": "bbef620d 5913d118 5f7875ae a9420540 787456db 5699f842 daa7e311 eec45e3d",
+     "stored": "runs/chain_g46.json.gz"
+    },
+    {
+     "name": "chain_g46_c000.npz",
+     "bytes": "18 001 415",
+     "sha256": "b17f0a18 6752948d c8f23942 95e2ff8a bc447e3c 90afe676 d09cf9a5 e947daad",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g46_holds.json",
+     "bytes": "4 077",
+     "sha256": "4bcb9835 04ba1ead 1548c5ae d7884e5a 4a6e35dc ae1717ab 33f6da4d 4b407efa",
+     "stored": "runs/chain_g46_holds.json.gz"
+    },
+    {
+     "name": "chain_g46_scan.json",
+     "bytes": "66 067",
+     "sha256": "5c893631 5fdbedd6 f34cb4ea ecbf88c4 672ae9ad efddd84e f13695f8 9f4609a1",
+     "stored": "runs/chain_g46_scan.json.gz"
+    },
+    {
+     "name": "chain_g46_summary.json",
+     "bytes": "794 939",
+     "sha256": "356a6080 7e4a3c13 bcbbfdd1 8e44dbcf 4a1748b6 959f1e6d d4fdc791 12079418",
+     "stored": "no (large; an_chain3.py rebuilds it from the arrays)"
+    }
+   ]
+  },
+  {
+   "tag": "g47",
+   "command": "p4_chain_g47 rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g47_set.json tag=chain_g47 ncell=53 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt",
+    "queue_gG.txt"
+   ],
+   "queue_note": "queued 2 times with the same line; the last queue file is given",
+   "layout": [
+    "radd4"
+   ],
+   "settings": 12,
+   "runs": 384,
+   "reference_runs": 12,
+   "capacitors": "none (cc = 0)",
+   "pairs": 53,
+   "set_file": "chain_g47_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g47_set.json",
+     "bytes": "7 226",
+     "sha256": "83ec5b77 6289ee1f 7a4645a7 880ae04a 8f167fd9 f0f7a8db a31a6163 7f8ab3e6",
+     "stored": "runs/chain_g47_set.json.gz"
+    },
+    {
+     "name": "chain_g47.json",
+     "bytes": "45 962",
+     "sha256": "cbe6131c ed1199c1 bbf5d21a dfa8fd1d b5277bd0 65d6c35e 39415183 f7fe9441",
+     "stored": "runs/chain_g47.json.gz"
+    },
+    {
+     "name": "chain_g47_c000.npz",
+     "bytes": "14 319 869",
+     "sha256": "72caf73b 7ad61590 9f2c034a 2e587aab e29ae25e b389bd1e 2e585d4d bd9840aa",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g47_logic.json",
+     "bytes": "4 269",
+     "sha256": "ebd1d9c4 3d1a2fea 2106e55e c4f40466 314c7245 cc5bc13a dece84c4 e45d880b",
+     "stored": "runs/chain_g47_logic.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g48",
+   "command": "p4_chain_g48 rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g48_set.json tag=chain_g48 ncell=53 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt"
+   ],
+   "layout": [
+    "radd4"
+   ],
+   "settings": 46,
+   "runs": 1472,
+   "reference_runs": 46,
+   "capacitors": "none (cc = 0)",
+   "pairs": 53,
+   "set_file": "chain_g48_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g48_set.json",
+     "bytes": "26 860",
+     "sha256": "0c2da37f a820d3c5 28a15e20 d4bac4d7 89685543 33e14795 84a159c3 acf38bf8",
+     "stored": "runs/chain_g48_set.json.gz"
+    },
+    {
+     "name": "chain_g48.json",
+     "bytes": "77 801",
+     "sha256": "973667e3 8c80d81f df9862ce eb237c6f 63089285 7edc8604 a786aa99 78d66a5b",
+     "stored": "runs/chain_g48.json.gz"
+    },
+    {
+     "name": "chain_g48_c000.npz",
+     "bytes": "54 464 836",
+     "sha256": "8fe924a2 8c848e65 572280ac b7bf557e b2f39107 febb60c1 c35a3138 53828277",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g48_logic.json",
+     "bytes": "16 706",
+     "sha256": "051f231b d5e82c2e 872fd1b7 2ad74dd3 d4fb1027 70ba017c 6f433d07 91780423",
+     "stored": "runs/chain_g48_logic.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g49",
+   "command": "p4_chain_g49 rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g49_set.json tag=chain_g49 ncell=20 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt"
+   ],
+   "layout": [
+    "sdaddx"
+   ],
+   "settings": 43,
+   "runs": 1376,
+   "reference_runs": 43,
+   "capacitors": "none (cc = 0)",
+   "pairs": 20,
+   "set_file": "chain_g49_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g49_set.json",
+     "bytes": "25 127",
+     "sha256": "93452e1d bd504ff9 1a4035f5 1a31bd10 7ff275fa c111d884 c18f5c88 f8cb17c8",
+     "stored": "runs/chain_g49_set.json.gz"
+    },
+    {
+     "name": "chain_g49.json",
+     "bytes": "61 006",
+     "sha256": "2d41682f 1ef3c5d0 1071cefa ed129aed a40a7cbd 7ffb3b91 13b39e43 8923fe9d",
+     "stored": "runs/chain_g49.json.gz"
+    },
+    {
+     "name": "chain_g49_c000.npz",
+     "bytes": "19 193 671",
+     "sha256": "6eeb4437 9b34e137 6654f336 dd0e261e b78e3e72 6a81b57a 46498bf1 37b37508",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g49_seq.json",
+     "bytes": "33 911",
+     "sha256": "80e54549 02edff72 76c81651 8405b9b0 064602ad 2e48d7f2 dba1ee54 fb273b57",
+     "stored": "runs/chain_g49_seq.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g50",
+   "command": "p4_chain_g50 rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g50_set.json tag=chain_g50 ncell=169 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt",
+    "queue_gF.txt"
+   ],
+   "queue_note": "queued 2 times with the same line; the last queue file is given",
+   "layout": [
+    "radd8"
+   ],
+   "settings": 2,
+   "runs": 64,
+   "reference_runs": 2,
+   "capacitors": "none (cc = 0)",
+   "pairs": 169,
+   "set_file": "chain_g50_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g50_set.json",
+     "bytes": "1 152",
+     "sha256": "b02e9cd6 e96b4195 895a649a cad80d8e c4ae8158 e0991f21 804bf5ae 79f06d51",
+     "stored": "runs/chain_g50_set.json.gz"
+    },
+    {
+     "name": "chain_g50.json",
+     "bytes": "86 263",
+     "sha256": "d543f947 e4e2e7eb d393a741 53b8b612 56944de5 1730a51b 54c1e682 989fd757",
+     "stored": "runs/chain_g50.json.gz"
+    },
+    {
+     "name": "chain_g50_c000.npz",
+     "bytes": "7 503 758",
+     "sha256": "1eb15a10 2dd89c3e 31977e71 f1608486 aee603f5 9d790a22 cb9f17cb f89b28dc",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g50_logic.json",
+     "bytes": "724",
+     "sha256": "0d4864c5 6817e5ff 2f3c5a35 62e54f48 1bbdd88a 76c98aef 6e9f6e30 8e41fea5",
+     "stored": "runs/chain_g50_logic.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g51",
+   "command": "p4_chain_g51 rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g51_set.json tag=chain_g51 ncell=84 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gA.txt",
+    "queue_gF.txt"
+   ],
+   "queue_note": "queued 2 times with the same line; the last queue file is given",
+   "layout": [
+    "sdacc8x"
+   ],
+   "settings": 4,
+   "runs": 128,
+   "reference_runs": 4,
+   "capacitors": "none (cc = 0)",
+   "pairs": 84,
+   "set_file": "chain_g51_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g51_set.json",
+     "bytes": "2 300",
+     "sha256": "ae56cf36 9c329b39 f2b04fec 5c9a10b4 ba0c08fa a89cb041 6fa94b51 c3b601e4",
+     "stored": "runs/chain_g51_set.json.gz"
+    },
+    {
+     "name": "chain_g51.json",
+     "bytes": "47 953",
+     "sha256": "8c36ddfe 5db6652d 9689659a 7c6b99bc 5ccad8ae ce953653 c8c2ac22 9ece68b2",
+     "stored": "runs/chain_g51.json.gz"
+    },
+    {
+     "name": "chain_g51_c000.npz",
+     "bytes": "7 431 323",
+     "sha256": "465b58e5 a4c34d99 23241cdc c19a05da d9b6c248 cdb3170e 6e97f648 5c7ac59f",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g51_seq.json",
+     "bytes": "3 302",
+     "sha256": "4d26fbdf 80910d3f 0348ae4f 275b45a7 3679dc8e de72e470 b1e76b90 9eb8ee0a",
+     "stored": "runs/chain_g51_seq.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g52",
+   "command": "p4_chain_g52 rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g52_set.json tag=chain_g52 ncell=53 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gC.txt"
+   ],
+   "layout": [
+    "radd4"
+   ],
+   "settings": 4,
+   "runs": 1024,
+   "reference_runs": 4,
+   "capacitors": "1 of 4 settings have cc > 0",
+   "pairs": 53,
+   "set_file": "chain_g52_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g52_set.json",
+     "bytes": "2 938",
+     "sha256": "8ebfe858 a0fef218 f61583f0 57eb53a6 6859534e 3fd621aa 63f36e04 36c84136",
+     "stored": "runs/chain_g52_set.json.gz"
+    },
+    {
+     "name": "chain_g52.json",
+     "bytes": "38 830",
+     "sha256": "45da619e 93b0a9c8 a931349a 159213d9 71aa27ad 6786288b e2810ced 952159d2",
+     "stored": "runs/chain_g52.json.gz"
+    },
+    {
+     "name": "chain_g52_c000.npz",
+     "bytes": "36 939 187",
+     "sha256": "3a601d1b be12c7f5 e6e1214b 0f9e8f9f 8c92270b c606303a 71a131da 220a2a28",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g52_logic.json",
+     "bytes": "1 552",
+     "sha256": "efb02a6d af1b362e 9ad56558 15c61099 a3e8b2b6 8aab9b4d 6f01c5eb fd841409",
+     "stored": "runs/chain_g52_logic.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g53",
+   "command": "p4_chain_g53 rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g53_set.json tag=chain_g53 ncell=53 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gD.txt"
+   ],
+   "layout": [
+    "radd4"
+   ],
+   "settings": 5,
+   "runs": 1280,
+   "reference_runs": 5,
+   "capacitors": "none (cc = 0)",
+   "pairs": 53,
+   "set_file": "chain_g53_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g53_set.json",
+     "bytes": "3 791",
+     "sha256": "31b2e483 edaa5845 6e25e37a 03d3a86c d6dc325b f98a86dd 68a6967b 5a27a3fb",
+     "stored": "runs/chain_g53_set.json.gz"
+    },
+    {
+     "name": "chain_g53.json",
+     "bytes": "40 036",
+     "sha256": "4e2ec2e4 9e20a2ad da7f664a 0b368e2a ff3165cb 03d57b4c 182ce656 b657f44d",
+     "stored": "runs/chain_g53.json.gz"
+    },
+    {
+     "name": "chain_g53_c000.npz",
+     "bytes": "45 996 730",
+     "sha256": "7f034517 41c9d7b6 e68e7fef d6b9663f 382910d9 17153dc3 6426d36d 0a23bc81",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g53_logic.json",
+     "bytes": "1 886",
+     "sha256": "ffd6fbf7 23f919b6 25f391c5 afb778a2 e67babfe f71ee3b2 bf85f666 51a93510",
+     "stored": "runs/chain_g53_logic.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g54a",
+   "command": "p4_chain_g54a rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g54a_set.json tag=chain_g54a ncell=53 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gI.txt"
+   ],
+   "layout": [
+    "radd4"
+   ],
+   "settings": 2,
+   "runs": 128,
+   "reference_runs": 2,
+   "capacitors": "none (cc = 0)",
+   "pairs": 53,
+   "set_file": "chain_g54a_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g54a_set.json",
+     "bytes": "1 089",
+     "sha256": "9a7e6718 f2c32d7a 7984e6cd 369f8946 ceb3b8c5 696c0c95 cf9e6667 ceb7f67e",
+     "stored": "runs/chain_g54a_set.json.gz"
+    },
+    {
+     "name": "chain_g54a.json",
+     "bytes": "36 307",
+     "sha256": "c4fe30a4 1d453a42 ad7d3fb4 9752ab39 54a89371 23dbac1e 774db2fb b7437a0a",
+     "stored": "runs/chain_g54a.json.gz"
+    },
+    {
+     "name": "chain_g54a_c000.npz",
+     "bytes": "4 676 612",
+     "sha256": "f66fdb70 34a98681 ce04a5bc bfcc59f8 183a4c17 ec40e63c 0475eeeb 2ff8f985",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g54a_logic.json",
+     "bytes": "782",
+     "sha256": "7dc1533c fd38f06c ee1305e2 3e61059b ac83983e 5849f298 f977b2a5 0c6b9d62",
+     "stored": "runs/chain_g54a_logic.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g54b",
+   "command": "p4_chain_g54b rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g54b_set.json tag=chain_g54b ncell=20 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gI.txt"
+   ],
+   "layout": [
+    "sdaddx"
+   ],
+   "settings": 1,
+   "runs": 127,
+   "reference_runs": 1,
+   "capacitors": "none (cc = 0)",
+   "pairs": 20,
+   "set_file": "chain_g54b_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g54b_set.json",
+     "bytes": "547",
+     "sha256": "17b7f8cc 2cfa3d16 089f3325 126db9b6 b395c936 d8e5c11a c8557486 0c343523",
+     "stored": "runs/chain_g54b_set.json.gz"
+    },
+    {
+     "name": "chain_g54b.json",
+     "bytes": "21 413",
+     "sha256": "287e299b eb10d532 db77d761 0b789b35 e5a532f1 24b73feb 8f3c185e 67b1666c",
+     "stored": "runs/chain_g54b.json.gz"
+    },
+    {
+     "name": "chain_g54b_c000.npz",
+     "bytes": "1 736 435",
+     "sha256": "6af69c8e b88483d1 39a8fdc9 5c8eeec8 d90d5864 30ac30c4 f73abb61 2c95a617",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g54b_seq.json",
+     "bytes": "915",
+     "sha256": "6fc05ea6 1cc3c81e dd54479f 58304537 7e41589a ada2c5db 4aae8a12 5836aa53",
+     "stored": "runs/chain_g54b_seq.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g54c",
+   "command": "p4_chain_g54c rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g54c_set.json tag=chain_g54c ncell=84 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gI.txt"
+   ],
+   "layout": [
+    "sdacc8x"
+   ],
+   "settings": 3,
+   "runs": 192,
+   "reference_runs": 3,
+   "capacitors": "none (cc = 0)",
+   "pairs": 84,
+   "set_file": "chain_g54c_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g54c_set.json",
+     "bytes": "1 639",
+     "sha256": "07122868 2b742b19 465bec19 c23a93c7 053548e8 4672c198 d40a0319 48d302ce",
+     "stored": "runs/chain_g54c_set.json.gz"
+    },
+    {
+     "name": "chain_g54c.json",
+     "bytes": "46 975",
+     "sha256": "b402963e 1c8a7463 fb6a4a0e de01850e acc3e3c1 3cd05484 c2ff6c33 e8a94275",
+     "stored": "runs/chain_g54c.json.gz"
+    },
+    {
+     "name": "chain_g54c_c000.npz",
+     "bytes": "11 041 938",
+     "sha256": "bf90e183 b8f75097 5dc0cb2e 98955933 7f0f4e4e 6bd8d4b2 90e37227 6a4bf70e",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g54c_seq.json",
+     "bytes": "2 978",
+     "sha256": "25abc2a6 0734473e 08046821 464a8d50 602400f5 f80e0cef 05f417ee e19753ee",
+     "stored": "runs/chain_g54c_seq.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g54d",
+   "command": "p4_chain_g54d rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g54d_set.json tag=chain_g54d ncell=169 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gI.txt"
+   ],
+   "layout": [
+    "radd8"
+   ],
+   "settings": 2,
+   "runs": 128,
+   "reference_runs": 2,
+   "capacitors": "none (cc = 0)",
+   "pairs": 169,
+   "set_file": "chain_g54d_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g54d_set.json",
+     "bytes": "1 089",
+     "sha256": "856991e7 9d75cfc8 003a3dfc 6c0b4f35 ed349f36 22337e1f 63e18630 051c14ae",
+     "stored": "runs/chain_g54d_set.json.gz"
+    },
+    {
+     "name": "chain_g54d.json",
+     "bytes": "86 226",
+     "sha256": "4b97b7c4 b168ab58 d439393b f489bcee 0906479e 58438262 b53e6beb 9e2d8b5b",
+     "stored": "runs/chain_g54d.json.gz"
+    },
+    {
+     "name": "chain_g54d_c000.npz",
+     "bytes": "14 876 572",
+     "sha256": "5f56b3ed c8316c57 e3938012 7cfbe632 1d647469 49d7cd81 e44c3b1a abce7892",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g54d_logic.json",
+     "bytes": "808",
+     "sha256": "a9ec4955 fdbf2a1c ebf9b4f3 0db68241 8ece066a e441fa93 abc8724e 5ae4aeda",
+     "stored": "runs/chain_g54d_logic.json.gz"
+    }
+   ]
+  },
+  {
+   "tag": "g54e",
+   "command": "p4_chain_g54e rtd/chain4.py chain backend=torch out=rtd/out3 set=chain_g54e_set.json tag=chain_g54e ncell=16 f=1.076 maxruns=16000 nseg=4 iv=0.9333,1.667,2.218",
+   "queue": [
+    "queue_gI.txt"
+   ],
+   "layout": [
+    "row"
+   ],
+   "settings": 1,
+   "runs": 127,
+   "reference_runs": 1,
+   "capacitors": "none (cc = 0)",
+   "pairs": 16,
+   "set_file": "chain_g54e_set.json",
+   "status": "results",
+   "files": [
+    {
+     "name": "chain_g54e_set.json",
+     "bytes": "603",
+     "sha256": "839abe4f 5f71adac fe109b16 64498765 b1b7bd52 9caf9c4c 6a0e45f7 d5ea57cb",
+     "stored": "runs/chain_g54e_set.json.gz"
+    },
+    {
+     "name": "chain_g54e.json",
+     "bytes": "15 349",
+     "sha256": "07c2d060 52db7de2 9eb9af68 333f0041 e8bbaa05 c1457af2 5a232e17 845a2878",
+     "stored": "runs/chain_g54e.json.gz"
+    },
+    {
+     "name": "chain_g54e_c000.npz",
+     "bytes": "346 220",
+     "sha256": "eb15d7a6 f88b6ae8 8e5b53ba 1e16ae3c 58c1b7de d6ef6171 d541f58d 347cff83",
+     "stored": "no (array file; obtain it separately and check it against this checksum)"
+    },
+    {
+     "name": "chain_g54e_summary.json",
+     "bytes": "3 715",
+     "sha256": "2d1c4c38 363c1905 9aedc487 b822c5ba 35588766 062382af 2b5d2e58 6a92a714",
+     "stored": "no (large; an_chain3.py rebuilds it from the arrays)"
+    },
+    {
+     "name": "chain_g54e_tol.json",
+     "bytes": "452",
+     "sha256": "045bdfd7 8a45334a 5b7e3c2a 4b1df6e6 cbaab78f bfeae7f7 4a23011e 45f7d0c2",
+     "stored": "runs/chain_g54e_tol.json.gz"
+    }
+   ]
+  }
+ ]
+}

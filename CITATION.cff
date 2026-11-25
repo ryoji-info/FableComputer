@@ -38,7 +38,8 @@ preferred-citation:
     the full revision history live in papers/REVISION-HISTORY.md, and
     papers/ERRATA.md reports any adopted correction not yet in the current deposit
     (three rows outstanding, opened 3 November 2026, on Part I's own citations). For the quantum extension
-    cite Part II, and for the ternary-model embedding Part III (see references).
+    cite Part II, for the ternary-model embedding Part III, and for the RTD-pair
+    parametron, a fork in the device, Part IV (see references).
 references:
   - type: report
     title: >-
@@ -71,3 +72,20 @@ references:
       The DOI above is the v1.1 deposit of 29 October 2026, the citable version;
       every number it computes reproduces from fable-model-ternary/ in this
       repository.
+  - type: report
+    title: >-
+      The Fable Computer, Part IV: A Parametron of Pumped
+      Resonant-Tunnelling-Diode Pairs
+    authors:
+      - family-names: Furui
+        given-names: Ryoji
+    year: 2026
+    month: 11
+    version: v1.0
+    url: https://github.com/ryoji-info/FableComputer/blob/main/papers/Fable-Computer-Part-IV.pdf
+    notes: >-
+      Draft, not yet deposited on Zenodo. A fork in the device: pairs of
+      resonant-tunnelling diodes, no graphene and no plasmon. Its claims are
+      results of a circuit model that is not one of the released chains of
+      Parts I to III; the model, its listings and the stored runs are
+      fable-model-parametron/ in this repository.

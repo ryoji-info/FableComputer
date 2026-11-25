@@ -1,0 +1,22 @@
+r4: serial adder on two rails, 20 pairs, 28 links, carry loop closed across the rails, cell F, pump 25 %, links 6 %
+
+1. Runs without noise or spread
+   supply   cc (model fF)  pairs right  margin  lowest (a) defined bits  lowest (a) all  lowest (b) common  weakest pair (b)  level of St (a)
+   0.940 V  0              20 of 20     0.863    203.6 mV                 203.6 mV         205.1 mV          St   slot 11       211.4 mV
+   1.015 V  0              20 of 20     0.859    252.5 mV                 252.5 mV         266.5 mV          St   slot 27       274.2 mV
+   0.940 V  0.02           20 of 20     0.846    195.7 mV                 195.7 mV         198.0 mV          St   slot 17       204.5 mV
+   1.015 V  0.02           20 of 20     0.825    186.5 mV                 186.5 mV         196.9 mV          St   slot 17       219.0 mV
+   at 0.940 V the capacitors lower the weakest level (b) by 3.4 %
+   at 1.015 V the capacitors lower the weakest level (b) by 26.1 %
+   session record of the comparison of codes, not in this package (numpy, double precision, reading (b)): without the capacitors 205.1 mV at 0.94 V and 266.5 mV at 1.015 V;
+   with them 198.0 and 196.9 mV.  Reading (a) over every pair and slot, with them: 195.7 and 186.5 mV.  Second code as written: 200.9 and 263.9 mV.
+   session, graphics processor, reading (a) on defined bits, without the capacitors: 203.6 mV at 0.94 V (chain_g30), 252.5 mV at 1.015 V (chain_g31)
+
+2. 16 runs at 0.94 V with physical noise and a 3 % spread of the inductance, no link capacitors
+   pairs right without noise or spread: 20 of 20
+   wrong decisions: 0 of 9920, in 0 of 16 runs
+   wrong sum bits (St): 0 of 496; wrong sums (runs with a wrong sum bit): 0 of 16
+   rms phase error of St 3.76 deg, of the worst pair 4.25 deg
+   session, chain_g30 (graphics processor), 16 runs: 0 wrong decisions of 9920, 0 wrong sums of 16
+
+   operands as 32-bit numbers, least significant bit first: a = 269050478, b = 689345942, a + b = 958396420; expected St stream (slots 1 to 31) = 958396420; equal: True

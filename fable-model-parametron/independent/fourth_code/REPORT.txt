@@ -1,0 +1,132 @@
+A. HOW IT WAS COMPUTED
+
+Source: only BLIND_SPEC_T1.md. All code is mine, in rebuild_t1y . Internal units: V, mA, ps, fF, kohm, nH.
+
+Unknowns per pair (11): supply node v_S; per half (+ and -): junction voltage v_j, conduction current i_x, pad voltage v_P, winding current i_L, stub voltage v_st. Layout (r) has 583 unknowns, layout (c) 220.
+
+Equations per half, with i_rho = (v_S - v_j - v_P - e_rho)/rho:
+- C_b dv_S/dt = (v_clk - v_S + e_b)/R_b - i_rho(+) - i_rho(-)
+- C_d dv_j/dt = i_rho - i_x - i_sh
+- tau_d di_x/dt = frac I_full(v_j) - i_x
+- C_p dv_P/dt = i_rho - i_L - (v_P - v_st + e_k)/R_k
+- C_s dv_st/dt = (v_P - v_st + e_k)/R_k + I_drive
+- L di_L/dt = v_P - R_L i_L - e_L, for all windings at once. L is one matrix: per pair L_h = L_odd/(1+k) = 4.2344 pH on the diagonal, -k L_h between the two halves; per link 0.5 M on (b+,a+) and (b-,a-), -0.5 M on (b+,a-) and (b-,a+), symmetric. M = -0.06 sqrt(L_odd,a L_odd,b) for a normal link, +0.06 for a reversed one. The square root is my choice for spread draws; it equals -0.06 L_odd without spread.
+- v_clk = V_s win(t - dT/4)(1 + p cos(4 pi f_d t + pi(q + 1.5 d))). win as specified (3.0 ps raised-cosine edges centred at 0 and 0.75 T).
+- Signal: v_odd = (v_st(+) - v_st(-))/2.
+
+Integrator: BDF2 at a fixed step, linear part implicit through a precomputed inverse of (I - (2/3) dt A). The diode term is solved by three fixed-point iterations per step from an extrapolated predictor. Going from 3 to 6 iterations changed phases by 2e-5 degrees and levels by 2e-5 mV.
+
+Time step: dt = 0.0145 ps (64 steps per carrier period, 1000 per clock period). Halving check, nominal point, no noise, all pair-slots 1 to 31:
+- Layout (r): phase change at most 0.54 degrees (mean 0.43), level change at most 1.06 mV (0.38 %).
+- Layout (c): phase change at most 0.54 degrees (mean 0.42), level change at most 1.03 mV (0.37 %).
+
+Noise. Every resistor gets a series voltage source and each diode a parallel current source. Each source is held constant over one step, as an independent Gaussian number:
+- Resistor R (ohm): sigma_e^2 = f x 2 k_B T R / dt [V^2, dt in s]. That is the two-sided density 2kTR, the same as the one-sided 4kTR. At T = 353 K and dt = 0.0145 ps: rho 2.84 mV, R_L 2.50 mV, R_b 1.30 mV, R_k 0.82 mV.
+- Shot: sigma_i^2 = f x q |i_x| / dt [A^2]. This is the two-sided density q i_x, the same as the one-sided 2 q i_x. It is 0.235 mA at i_x = 5 mA.
+- f = 1 in all noisy runs.
+- Check: one pair with zero supply. The odd-mode power below 5 THz was 3.84e-7 V^2 at dt and 3.65e-7 V^2 at dt/2. It is dt-independent in band and below kT/2C (7.0e-7 V^2), as expected with the noiseless diode leakage term. The raw stub-node variance depends on dt, because R_k C_s = 1.5e-4 ps puts that noise far above any band of interest.
+
+Drive: +-0.4 mA cos(2 pi f_d t) into the stub nodes, switched on abruptly for t in [sT - T/4, sT + 3T/4). I take "until the pair switches off" as the centre of the falling edge.
+
+Starting state: everything zero at t = -4 ps. Each pair's supply is held at 0 until its own slot-0 rising edge, so no pair starts in a fictitious slot -1. For task 1 the pair starts from its DC point (unique root of v_j = V_s - (2R_b + rho + R_L) frac I_full(v_j); 0.774 V at 0.94 V) plus a 1 mV odd seed. The seed sets v_P odd = 1 mV cos(phi), v_j odd opposite, and i_L odd = (1 mV / Z) sin(phi), with Z = sqrt(L_odd/(C_p + C_s)).
+
+Read window: starts T/4 + 0.25 ps = 3.875 ps into the pair's own slot and lasts two carrier periods (1.859 ps). X = 2 mean(v_odd exp(-i 2 pi f_d t)) over the samples in it. Level = |X| in mV, the amplitude of the carrier component. Phase = arg X against cos(2 pi f_d t).
+
+Axis and sign. Axis_0 is the mean phase of the driven pairs for bit 1, about 7 to 11 degrees depending on V_s. A 4-pair row without noise showed that one link turns the phase by +134 to +135 degrees per clock depth (the pump-step half of 270 degrees). That is how "copies" looks on the carrier. So axis_d = axis_0 + 135 d degrees, and a pair's bit is the sign of Re(X exp(-i axis_d)). It follows that 4 depths flip the label. The expected logic treats the X3 to C links into the next slot as inverted, which is what the cross-wired loop of layout (c) needs. Expected values come from propagating majority logic over the links of the layout.
+
+Wrong decision: |phase(run) - phase(run without noise and spread, same V_s and p)| > 90 degrees, in slots 1 to 31.
+
+Spread draws: g ~ N(0,1) per pair from numpy default_rng, seed 20261123 for (r) and 20261124 for (c). Draw k always uses row k, at every V_s point. Noise seeds are 777000 + k for (r) and 778000 + k for (c).
+
+B. TABLES
+
+Task 1, one pair, constant supply, no pump, 300 ps runs. "Level" is half the peak-to-peak of v_odd over the last 30 ps.
+- 0.90 to 0.96 V: no oscillation. At 0.96 the seed decays slowly (1 mV to 2.6e-5 V at 100 ps).
+- 0.97 V: oscillates, 1.0502 THz, 162 mV
+- 0.98: 1.0535 THz, 191 mV
+- 1.00: 1.0598 THz, 227 mV
+- 1.02: 1.0644 THz, 251 mV
+- 1.04: 1.0676 THz, 269 mV
+- 1.05 (middle): 1.0687 THz, 276 mV (carrier amplitude 271 mV), even-mode residue 9 mV
+- 1.06: 1.0695 THz, 282 mV
+- 1.08: 1.0705 THz, 291 mV
+- 1.10: 1.0706 THz, 297 mV
+- 1.12: 1.0698 THz, 298 mV
+- 1.14: 1.0681 THz, 293 mV. It starts late: 33 mV at 100 ps, full level by 200 ps.
+- 1.15 to 1.20 V: no oscillation (decays).
+Free-running range: 0.97 to 1.14 V inclusive.
+
+Pumped, V_s = 0.94 V, p = 0.25, 12 seed phases (0 to 330 degrees in steps of 30): every seed oscillates, at 1.07600 THz, half the pump. Level 195 mV (carrier amplitude 198 mV). Two distinct final phases: +13.0 degrees (seeds 0, 30, 60, 270, 300, 330) and -167.0 degrees (seeds 90 to 240). The even mode carries 87 mV at the pump.
+
+Task 2, layout (r), 0.94 V, p = 0.25, no noise, no spread:
+- Every pair right in every slot: yes, 0 of 1643 pair-slots wrong.
+- S_0 to S_3 and C_4 give the sum in 31 of 31 slots.
+- Largest distance of any phase from its axis line: 4.1 degrees.
+- Lowest level of any pair in any slot: 196.4 mV (S1, slot 16).
+- Lowest level by kind: driven 233.4 mV (A0, slot 17); buffer 212.7 (A3, 10); M 201.8 (M2, 8); G 210.0 (G3, 2); K 219.4 (K3, 31); S 196.4 (S1, 16); C 201.3 (C3, 5).
+
+Task 3, layout (r), no noise, no spread. At every level: 0 of 1643 wrong, sum right in 31 of 31 slots. Columns: V_s; lowest level (pair, slot); lowest by kind for driven, buffer, M, G, K, S, C; largest distance from the axis line.
+- 0.895: 77.4 mV (S1, 16); 179.4, 122.7, 105.1, 111.7, 119.5, 77.4, 105.2; 4.1 deg
+- 0.910: 131.4 (S1, 16); 199.8, 161.3, 147.4, 154.8, 163.8, 131.4, 148.0; 3.8 deg
+- 0.970: 234.8 (S0, 21); 258.9, 247.8, 236.1, 245.9, 255.4, 234.8, 235.0; 5.2 deg
+- 0.985: 245.5 (C3, 6); 268.6, 261.3, 247.6, 258.1, 267.7, 248.1, 245.5; 5.9 deg
+- 1.000: 250.5 (C3, 6); 276.0, 272.4, 254.7, 265.2, 275.3, 256.4, 250.5; 7.0 deg
+- 1.015: 246.4 (C3, 6); 280.8, 280.1, 252.6, 263.4, 274.7, 255.3, 246.4; 8.8 deg
+
+Task 4, layout (r), 0.94 V, noise f = 1 and 3 % spread, 32 draws:
+- Wrong decisions: 0 of 52,576. Runs with any wrong decision: 0 of 32. Slots with any wrong output pair: 0. Pairs that go wrong: none.
+- Phase change from the clean run: 99th percentile 8.9 degrees, maximum 12.8.
+- Lowest level: 148.3 mV. By kind: driven 190.9, buffer 159.6, M 161.0, G 169.8, K 187.6, S 148.3, C 163.3 mV.
+
+Task 5, layout (r), same conditions, 32 draws at each level (32 did not cost too much):
+- 1.000 V: 0 of 52,576 wrong; 0 runs; 0 slots. Lowest level 182.2 mV. 99th-percentile phase change 12.9 degrees.
+- 1.015 V: 14 of 52,576 wrong, in 2 of 32 runs (draws 1 and 12). 4 slots have a wrong output: draw 1 slot 14, draw 12 slots 1, 9 and 23. Wrong pairs: M3 3, G3 3, K3 1, S3 4, C4 3; all in stage 3. Wrong pairs read at 10 to 98 mV, except S3 at 180 and 245 mV. Lowest level 10.5 mV (M3). By kind: driven 233, buffer 214, M 10.5, G 25.3, K 17.3, S 32.8, C 36.5 mV. Fifteen pair-slots read below 50 mV.
+- 0.895 V: 0 of 52,576 wrong; 0 runs; 0 slots. Levels are very low, though: lowest 2.7 mV (S3, draw 16, slot 2). The S pairs' median level is 100 mV, 3103 pair-slots read below 100 mV and 83 below 50 mV. By kind: driven 140, buffer 77, M 54, G 44, K 70, S 2.7, C 55 mV.
+
+Diagnostic runs at 1.015 V, layout (r):
+- Draw 12 with spread and no noise: 7 wrong (M3, G3, K3, S3 and C4 in slot 23; S3 in slots 3 and 9).
+- Draw 12 with noise and no spread: 0 wrong, lowest level 242 mV.
+- Draw 1 with spread and no noise: 0 wrong, but S3 slot 14 sits at 15.6 mV and -59 degrees.
+So the spread pushes these pairs to the edge and causes the failures; noise alone does not.
+
+Task 6, layout (c), no noise, no spread:
+- 0.94 V: 0 of 620 wrong; St equals the sum stream in 31 of 31 slots. Lowest level 195.9 mV (St, slot 11).
+- 1.000 V: 0 of 620; 31 of 31. Lowest level 254.6 mV (St, 11).
+- 1.015 V: 0 of 620; 31 of 31. Lowest level 257.7 mV (St, 27).
+
+Layout (c), noise and 3 % spread, 32 draws at each level (more than the 16 asked):
+- 0.94 V: 0 of 19,840 wrong; 0 runs. Lowest level 162.4 mV.
+- 1.000 V: 0 of 19,840; 0 runs. Lowest level 190.5 mV.
+- 1.015 V: 56 of 19,840 wrong, all in 1 run (draw 3, where Mt has g = +3.57). St is wrong in slots 18 to 21. Fc is wrong 9 times, scattered over the run at 4 to 120 mV. The other 47 wrong decisions cluster in slots 17 to 21 and touch every non-driven pair: Ct 3, Cc 4, Mt 2, Mc 3, Gt 3, Gc 2, Kt 3, Kc 4, St 4, Sc 3, X2t 2, X2c 3, X3t 4, X3c 3, Ft 4. Lowest level 4.3 mV (Fc).
+- Diagnostics for draw 3 at 1.015 V: spread without noise gives 9 wrong, all in Fc. Noise without spread gives 0 wrong.
+
+C. WHAT I DID NOT EXPECT FROM THE SPECIFICATION'S DESCRIPTION
+
+1. The nominal supply of 0.94 V lies below the pair's free-running threshold of 0.97 V; the pair oscillates there only with the pump. The levels 1.000 and 1.015 V lie inside the free-running range (0.97 to 1.14 V). The adder still computes correctly at both without noise and spread. All wrong decisions I found are at 1.015 V and are driven by the inductance spread.
+2. At 1.015 V the failures in (r) sit only in the deepest stage (M3, G3, K3, S3, C4). There they come with collapsed levels of 10 to 65 mV in the read window. In (c), Fc fails on its own with the spread alone; it has one input and drives nothing.
+3. In (c), one carry error in draw 3 at 1.015 V runs round the loop and spoils four consecutive sums (slots 18 to 21) before it clears.
+4. At 0.895 V nothing goes wrong, but the S pairs are still small at read time: median 100 mV, down to 2.7 mV under noise. A "right" phase at a few mV is a thin margin that the 90-degree rule does not show.
+5. A forward link turns the carrier phase by +135 degrees per clock depth. So "copies the sign" holds on axes that rotate with depth, and four depths invert the label. The spec does not say this; it is consistent with the cross-wired loop of (c).
+
+D. WHAT I DID NOT RUN AND LIMITS
+
+- Layout (a) was not run. I ran only a 4-pair row, to fix the axis convention.
+- No scan of noise factor f; every noisy run uses f = 1 with spread together. The noise-only and spread-only splits were run only for (r) draws 1 and 12 and (c) draw 3, at 1.015 V.
+- Each draw is one noise realisation; 32 draws per point. Zero errors in 52,576 decisions bounds the rate only to about 6e-5 at 95 %. The error counts at 1.015 V come from 2 runs, or 1 run, and are not stable statistics.
+- The time-step halving was done only at 0.94 V, once per layout. Read-window placement and length were not varied.
+- In task 1 I did not test large seeds below 0.97 V for hysteresis. I did not check whether the low-level S pairs at 0.895 V grow later in the slot.
+- The drive switches abruptly; I did not test a smoothed drive.
+- Without spread, M_link = -0.06 L_odd exactly. With spread I used the geometric mean of the two pairs' L_odd, which is my choice.
+
+E. FILES (all under rebuild_t1y )
+
+- rtdsim.py: model, BDF2 integrator, noise, read window
+- layouts.py: layouts (r), (c) and the row; expected logic
+- t1_single.py: task 1; results in t1_results_scan.json and t1_results_pump.json
+- run_lay.py: layout runs; output in res\<layout>_<tag>.npz
+- analyse.py and detail.py: decoding, counts and lowest levels
+- noise_check.py: noise check
+- iter_check.py: iteration check
+- res\rep_r_n_094.json, res\rep_r_n32_1.000.json, res\rep_r_n32_1.015.json, res\rep_r_n32_0.895.json, res\rep_c_n_0.94.json, res\rep_c_n_1.000.json, res\rep_c_n_1.015.json: noisy summaries. The rep_r_n_1.000/1.015/0.895 files are earlier 16-draw summaries.
+- res\detail_r_*.txt and res\detail_c_1.015.txt: listings of wrong events and low levels
+- res\r_sp_*, r_no_*, c_sp_*, c_no_*: spread-only and noise-only diagnostic runs

@@ -26,10 +26,11 @@ The deposited manuscripts are archived on Zenodo. Cite the version you read.
 | Part II | v1.6 | [10.5281/zenodo.21385646](https://doi.org/10.5281/zenodo.21385646) |
 | Part III | **v1.1** (current deposit, 29 October 2026) | [10.5281/zenodo.23758679](https://doi.org/10.5281/zenodo.23758679) |
 | Part III | v1.0 (4 October 2026; the Zenodo record carries no version label) | [10.5281/zenodo.23132802](https://doi.org/10.5281/zenodo.23132802) |
+| Part IV | **v1.0** (draft, current) | not yet deposited |
 
 Earlier version DOIs continue to resolve to the manuscripts as they stood. The
 repository copies in [`papers/`](.) are the deposited v6.1 / v2.1 / v1.1 (each deposited
-PDF has the MD5 of the repository file). [`ERRATA.md`](ERRATA.md) has no outstanding
+PDF has the MD5 of the repository file). Part IV v1.0 is a draft and has not been deposited. [`ERRATA.md`](ERRATA.md) has no outstanding
 row: the rows that tracked the gap between the July deposits (v6.0 / v2.0) and the
 October repository copies were discharged by the 29 October 2026 deposits and are
 preserved at the end of the v6.1 and v2.1 blocks below.
@@ -45,6 +46,7 @@ and Part II as v2.0 (10.5281/zenodo.21607070). The table above gives the current
 
 | paper | version | date | summary |
 |---|---|---|---|
+| Part IV | **v1.0** | November 2026 · draft, not yet deposited | First manuscript of Part IV, a fork in the device: phase logic with pairs of resonant-tunnelling diodes on a damped, centre-tapped inductor, biased below their own oscillation threshold and pumped at twice their carrier. A circuit model that is not one of the released chains (fable-model-parametron/): one pair, rows, adders of 53 to 169 pairs, a serial adder and an accumulator at a 225-GHz carrier, the spread budget, the sensitivity to stray capacitance, the noise margins, and a 1-THz-class specification validated in the model only; three further codes written from specifications; four gates RG1–RG4, whose pass thresholds are not yet set. |
 | Part I | **v6.1** | October 2026 · [DOI](https://doi.org/10.5281/zenodo.23758795) | Folds the community notes promoted after v6.0 into the text as dated qualifications and corrections, in each note's own numbers and scope. From October: notes/2026-10-08-no-rail-scale-one-at-deciding-inputs.md, notes/2026-10-15-graphene-fluid-threshold-turns-on-current-channel.md, notes/2026-10-16-no-density-route-to-a-not-in-the-released-cell.md and notes/2026-10-17-a-pumped-cell-restores-phase-in-a-narrow-window.md (each promoted by maintainer direction after the round-4 cap), and notes/2026-10-13-phase-is-not-the-easier-half-for-the-cell.md (3-of-3 clean on round 4). From July–August: notes/2026-07-31-physical-launch-gated-frontier.md; the three notes of 2026-08-01 (bench-gate-g1-reissued, gated-requirement-round-trip, ratio-bias-gain-table); both notes of 2026-08-02 (zero-floor-spec-dissolved, where-the-released-threshold-bracket-stops-working-a-scanned); notes/2026-08-05-idler-added-noise-and-the-nf4db-requirement.md; notes/2026-08-06-mth-num-record-length-and-fit-convention.md; notes/2026-08-07-mth-num-excess-decomposition.md; notes/2026-08-12-gated-zero-residual-phasor.md; and notes/2026-08-25-what-the-20db-launch-budget-denominates.md. What moved: (1) with a physical launch that is confined to its slot and gated by the data, the in-model fan-out-2 frontier is ≈0.07 THz (69 GHz, band 63–74 GHz); ≈0.1 THz survives only under the pulse-knee convention. (2) §5's logic family is labelled the design model. The released cell compresses rather than thresholds, has no density route to a NOT and no output rail, and re-clamps a loaded cascade near a 2 % drive; no multi-cell cascade has been run, so §7.4's cascade figure is a compression-form budget. This qualification is carried to the Abstract, §1, §4, §6.5, §7, §9.4, §11 and Tables 1, A1 and B1. (3) The cells' own transfer phase draws on the ±15° clock budget, and Table 5's latency is picoseconds per cell in-model. (4) The kinetic band, threshold and thermal reading are the closure's. In the single-rate kinetic operator, with the drift heat shed, no 353 K threshold exists for A ≤ 1, and whether graphene's own fluid has one is open, so the Boltzmann–Maxwell solve is asked first whether a threshold exists. (5) Re-sync spacing is 10–13 cells, and NF ≤ 4 dB binds only ahead of the gain and on the idler. (6) Table 7 keeps one pre-registered G1 row; the G1a/G1b re-issue is recorded as a proposal. Issues #88, #97, #139, #140 and #141 are cited as open items only. Part III (v1.1, not deposited) is cited as [45] and Part II as [46]. A primary-source re-check of external facts (October 2026) updates §2 and §3.2. The disclaimer records how the October account was prepared, and Table B1 gains a row for A. Pre-registered pass thresholds and the four kinetic-solve bands are unchanged; no released-chain output changed. ERRATA rows I-11 to I-40 stay in papers/ERRATA.md until this revision is deposited. |
 | Part I | **v6.0** | July 2026 · [DOI](https://doi.org/10.5281/zenodo.21606810) | Reader-focused revision. Folds in the July 2026 record audit (notes/2026-07-26-record-audit-ten-findings.md) and the ISI/flush/reset/burst timing thread (notes 07-22 through 07-25): the ring-down containment mechanism of §6.2(iii) is corrected, F = 2 logic closure at the 4-ps slot is withdrawn in favour of the ≈0.1 THz in-model operating point with the 0.25 THz design baseline retained, gate G2's model target is corrected, the knee/rail reference planes are labelled, §7.3's convergence claim now names the exact inviscid limit and the physical kinetic threshold, and the boundary-channel rider appears in the Abstract and scoreboard. Revision notes moved to this file; version statements removed from the document. |
 | Part I | v5.6 | July 2026 | This update folds the community’s boundary-kinetics resolution and the drive-sweep calibration — notes/2026-07-18-boundary-channel-contact-gated.md (promoted 3-of-3) … |
@@ -66,6 +68,32 @@ and Part II as v2.0 (10.5281/zenodo.21607070). The table above gives the current
 | Part II | v1.1 | July 2026 | This revision incorporates the July 2026 community review (Agent Lab discussions #1–#6; technical notes at github.com/ryoji-info/FableComputer). |
 
 ---
+
+## Part IV — v1.0 (November 2026): first manuscript
+
+**Not yet deposited.** The manuscript and its companion package (`fable-model-parametron/`)
+enter the repository together. Part IV is a fork in the device: it has no graphene and no
+plasmon, its circuit model is not one of the released model chains of Parts I to III and does
+not extend them, and it changes no number of those Parts. The model, its runs and the
+manuscript were prepared in a maintainer-operated Claude Code session in November 2026. The
+manuscript's Appendix RB lists the checks: each part against its sources, three readers of
+the whole text, two readers of the literature on earlier logic with series
+negative-resistance devices, two last checkers and one checker of the last changes, all of
+them AI agents. The few changes made after that were not checked by an agent, and no human
+expert has reviewed the model or the text.
+
+**Open before deposit.**
+
+- The pass thresholds of gates RG1 to RG4: the manuscript's table of gates reads "to be set
+  by the author before deposit".
+- Two statements of the earlier Parts are touched by Part IV's reading of its sources and are
+  not corrected there (its Appendix RC, last paragraph): Part III's sentence on the best
+  single RTD oscillators near 1 THz (Section 8.1(e)) and Part I's "to 1.92 THz" (Section 2).
+  Whether either needs a row in [`ERRATA.md`](ERRATA.md) is the maintainer's decision; no
+  promoted note binds them.
+- A reader acting as a referee proposed a much shorter abstract, fewer tables and moving the
+  account of the study's own corrections (Appendix RB) out of the paper. These proposals
+  were not taken up.
 
 ## Part III — v1.1 (October 2026)
 

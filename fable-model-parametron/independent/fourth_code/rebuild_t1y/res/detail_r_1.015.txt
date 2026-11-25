@@ -1,0 +1,31 @@
+﻿WRONG draw 1 pair S3 slot 14 dphi -165 level 39.1 mV
+WRONG draw 12 pair M3 slot 1 dphi 165 level 20.4 mV
+WRONG draw 12 pair M3 slot 9 dphi -148 level 10.5 mV
+WRONG draw 12 pair M3 slot 23 dphi 168 level 22.2 mV
+WRONG draw 12 pair G3 slot 1 dphi 177 level 64.9 mV
+WRONG draw 12 pair G3 slot 9 dphi -175 level 35.8 mV
+WRONG draw 12 pair G3 slot 23 dphi 176 level 25.3 mV
+WRONG draw 12 pair K3 slot 23 dphi 171 level 27.1 mV
+WRONG draw 12 pair S3 slot 1 dphi -178 level 245.3 mV
+WRONG draw 12 pair S3 slot 9 dphi 177 level 179.5 mV
+WRONG draw 12 pair S3 slot 23 dphi 172 level 69.1 mV
+WRONG draw 12 pair C4 slot 1 dphi 157 level 98.5 mV
+WRONG draw 12 pair C4 slot 9 dphi 142 level 36.5 mV
+WRONG draw 12 pair C4 slot 23 dphi 155 level 94.8 mV
+LOW draw 12 pair M3 slot 9 level 10.5 mV dphi -148
+LOW draw 12 pair K3 slot 9 level 17.3 mV dphi 1
+LOW draw 12 pair M3 slot 1 level 20.4 mV dphi 165
+LOW draw 12 pair M3 slot 23 level 22.2 mV dphi 168
+LOW draw 12 pair G3 slot 23 level 25.3 mV dphi 176
+LOW draw 12 pair K3 slot 23 level 27.1 mV dphi 171
+LOW draw 12 pair S2 slot 1 level 32.8 mV dphi -22
+LOW draw 12 pair G3 slot 9 level 35.8 mV dphi -175
+LOW draw 1 pair S3 slot 7 level 36.4 mV dphi -70
+LOW draw 12 pair C4 slot 9 level 36.5 mV dphi 142
+LOW draw 1 pair S3 slot 14 level 39.1 mV dphi -165
+LOW draw 12 pair K3 slot 1 level 41.4 mV dphi 5
+LOW draw 1 pair S3 slot 25 level 43.6 mV dphi -30
+LOW draw 12 pair C3 slot 23 level 46.0 mV dphi -68
+LOW draw 24 pair S1 slot 28 level 47.3 mV dphi -61
+per-draw min level mV: 0:157 1:36 2:226 3:179 4:207 5:224 6:145 7:205 8:213 9:171 10:212 11:198 12:10 13:215 14:224 15:218 16:189 17:213 18:213 19:198 20:230 21:207 22:221 23:232 24:47 25:194 26:226 27:214 28:190 29:198 30:157 31:202
+pair-slots below 100 mV: 42  below 50 mV: 15

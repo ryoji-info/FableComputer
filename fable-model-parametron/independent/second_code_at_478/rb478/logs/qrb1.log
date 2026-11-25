@@ -1,0 +1,11 @@
+[    0.0 s 17:45:08] queue: starting rbb_clean
+[   63.2 s 17:46:11] queue: finished rbb_clean exit code 0 | GPU 0 %, 487 MiB, 18 C, 11.70 W
+[   63.2 s 17:46:11] queue: starting rbb_n478r
+[  378.4 s 17:51:27] queue: finished rbb_n478r exit code 0 | GPU 1 %, 487 MiB, 18 C, 11.42 W
+[  378.4 s 17:51:27] queue: starting rbb_st478r
+[  378.8 s 17:51:27] queue: finished rbb_st478r exit code 0 | GPU 1 %, 487 MiB, 18 C, 11.30 W
+[  378.8 s 17:51:27] queue: starting rbb_n478k
+[  724.5 s 17:57:13] queue: finished rbb_n478k exit code 0 | GPU 0 %, 487 MiB, 18 C, 11.71 W
+[  724.5 s 17:57:13] queue: starting rbb_st478k
+[  724.8 s 17:57:13] queue: finished rbb_st478k exit code 0 | GPU 0 %, 487 MiB, 18 C, 11.69 W
+[  724.8 s 17:57:13] queue done

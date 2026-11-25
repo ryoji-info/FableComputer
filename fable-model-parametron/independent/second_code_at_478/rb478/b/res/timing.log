@@ -1,0 +1,5 @@
+run2 c478 c2 G 6 Bg 13 steps 59438 dt 0.03965 ps float64 vjmax 1.412 V time 63.0 s
+run2 n100r c2 G 32 Bg 13 steps 59438 dt 0.03965 ps float32 vjmax 1.425 V time 316.7 s
+run2 n478r c2 G 32 Bg 13 steps 59438 dt 0.03965 ps float32 vjmax 1.428 V time 315.0 s
+run2 n16r c2 G 32 Bg 13 steps 59438 dt 0.03965 ps float32 vjmax 1.439 V time 321.0 s
+run2 n478k c2 G 160 Bg 1 steps 59438 dt 0.03965 ps float32 vjmax 1.285 V time 345.4 s

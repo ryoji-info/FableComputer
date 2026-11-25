@@ -1,0 +1,46 @@
+task 4, early window: dt 0.01982 -> 0.00991 ps, all 16 pairs x slots 1..10
+  max|dphase| 0.06 deg, rms dphase 0.06 deg, mean dphase 0.06 deg; max|dlevel| 0.23 mV (0.10 %), mean dlevel -0.22 mV
+  pair 14: mean dphase 0.06 deg, max|dphase| 0.06; level 228.8 -> 228.6 mV (mean over slots)
+  per pair mean dphase: 0.05 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.06 0.06
+  all right: dt True, dt/2 True
+  task 5 (dt): axis of pair n (deg): 10.7 144.3 -80.6 54.4 -170.7 -35.7 99.3 -125.7 9.3 144.3 -80.7 54.3 -170.7 -35.6 99.3 -124.8
+     ax(n+1)-ax(n) mod 180 in [0,180): 133.5 135.1 135.0 135.0 135.0 135.0 135.0 135.0 135.0 135.0 135.0 135.0 135.1 134.9 136.0
+     mean 134.97 deg, std 0.47 deg, min 133.5, max 136.0 (n = 0..14, 15 steps); without step 0->1: mean 135.07 std 0.26
+     per-slot phase step mod 180: mean over slots per n: 133.5 135.1 135.0 135.0 135.0 135.0 135.0 135.0 135.0 135.0 135.0 135.0 135.1 134.9 136.0 | max spread over slots 0.70 deg
+  task 5 (dt/2): axis of pair n (deg): 10.8 144.3 -80.6 54.4 -170.6 -35.6 99.4 -125.6 9.4 144.4 -80.6 54.4 -170.6 -35.6 99.3 -124.7
+     ax(n+1)-ax(n) mod 180 in [0,180): 133.5 135.1 135.0 135.0 135.0 135.0 135.0 135.0 135.0 135.0 135.0 135.0 135.1 134.9 136.0
+     mean 134.97 deg, std 0.47 deg, min 133.5, max 136.0 (n = 0..14, 15 steps); without step 0->1: mean 135.07 std 0.26
+     per-slot phase step mod 180: mean over slots per n: 133.5 135.1 135.0 135.0 135.0 135.0 135.0 135.0 135.0 135.0 135.0 135.0 135.1 134.9 136.0 | max spread over slots 0.71 deg
+  dev from own axis, max over pairs/slots: dt 0.29 deg
+task 4, late window: dt 0.01982 -> 0.00991 ps, all 16 pairs x slots 1..10
+  max|dphase| 0.06 deg, rms dphase 0.05 deg, mean dphase 0.05 deg; max|dlevel| 0.27 mV (0.13 %), mean dlevel -0.20 mV
+  pair 14: mean dphase 0.05 deg, max|dphase| 0.05; level 194.2 -> 194.0 mV (mean over slots)
+  per pair mean dphase: 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.06
+  all right: dt True, dt/2 True
+  task 5 (dt): axis of pair n (deg): 5.1 140.2 -85.5 49.5 -175.4 -40.4 94.5 -130.5 4.6 139.6 -85.5 49.5 -175.5 -40.3 94.4 -121.0
+     ax(n+1)-ax(n) mod 180 in [0,180): 135.1 134.4 135.0 135.1 135.0 134.9 135.0 135.0 135.1 134.9 135.0 135.0 135.2 134.7 144.6
+     mean 135.60 deg, std 2.51 deg, min 134.4, max 144.6 (n = 0..14, 15 steps); without step 0->1: mean 135.63 std 2.60
+     per-slot phase step mod 180: mean over slots per n: 135.1 134.4 135.0 135.1 135.0 134.9 135.0 135.0 135.1 134.9 135.0 135.0 135.2 134.7 144.6 | max spread over slots 1.29 deg
+  task 5 (dt/2): axis of pair n (deg): 5.1 140.2 -85.4 49.6 -175.3 -40.3 94.6 -130.4 4.6 139.7 -85.4 49.6 -175.4 -40.3 94.4 -120.9
+     ax(n+1)-ax(n) mod 180 in [0,180): 135.1 134.4 135.0 135.1 135.0 134.9 135.0 135.0 135.1 134.9 135.0 135.0 135.2 134.7 144.6
+     mean 135.60 deg, std 2.51 deg, min 134.4, max 144.6 (n = 0..14, 15 steps); without step 0->1: mean 135.63 std 2.60
+     per-slot phase step mod 180: mean over slots per n: 135.1 134.4 135.0 135.1 135.0 134.9 135.0 135.0 135.1 134.9 135.0 135.0 135.2 134.7 144.6 | max spread over slots 1.29 deg
+  dev from own axis, max over pairs/slots: dt 0.57 deg
+
+pair 0 / 1 per q (clean, early window): axis of pair 0 vs the drive phase (drive cos(w t) has phase 0), min level
+  q 0.25  pair0 axis    10.7 deg  minlev0  245.9 mV  meanlev0  248.4  minlev1  236.9  maxdev0   0.1 maxdev1   0.1
+  q 0.50  pair0 axis    29.1 deg  minlev0  240.1 mV  meanlev0  242.6  minlev1  235.3  maxdev0   0.2 maxdev1   0.2
+  q 0.75  pair0 axis    46.9 deg  minlev0  222.1 mV  meanlev0  225.5  minlev1  231.1  maxdev0   0.5 maxdev1   0.3
+  q 1.00  pair0 axis    61.5 deg  minlev0  168.9 mV  meanlev0  179.2  minlev1  217.7  maxdev0   1.5 maxdev1   0.4
+  q 1.25  pair0 axis   -62.5 deg  minlev0   92.2 mV  meanlev0  112.3  minlev1  198.1  maxdev0   5.0 maxdev1   0.9
+  q 1.50  pair0 axis   -46.9 deg  minlev0  199.5 mV  meanlev0  204.3  minlev1  228.4  maxdev0   0.4 maxdev1   0.3
+  q 1.75  pair0 axis   -27.1 deg  minlev0  230.1 mV  meanlev0  232.3  minlev1  234.3  maxdev0   0.1 maxdev1   0.3
+  q 2.00  pair0 axis    -7.9 deg  minlev0  242.8 mV  meanlev0  245.1  minlev1  236.6  maxdev0   0.1 maxdev1   0.2
+  q 2.25  pair0 axis    10.7 deg  minlev0  245.9 mV  meanlev0  248.4  minlev1  236.9  maxdev0   0.1 maxdev1   0.1
+  q 2.50  pair0 axis    29.1 deg  minlev0  240.1 mV  meanlev0  242.6  minlev1  235.3  maxdev0   0.2 maxdev1   0.2
+  q 2.75  pair0 axis    46.9 deg  minlev0  222.1 mV  meanlev0  225.5  minlev1  231.1  maxdev0   0.5 maxdev1   0.3
+  q 3.00  pair0 axis    61.5 deg  minlev0  168.9 mV  meanlev0  179.2  minlev1  217.7  maxdev0   1.5 maxdev1   0.4
+  q 3.25  pair0 axis   -62.5 deg  minlev0   92.2 mV  meanlev0  112.3  minlev1  198.1  maxdev0   5.0 maxdev1   0.9
+  q 3.50  pair0 axis   -46.9 deg  minlev0  199.5 mV  meanlev0  204.3  minlev1  228.4  maxdev0   0.4 maxdev1   0.3
+  q 3.75  pair0 axis   -27.1 deg  minlev0  230.1 mV  meanlev0  232.3  minlev1  234.3  maxdev0   0.1 maxdev1   0.3
+  q 4.00  pair0 axis    -7.9 deg  minlev0  242.8 mV  meanlev0  245.1  minlev1  236.6  maxdev0   0.1 maxdev1   0.2
