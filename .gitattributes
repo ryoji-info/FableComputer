@@ -5,3 +5,9 @@
 agents/routines/routines.json    text eol=lf
 agents/routines/prompts/*.md     text eol=lf
 agents/routines/*.py             text eol=lf
+
+# fable-model-parametron/r7_tables.py rebuilds the tables of results and compares its text with
+# tables.md byte for byte. Declare LF here, so that a clone with core.autocrlf=true does not check
+# the file out with CRLF and make the listing print "differs" where its reference output says
+# "equal".
+fable-model-parametron/tables.md text eol=lf
