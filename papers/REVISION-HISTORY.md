@@ -30,10 +30,11 @@ The deposited manuscripts are archived on Zenodo. Cite the version you read.
 
 Earlier version DOIs continue to resolve to the manuscripts as they stood. The
 repository copies in [`papers/`](.) are the deposited v6.1 / v2.1 / v1.1 (each deposited
-PDF has the MD5 of the repository file). Part IV v1.0 is a draft and has not been deposited. [`ERRATA.md`](ERRATA.md) has no outstanding
-row: the rows that tracked the gap between the July deposits (v6.0 / v2.0) and the
-October repository copies were discharged by the 29 October 2026 deposits and are
-preserved at the end of the v6.1 and v2.1 blocks below.
+PDF has the MD5 of the repository file). Part IV v1.0 is a draft and has not been
+deposited. [`ERRATA.md`](ERRATA.md) has three outstanding rows for Part I (I-41 … I-43,
+opened on 3 November 2026, on its own citations). The rows that tracked the gap between
+the July deposits (v6.0 / v2.0) and the October repository copies were discharged by the
+29 October 2026 deposits and are preserved at the end of the v6.1 and v2.1 blocks below.
 
 *Editorial note (2 November 2026).* The v1.0 row for Part III is new on this date; the
 editorial note after the v1.0 block says why. The three manuscripts were finalised before
@@ -85,6 +86,11 @@ expert has reviewed the model or the text.
 *Editorial note (28 November 2026).* One passage of the manuscript, in Appendix RB.3, was
 corrected on this date. The version stays v1.0. No result, table, figure or reference
 changed. The passage grew by about 480 words, and the PDF has 50 pages where it had 49.
+On the same date the PDF's entry for the language of the document was set to English.
+The export had written it as Japanese, while it tags nearly all of the text itself as
+English, span by span. The PDFs of Parts I to III have the same entry and keep it for
+now, because they are the deposited files, byte for byte.
+
 The passage said of each round of checks that the findings were applied. That was not
 exact. On 24 November, a day before the manuscript entered the repository, an AI agent
 that compared the record files of the planned upload (the README, the citation file, the
@@ -188,6 +194,9 @@ Applied in part (13):
 - A reader acting as a referee proposed a much shorter abstract, fewer tables and moving the
   account of the study's own corrections (Appendix RB) out of the paper. These proposals
   were not taken up.
+- The PDF's entry for the language of the document. Word writes it as Japanese at every
+  export, so it has to be set to English again after any new export (see the editorial
+  note above).
 
 ## Part III — v1.1 (October 2026)
 
