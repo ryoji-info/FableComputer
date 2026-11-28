@@ -82,6 +82,100 @@ negative-resistance devices, two last checkers and one checker of the last chang
 them AI agents. The few changes made after that were not checked by an agent, and no human
 expert has reviewed the model or the text.
 
+*Editorial note (28 November 2026).* One passage of the manuscript, in Appendix RB.3, was
+corrected on this date. The version stays v1.0. No result, table, figure or reference
+changed. The passage grew by about 480 words, and the PDF has 50 pages where it had 49.
+The passage said of each round of checks that the findings were applied. That was not
+exact. On 24 November, a day before the manuscript entered the repository, an AI agent
+that compared the record files of the planned upload (the README, the citation file, the
+roadmap and this history) with the paper found that it was not true of the referee's
+proposals on structure. The files that entered the repository did not carry a correction.
+
+For the correction, seven AI agents compared every request of the sixteen check reports on
+the manuscript with the text as it entered the repository. The reports are session records
+and are not in the repository. The agents counted 523 requests. Two more agents tested
+their verdicts. One checked the 41 requests that had not come out as applied. It found six
+of them applied after all and settled two that had been undecided as not applied. The
+other judged 48 of the remaining requests again without the first verdicts. It agreed in
+45 that the request was met, in 43 of them with the same verdict. In the other three it
+found a detail missing or could not decide. So perhaps 20 to 30 of the requests counted as
+applied are applied only in part. The 95 % interval of 3 in 48 allows about 6 to 80 of
+them, and the sample took three requests from each report.
+
+After the first test the count stands as follows. Of the 523 requests, 420 were applied as
+proposed or in equal words; six of these are limits stated by the readers of the
+literature, which the text keeps. Sixty-three were applied in another form. Thirteen were
+applied in part and 22 were not applied. Five concerned the code package, a figure script
+or working files and were applied there: a reference output and the model description of
+the package, the script of Figure R9, the study's sheet of facts, and the list of sources
+of one draft part. The count says only whether a request was acted on. It does not say
+whether the changes are right. Appendix RB.3 now gives these numbers and groups the
+exceptions, which are listed one by one below.
+
+Four further agents read this correction before it entered the repository. None of them
+checked the manuscript's earlier changes for new faults. Most of what they found was
+applied, and those last changes were not read again by an agent. Not applied were a line
+under the README's table of papers on the limits of Parts I to III, the naming of the law
+in the passage of Appendix RB.3 (the manuscript names it once, in Section 12.4), and one
+of two proposals that contradicted each other. All of these were AI agents, and no human
+expert has reviewed the model, the text or this correction.
+
+Not applied (22):
+
+- The referee's nine proposals on structure: an abstract of about 250 words (it has about
+  850); the naming and labelling conventions moved into the introduction; the account of
+  the requests behind the study (Section 1.2) cut to one sentence; the passages on sources
+  in Sections 2, 10.4 and 11.6 merged into one table; the in-phase mode (Section 6.5) and
+  the shot-noise factor (Section 9.5) moved to an appendix; Section 9.3 folded into
+  Section 11.3; the lists of Section 14 merged with its table; Appendix RB and most of
+  Appendix RC moved to supplementary material; and fewer tables, with six tables of
+  results merged into two. This is the third item under "Open before deposit" below.
+- Three notes about length. The checks of Sections 5 and 6, of Section 7, and of
+  Section 13 with the appendices each set the lengths of their parts against the planned
+  ones. Sections 5, 6 and 7 and Appendices RA and RC ran over and were not cut. They grew
+  further with material that other findings asked for. The last of these checks also
+  found Section 13 short; it now reaches its planned length if its table is counted.
+- One request that is left to the author: to set the pass thresholds of the four gates of
+  Section 13 (the first item under "Open before deposit" below).
+- Four requests that were overtaken or did not apply. The referee asked that the package be
+  called "to be released" while it was not yet in the repository; it entered with the
+  manuscript. One check of the parts read a draft of Appendix RB.3 that already named the
+  readings of the whole text, which had not yet been made, and asked that this be
+  confirmed; the readings were made afterwards. A reader asked that the caption of
+  Figure R9 be shortened or moved if captions counted towards the length limit set for the
+  outlook of Section 12.4; they were not counted. A reader of the literature could not
+  obtain the abstract of reference [26]; its reading level "index abstract" rests on the
+  reading of an earlier checker of the references.
+- Five small requests: a clause in the abstract saying that spreads end the scaling rule
+  sooner; a definition of the nine spreads in the abstract, or a pointer to their list;
+  the spread of the diode current shown in equation (R6); two patents offered as secondary
+  sources on the tunnel-diode pair ("twin") of reference [39], which Section 3 describes;
+  and a pointer from Section 12.4 to Section 12.2.
+
+Applied in part (13):
+
+- The referee asked that the clause of Section 12.4 on "a trajectory of the kind of
+  Moore's law" be deleted or replaced. It was kept, and the conditions that the referee
+  named were added to it.
+- The referee asked that "validated in the model" be replaced by another wording and that
+  the runs not made be named beside it. The words were kept in the sense that the first
+  page gives them; "within the lines run" was added in the abstract and in Section 15, and
+  Section 11.4 names the limits.
+- Eleven details that were left out: the British application number of the patent of
+  reference [22]; edge triggering in the list of what is not new against the
+  monostable-bistable transition logic element (MOBILE) of Section 3; an explicit note
+  that references [26] and [27] are not MOBILE circuits; the edge failures named one by
+  one, and the noise margin of the 1-THz-class cell in its own units, in the abstract; the
+  failures with seven spreads in the abstract and in Section 1.5 (they are in Section 8
+  and in Table R26); the in-phase voltage in the first half of the flat top of the
+  on-time, which one of the four clocked rows of Table R5 lacks and which the prose gives
+  only for the runs without noise; the slots of Section 7.3 written as a list and not as a
+  range; the words "emulation runnable" and "ternary" in what Section 9.6 quotes from
+  Part III; the cell's own total delay beside the published total delays in Section 11.5;
+  "a count, not a rate" at a few bullets of Sections 11.3 and 11.5; and the untested
+  alternation in sign of the voltage across the stub resistor (Appendix RA.2) repeated in
+  the list "Runs that were not made" (it is in Table R26).
+
 **Open before deposit.**
 
 - The pass thresholds of gates RG1 to RG4: the manuscript's table of gates reads "to be set
